@@ -1,98 +1,138 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #F7F5F3;
-  color: #222;
-  margin: 0;
-  padding: 20px;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simulateur Lumigency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://www.lumigency.com/_files/ugd/7e28d7_8d9c3c20c9914f2db3aa71f8c94c5af3.png" alt="Lumigency Logo">
+    </div>
 
-.container {
-  max-width: 800px;
-  margin: auto;
-}
+    <!-- Accroche -->
+    <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
+    <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
 
-.logo img {
-  max-width: 180px;
-  display: block;
-  margin: 0 auto 20px;
-}
+    <form id="form-simu" class="card">
 
-h1 {
-  color: #0000FF;
-  text-align: center;
-  margin-bottom: 10px;
-}
+      <!-- Trafic (curseur) -->
+      <div class="form-block">
+        <label for="traffic">👥 Votre trafic mensuel actuel</label>
 
-.subtitle {
-  text-align: center;
-  font-size: 1rem;
-  margin-bottom: 25px;
-}
+        <!-- Légende au-dessus du curseur -->
+        <div class="range-top">
+          <span class="range-min">0&nbsp;visiteurs</span>
+          <span class="range-current"><span id="traffic-value">0</span>&nbsp;/&nbsp;5 000 000&nbsp;visiteurs</span>
+        </div>
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
+        <!-- Curseur -->
+        <div class="range-line">
+          <input type="range" id="traffic" name="traffic" min="0" max="5000000" step="1000" required>
+        </div>
+      </div>
 
-label {
-  font-weight: 600;
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
+      <!-- AOV & CVR -->
+      <div class="form-row">
+        <div class="field">
+          <label for="aov">🛒 Panier moyen (€)</label>
+          <input type="number" id="aov" name="aov" required>
+        </div>
+        <div class="field">
+          <label for="cvr">📊 Taux de conversion (%)</label>
+          <input type="number" id="cvr" name="cvr" step="0.1" required>
+        </div>
+      </div>
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
+      <!-- CAC & Budget -->
+      <div class="form-row">
+        <div class="field">
+          <label for="cac">🎯 Coût d’acquisition max envisagé (€)</label>
+          <input type="number" id="cac" name="cac" required>
+        </div>
+        <div class="field">
+          <label for="budget">💰 Budget affiliation mensuel (€)</label>
+          <input type="number" id="budget" name="budget" required>
+        </div>
+      </div>
 
-.range-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
+      <!-- Leviers (horizontaux, sans cadre) -->
+      <div class="form-block">
+        <label>📌 Leviers que vous souhaitez autoriser</label>
+        <div class="levers-inline">
+          <label class="chk"><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+          <label class="chk"><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+          <label class="chk"><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+          <label class="chk"><input type="checkbox" name="levers" value="css"> CSS</label>
+          <label class="chk"><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+          <label class="chk"><input type="checkbox" name="levers" value="display"> Display</label>
+          <label class="chk"><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+          <label class="chk"><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
+          <label class="chk"><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+          <label class="chk"><input type="checkbox" name="levers" value="content-commerce"> Content commerce</label>
+          <label class="chk"><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+          <label class="chk"><input type="checkbox" name="levers" value="influence"> Influence</label>
+          <label class="chk"><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+        </div>
+      </div>
 
-.range-value {
-  font-weight: 600;
-  color: #0000FF;
-  text-align: right;
-}
+      <!-- Modèles hybrides (Oui / Non, horizontal) -->
+      <div class="form-block">
+        <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM…) ?</label>
+        <div class="options-inline">
+          <label class="opt"><input type="checkbox" name="hybride" value="oui"> Oui</label>
+          <label class="opt"><input type="checkbox" name="hybride" value="non"> Non</label>
+        </div>
+      </div>
 
-.checkbox-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px 20px;
-  margin-top: 10px;
-}
+      <!-- Secteur -->
+      <div class="form-block">
+        <label for="sector">🏷️ Secteur d'activité</label>
+        <select id="sector" name="sector" required>
+          <option value="">-- Choisissez un secteur --</option>
+          <option>B2B</option>
+          <option>Mode</option>
+          <option>Beauté, Santé & Hygiène</option>
+          <option>Produits culturels & Loisirs</option>
+          <option>High Tech & Électroménager</option>
+          <option>Alimentation & Drive</option>
+          <option>Sport</option>
+          <option>Jeux & jouets</option>
+          <option>Voyage</option>
+          <option>Maison & Jardin</option>
+          <option>Pièces automobiles</option>
+          <option>Télécom</option>
+          <option>Banque, Finance, Assurance</option>
+          <option>Énergie</option>
+        </select>
+      </div>
 
-.radio-group {
-  display: flex;
-  gap: 20px;
-  margin-top: 5px;
-}
+      <!-- Email -->
+      <div class="form-block">
+        <label for="email">📧 Votre email (obligatoire)</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-.cta {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  margin-top: 25px;
-  background: #849BFF;
-  color: white;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+      <!-- CTA principal -->
+      <button type="submit" class="cta-primary">🔥 Lancer ma simulation</button>
+    </form>
 
-.cta:hover {
-  background: #0000FF;
-}
+    <!-- Résultats -->
+    <div id="results" style="display:none;">
+      <h2>✨ Voici quelques projections de votre potentiel en affiliation</h2>
+      <p><em>Ces chiffres sont des estimations indicatives et ne constituent pas une vérité absolue.</em></p>
+      <p>CA estimé : <span id="kpi-revenue"></span></p>
+      <p>Commandes : <span id="kpi-orders"></span></p>
+      <p>CAC : <span id="kpi-cac"></span></p>
+      <ul id="reco-list"></ul>
+
+      <a href="https://www.lumigency.com/consultation-gratuite" target="_blank" class="cta-secondary">
+        📅 Passez de la simulation à l’action
+      </a>
+    </div>
+  </div>
+</body>
+</html>
