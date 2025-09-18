@@ -1,139 +1,98 @@
-/* Police */
 body {
-  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
-  background-color: #f7f5f3;
-  color: #333;
+  font-family: 'Poppins', sans-serif;
+  background: #F7F5F3;
+  color: #222;
   margin: 0;
   padding: 20px;
 }
 
-/* Container */
 .container {
   max-width: 800px;
   margin: auto;
-  padding: 20px;
 }
 
-/* Titres */
+.logo img {
+  max-width: 180px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
 h1 {
-  font-size: 1.8em;
   color: #0000FF;
+  text-align: center;
   margin-bottom: 10px;
 }
+
 .subtitle {
-  color: #444;
-  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 25px;
 }
 
-/* Carte formulaire */
 .card {
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* Champs */
 label {
   font-weight: 600;
-  margin-top: 15px;
   display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
+
 input, select {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 1em;
+  font-size: 0.95rem;
 }
 
-/* Curseur trafic */
-.slider-group {
+.range-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: space-between;
+  gap: 10px;
 }
-#traffic-value {
+
+.range-value {
   font-weight: 600;
   color: #0000FF;
+  text-align: right;
 }
 
-/* Form rows */
-.form-row {
-  display: flex;
-  gap: 20px;
-}
-.form-group {
-  flex: 1;
-}
-
-/* Leviers */
-.levers-grid {
+.checkbox-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 20px;
   margin-top: 10px;
 }
-.levers-grid label {
-  font-weight: normal;
-}
 
-/* Radios hybrides */
 .radio-group {
   display: flex;
   gap: 20px;
-  margin-top: 10px;
-}
-.radio-group label {
-  font-weight: normal;
+  margin-top: 5px;
 }
 
-/* CTA */
 .cta {
-  margin-top: 20px;
+  display: block;
   width: 100%;
-  background-color: #0000FF;
+  padding: 14px;
+  margin-top: 25px;
+  background: #849BFF;
   color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 15px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
   text-align: center;
-}
-.cta:hover {
-  background-color: #849BFF;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Résultats */
-#results {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-#results h2 {
-  color: #0000FF;
-}
-#results em {
-  color: #777;
-}
-.cta-block {
-  margin-top: 20px;
-}
-.cta-secondary {
-  display: block;
-  text-align: center;
-  padding: 15px;
-  background-color: #F88989;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 12px;
-}
-.cta-secondary:hover {
-  background-color: #d36f6f;
+.cta:hover {
+  background: #0000FF;
 }
