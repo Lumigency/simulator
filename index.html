@@ -30,7 +30,7 @@
       </div>
 
       <!-- Panier moyen + Taux de conversion -->
-      <div class="form-row-inline">
+      <div class="form-row-inline small-inputs">
         <div>
           <label>🛒 Panier moyen (€)</label>
           <input type="number" id="aov" name="aov" placeholder="80">
@@ -42,7 +42,7 @@
       </div>
 
       <!-- CAC + Budget -->
-      <div class="form-row-inline">
+      <div class="form-row-inline small-inputs">
         <div>
           <label>🎯 CAC max (€)</label>
           <input type="number" id="cacmax" name="cacmax" placeholder="50">
@@ -72,6 +72,16 @@
         </div>
       </div>
 
+      <!-- Modèles hybrides -->
+      <div class="form-row">
+        <label>⚖️ Êtes-vous ouverts à des modèles hybrides (fixes, CPC, CPM…) ?</label>
+        <div class="options-inline">
+          <label><input type="checkbox" name="hybrid" value="oui"> Oui</label>
+          <label><input type="checkbox" name="hybrid" value="non"> Non</label>
+          <label><input type="checkbox" name="hybrid" value="nspp"> Je ne sais pas</label>
+        </div>
+      </div>
+
       <!-- Secteur -->
       <div class="form-row">
         <label>🏷️ Secteur d’activité</label>
@@ -95,12 +105,6 @@
         </select>
       </div>
 
-      <!-- Modèle hybride -->
-      <div class="form-row">
-        <label>⚖️ Êtes-vous ouverts à des modèles hybrides (CPC, frais fixes) ?</label>
-        <label><input type="checkbox" id="hybrid" name="hybrid" value="oui"> Oui</label>
-      </div>
-
       <!-- Email -->
       <div class="form-row">
         <label>📩 Votre email (obligatoire)</label>
@@ -108,7 +112,7 @@
       </div>
 
       <!-- Bouton -->
-      <button type="submit">🔥 Lancer ma simulation</button>
+      <button type="submit" class="cta-button">🔥 Lancer ma simulation</button>
     </form>
 
     <!-- Résultats -->
