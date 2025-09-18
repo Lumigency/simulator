@@ -1,0 +1,25 @@
+body {
+  font-family: Open Sans, sans-serif;
+  background:#F7F5F3;
+  color:#000;
+  margin:0;
+  padding:20px;
+}
+.container { max-width:600px; margin:auto; }
+h1 { color:#0732EF; }
+.card {
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom:20px;
+}
+button {
+  background:#849BFF;
+  border:none;
+  padding:10px 15px;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+button:hover { background:#0732EF; }
