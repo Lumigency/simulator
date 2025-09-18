@@ -4,26 +4,39 @@
   <meta charset="UTF-8">
   <title>Simulateur Lumigency</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Import police (fallback si ES Rebond Grotesque n’est pas dispo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>Explorez votre potentiel en affiliation</h1>
-    <p>Estimez vos ventes, votre CAC et vos coûts selon vos leviers et votre budget.</p>
+    <!-- Accroche -->
+    <header class="hero">
+      <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
+      <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
+    </header>
+
+    <!-- Formulaire -->
     <form id="form-simu" class="card">
-      <label>Trafic mensuel (visiteurs)</label>
-      <input type="number" id="traffic" name="traffic" placeholder="80000">
+      <p class="intro">Remplissez vos données actuelles :</p>
 
-      <label>Budget mensuel affiliation (€)</label>
-      <input type="number" id="budget" name="budget" placeholder="3000">
+      <label>👥 Votre trafic mensuel actuel</label>
+      <input type="range" id="traffic" name="traffic" min="1000" max="1000000" step="1000" value="80000" oninput="trafficOut.value = this.value">
+      <output id="trafficOut">80000</output>
 
-      <label>Panier moyen (€)</label>
+      <label>💳 Votre panier moyen (€)</label>
       <input type="number" id="aov" name="aov" placeholder="80">
 
-      <label>Taux de conversion (%)</label>
+      <label>📊 Votre taux de conversion actuel (%)</label>
       <input type="number" id="cvr" name="cvr" placeholder="2">
 
+      <label>🎯 Votre coût d’acquisition max envisagé (€)</label>
+      <input type="number" id="cacMax" name="cacMax" placeholder="50">
+
+      <label>💰 Votre budget affiliation mensuel (€)</label>
+      <input type="number" id="budget" name="budget" placeholder="3000">
+
       <fieldset>
-        <legend>Leviers</legend>
+        <legend>🔑 Leviers que vous souhaitez autoriser</legend>
         <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
         <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
         <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
@@ -34,16 +47,59 @@
         <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
       </fieldset>
 
-      <button type="submit">Calculer</button>
+      <label>🏢 Votre secteur d’activité</label>
+      <select id="sector" name="sector">
+        <option>Retail</option>
+        <option>Finance</option>
+        <option>Voyage</option>
+        <option>Food</option>
+        <option>Éducation</option>
+        <option>Autre</option>
+      </select>
+
+      <label>🎯 Votre objectif principal</label>
+      <select id="objective" name="objective">
+        <option>Acquisition</option>
+        <option>Notoriété</option>
+        <option>ROI</option>
+        <option>Test marché</option>
+        <option>Diversification</option>
+      </select>
+
+      <label>🔄 Êtes-vous ouverts à des modèles hybrides (CPC, frais fixes, etc.) ?</label>
+      <div>
+        <label><input type="radio" name="hybrid" value="oui"> Oui</label>
+        <label><input type="radio" name="hybrid" value="non"> Non</label>
+      </div>
+
+      <label>📧 Votre email (obligatoire)</label>
+      <input type="email" id="email" name="email" required placeholder="exemple@email.com">
+
+      <button type="submit" class="btn-submit">🔥 Lancer ma simulation</button>
     </form>
 
-    <div id="results" style="display:none;">
-      <h2>Résultats</h2>
+    <!-- Résultats -->
+    <div id="results" style="display:none;" class="card results">
+      <h2>Vos résultats</h2>
       <p>CA estimé: <span id="kpi-revenue"></span></p>
       <p>Commandes: <span id="kpi-orders"></span></p>
       <p>Coût affiliation: <span id="kpi-cost"></span></p>
       <p>CAC: <span id="kpi-cac"></span></p>
+
+      <div id="analysis" class="analysis"></div>
       <ul id="reco-list"></ul>
+
+      <!-- CTA -->
+      <section class="cta-card">
+        <p class="cta-text">
+          Passez de la simulation à l’action : réservez un rendez-vous avec votre expert Lumigency.
+        </p>
+        <a class="btn-cta"
+           href="https://www.lumigency.com/consultation-gratuite"
+           target="_blank" rel="noopener noreferrer">
+          📅 Réserver mon rendez-vous gratuit
+        </a>
+      </section>
     </div>
   </div>
   <script src="script.js"></script>
