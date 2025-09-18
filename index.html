@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Simulateur Lumigency</title>
+  <!-- Police proche de Rebond Grotesque -->
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
+
+    <!-- Logo -->
+    <div class="logo">
+      <img src="ton-logo.png" alt="Logo Lumigency">
+    </div>
+
     <!-- Accroche -->
     <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
     <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
@@ -15,13 +23,13 @@
     <form id="form-simu" class="card">
       <p class="form-intro">✨ Remplissez vos données actuelles pour lancer la simulation :</p>
 
-      <!-- Ligne 1 -->
+      <!-- Trafic -->
       <div class="form-row">
         <label>👥 Trafic mensuel actuel</label>
         <input type="number" id="traffic" name="traffic" placeholder="80000">
       </div>
 
-      <!-- Ligne 2 -->
+      <!-- Panier moyen + Taux de conversion -->
       <div class="form-row-inline">
         <div>
           <label>🛒 Panier moyen (€)</label>
@@ -33,7 +41,7 @@
         </div>
       </div>
 
-      <!-- Ligne 3 -->
+      <!-- CAC + Budget -->
       <div class="form-row-inline">
         <div>
           <label>🎯 CAC max (€)</label>
@@ -45,9 +53,9 @@
         </div>
       </div>
 
-      <!-- Ligne 4 : leviers -->
-      <fieldset>
-        <legend>🔑 Leviers autorisés</legend>
+      <!-- Leviers -->
+      <div class="form-row">
+        <label>🔑 Leviers autorisés</label>
         <div class="grid-levers">
           <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
           <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
@@ -62,9 +70,9 @@
           <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
           <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
         </div>
-      </fieldset>
+      </div>
 
-      <!-- Ligne 5 -->
+      <!-- Secteur -->
       <div class="form-row">
         <label>🏷️ Secteur d’activité</label>
         <select id="sector" name="sector">
@@ -87,13 +95,10 @@
         </select>
       </div>
 
-      <!-- Ligne 6 -->
+      <!-- Modèle hybride -->
       <div class="form-row">
         <label>⚖️ Êtes-vous ouverts à des modèles hybrides (CPC, frais fixes) ?</label>
-        <select id="hybrid" name="hybrid">
-          <option value="non">Non</option>
-          <option value="oui">Oui</option>
-        </select>
+        <label><input type="checkbox" id="hybrid" name="hybrid" value="oui"> Oui</label>
       </div>
 
       <!-- Email -->
@@ -111,7 +116,6 @@
       <h2>Résultats</h2>
       <p>💸 CA estimé : <span id="kpi-revenue"></span></p>
       <p>📦 Commandes : <span id="kpi-orders"></span></p>
-      <p>💼 Coût affiliation : <span id="kpi-cost"></span></p>
       <p>🎯 CAC : <span id="kpi-cac"></span></p>
 
       <!-- Analyse dynamique -->
