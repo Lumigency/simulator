@@ -1,3 +1,4 @@
+/* ===== Base ===== */
 body {
   font-family: 'Poppins', sans-serif;
   background: #F7F5F3;
@@ -11,12 +12,14 @@ body {
   margin: auto;
 }
 
+/* ===== Logo ===== */
 .logo img {
   max-width: 180px;
   display: block;
   margin: 0 auto 20px;
 }
 
+/* ===== Titres ===== */
 h1 {
   color: #0000FF;
   text-align: center;
@@ -29,6 +32,7 @@ h1 {
   margin-bottom: 25px;
 }
 
+/* ===== Carte formulaire ===== */
 .card {
   background: white;
   padding: 25px;
@@ -51,6 +55,7 @@ input, select {
   font-size: 0.95rem;
 }
 
+/* ===== Curseur trafic ===== */
 .range-wrapper {
   display: flex;
   align-items: center;
@@ -66,6 +71,8 @@ input[type="range"] {
   background: linear-gradient(to right, #849BFF, #0000FF);
   outline: none;
 }
+
+/* Curseur Chrome / Safari */
 input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 18px;
@@ -74,6 +81,16 @@ input[type="range"]::-webkit-slider-thumb {
   background: #F88989;
   cursor: pointer;
 }
+
+/* Curseur Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #F88989;
+  cursor: pointer;
+}
+
 .range-value {
   font-weight: 600;
   color: #0000FF;
@@ -81,6 +98,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: 8px;
 }
 
+/* ===== Cases à cocher leviers ===== */
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
@@ -91,6 +109,7 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: normal;
 }
 
+/* ===== Radios hybrides ===== */
 .radio-group {
   display: flex;
   gap: 20px;
@@ -100,6 +119,7 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: normal;
 }
 
+/* ===== CTA principal ===== */
 .cta {
   display: block;
   width: 100%;
@@ -119,6 +139,7 @@ input[type="range"]::-webkit-slider-thumb {
   background: #0000FF;
 }
 
+/* ===== Résultats ===== */
 #results {
   background: white;
   padding: 25px;
@@ -133,6 +154,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: #777;
 }
 
+/* CTA secondaire */
 .cta-secondary {
   display: block;
   margin-top: 25px;
