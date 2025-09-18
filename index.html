@@ -22,14 +22,10 @@
       <!-- Trafic (curseur) -->
       <div class="form-block">
         <label for="traffic">👥 Votre trafic mensuel actuel</label>
-
-        <!-- Légende au-dessus du curseur -->
         <div class="range-top">
-          <span class="range-min">0&nbsp;visiteurs</span>
-          <span class="range-current"><span id="traffic-value">0</span>&nbsp;/&nbsp;5 000 000&nbsp;visiteurs</span>
+          <span class="range-min">0 visiteurs</span>
+          <span class="range-current"><span id="traffic-value">0</span> / 5 000 000 visiteurs</span>
         </div>
-
-        <!-- Curseur -->
         <div class="range-line">
           <input type="range" id="traffic" name="traffic" min="0" max="5000000" step="1000" required>
         </div>
@@ -50,7 +46,7 @@
       <!-- CAC & Budget -->
       <div class="form-row">
         <div class="field">
-          <label for="cac">🎯 Coût d’acquisition max envisagé (€)</label>
+          <label for="cac">🎯 Coût d’acquisition max (€)</label>
           <input type="number" id="cac" name="cac" required>
         </div>
         <div class="field">
@@ -59,32 +55,32 @@
         </div>
       </div>
 
-      <!-- Leviers (horizontaux, sans cadre) -->
+      <!-- Leviers -->
       <div class="form-block">
         <label>📌 Leviers que vous souhaitez autoriser</label>
-        <div class="levers-inline">
-          <label class="chk"><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-          <label class="chk"><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-          <label class="chk"><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-          <label class="chk"><input type="checkbox" name="levers" value="css"> CSS</label>
-          <label class="chk"><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-          <label class="chk"><input type="checkbox" name="levers" value="display"> Display</label>
-          <label class="chk"><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-          <label class="chk"><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
-          <label class="chk"><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
-          <label class="chk"><input type="checkbox" name="levers" value="content-commerce"> Content commerce</label>
-          <label class="chk"><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
-          <label class="chk"><input type="checkbox" name="levers" value="influence"> Influence</label>
-          <label class="chk"><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+        <div class="levers-grid">
+          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+          <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+          <label><input type="checkbox" name="levers" value="css"> CSS</label>
+          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+          <label><input type="checkbox" name="levers" value="display"> Display</label>
+          <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+          <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
+          <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+          <label><input type="checkbox" name="levers" value="content-commerce"> Content commerce</label>
+          <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
         </div>
       </div>
 
-      <!-- Modèles hybrides (Oui / Non, horizontal) -->
+      <!-- Modèles hybrides -->
       <div class="form-block">
         <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM…) ?</label>
         <div class="options-inline">
-          <label class="opt"><input type="checkbox" name="hybride" value="oui"> Oui</label>
-          <label class="opt"><input type="checkbox" name="hybride" value="non"> Non</label>
+          <label><input type="checkbox" name="hybride" value="oui"> Oui</label>
+          <label><input type="checkbox" name="hybride" value="non"> Non</label>
         </div>
       </div>
 
@@ -116,7 +112,7 @@
         <input type="email" id="email" name="email" required>
       </div>
 
-      <!-- CTA principal -->
+      <!-- CTA -->
       <button type="submit" class="cta-primary">🔥 Lancer ma simulation</button>
     </form>
 
