@@ -4,43 +4,46 @@
   <meta charset="UTF-8">
   <title>Simulateur Lumigency</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Espace+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <!-- Accroche -->
     <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
-    <p> Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
+    <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
 
-    <!-- Formulaire -->
     <form id="form-simu" class="card">
-      <label>👥 Votre trafic mensuel actuel</label>
-      <input type="number" id="traffic" name="traffic" required>
+      <!-- Trafic mensuel (curseur) -->
+      <label for="traffic">👥 Votre trafic mensuel actuel</label>
+      <input type="range" id="traffic" name="traffic" min="0" max="500000" step="1000" required>
+      <span id="traffic-value">0</span> visiteurs
 
+      <!-- Ligne : Panier moyen + Conversion -->
       <div class="form-row">
         <div class="form-group">
-          <label>🛒 Panier moyen (€)</label>
+          <label for="aov">🛒 Panier moyen (€)</label>
           <input type="number" id="aov" name="aov" required>
         </div>
         <div class="form-group">
-          <label>📊 Taux de conversion (%)</label>
-          <input type="number" id="cvr" name="cvr" required>
+          <label for="cvr">📊 Taux de conversion (%)</label>
+          <input type="number" id="cvr" name="cvr" step="0.1" required>
         </div>
       </div>
 
+      <!-- Ligne : CAC + Budget -->
       <div class="form-row">
         <div class="form-group">
-          <label>🎯 CAC max (€)</label>
+          <label for="cac">🎯 CAC max (€)</label>
           <input type="number" id="cac" name="cac" required>
         </div>
         <div class="form-group">
-          <label>💰 Budget affiliation mensuel (€)</label>
+          <label for="budget">💰 Budget affiliation mensuel (€)</label>
           <input type="number" id="budget" name="budget" required>
         </div>
       </div>
 
       <!-- Leviers -->
-      <fieldset>
-        <legend>📌 Leviers que vous souhaitez autoriser :</legend>
+      <label>📌 Leviers que vous souhaitez autoriser :</label>
+      <div class="checkbox-grid">
         <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
         <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
         <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
@@ -49,37 +52,42 @@
         <label><input type="checkbox" name="levers" value="display"> Display</label>
         <label><input type="checkbox" name="levers" value="influence"> Influence</label>
         <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-      </fieldset>
+        <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
+        <label><input type="checkbox" name="levers" value="displaynetworks"> Display Networks</label>
+        <label><input type="checkbox" name="levers" value="retention"> Rétention onsite</label>
+        <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
+        <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+      </div>
 
       <!-- Modèles hybrides -->
       <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...) ?</label>
       <div class="radio-group">
         <label><input type="radio" name="hybrides" value="oui" required> Oui</label>
         <label><input type="radio" name="hybrides" value="non"> Non</label>
-        <label><input type="radio" name="hybrides" value="nspp"> Je ne sais pas</label>
+        <label><input type="radio" name="hybrides" value="ne-sais-pas"> Je ne sais pas</label>
       </div>
 
       <!-- Secteur -->
-      <label>🏷️ Secteur d'activité</label>
+      <label for="sector">🏷️ Secteur d'activité</label>
       <select id="sector" name="sector" required>
-        <option value="" disabled selected>-- Choisissez un secteur --</option>
-        <option>Mode</option>
-        <option>Beauté, Santé & Hygiène</option>
-        <option>Produits culturels & Loisirs</option>
-        <option>High Tech & Electroménager</option>
-        <option>Alimentation & Drive</option>
-        <option>Sport</option>
-        <option>Jeux & jouets</option>
-        <option>Voyage</option>
-        <option>Maison & Jardin</option>
-        <option>Pièces automobiles</option>
-        <option>Télécom</option>
-        <option>Banque, Finance, Assurance</option>
-        <option>Énergie</option>
-        <option>B2B</option>
+        <option value="">-- Choisissez un secteur --</option>
+        <option value="b2b">B2B</option>
+        <option value="mode">Mode</option>
+        <option value="beaute">Beauté, Santé & Hygiène</option>
+        <option value="culture">Produits culturels & Loisirs</option>
+        <option value="hightech">High Tech & Électroménager</option>
+        <option value="alimentaire">Alimentation & Drive</option>
+        <option value="sport">Sport</option>
+        <option value="jouets">Jeux & jouets</option>
+        <option value="voyage">Voyage</option>
+        <option value="maison">Maison & Jardin</option>
+        <option value="auto">Pièces automobiles</option>
+        <option value="telecom">Télécom</option>
+        <option value="finance">Banque, Finance, Assurance</option>
+        <option value="energie">Énergie</option>
       </select>
 
-      <!-- Bouton -->
+      <!-- CTA -->
       <button type="submit" class="cta">🔥 Lancer ma simulation</button>
     </form>
 
@@ -90,9 +98,11 @@
       <p>Commandes : <span id="kpi-orders"></span></p>
       <p>CAC : <span id="kpi-cac"></span></p>
       <ul id="reco-list"></ul>
-      <p><em>Ces résultats sont indicatifs et basés sur vos données saisies. Ils ne constituent pas une garantie de performance.</em></p>
+      <p class="note"><em>Ces chiffres sont des estimations indicatives basées sur vos données et vos choix de leviers.</em></p>
+      <a href="https://www.lumigency.com/consultation-gratuite" class="cta-link">Passez de la simulation à l’action 🚀</a>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
