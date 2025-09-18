@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulateur Lumigency</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Explorez votre potentiel en affiliation</h1>
+    <p>Estimez vos ventes, votre CAC et vos coûts selon vos leviers et votre budget.</p>
+    <form id="form-simu" class="card">
+      <label>Trafic mensuel (visiteurs)</label>
+      <input type="number" id="traffic" name="traffic" placeholder="80000">
+
+      <label>Budget mensuel affiliation (€)</label>
+      <input type="number" id="budget" name="budget" placeholder="3000">
+
+      <label>Panier moyen (€)</label>
+      <input type="number" id="aov" name="aov" placeholder="80">
+
+      <label>Taux de conversion (%)</label>
+      <input type="number" id="cvr" name="cvr" placeholder="2">
+
+      <fieldset>
+        <legend>Leviers</legend>
+        <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+        <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+        <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+        <label><input type="checkbox" name="levers" value="css"> CSS</label>
+        <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+        <label><input type="checkbox" name="levers" value="display"> Display</label>
+        <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+        <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+      </fieldset>
+
+      <button type="submit">Calculer</button>
+    </form>
+
+    <div id="results" style="display:none;">
+      <h2>Résultats</h2>
+      <p>CA estimé: <span id="kpi-revenue"></span></p>
+      <p>Commandes: <span id="kpi-orders"></span></p>
+      <p>Coût affiliation: <span id="kpi-cost"></span></p>
+      <p>CAC: <span id="kpi-cac"></span></p>
+      <ul id="reco-list"></ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
