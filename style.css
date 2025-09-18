@@ -1,25 +1,130 @@
+/* Font et reset */
 body {
-  font-family: Open Sans, sans-serif;
-  background:#F7F5F3;
-  color:#000;
-  margin:0;
-  padding:20px;
+  font-family: 'ES Rebond Grotesque', 'Open Sans', sans-serif;
+  background: #F7F5F3;
+  margin: 0;
+  padding: 0;
+  color: #1a1a1a;
 }
-.container { max-width:600px; margin:auto; }
-h1 { color:#0732EF; }
+
+/* Container global */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.hero h1 {
+  font-size: 1.8rem;
+  color: #0000FF;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Card */
 .card {
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom:20px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
 }
-button {
-  background:#849BFF;
-  border:none;
-  padding:10px 15px;
-  color:#fff;
-  border-radius:8px;
-  cursor:pointer;
+
+/* Labels et inputs */
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 18px;
 }
-button:hover { background:#0732EF; }
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+input[type="range"] {
+  width: 90%;
+}
+
+fieldset {
+  border: none;
+  margin-top: 20px;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Bouton simulation */
+.btn-submit {
+  margin-top: 24px;
+  display: inline-block;
+  padding: 14px 20px;
+  background: #849BFF;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-submit:hover {
+  background: #0732EF;
+  transform: translateY(-1px);
+}
+
+/* Résultats */
+.results h2 {
+  margin-top: 0;
+  color: #F88989;
+}
+
+.analysis {
+  margin-top: 20px;
+  font-style: italic;
+  color: #555;
+}
+
+/* CTA */
+.cta-card {
+  margin-top: 30px;
+  padding: 20px;
+  background: #EDE1D8;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.cta-text {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #849BFF;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-cta:hover {
+  background: #0732EF;
+}
