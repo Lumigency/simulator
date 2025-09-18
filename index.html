@@ -8,46 +8,46 @@
 <body>
   <div class="container">
     <!-- Accroche -->
-    <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency.</h1>
+    <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
     <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
 
     <!-- Formulaire -->
     <form id="form-simu" class="card">
-      <p class="form-intro">Remplissez vos données actuelles :</p>
+      <p class="form-intro">✨ Remplissez vos données actuelles pour lancer la simulation :</p>
 
       <!-- Ligne 1 -->
       <div class="form-row">
-        <label>Trafic mensuel actuel</label>
+        <label>👥 Trafic mensuel actuel</label>
         <input type="number" id="traffic" name="traffic" placeholder="80000">
       </div>
 
       <!-- Ligne 2 -->
-      <div class="form-row">
+      <div class="form-row-inline">
         <div>
-          <label>Panier moyen (€)</label>
+          <label>🛒 Panier moyen (€)</label>
           <input type="number" id="aov" name="aov" placeholder="80">
         </div>
         <div>
-          <label>Taux de conversion (%)</label>
+          <label>📊 Taux de conversion (%)</label>
           <input type="number" id="cvr" name="cvr" placeholder="2">
         </div>
       </div>
 
       <!-- Ligne 3 -->
-      <div class="form-row">
+      <div class="form-row-inline">
         <div>
-          <label>Coût d’acquisition max (€)</label>
+          <label>🎯 CAC max (€)</label>
           <input type="number" id="cacmax" name="cacmax" placeholder="50">
         </div>
         <div>
-          <label>Budget affiliation mensuel (€)</label>
+          <label>💰 Budget affiliation mensuel (€)</label>
           <input type="number" id="budget" name="budget" placeholder="3000">
         </div>
       </div>
 
       <!-- Ligne 4 : leviers -->
       <fieldset>
-        <legend>Leviers que vous souhaitez autoriser</legend>
+        <legend>🔑 Leviers autorisés</legend>
         <div class="grid-levers">
           <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
           <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
@@ -66,7 +66,7 @@
 
       <!-- Ligne 5 -->
       <div class="form-row">
-        <label>Secteur d’activité</label>
+        <label>🏷️ Secteur d’activité</label>
         <select id="sector" name="sector">
           <option value="">Sélectionnez…</option>
           <option>B2B</option>
@@ -89,7 +89,7 @@
 
       <!-- Ligne 6 -->
       <div class="form-row">
-        <label>Êtes-vous ouverts à des modèles hybrides (CPC, frais fixes) ?</label>
+        <label>⚖️ Êtes-vous ouverts à des modèles hybrides (CPC, frais fixes) ?</label>
         <select id="hybrid" name="hybrid">
           <option value="non">Non</option>
           <option value="oui">Oui</option>
@@ -98,7 +98,7 @@
 
       <!-- Email -->
       <div class="form-row">
-        <label>Votre email (obligatoire)</label>
+        <label>📩 Votre email (obligatoire)</label>
         <input type="email" id="email" name="email" required placeholder="exemple@domaine.com">
       </div>
 
@@ -109,10 +109,10 @@
     <!-- Résultats -->
     <div id="results" style="display:none;">
       <h2>Résultats</h2>
-      <p>CA estimé : <span id="kpi-revenue"></span></p>
-      <p>Commandes : <span id="kpi-orders"></span></p>
-      <p>Coût affiliation : <span id="kpi-cost"></span></p>
-      <p>CAC : <span id="kpi-cac"></span></p>
+      <p>💸 CA estimé : <span id="kpi-revenue"></span></p>
+      <p>📦 Commandes : <span id="kpi-orders"></span></p>
+      <p>💼 Coût affiliation : <span id="kpi-cost"></span></p>
+      <p>🎯 CAC : <span id="kpi-cac"></span></p>
 
       <!-- Analyse dynamique -->
       <div id="analysis"></div>
@@ -126,7 +126,7 @@
       <!-- CTA -->
       <div class="cta">
         <a href="https://www.lumigency.com/consultation-gratuite" target="_blank">
-          Passez de la simulation à l’action : réservez un rendez-vous avec votre expert Lumigency
+          🚀 Passez de la simulation à l’action : réservez un rendez-vous avec votre expert Lumigency
         </a>
       </div>
     </div>
