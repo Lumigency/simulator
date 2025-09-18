@@ -1,142 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Simulateur Lumigency</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
+
     <!-- Logo -->
     <div class="logo">
-      <img src="https://www.lumigency.com/_files/ugd/7e28d7_8d9c3c20c9914f2db3aa71f8c94c5af3.png" alt="Lumigency Logo">
+      <img src="ton-logo.png" alt="Logo Lumigency">
     </div>
 
-    <!-- Accroche -->
+    <!-- Accroches -->
     <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
     <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
 
+    <!-- Formulaire -->
     <form id="form-simu" class="card">
 
-      <!-- Trafic -->
-      <div class="form-block">
-        <label for="traffic">👥 Votre trafic mensuel actuel</label>
-        <div class="range-top">
-          <span class="range-min">0 visiteurs</span>
-          <span class="range-current"><span id="traffic-value">0</span> visiteurs</span>
-        </div>
-        <div class="range-line">
-          <input type="range" id="traffic" name="traffic" min="0" max="5000000" step="1000" required>
-        </div>
+      <!-- Trafic curseur -->
+      <label for="traffic">👥 Votre trafic mensuel actuel</label>
+      <div class="range-container">
+        <input type="range" id="traffic" name="traffic" min="0" max="5000000" step="1000" value="10000" oninput="document.getElementById('traffic-value').textContent=this.value.toLocaleString() + ' visiteurs'">
+        <span id="traffic-value" class="range-value">10 000 visiteurs</span>
       </div>
 
-      <!-- AOV & CVR -->
-      <div class="form-row">
-        <div class="field">
-          <label for="aov">🛒 Panier moyen (€)</label>
-          <input type="number" id="aov" name="aov" required>
-        </div>
-        <div class="field">
-          <label for="cvr">📊 Taux de conversion (%)</label>
-          <input type="number" id="cvr" name="cvr" step="0.1" required>
-        </div>
-      </div>
+      <!-- Panier moyen -->
+      <label for="aov">🛒 Panier moyen (€)</label>
+      <input type="number" id="aov" name="aov" required>
 
-      <!-- CAC & Budget -->
-      <div class="form-row">
-        <div class="field">
-          <label for="cac">🎯 Coût d’acquisition max (€)</label>
-          <input type="number" id="cac" name="cac" required>
-        </div>
-        <div class="field">
-          <label for="budget">💰 Budget affiliation mensuel (€)</label>
-          <input type="number" id="budget" name="budget" required>
-        </div>
-      </div>
+      <!-- Taux de conversion -->
+      <label for="cvr">📊 Taux de conversion (%)</label>
+      <input type="number" id="cvr" name="cvr" step="0.1" required>
+
+      <!-- CAC max -->
+      <label for="cac">🎯 Coût d’acquisition max envisagé (€)</label>
+      <input type="number" id="cac" name="cac" required>
+
+      <!-- Budget -->
+      <label for="budget">💰 Budget affiliation mensuel (€)</label>
+      <input type="number" id="budget" name="budget" required>
 
       <!-- Leviers -->
-      <div class="form-block">
-        <label>📌 Leviers que vous souhaitez autoriser</label>
-        <div class="levers-grid">
-          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-          <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-          <label><input type="checkbox" name="levers" value="css"> CSS</label>
-          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-          <label><input type="checkbox" name="levers" value="display"> Display</label>
-          <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-          <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
-          <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
-          <label><input type="checkbox" name="levers" value="content-commerce"> Content commerce</label>
-          <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
-          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
-          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+      <fieldset>
+        <legend>📌 Leviers que vous souhaitez autoriser</legend>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="css"> CSS</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="display"> Display</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="content-commerce"> Content commerce</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="influence"> Influence</label>
+          <label class="checkbox-item"><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
         </div>
-      </div>
+      </fieldset>
 
       <!-- Modèles hybrides -->
-      <div class="form-block">
-        <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM…) ?</label>
-        <div class="options-inline">
-          <label><input type="checkbox" name="hybride" value="oui"> Oui</label>
-          <label><input type="checkbox" name="hybride" value="non"> Non</label>
-        </div>
+      <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="hybride" value="oui" required> Oui</label>
+        <label><input type="radio" name="hybride" value="non"> Non</label>
       </div>
 
       <!-- Secteur -->
-      <div class="form-block">
-        <label for="sector">🏷️ Secteur d'activité</label>
-        <select id="sector" name="sector" required>
-          <option value="">-- Choisissez un secteur --</option>
-          <option>B2B</option>
-          <option>Mode</option>
-          <option>Beauté, Santé & Hygiène</option>
-          <option>Produits culturels & Loisirs</option>
-          <option>High Tech & Électroménager</option>
-          <option>Alimentation & Drive</option>
-          <option>Sport</option>
-          <option>Jeux & jouets</option>
-          <option>Voyage</option>
-          <option>Maison & Jardin</option>
-          <option>Pièces automobiles</option>
-          <option>Télécom</option>
-          <option>Banque, Finance, Assurance</option>
-          <option>Énergie</option>
-        </select>
-      </div>
+      <label for="sector">🏷️ Secteur d'activité</label>
+      <select id="sector" name="sector" required>
+        <option value="">-- Choisissez un secteur --</option>
+        <option value="mode">Mode</option>
+        <option value="beaute">Beauté, Santé & Hygiène</option>
+        <option value="culture">Produits culturels & Loisirs</option>
+        <option value="hightech">High Tech & Électroménager</option>
+        <option value="food">Alimentation & Drive</option>
+        <option value="sport">Sport</option>
+        <option value="voyage">Voyage</option>
+        <option value="maison">Maison & Jardin</option>
+        <option value="auto">Pièces automobiles</option>
+        <option value="banque">Banque, Finance, Assurance</option>
+        <option value="energie">Énergie</option>
+        <option value="b2b">B2B</option>
+      </select>
 
       <!-- Email -->
-      <div class="form-block">
-        <label for="email">📧 Votre email (obligatoire)</label>
-        <input type="email" id="email" name="email" required>
-      </div>
+      <label for="email">📧 Votre email (obligatoire)</label>
+      <input type="email" id="email" name="email" required>
 
       <!-- CTA -->
-      <button type="submit" class="cta-primary">🔥 Lancer ma simulation</button>
+      <button type="submit" class="cta">🔥 Lancer ma simulation</button>
     </form>
 
     <!-- Résultats -->
     <div id="results" style="display:none;">
-      <h2>✨ Voici quelques projections de votre potentiel en affiliation</h2>
-      <p><em>Ces chiffres sont des estimations indicatives et ne constituent pas une vérité absolue.</em></p>
-      <p>CA estimé : <span id="kpi-revenue"></span></p>
-      <p>Commandes : <span id="kpi-orders"></span></p>
-      <p>CAC : <span id="kpi-cac"></span></p>
-      <ul id="reco-list"></ul>
-
-      <a href="https://www.lumigency.com/consultation-gratuite" target="_blank" class="cta-secondary">
-        📅 Passez de la simulation à l’action
-      </a>
+      <h2>Voici vos projections</h2>
+      <p id="kpi-revenue"></p>
+      <p id="kpi-orders"></p>
+      <p id="kpi-cac"></p>
+      <p><em>Ces chiffres sont des estimations indicatives et non des données contractuelles.</em></p>
+      <a href="https://www.lumigency.com/consultation-gratuite" class="cta">📅 Passez de la simulation à l’action</a>
     </div>
   </div>
-
-  <script>
-    const trafficInput = document.getElementById('traffic');
-    const trafficValue = document.getElementById('traffic-value');
-    trafficInput.addEventListener('input', () => {
-      trafficValue.textContent = new Intl.NumberFormat('fr-FR').format(trafficInput.value);
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
