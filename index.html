@@ -1,103 +1,91 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #F7F5F3;
-  color: #222;
-  margin: 0;
-  padding: 20px;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulateur Affiliation Lumigency</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="Lumigency Logo">
+    </div>
+    <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
+    <p class="subtitle">📈 Simulez vos ventes, votre CAC et vos coûts en fonction de vos leviers et de votre budget.</p>
 
-.container {
-  max-width: 800px;
-  margin: auto;
-}
+    <div class="card">
+      <form id="form-simu">
+        
+        <!-- Trafic -->
+        <label>👥 Votre trafic mensuel actuel</label>
+        <div class="range-container">
+          <span>0 visiteurs</span>
+          <input type="range" name="traffic" min="0" max="5000000" step="1000" value="0" oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
+          <span>5 000 000 visiteurs</span>
+        </div>
+        <div class="range-value" id="trafficValue">0 visiteurs</div>
 
-.logo img {
-  max-width: 180px;
-  display: block;
-  margin: 0 auto 20px;
-}
+        <!-- Panier + Taux -->
+        <label>🛒 Panier moyen (€)</label>
+        <input type="number" name="aov" required>
 
-h1 {
-  color: #0000FF;
-  text-align: center;
-  margin-bottom: 10px;
-}
+        <label>📊 Taux de conversion (%)</label>
+        <input type="number" step="0.1" name="cvr" required>
 
-.subtitle {
-  text-align: center;
-  font-size: 1rem;
-  margin-bottom: 25px;
-}
+        <!-- CAC + Budget -->
+        <label>🎯 Coût d’acquisition max envisagé (€)</label>
+        <input type="number" name="cac" required>
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
+        <label>💰 Budget affiliation mensuel (€)</label>
+        <input type="number" name="budget" required>
 
-label {
-  font-weight: 600;
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
+        <!-- Leviers -->
+        <fieldset>
+          <legend>📌 Leviers que vous souhaitez autoriser</legend>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+            <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+            <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+            <label><input type="checkbox" name="levers" value="css"> CSS</label>
+            <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+            <label><input type="checkbox" name="levers" value="display"> Display</label>
+            <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+            <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+            <label><input type="checkbox" name="levers" value="content-commerce"> Content commerce</label>
+            <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+            <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+            <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+            <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
+          </div>
+        </fieldset>
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
+        <!-- Modèles hybrides -->
+        <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="hybrides" value="oui"> Oui</label>
+          <label><input type="radio" name="hybrides" value="non"> Non</label>
+        </div>
 
-.range-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+        <!-- Email -->
+        <label>📧 Votre email (obligatoire)</label>
+        <input type="email" name="email" required>
 
-.range-value {
-  font-weight: 600;
-  color: #0000FF;
-  text-align: right;
-}
+        <!-- CTA -->
+        <button type="submit" class="cta">🔥 Lancer ma simulation</button>
+      </form>
+    </div>
 
-.checkbox-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px 20px;
-  margin-top: 10px;
-}
-
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.radio-group {
-  display: flex;
-  gap: 20px;
-  margin-top: 5px;
-}
-
-.cta {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  margin-top: 25px;
-  background: #849BFF;
-  color: white;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.cta:hover {
-  background: #0000FF;
-}
+    <!-- Résultats -->
+    <div id="results" class="card" style="display:none;">
+      <h2>Voici quelques projections de votre potentiel en affiliation :</h2>
+      <p><strong>CA estimé :</strong> <span id="kpi-revenue"></span></p>
+      <p><strong>Commandes :</strong> <span id="kpi-orders"></span></p>
+      <p><strong>CAC :</strong> <span id="kpi-cac"></span></p>
+      <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
+      <a href="https://www.lumigency.com/consultation-gratuite" class="cta">📅 Passez de la simulation à l’action</a>
+    </div>
+  </div>
+</body>
+</html>
