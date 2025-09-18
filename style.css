@@ -1,4 +1,4 @@
-/* ===== Base ===== */
+/* Base */
 * { box-sizing: border-box; }
 body {
   font-family: 'Poppins', sans-serif;
@@ -9,12 +9,14 @@ body {
 }
 .container { max-width: 840px; margin: 0 auto; }
 
-/* ===== Logo & titres ===== */
+/* Logo */
 .logo img {
   max-width: 180px;
   display: block;
   margin: 0 auto 20px;
 }
+
+/* Titres */
 h1 {
   color: #0000FF;
   text-align: center;
@@ -27,19 +29,15 @@ h1 {
   color: #444;
 }
 
-/* ===== Carte formulaire ===== */
+/* Formulaire */
 .card {
   background: #fff;
   padding: 26px;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
-
-/* Blocs & espacement */
-.form-block { margin-bottom: 22px; }
+.form-block { margin-bottom: 25px; }
 label { display: block; font-weight: 600; margin-bottom: 8px; }
-
-/* Inputs */
 input, select {
   width: 100%;
   padding: 10px 12px;
@@ -48,17 +46,14 @@ input, select {
   font-size: 0.98rem;
   background: #fff;
 }
-
-/* Deux colonnes (AOV+CVR / CAC+Budget) */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
   margin-bottom: 22px;
 }
-.field label { margin-bottom: 8px; }
 
-/* ===== Curseur trafic ===== */
+/* Curseur */
 .range-top {
   display: flex;
   align-items: baseline;
@@ -68,19 +63,17 @@ input, select {
 }
 .range-min { color: #666; }
 .range-current { color: #0000FF; }
-
 .range-line {
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 input[type="range"] {
-  width: 100%;
+  width: 90%;
   appearance: none;
   height: 8px;
   border-radius: 999px;
   background: linear-gradient(90deg, #849BFF 0%, #0000FF 100%);
   outline: none;
-  margin: 0;
 }
 input[type="range"]::-webkit-slider-thumb {
   appearance: none;
@@ -88,61 +81,59 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   background: #F88989;
   cursor: pointer;
-  border: none;
 }
 input[type="range"]::-moz-range-thumb {
   width: 18px; height: 18px;
   border-radius: 50%;
   background: #F88989;
   cursor: pointer;
-  border: none;
 }
 
-/* ===== Leviers (horizontaux, sans cadre) ===== */
-.levers-inline {
-  display: flex;
-  flex-wrap: wrap;
+/* Leviers en 3 colonnes */
+.levers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px 20px;
 }
-.levers-inline .chk {
-  display: inline-flex;
+.levers-grid label {
+  display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 500;
 }
 
-/* ===== Modèles hybrides (Oui/Non inline) ===== */
+/* Modèles hybrides inline */
 .options-inline {
   display: flex;
-  gap: 24px;
+  gap: 30px;
   align-items: center;
 }
-.options-inline .opt {
-  display: inline-flex;
+.options-inline label {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 500;
+  gap: 6px;
 }
 
-/* ===== CTA ===== */
+/* CTA */
 .cta-primary {
   display: block;
   width: 100%;
-  padding: 18px;
-  margin-top: 30px;
+  padding: 20px;
+  margin-top: 35px;
   background: #849BFF;
   color: #fff;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   border: 0;
   border-radius: 12px;
   cursor: pointer;
-  transition: background .25s ease;
+  transition: background .25s, box-shadow .25s;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
 }
 .cta-primary:hover { background: #0000FF; }
 
-/* ===== Résultats ===== */
+/* Résultats */
 #results {
   margin-top: 30px;
   background: #fff;
@@ -152,7 +143,6 @@ input[type="range"]::-moz-range-thumb {
 }
 #results h2 { color: #0000FF; margin-top: 0; }
 #results em { color: #666; }
-
 .cta-secondary {
   display: block;
   margin-top: 18px;
@@ -167,7 +157,8 @@ input[type="range"]::-moz-range-thumb {
 }
 .cta-secondary:hover { background: #d36f6f; }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 700px) {
   .form-row { grid-template-columns: 1fr; }
+  .levers-grid { grid-template-columns: 1fr 1fr; }
 }
