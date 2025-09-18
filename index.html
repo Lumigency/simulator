@@ -19,170 +19,17 @@
 
     <form id="form-simu" class="card">
 
-     /* Base */
-* { box-sizing: border-box; }
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #F7F5F3;
-  color: #222;
-  margin: 0;
-  padding: 20px;
-}
-.container { max-width: 840px; margin: 0 auto; }
-
-/* Logo */
-.logo img {
-  max-width: 180px;
-  display: block;
-  margin: 0 auto 20px;
-}
-
-/* Titres */
-h1 {
-  color: #0000FF;
-  text-align: center;
-  margin: 0 0 10px;
-  font-size: 1.9rem;
-}
-.subtitle {
-  text-align: center;
-  margin: 0 0 24px;
-  color: #444;
-}
-
-/* Formulaire */
-.card {
-  background: #fff;
-  padding: 26px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-.form-block { margin-bottom: 25px; }
-label { display: block; font-weight: 600; margin-bottom: 8px; }
-input, select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #D9D9D9;
-  border-radius: 10px;
-  font-size: 0.98rem;
-  background: #fff;
-}
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 22px;
-}
-
-/* Curseur */
-.range-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.range-min { color: #666; }
-.range-current { color: #0000FF; }
-.range-line {
-  display: flex;
-  justify-content: center;
-}
-input[type="range"] {
-  width: 90%;
-  appearance: none;
-  height: 8px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #849BFF 0%, #0000FF 100%);
-  outline: none;
-}
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: #F88989;
-  cursor: pointer;
-}
-input[type="range"]::-moz-range-thumb {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: #F88989;
-  cursor: pointer;
-}
-
-/* Leviers en 3 colonnes */
-.levers-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px 20px;
-}
-.levers-grid label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-}
-
-/* Modèles hybrides inline */
-.options-inline {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-}
-.options-inline label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* CTA */
-.cta-primary {
-  display: block;
-  width: 100%;
-  padding: 20px;
-  margin-top: 35px;
-  background: #849BFF;
-  color: #fff;
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: 700;
-  border: 0;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background .25s, box-shadow .25s;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-}
-.cta-primary:hover { background: #0000FF; }
-
-/* Résultats */
-#results {
-  margin-top: 30px;
-  background: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-#results h2 { color: #0000FF; margin-top: 0; }
-#results em { color: #666; }
-.cta-secondary {
-  display: block;
-  margin-top: 18px;
-  text-align: center;
-  padding: 14px;
-  background: #F88989;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 10px;
-  transition: background .25s ease;
-}
-.cta-secondary:hover { background: #d36f6f; }
-
-/* Responsive */
-@media (max-width: 700px) {
-  .form-row { grid-template-columns: 1fr; }
-  .levers-grid { grid-template-columns: 1fr 1fr; }
-}
+      <!-- Trafic -->
+      <div class="form-block">
+        <label for="traffic">👥 Votre trafic mensuel actuel</label>
+        <div class="range-top">
+          <span class="range-min">0 visiteurs</span>
+          <span class="range-current"><span id="traffic-value">0</span> visiteurs</span>
+        </div>
+        <div class="range-line">
+          <input type="range" id="traffic" name="traffic" min="0" max="5000000" step="1000" required>
+        </div>
+      </div>
 
       <!-- AOV & CVR -->
       <div class="form-row">
@@ -283,6 +130,13 @@ input[type="range"]::-moz-range-thumb {
       </a>
     </div>
   </div>
+
+  <script>
+    const trafficInput = document.getElementById('traffic');
+    const trafficValue = document.getElementById('traffic-value');
+    trafficInput.addEventListener('input', () => {
+      trafficValue.textContent = new Intl.NumberFormat('fr-FR').format(trafficInput.value);
+    });
+  </script>
 </body>
 </html>
-
