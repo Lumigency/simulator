@@ -56,17 +56,12 @@ input, select {
 /* Curseur */
 .range-top {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 8px;
   font-weight: 600;
+  margin-bottom: 8px;
 }
-.range-min { color: #666; }
-.range-current { color: #0000FF; }
-.range-line {
-  display: flex;
-  justify-content: center;
-}
+.range-current { color: #0000FF; font-weight: 700; }
+.range-line { display: flex; justify-content: center; }
 input[type="range"] {
   width: 90%;
   appearance: none;
@@ -89,11 +84,11 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
-/* Leviers en 3 colonnes */
+/* Leviers en 2 colonnes */
 .levers-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
 }
 .levers-grid label {
   display: flex;
@@ -160,5 +155,5 @@ input[type="range"]::-moz-range-thumb {
 /* Responsive */
 @media (max-width: 700px) {
   .form-row { grid-template-columns: 1fr; }
-  .levers-grid { grid-template-columns: 1fr 1fr; }
+  .levers-grid { grid-template-columns: 1fr; }
 }
