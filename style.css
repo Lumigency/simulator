@@ -37,7 +37,7 @@ h1 {
   margin-bottom: 25px;
 }
 
-/* ✅ Labels pour les champs classiques */
+/* ✅ Labels pour champs normaux */
 form > label {
   font-weight: 600;
   display: block;
@@ -45,7 +45,7 @@ form > label {
   margin-bottom: 8px;
 }
 
-/* ✅ On exclut les checkboxes de width: 100% */
+/* ✅ Sauf checkbox */
 input:not([type="checkbox"]),
 select {
   width: 100%;
@@ -75,20 +75,18 @@ select {
   text-align: right;
 }
 
-/* ✅ CHAMPS LEVIERS — propre et aligné */
+/* ✅ CHAMPS LEVIERS — espacé & aligné */
 fieldset {
   border: none;
   padding: 0;
-  margin: 0;
+  margin: 24px 0 0 0; /* 🆕 espace ajouté en haut */
 }
 
-/* 🆕 Plus d'espace sous le titre */
 legend {
   font-weight: 600;
   margin-bottom: 16px;
 }
 
-/* ✅ Grille 2 colonnes pour les leviers */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -96,7 +94,6 @@ legend {
   margin-top: 10px;
 }
 
-/* ✅ Alignement texte + case */
 .checkbox-group label {
   display: flex;
   align-items: center;
@@ -119,7 +116,6 @@ legend {
   margin-top: 8px;
 }
 
-/* 🆕 Texte à côté des radios */
 .radio-group label {
   display: flex;
   align-items: center;
