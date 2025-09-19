@@ -1,15 +1,5 @@
 console.log("✅ Script Lumigency chargé");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("form-simu");
-  console.log("🎯 Form trouvé :", form);
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("🚀 Simulation lancée !");
-  });
-});
-
 // === LUMIGENCY SIMULATEUR — V2 SMART ===
 
 // ---- 1) Defaults secteur (baromètre CPA 2025) ----
@@ -20,7 +10,7 @@ const SECTOR_DEFAULTS = {
   food:        { aov: 80.71, cvr: 0.0216, roi: 25.65, label: "Alimentaire & Drive" },
   sports:      { aov: 79.21, cvr: 0.0107, roi: 11.08, label: "Sport & Loisirs" },
   travel:      { aov: 171.80, cvr: 0.0125, roi: 24.03, label: "Voyage & Tourisme" },
-  luxury:      { aov: 200.00, cvr: 0.0120, roi: 18.00, label: "Luxe & Bijoux" }, // exemple
+  luxury:      { aov: 200.00, cvr: 0.0120, roi: 18.00, label: "Luxe & Bijoux" },
   auto:        { aov: 85.59, cvr: 0.0169, roi: 13.02, label: "Automobile" },
   services:    { aov: 60.24, cvr: 0.0184, roi: 12.73, label: "B2B / Finance / Assurance" },
   culture:     { aov: 82.61, cvr: 0.0228, roi: 16.50, label: "Produits culturels & Loisirs" },
@@ -91,7 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedLevers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(n => n.value);
     selectedLevers.forEach(lv => {
       const w = LEVER_WEIGHTS[lv];
-      if (w) { ordersFactor *= w.orders; aovFactor *= w.aov; if (w.note) leverNotes.push(w.note); }
+      if (w) { 
+        ordersFactor *= w.orders; 
+        aovFactor *= w.aov; 
+        if (w.note) leverNotes.push(w.note); 
+      }
     });
 
     // --- Résultats bruts
@@ -163,4 +157,3 @@ function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return
 function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[s])); }
-
