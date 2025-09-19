@@ -1,3 +1,15 @@
+console.log("✅ Script Lumigency chargé");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form-simu");
+  console.log("🎯 Form trouvé :", form);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("🚀 Simulation lancée !");
+  });
+});
+
 // === LUMIGENCY SIMULATEUR — V2 SMART ===
 
 // ---- 1) Defaults secteur (baromètre CPA 2025) ----
@@ -151,3 +163,4 @@ function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return
 function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[s])); }
+
