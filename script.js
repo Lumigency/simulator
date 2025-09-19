@@ -50,15 +50,17 @@ function annualAffiliatedTraffic(trafficMonthly) {
 
 // ---- 4) Gestion du formulaire ----
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ DOM chargé !");
   const form = document.getElementById("form-simu");
   if (!form) {
     console.error("❌ Formulaire non trouvé !");
     return;
   }
 
+  console.log("✅ Formulaire détecté");
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
     console.log("🚀 Simulation lancée !");
 
     // --- Inputs utilisateur
@@ -86,11 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedLevers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(n => n.value);
     selectedLevers.forEach(lv => {
       const w = LEVER_WEIGHTS[lv];
-      if (w) { 
-        ordersFactor *= w.orders; 
-        aovFactor *= w.aov; 
-        if (w.note) leverNotes.push(w.note); 
-      }
+      if (w) { ordersFactor *= w.orders; aovFactor *= w.aov; if (w.note) leverNotes.push(w.note); }
     });
 
     // --- Résultats bruts
@@ -105,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
     insights.push(`🏷️ Secteur choisi : ${sector.label}.`);
 
     // Panier moyen
-    if (aov > sector.aov * 1.1) insights.push(`🛒 Votre panier moyen (${format€(aov)}) est supérieur à la moyenne du secteur (${format€(sector.aov)}).`);
-    else if (aov < sector.aov * 0.9) insights.push(`⚠️ Votre panier moyen (${format€(aov)}) est inférieur à la moyenne du secteur (${format€(sector.aov)}).`);
-    else insights.push(`✅ Votre panier moyen (${format€(aov)}) est proche de la moyenne du secteur (${format€(sector.aov)}).`);
+    if (aov > sector.aov * 1.1) insights.push(`🛒 Votre panier moyen (${formatEUR(aov)}) est supérieur à la moyenne du secteur (${formatEUR(sector.aov)}).`);
+    else if (aov < sector.aov * 0.9) insights.push(`⚠️ Votre panier moyen (${formatEUR(aov)}) est inférieur à la moyenne du secteur (${formatEUR(sector.aov)}).`);
+    else insights.push(`✅ Votre panier moyen (${formatEUR(aov)}) est proche de la moyenne du secteur (${formatEUR(sector.aov)}).`);
 
     // Conversion
     if (cvr > sector.cvr * 1.1) insights.push(`✅ Votre taux de conversion (${(cvr*100).toFixed(2)}%) est au-dessus de la moyenne sectorielle (${(sector.cvr*100).toFixed(2)}%).`);
@@ -117,8 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // CAC comparatif
     const sectorCAC = 1 / sector.roi * aov; 
     if (isFinite(cac) && finalOrders > 0) {
-      if (cac < sectorCAC) insights.push(`🚀 Votre CAC simulé (${format€(cac)}) est meilleur que la moyenne du secteur (~${format€(sectorCAC)}).`);
-      else insights.push(`⚠️ Votre CAC simulé (${format€(cac)}) est au-dessus de la moyenne du secteur (~${format€(sectorCAC)}).`);
+      if (cac < sectorCAC) insights.push(`🚀 Votre CAC simulé (${formatEUR(cac)}) est meilleur que la moyenne du secteur (~${formatEUR(sectorCAC)}).`);
+      else insights.push(`⚠️ Votre CAC simulé (${formatEUR(cac)}) est au-dessus de la moyenne du secteur (~${formatEUR(sectorCAC)}).`);
     }
 
     // Leviers
@@ -143,15 +141,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ---- Helpers ----
 function showResults(revenue, orders, cac, insights, ctaText) {
-  document.getElementById("kpi-revenue").textContent = format€(revenue);
+  document.getElementById("kpi-revenue").textContent = formatEUR(revenue);
   document.getElementById("kpi-orders").textContent  = formatInt(orders);
-  document.getElementById("kpi-cac").textContent     = isFinite(cac) ? format€(cac) : "—";
+  document.getElementById("kpi-cac").textContent     = isFinite(cac) ? formatEUR(cac) : "—";
 
   const insightsBox = document.getElementById("insights");
   if (insightsBox) {
-    insightsBox.innerHTML = "<h3>💡 Insights personnalisés</h3><ul>" 
-      + insights.map(t => "<li>" + escapeHtml(t) + "</li>").join("") 
-      + "</ul>";
+    insightsBox.innerHTML = `<h3>💡 Insights personnalisés</h3><ul>${insights.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>`;
   }
 
   const ctaLink = document.getElementById("cta-link");
@@ -160,7 +156,25 @@ function showResults(revenue, orders, cac, insights, ctaText) {
   document.getElementById("results").style.display = "block";
 }
 
-function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
-function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
-function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[s])); }
+function numberOf(v) { 
+  const n = parseFloat(String(v).replace(",", ".")); 
+  return isNaN(n) ? 0 : n; 
+}
+
+function formatEUR(n) { 
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency", 
+    currency: "EUR", 
+    maximumFractionDigits: 0
+  }).format(n); 
+}
+
+function formatInt(n) { 
+  return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); 
+}
+
+function escapeHtml(str) { 
+  return String(str).replace(/[&<>"']/g, s => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[s])); 
+}
