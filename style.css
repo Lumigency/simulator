@@ -37,7 +37,7 @@ h1 {
   margin-bottom: 25px;
 }
 
-/* ✅ Appliqué uniquement aux labels des champs */
+/* ✅ Labels pour les champs classiques */
 form > label {
   font-weight: 600;
   display: block;
@@ -45,7 +45,7 @@ form > label {
   margin-bottom: 8px;
 }
 
-/* ✅ On exclut les checkboxes pour éviter le bug */
+/* ✅ On exclut les checkboxes de width: 100% */
 input:not([type="checkbox"]),
 select {
   width: 100%;
@@ -82,20 +82,21 @@ fieldset {
   margin: 0;
 }
 
+/* 🆕 Plus d'espace sous le titre */
 legend {
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
-/* ✅ Grille 2 colonnes */
+/* ✅ Grille 2 colonnes pour les leviers */
 .checkbox-group {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes identiques */
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px 30px;
   margin-top: 10px;
 }
 
-/* ✅ Case + texte sur une seule ligne */
+/* ✅ Alignement texte + case */
 .checkbox-group label {
   display: flex;
   align-items: center;
@@ -108,14 +109,24 @@ legend {
 
 .checkbox-group input[type="checkbox"] {
   flex-shrink: 0;
-  width: auto; /* 👈 fixe le bug */
+  width: auto;
 }
 
 /* ✅ Radios en ligne */
 .radio-group {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   margin-top: 8px;
+}
+
+/* 🆕 Texte à côté des radios */
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* ✅ Bouton CTA */
