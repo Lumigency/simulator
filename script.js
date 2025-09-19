@@ -1,6 +1,5 @@
+// === LUMIGENCY SIMULATEUR — V3 ===
 console.log("🔥 script.js bien chargé !");
-
-// === LUMIGENCY SIMULATEUR — V2 SMART ===
 
 // ---- 1) Defaults secteur (baromètre CPA 2025) ----
 const SECTOR_DEFAULTS = {
@@ -19,19 +18,19 @@ const SECTOR_DEFAULTS = {
 
 // ---- 2) Pondérations par levier ----
 const LEVER_WEIGHTS = {
-  cashback:        { orders: 1.10, aov: 0.95, note: "💰 Cashback : +volumes, panier un peu plus bas." },
-  bonsplans:       { orders: 1.15, aov: 0.90, note: "🏷️ Bons plans : croissance rapide, pression sur le panier." },
-  retargeting:     { orders: 1.15, aov: 1.00, note: "🎯 Retargeting : optimise la conversion." },
-  css:             { orders: 1.10, aov: 1.00, note: "🛍️ CSS/Comparateurs : intention forte, conversion saine." },
-  comparateurs:    { orders: 1.10, aov: 1.00, note: "🛍️ Comparateurs : intention d’achat, bon mix." },
-  display:         { orders: 1.05, aov: 1.00, note: "📣 Display : visibilité, uplift modéré direct." },
-  "display-networks": { orders: 1.05, aov: 1.00, note: "📣 Display networks : visibilité, uplift modéré direct." },
-  retention:       { orders: 1.10, aov: 1.02, note: "🔁 Rétention on-site : panier & LTV améliorés." },
-  content:         { orders: 1.08, aov: 1.02, note: "📰 Content commerce : panier et confiance." },
-  emailing:        { orders: 1.10, aov: 1.01, note: "✉️ Emailing/NL : très ROIste si base saine." },
-  ppc:             { orders: 1.25, aov: 1.00, note: "🔍 PPC/SEA : gros volume, surveiller le CAC." },
-  affinitaires:    { orders: 1.12, aov: 1.02, note: "🤝 Affinitaires : audience quali, meilleure valeur." },
-  influence:       { orders: 1.20, aov: 0.98, note: "🌟 Influence : notoriété + ventes incrémentales." }
+  cashback:        { orders: 1.10, aov: 0.95, note: "Cashback : volumes accrus, panier plus bas." },
+  bonsplans:       { orders: 1.15, aov: 0.90, note: "Bons plans : croissance rapide, panier sous pression." },
+  retargeting:     { orders: 1.15, aov: 1.00, note: "Retargeting : améliore la conversion." },
+  css:             { orders: 1.10, aov: 1.00, note: "CSS/Comparateurs : intention forte, conversion saine." },
+  comparateurs:    { orders: 1.10, aov: 1.00, note: "Comparateurs : intention d’achat, bon mix." },
+  display:         { orders: 1.05, aov: 1.00, note: "Display : visibilité, uplift modéré." },
+  "display-networks": { orders: 1.05, aov: 1.00, note: "Display networks : visibilité, uplift modéré." },
+  retention:       { orders: 1.10, aov: 1.02, note: "Rétention on-site : panier et fidélité améliorés." },
+  content:         { orders: 1.08, aov: 1.02, note: "Content commerce : panier et confiance renforcés." },
+  emailing:        { orders: 1.10, aov: 1.01, note: "Emailing : très ROIste si base saine." },
+  ppc:             { orders: 1.25, aov: 1.00, note: "PPC/SEA : gros volume, surveiller le coût." },
+  affinitaires:    { orders: 1.12, aov: 1.02, note: "Affinitaires : audience quali, meilleure valeur." },
+  influence:       { orders: 1.20, aov: 0.98, note: "Influence : notoriété + ventes incrémentales." }
 };
 
 // ---- 3) Ajustement du trafic (annualisé 12 mois) ----
@@ -51,24 +50,16 @@ function annualAffiliatedTraffic(trafficMonthly) {
 // ---- 4) Gestion du formulaire ----
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
-  if (!form) {
-    console.error("❌ Formulaire non trouvé !");
-    return;
-  }
-
-  console.log("✅ Formulaire détecté");
+  if (!form) return;
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    console.log("🚀 Simulation lancée !");
 
     // --- Inputs utilisateur
     const trafficMonthly = numberOf(form.elements["traffic"]?.value);
     const aovInput       = numberOf(form.elements["aov"]?.value);
     const cvrInputPct    = numberOf(form.elements["cvr"]?.value);
-    const budget         = numberOf(form.elements["budget"]?.value);
-    const cacMax         = numberOf(form.elements["cac"]?.value);
+    const budgetMonthly  = numberOf(form.elements["budget"]?.value);
     const sectorKey      = form.elements["sector"]?.value || "other";
 
     const sector = SECTOR_DEFAULTS[sectorKey] || SECTOR_DEFAULTS.other;
@@ -92,62 +83,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- Résultats bruts
-    const finalOrders  = Math.round(baseOrders * ordersFactor);
-    const adjAOV       = aov * aovFactor;
-    const finalRevenue = Math.round(finalOrders * adjAOV);
-    const cac          = finalOrders > 0 ? budget / finalOrders : Infinity;
+    let projectedOrders  = Math.round(baseOrders * ordersFactor);
+    const adjAOV         = aov * aovFactor;
+    let projectedRevenue = Math.round(projectedOrders * adjAOV);
 
-    // --- Comparatif secteur
+    // --- Ajustement par budget
+    const annualBudget = budgetMonthly * 12;
+    if (projectedRevenue > annualBudget * 10) {  
+      // garde une cohérence : max 10x budget en CA
+      projectedRevenue = Math.round(annualBudget * 10);
+      projectedOrders  = Math.round(projectedRevenue / adjAOV);
+    }
+
+    // --- Insights
     const insights = [];
-    insights.push("📅 Estimations projetées sur 12 mois (l’affiliation est un levier long terme).");
-    insights.push(`🏷️ Secteur choisi : ${sector.label}.`);
+    insights.push("Estimations projetées sur 12 mois (affiliation = levier long terme).");
+    insights.push(`Secteur choisi : ${sector.label}.`);
 
-    // Panier moyen
-    if (aov > sector.aov * 1.1) insights.push(`🛒 Votre panier moyen (${formatEUR(aov)}) est supérieur à la moyenne du secteur (${formatEUR(sector.aov)}).`);
-    else if (aov < sector.aov * 0.9) insights.push(`⚠️ Votre panier moyen (${formatEUR(aov)}) est inférieur à la moyenne du secteur (${formatEUR(sector.aov)}).`);
-    else insights.push(`✅ Votre panier moyen (${formatEUR(aov)}) est proche de la moyenne du secteur (${formatEUR(sector.aov)}).`);
+    if (aov > sector.aov * 1.1) insights.push(`Votre panier moyen (${format€(aov)}) est supérieur à celui du secteur (${format€(sector.aov)}).`);
+    else if (aov < sector.aov * 0.9) insights.push(`Votre panier moyen (${format€(aov)}) est inférieur à celui du secteur (${format€(sector.aov)}).`);
+    else insights.push(`Votre panier moyen (${format€(aov)}) est proche de la moyenne sectorielle (${format€(sector.aov)}).`);
 
-    // Conversion
-    if (cvr > sector.cvr * 1.1) insights.push(`✅ Votre taux de conversion (${(cvr*100).toFixed(2)}%) est au-dessus de la moyenne sectorielle (${(sector.cvr*100).toFixed(2)}%).`);
-    else if (cvr < sector.cvr * 0.9) insights.push(`📉 Votre taux de conversion (${(cvr*100).toFixed(2)}%) est en dessous de la moyenne sectorielle (${(sector.cvr*100).toFixed(2)}%).`);
-    else insights.push(`✅ Votre taux de conversion (${(cvr*100).toFixed(2)}%) est cohérent avec votre secteur (${(sector.cvr*100).toFixed(2)}%).`);
+    if (cvr > sector.cvr * 1.1) insights.push(`Votre taux de conversion (${(cvr*100).toFixed(2)}%) est au-dessus de la moyenne sectorielle (${(sector.cvr*100).toFixed(2)}%).`);
+    else if (cvr < sector.cvr * 0.9) insights.push(`Votre taux de conversion (${(cvr*100).toFixed(2)}%) est inférieur à la moyenne sectorielle (${(sector.cvr*100).toFixed(2)}%).`);
+    else insights.push(`Votre taux de conversion (${(cvr*100).toFixed(2)}%) est cohérent avec la moyenne du secteur (${(sector.cvr*100).toFixed(2)}%).`);
 
-    // CAC comparatif
-    const sectorCAC = 1 / sector.roi * aov; 
-    if (isFinite(cac) && finalOrders > 0) {
-      if (cac < sectorCAC) insights.push(`🚀 Votre CAC simulé (${formatEUR(cac)}) est meilleur que la moyenne du secteur (~${formatEUR(sectorCAC)}).`);
-      else insights.push(`⚠️ Votre CAC simulé (${formatEUR(cac)}) est au-dessus de la moyenne du secteur (~${formatEUR(sectorCAC)}).`);
-    }
-
-    // Leviers
     if (leverNotes.length) leverNotes.forEach(n => insights.push(n));
-    else insights.push("ℹ️ Aucun levier sélectionné : résultats basés uniquement sur le trafic et la conversion.");
+    else insights.push("Aucun levier sélectionné : résultats basés uniquement sur le trafic et la conversion.");
 
-    // Trafic pris en compte
-    insights.push(`👥 Trafic annuel pris en compte après règles : ${formatInt(affiliatedTrafficYear)} visites.`);
+    insights.push(`Trafic annuel pris en compte après règles : ${formatInt(affiliatedTrafficYear)} visites.`);
 
-    // CTA contextuel
-    let ctaText = "";
-    if (cac < sectorCAC && cvr >= sector.cvr) {
-      ctaText = "✅ Vous êtes bien positionné ! Passez à l’action pour accélérer vos performances → réservez un RDV gratuit.";
-    } else {
-      ctaText = "📊 Vos résultats montrent un potentiel d’optimisation. Découvrez votre positionnement exact par rapport au marché → réservez un RDV gratuit.";
-    }
+    // --- CTA contextuel
+    const ctaText = "📅 Créez votre programme d’affiliation sur mesure → Réservez un rendez-vous gratuit.";
 
     // --- Affichage
-    showResults(finalRevenue, finalOrders, cac, insights, ctaText);
+    showResults(projectedRevenue, projectedOrders, annualBudget, insights, ctaText);
   });
 });
 
 // ---- Helpers ----
-function showResults(revenue, orders, cac, insights, ctaText) {
-  document.getElementById("kpi-revenue").textContent = formatEUR(revenue);
+function showResults(revenue, orders, budget, insights, ctaText) {
+  document.getElementById("kpi-revenue").textContent = format€(revenue);
   document.getElementById("kpi-orders").textContent  = formatInt(orders);
-  document.getElementById("kpi-cac").textContent     = isFinite(cac) ? formatEUR(cac) : "—";
+  document.getElementById("kpi-cac").textContent     = format€(budget); // 🔥 remplace CAC par Budget annuel
 
   const insightsBox = document.getElementById("insights");
   if (insightsBox) {
-    insightsBox.innerHTML = `<h3>💡 Insights personnalisés</h3><ul>${insights.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>`;
+    insightsBox.innerHTML = `<h3>Insights personnalisés</h3><ul>${insights.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>`;
   }
 
   const ctaLink = document.getElementById("cta-link");
@@ -156,25 +138,7 @@ function showResults(revenue, orders, cac, insights, ctaText) {
   document.getElementById("results").style.display = "block";
 }
 
-function numberOf(v) { 
-  const n = parseFloat(String(v).replace(",", ".")); 
-  return isNaN(n) ? 0 : n; 
-}
-
-function formatEUR(n) { 
-  return new Intl.NumberFormat("fr-FR", {
-    style: "currency", 
-    currency: "EUR", 
-    maximumFractionDigits: 0
-  }).format(n); 
-}
-
-function formatInt(n) { 
-  return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); 
-}
-
-function escapeHtml(str) { 
-  return String(str).replace(/[&<>"']/g, s => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[s])); 
-}
+function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
+function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
+function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
+function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[s])); }
