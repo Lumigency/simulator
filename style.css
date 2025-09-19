@@ -73,26 +73,22 @@ input, select {
 }
 
 .checkbox-group {
-  .checkbox-group {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
   gap: 12px 30px; /* espace vertical et horizontal */
   margin-top: 10px;
 }
 
 .checkbox-group label {
   display: flex;
-  align-items: center; /* case bien alignée avec le texte */
+  align-items: center;
   font-size: 0.95rem;
   font-weight: 500;
+  white-space: nowrap; /* évite le retour à la ligne */
 }
 
 .checkbox-group input {
-  margin-right: 8px; /* petit espace entre la case et le texte */
-}
-
-}
-
+  margin-right: 8px;
 }
 
 .radio-group {
@@ -120,5 +116,6 @@ input, select {
 .cta:hover {
   background: #0000FF;
 }
+
 
 
