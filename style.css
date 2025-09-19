@@ -73,19 +73,17 @@ select {
   text-align: right;
 }
 
-/* ✅ Section Leviers */
 fieldset {
   border: none;
   padding: 0;
-  margin-top: 32px; /* ✅ Espacement au-dessus */
+  margin: 0;
 }
 
 legend {
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
-/* ✅ Grille 2 colonnes propre */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -105,10 +103,8 @@ legend {
 
 .checkbox-group input[type="checkbox"] {
   flex-shrink: 0;
-  width: auto;
 }
 
-/* ✅ Radios en ligne avec texte à droite */
 .radio-group {
   display: flex;
   gap: 20px;
@@ -118,12 +114,10 @@ legend {
 .radio-group label {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
+  gap: 8px;
   font-weight: 500;
 }
 
-/* ✅ Bouton CTA */
 .cta {
   display: block;
   width: 100%;
