@@ -37,16 +37,14 @@ h1 {
   margin-bottom: 25px;
 }
 
-/* ✅ Labels pour champs normaux */
-form > label {
+label {
   font-weight: 600;
   display: block;
   margin-top: 20px;
   margin-bottom: 8px;
 }
 
-/* ✅ Sauf checkbox */
-input:not([type="checkbox"]),
+input,
 select {
   width: 100%;
   padding: 10px;
@@ -75,11 +73,11 @@ select {
   text-align: right;
 }
 
-/* ✅ CHAMPS LEVIERS — espacé & aligné */
+/* ✅ Section Leviers */
 fieldset {
   border: none;
   padding: 0;
-  margin: 24px 0 0 0; /* 🆕 espace ajouté en haut */
+  margin-top: 32px; /* ✅ Espacement au-dessus */
 }
 
 legend {
@@ -87,6 +85,7 @@ legend {
   margin-bottom: 16px;
 }
 
+/* ✅ Grille 2 colonnes propre */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -109,20 +108,19 @@ legend {
   width: auto;
 }
 
-/* ✅ Radios en ligne */
+/* ✅ Radios en ligne avec texte à droite */
 .radio-group {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   margin-top: 8px;
 }
 
 .radio-group label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.95rem;
   font-weight: 500;
-  white-space: nowrap;
 }
 
 /* ✅ Bouton CTA */
