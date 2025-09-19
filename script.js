@@ -1,59 +1,36 @@
-// === LUMIGENCY SIMULATEUR — V3 (Budget-first) ===
-console.log("🔥 script.js bien chargé !");
+console.log("🔥 script.js chargé correctement !");
 
-// === Defaults secteur (baromètre CPA 2025) ===
+// === LUMIGENCY SIMULATEUR — V2 CLEAN ===
+
+// ---- 1) Defaults secteur (baromètre CPA 2025) ----
 const SECTOR_DEFAULTS = {
-  fashion:     { aov: 66.67, cvr: 0.0155, roi: 14.43, label: "Mode & Beauté" },
-  electronics: { aov: 110.93, cvr: 0.0171, roi: 17.31, label: "High Tech & Électroménager" },
-  home:        { aov: 112.69, cvr: 0.0160, roi: 20.71, label: "Maison & Décoration" },
-  food:        { aov: 80.71, cvr: 0.0216, roi: 25.65, label: "Alimentaire & Drive" },
-  sports:      { aov: 79.21, cvr: 0.0107, roi: 11.08, label: "Sport & Loisirs" },
-  travel:      { aov: 171.80, cvr: 0.0125, roi: 24.03, label: "Voyage & Tourisme" },
-  luxury:      { aov: 200.00, cvr: 0.0120, roi: 18.00, label: "Luxe & Bijoux" },
-  auto:        { aov: 85.59, cvr: 0.0169, roi: 13.02, label: "Automobile" },
-  services:    { aov: 60.24, cvr: 0.0184, roi: 12.73, label: "B2B / Finance / Assurance" },
-  culture:     { aov: 82.61, cvr: 0.0228, roi: 16.50, label: "Produits culturels & Loisirs" },
-  other:       { aov: 80, cvr: 0.015, roi: 15, label: "Autre" }
+  fashion:     { aov: 66.67, cvr: 0.0155, roi: 14.43, levers: { bonsplans: 24, retargeting: 15, display: 16 } },
+  electronics: { aov: 110.93, cvr: 0.0171, roi: 17.31, levers: { comparateurs: 20, css: 18, retargeting: 12 } },
+  home:        { aov: 112.69, cvr: 0.0160, roi: 20.71, levers: { cashback: 22, bonsplans: 19, display: 15 } },
+  food:        { aov: 80.71,  cvr: 0.0216, roi: 25.65, levers: { emailing: 23, cashback: 18, comparateurs: 15 } },
+  sports:      { aov: 79.21,  cvr: 0.0107, roi: 11.08, levers: { bonsplans: 20, influence: 15, display: 14 } },
+  travel:      { aov: 171.80, cvr: 0.0125, roi: 24.03, levers: { comparateurs: 25, css: 20, display: 18 } },
+  luxury:      { aov: 200.00, cvr: 0.0120, roi: 18.00, levers: { influence: 22, content: 18, emailing: 12 } },
+  auto:        { aov: 85.59,  cvr: 0.0169, roi: 13.02, levers: { comparateurs: 21, css: 17, retargeting: 15 } },
+  services:    { aov: 60.24,  cvr: 0.0184, roi: 12.73, levers: { content: 20, emailing: 19, ppc: 15 } },
+  other:       { aov: 80,     cvr: 0.015,  roi: 15,    levers: { display: 18, cashback: 14, bonsplans: 13 } }
 };
 
-// === Parts de ventes par leviers (CPA 2025) ===
-const SECTOR_SHARES = {
-  fashion: {
-    cashback: 0.12, bonsplans: 0.24, comparateurs: 0.02, emailing: 0.12,
-    retargeting: 0.15, affinitaires: 0.14, display: 0.16, content: 0.12
-  },
-  travel: {
-    cashback: 0.21, comparateurs: 0.27, content: 0.04, bonsplans: 0.05,
-    affinitaires: 0.11, emailing: 0.14, "display-networks": 0.18
-  },
-  auto: {
-    cashback: 0.13, bonsplans: 0.30, comparateurs: 0.11, emailing: 0.12,
-    retargeting: 0.12, affinitaires: 0.05, "display-networks": 0.12, content: 0.04
-  },
-  food: {
-    cashback: 0.21, bonsplans: 0.41, comparateurs: 0.09, emailing: 0.03,
-    retargeting: 0.20, affinitaires: 0.03, display: 0.03, content: 0.01
-  }
-};
-
-// === Pondérations par levier ===
+// ---- 2) Pondérations par levier ----
 const LEVER_WEIGHTS = {
-  cashback: { orders: 1.10, aov: 0.95, note: "💰 Cashback : volumes accrus, panier plus bas." },
-  bonsplans: { orders: 1.15, aov: 0.90, note: "🏷️ Bons plans : croissance rapide, panier réduit." },
-  retargeting: { orders: 1.15, aov: 1.00, note: "🎯 Retargeting : améliore la conversion." },
-  css: { orders: 1.10, aov: 1.00, note: "🛍️ CSS : intention forte, conversion saine." },
-  comparateurs: { orders: 1.10, aov: 1.00, note: "🛍️ Comparateurs : intention d’achat, bon mix." },
-  display: { orders: 1.05, aov: 1.00, note: "📣 Display : visibilité, uplift modéré." },
-  "display-networks": { orders: 1.05, aov: 1.00, note: "📣 Display networks : uplift modéré direct." },
-  retention: { orders: 1.10, aov: 1.02, note: "🔁 Rétention on-site : panier & LTV améliorés." },
-  content: { orders: 1.08, aov: 1.02, note: "📰 Content commerce : panier et confiance." },
-  emailing: { orders: 1.10, aov: 1.01, note: "✉️ Emailing/NL : très ROIste si base saine." },
-  ppc: { orders: 1.25, aov: 1.00, note: "🔍 PPC/SEA : gros volume, surveiller le CAC." },
-  affinitaires: { orders: 1.12, aov: 1.02, note: "🤝 Affinitaires : audience quali, meilleure valeur." },
-  influence: { orders: 1.20, aov: 0.98, note: "🌟 Influence : notoriété + ventes incrémentales." }
+  cashback:     { orders: 1.10, aov: 0.95, note: "Cashback : volumes accrus, panier un peu plus bas." },
+  bonsplans:    { orders: 1.15, aov: 0.90, note: "Bons plans : croissance rapide, pression sur le panier." },
+  retargeting:  { orders: 1.15, aov: 1.00, note: "Retargeting : améliore la conversion." },
+  css:          { orders: 1.10, aov: 1.00, note: "CSS : intention forte, conversion saine." },
+  comparateurs: { orders: 1.10, aov: 1.00, note: "Comparateurs : intention d’achat, bon mix." },
+  display:      { orders: 1.05, aov: 1.00, note: "Display : visibilité, uplift modéré." },
+  content:      { orders: 1.08, aov: 1.02, note: "Content commerce : panier et confiance." },
+  emailing:     { orders: 1.10, aov: 1.01, note: "Emailing : très ROIste si base saine." },
+  ppc:          { orders: 1.25, aov: 1.00, note: "PPC/SEA : gros volume, surveiller le CAC." },
+  influence:    { orders: 1.20, aov: 0.98, note: "Influence : notoriété + ventes incrémentales." }
 };
 
-// === Ajustement trafic annualisé ===
+// ---- 3) Ajustement du trafic annualisé ----
 function annualAffiliatedTraffic(trafficMonthly) {
   if (trafficMonthly < 10000) return trafficMonthly * 0.20 * 6 + trafficMonthly * 0.30 * 6;
   if (trafficMonthly < 50000) return trafficMonthly * 0.40 * 6 + trafficMonthly * 0.30 * 6;
@@ -61,7 +38,7 @@ function annualAffiliatedTraffic(trafficMonthly) {
   return trafficMonthly * 0.70 * 12;
 }
 
-// === Gestion du formulaire ===
+// ---- 4) Gestion du formulaire ----
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
   if (!form) return;
@@ -69,20 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    // Inputs
     const trafficMonthly = numberOf(form.elements["traffic"]?.value);
-    const aovInput = numberOf(form.elements["aov"]?.value);
-    const cvrInputPct = numberOf(form.elements["cvr"]?.value);
-    const budgetMensuel = numberOf(form.elements["budget"]?.value);
-    const sectorKey = form.elements["sector"]?.value || "other";
-    const sector = SECTOR_DEFAULTS[sectorKey] || SECTOR_DEFAULTS.other;
+    const aovInput       = numberOf(form.elements["aov"]?.value);
+    const cvrInputPct    = numberOf(form.elements["cvr"]?.value);
+    const budgetMensuel  = numberOf(form.elements["budget"]?.value);
+    const cacMax         = numberOf(form.elements["cac"]?.value);
+    const sectorKey      = form.elements["sector"]?.value || "other";
 
+    const sector = SECTOR_DEFAULTS[sectorKey] || SECTOR_DEFAULTS.other;
     const aov = aovInput > 0 ? aovInput : sector.aov;
     const cvr = (cvrInputPct > 0 ? cvrInputPct : sector.cvr * 100) / 100;
 
+    // Trafic affilié
     const affiliatedTrafficYear = annualAffiliatedTraffic(trafficMonthly);
+
+    // Commandes
     let baseOrders = affiliatedTrafficYear * cvr;
 
-    // --- Pondérations leviers ---
+    // Pondérations leviers
     let ordersFactor = 1, aovFactor = 1;
     const leverNotes = [];
     const selectedLevers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(n => n.value);
@@ -91,83 +73,64 @@ document.addEventListener("DOMContentLoaded", () => {
       if (w) { ordersFactor *= w.orders; aovFactor *= w.aov; if (w.note) leverNotes.push(w.note); }
     });
 
-    const finalOrders = Math.round(baseOrders * ordersFactor);
-    const adjAOV = aov * aovFactor;
+    // Résultats bruts
+    const finalOrders  = Math.round(baseOrders * ordersFactor);
+    const adjAOV       = aov * aovFactor;
     const finalRevenue = Math.round(finalOrders * adjAOV);
 
-    // --- CAC & budget affiliation ---
-    const cac = finalOrders > 0 ? (budgetMensuel * 12) / finalOrders : Infinity;
-    let budgetAff = cac * finalOrders;
-    const budgetCap = budgetMensuel * 12;
-    if (budgetAff > budgetCap) budgetAff = budgetCap;
+    // 💼 Budget affiliation annuel
+    const budgetTheorique = cacMax * finalOrders;
+    const budgetAnnuel = Math.min(budgetTheorique, budgetMensuel * 12);
 
-    // --- Insights ---
+    // Analyse narrative
     const insights = [];
-    insights.push(`💼 Budget annuel affiliation estimé : ${formatEur(budgetAff)} (cappé par ${formatEur(budgetCap)}).`);
-    insights.push(`📅 Estimations projetées sur 12 mois (levier long terme).`);
-    insights.push(`🏷️ Secteur choisi : ${sector.label}.`);
+    insights.push(`📊 Sur la base de vos données et du secteur ${sectorKey}, voici quelques enseignements :`);
+    if (aov > sector.aov * 1.1) insights.push(`Votre panier moyen (${format€(aov)}) est supérieur à la moyenne du secteur (${format€(sector.aov)}), signe d’une bonne valorisation client.`);
+    else if (aov < sector.aov * 0.9) insights.push(`Votre panier moyen (${format€(aov)}) est en dessous de la moyenne du secteur (${format€(sector.aov)}), ce qui peut limiter la marge.`);
+    else insights.push(`Votre panier moyen (${format€(aov)}) est cohérent avec celui de votre secteur (${format€(sector.aov)}).`);
 
-    // Panier
-    if (aov > sector.aov * 1.1) insights.push(`🛒 Panier moyen (${formatEur(aov)}) > moyenne du secteur (${formatEur(sector.aov)}).`);
-    else if (aov < sector.aov * 0.9) insights.push(`⚠️ Panier moyen (${formatEur(aov)}) < secteur (${formatEur(sector.aov)}).`);
-    else insights.push(`✅ Panier moyen (${formatEur(aov)}) ~ cohérent avec le secteur.`);
-
-    // Conversion
-    if (cvr > sector.cvr * 1.1) insights.push(`✅ Taux de conversion ${(cvr*100).toFixed(2)}% > secteur ${(sector.cvr*100).toFixed(2)}%.`);
-    else if (cvr < sector.cvr * 0.9) insights.push(`📉 Taux de conversion ${(cvr*100).toFixed(2)}% < secteur ${(sector.cvr*100).toFixed(2)}%.`);
-    else insights.push(`✅ Taux de conversion ${(cvr*100).toFixed(2)}% ~ cohérent avec secteur.`);
+    if (cvr > sector.cvr * 1.1) insights.push(`Votre taux de conversion (${(cvr*100).toFixed(2)}%) est au-dessus de la moyenne (${(sector.cvr*100).toFixed(2)}%).`);
+    else if (cvr < sector.cvr * 0.9) insights.push(`Votre taux de conversion (${(cvr*100).toFixed(2)}%) est inférieur à la moyenne (${(sector.cvr*100).toFixed(2)}%).`);
+    else insights.push(`Votre taux de conversion (${(cvr*100).toFixed(2)}%) est proche de la moyenne (${(sector.cvr*100).toFixed(2)}%).`);
 
     leverNotes.forEach(n => insights.push(n));
 
-    // --- Analyse sectorielle leviers clés ---
-    const sectorShares = SECTOR_SHARES[sectorKey] || {};
-    const leverAnalysis = [];
-    Object.entries(sectorShares).forEach(([lever, share]) => {
-      if (share >= 0.15) {
-        if (selectedLevers.includes(lever)) {
-          leverAnalysis.push(`✅ Vous avez activé ${lever}, qui pèse ${Math.round(share*100)}% des ventes dans votre secteur.`);
-        } else {
-          leverAnalysis.push(`⚠️ ${lever} représente ${Math.round(share*100)}% des ventes dans votre secteur, mais vous ne l’avez pas activé.`);
-        }
+    // Comparatif leviers sectoriels
+    const leverComparisons = [];
+    Object.entries(sector.levers).forEach(([lever, share]) => {
+      if (!selectedLevers.includes(lever) && share >= 15) {
+        leverComparisons.push(`⚠️ ${lever} représente ${share}% des ventes dans votre secteur, mais vous ne l’avez pas activé.`);
+      } else if (selectedLevers.includes(lever)) {
+        leverComparisons.push(`✅ Vous avez activé ${lever}, qui pèse ${share}% des ventes dans votre secteur.`);
       }
     });
 
-    // --- CTA ---
-    let ctaText = "📅 Prenez RDV pour aller plus loin dans l’analyse ou créer votre programme d’affiliation";
+    // CTA
+    const ctaText = "📅 Prenez RDV pour aller plus loin dans l’analyse ou créer votre programme d’affiliation";
 
-    showResults(finalRevenue, finalOrders, cac, insights, ctaText, leverAnalysis);
+    // Affichage
+    showResults(finalRevenue, finalOrders, budgetAnnuel, insights, leverComparisons, ctaText);
   });
 });
 
-// === Helpers ===
-function showResults(revenue, orders, cac, insights, ctaText, leverAnalysis) {
-  document.getElementById("kpi-revenue").textContent = formatEur(revenue);
+// ---- Helpers ----
+function showResults(revenue, orders, budget, insights, leverComparisons, ctaText) {
+  document.getElementById("kpi-revenue").textContent = format€(revenue);
   document.getElementById("kpi-orders").textContent  = formatInt(orders);
-  document.getElementById("kpi-cac").textContent     = isFinite(cac) ? formatEur(cac) : "—";
+  document.getElementById("kpi-cac").textContent     = format€(budget);
 
   const insightsBox = document.getElementById("insights");
-  if (insightsBox) {
-    insightsBox.innerHTML = `
-      <h3>📊 Vous voilà avec vos potentielles futures performances :</h3>
-      <ul>${insights.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
-      <h3>🎯 Leviers activés et analyse sectorielle :</h3>
-      <ul>${leverAnalysis.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
-    `;
-  }
-
-  const ctaLink = document.getElementById("cta-link");
-  if (ctaLink) {
-    ctaLink.outerHTML = `
-      <button class="cta" onclick="window.location.href='https://www.lumigency.com/consultation-gratuite'">
-        ${ctaText}
-      </button>
-    `;
-  }
-
-  document.getElementById("results").style.display = "block";
+  insightsBox.innerHTML = `
+    <h3>📊 Analyse rapide</h3>
+    <ul>${insights.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
+    <h3>🎯 Leviers activés et analyse sectorielle</h3>
+    <ul>${leverComparisons.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
+    <a id="cta-link" href="https://www.lumigency.com/consultation-gratuite" class="cta">${ctaText}</a>
+    <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
+  `;
 }
 
 function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function formatEur(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
+function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[s])); }
