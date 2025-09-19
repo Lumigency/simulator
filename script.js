@@ -103,14 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Insights ---
     const insights = [];
-    insights.push(`💼 Budget annuel affiliation estimé : ${format€(budgetAff)} (cappé par ${format€(budgetCap)}).`);
+    insights.push(`💼 Budget annuel affiliation estimé : ${formatEur(budgetAff)} (cappé par ${formatEur(budgetCap)}).`);
     insights.push(`📅 Estimations projetées sur 12 mois (levier long terme).`);
     insights.push(`🏷️ Secteur choisi : ${sector.label}.`);
 
     // Panier
-    if (aov > sector.aov * 1.1) insights.push(`🛒 Panier moyen (${format€(aov)}) > moyenne du secteur (${format€(sector.aov)}).`);
-    else if (aov < sector.aov * 0.9) insights.push(`⚠️ Panier moyen (${format€(aov)}) < secteur (${format€(sector.aov)}).`);
-    else insights.push(`✅ Panier moyen (${format€(aov)}) ~ cohérent avec le secteur.`);
+    if (aov > sector.aov * 1.1) insights.push(`🛒 Panier moyen (${formatEur(aov)}) > moyenne du secteur (${formatEur(sector.aov)}).`);
+    else if (aov < sector.aov * 0.9) insights.push(`⚠️ Panier moyen (${formatEur(aov)}) < secteur (${formatEur(sector.aov)}).`);
+    else insights.push(`✅ Panier moyen (${formatEur(aov)}) ~ cohérent avec le secteur.`);
 
     // Conversion
     if (cvr > sector.cvr * 1.1) insights.push(`✅ Taux de conversion ${(cvr*100).toFixed(2)}% > secteur ${(sector.cvr*100).toFixed(2)}%.`);
@@ -141,9 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // === Helpers ===
 function showResults(revenue, orders, cac, insights, ctaText, leverAnalysis) {
-  document.getElementById("kpi-revenue").textContent = format€(revenue);
+  document.getElementById("kpi-revenue").textContent = formatEur(revenue);
   document.getElementById("kpi-orders").textContent  = formatInt(orders);
-  document.getElementById("kpi-cac").textContent     = isFinite(cac) ? format€(cac) : "—";
+  document.getElementById("kpi-cac").textContent     = isFinite(cac) ? formatEur(cac) : "—";
 
   const insightsBox = document.getElementById("insights");
   if (insightsBox) {
@@ -168,6 +168,6 @@ function showResults(revenue, orders, cac, insights, ctaText, leverAnalysis) {
 }
 
 function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
+function formatEur(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[s])); }
