@@ -37,7 +37,8 @@ h1 {
   margin-bottom: 25px;
 }
 
-label {
+/* ✅ Appliqué uniquement aux labels des champs */
+form > label {
   font-weight: 600;
   display: block;
   margin-top: 20px;
@@ -93,8 +94,9 @@ legend {
   margin-top: 10px;
 }
 
+/* ✅ Correction du bug de label écrasé */
 .checkbox-group label {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 8px;
   font-size: 0.95rem;
@@ -134,4 +136,3 @@ legend {
 .cta:hover {
   background: #0000FF;
 }
-
