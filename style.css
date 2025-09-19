@@ -75,7 +75,7 @@ select {
 
 /* ✅ CHAMPS LEVIERS — propre et aligné */
 fieldset {
-  border: none;           /* Supprime le contour par défaut */
+  border: none;
   padding: 0;
   margin: 0;
 }
@@ -85,7 +85,7 @@ legend {
   margin-bottom: 8px;
 }
 
-/* ✅ Grille 2 colonnes propre */
+/* ✅ Grille 2 colonnes */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -94,6 +94,7 @@ legend {
   max-width: 100%;
 }
 
+/* ✅ Affichage clair : case + texte aligné */
 .checkbox-group label {
   display: flex;
   align-items: center;
@@ -101,8 +102,7 @@ legend {
   font-size: 0.95rem;
   font-weight: 500;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #222;
 }
 
 .checkbox-group input[type="checkbox"] {
