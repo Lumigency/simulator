@@ -1,121 +1,61 @@
-console.log("🔥 script.js chargé !");
+console.log("🔥 script.js chargé");
 
-// === 1) Defaults secteur (CPA 2025) ===
-const SECTOR_DEFAULTS = {
-  fashion:     { aov: 66.67, cvr: 0.0155, label: "Mode & Beauté" },
-  electronics: { aov: 110.93, cvr: 0.0171, label: "High Tech & Électroménager" },
-  home:        { aov: 112.69, cvr: 0.0160, label: "Maison & Décoration" },
-  food:        { aov: 80.71,  cvr: 0.0216, label: "Alimentaire & Drive" },
-  sports:      { aov: 79.21,  cvr: 0.0107, label: "Sport & Loisirs" },
-  travel:      { aov: 171.80, cvr: 0.0125, label: "Voyage & Tourisme" },
-  luxury:      { aov: 200.00, cvr: 0.0120, label: "Luxe & Bijoux" },
-  auto:        { aov: 85.59,  cvr: 0.0169, label: "Automobile" },
-  services:    { aov: 60.24,  cvr: 0.0184, label: "B2B / Finance / Assurance" },
-  culture:     { aov: 82.61,  cvr: 0.0228, label: "Produits culturels & Loisirs" },
-  other:       { aov: 80,     cvr: 0.015,  label: "Autre" }
+// === Grille CAC par levier (valeurs fixes que tu m’as données) ===
+const LEVER_CAC = {
+  cashback: 4,
+  bonsplans: 2,
+  retargeting: 3,
+  "display-networks": 3,
+  comparateurs: 6.5,
+  css: 6.5,
+  retention: 1.5,
+  affinitaires: 10,
+  content: 8,
+  emailing: 5,
+  ppc: 7,
+  influence: 12,
+  display: 6
 };
 
-// === 2) Trafic annualisé ===
-function annualAffiliatedTraffic(trafficMonthly) {
-  if (trafficMonthly < 10000) {
-    return trafficMonthly * (0.10 * 6 + 0.15 * 6);
+// === Facteurs d’ajustement sur CR en fonction des leviers ===
+function adjustCR(baseCR, levers) {
+  let cr = baseCR;
+
+  // Cashback + bons plans pas activés => pénalité
+  if (!levers.includes("cashback") && !levers.includes("bonsplans")) {
+    cr = cr / 2;
   }
-  if (trafficMonthly < 50000) {
-    return trafficMonthly * (0.15 * 6 + 0.16 * 6);
-  }
-  if (trafficMonthly < 500000) {
-    return trafficMonthly * 0.25 * 12;
-  }
-  return trafficMonthly * 0.30 * 12;
+
+  // Cashback activé => léger boost
+  if (levers.includes("cashback")) cr += 0.2;
+
+  // Bons plans activé => léger boost
+  if (levers.includes("bonsplans")) cr += 0.2;
+
+  // Retargeting booste la conversion
+  if (levers.includes("retargeting")) cr += 0.3;
+
+  // Rétention booste un peu
+  if (levers.includes("retention")) cr += 0.2;
+
+  return cr;
 }
 
-// === 3) Ajustement CR selon leviers ===
-function adjustCVR(baseCvr, selectedLevers) {
-  let cvr = baseCvr;
-
-  if (selectedLevers.includes("cashback") || selectedLevers.includes("bonsplans")) {
-    cvr *= 1.2; // boost léger
-  } else {
-    cvr *= 0.5; // pas de leviers volumiques = moins de conversion
+// === Trafic annualisé (règles revues) ===
+function annualAffiliatedTraffic(monthlyTraffic) {
+  if (monthlyTraffic < 10000) {
+    return monthlyTraffic * (0.10 * 6 + 0.15 * 6);
   }
-
-  if (selectedLevers.includes("retargeting")) {
-    cvr *= 1.15;
+  if (monthlyTraffic < 50000) {
+    return monthlyTraffic * (0.15 * 6 + 0.16 * 6);
   }
-
-  if (selectedLevers.includes("influence")) {
-    cvr *= 1.1;
+  if (monthlyTraffic < 500000) {
+    return monthlyTraffic * (0.25 * 12);
   }
-
-  return cvr;
+  return monthlyTraffic * (0.30 * 12);
 }
 
-// === 4) Répartition des ventes par leviers (baromètre simplifié) ===
-const LEVER_SHARE = {
-  cashback: 25,
-  bonsplans: 20,
-  retargeting: 15,
-  comparateurs: 15,
-  display: 10,
-  influence: 15
-};
-
-function distributeOrders(finalOrders, selectedLevers) {
-  let filteredShares = {};
-  let totalShare = 0;
-
-  for (let [lever, share] of Object.entries(LEVER_SHARE)) {
-    if (selectedLevers.includes(lever)) {
-      filteredShares[lever] = share;
-      totalShare += share;
-    }
-  }
-
-  for (let lever in filteredShares) {
-    filteredShares[lever] = (filteredShares[lever] / totalShare) * finalOrders;
-  }
-
-  return filteredShares;
-}
-
-// === 5) Chart.js ===
-function showLeversChart(ordersByLevers) {
-  const ctx = document.getElementById("chart-levers").getContext("2d");
-  if (window.leversChart) window.leversChart.destroy();
-
-  const labels = Object.keys(ordersByLevers);
-  const values = Object.values(ordersByLevers);
-
-  window.leversChart = new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: labels,
-      datasets: [{
-        data: values,
-        backgroundColor: [
-          "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f",
-          "#edc949", "#af7aa1", "#ff9da7", "#9c755f", "#bab0ac"
-        ]
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: "bottom" },
-        tooltip: { callbacks: {
-          label: (context) => `${context.label}: ${formatInt(context.raw)} ventes`
-        }}
-      }
-    }
-  });
-}
-
-// === 6) Helpers ===
-function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function formatEur(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
-function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
-
-// === 7) Form submit ===
+// === Fonction principale ===
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
   if (!form) return;
@@ -123,49 +63,102 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const trafficMonthly = numberOf(form.elements["traffic"]?.value);
-    const aovInput       = numberOf(form.elements["aov"]?.value);
-    const cvrInputPct    = numberOf(form.elements["cvr"]?.value);
-    const budgetMonthly  = numberOf(form.elements["budget"]?.value);
-    const sectorKey      = form.elements["sector"]?.value || "other";
+    // --- Inputs utilisateur ---
+    const trafficMonthly = parseFloat(form.elements["traffic"].value) || 0;
+    const aov = parseFloat(form.elements["aov"].value) || 50;
+    const baseCR = parseFloat(form.elements["cvr"].value) || 1;
+    const budgetMensuel = parseFloat(form.elements["budget"].value) || 0;
+    const budgetAnnuelMax = budgetMensuel * 12;
 
-    const sector = SECTOR_DEFAULTS[sectorKey] || SECTOR_DEFAULTS.other;
+    const selectedLevers = Array.from(
+      form.querySelectorAll('input[name="levers"]:checked')
+    ).map((n) => n.value);
 
-    const aov = aovInput > 0 ? aovInput : sector.aov;
-    const baseCvr = (cvrInputPct > 0 ? cvrInputPct : sector.cvr * 100) / 100;
-
+    // --- Trafic annualisé ---
     const affiliatedTrafficYear = annualAffiliatedTraffic(trafficMonthly);
 
-    const selectedLevers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(n => n.value);
-    const adjCvr = adjustCVR(baseCvr, selectedLevers);
+    // --- Conversion ajustée ---
+    const cr = adjustCR(baseCR, selectedLevers) / 100;
 
-    let potentialOrders = affiliatedTrafficYear * adjCvr;
-    let potentialRevenue = potentialOrders * aov;
+    // --- Ventes potentielles (sans contrainte budget) ---
+    const potentialOrders = affiliatedTrafficYear * cr;
 
-    // Budget cap
-    const budgetYear = budgetMonthly * 12;
-    const budgetCapOrders = budgetYear / aov;
-    let finalOrders = Math.min(potentialOrders, budgetCapOrders);
-    let finalRevenue = finalOrders * aov;
+    // --- CAC mix pondéré ---
+    let totalCAC = 0;
+    selectedLevers.forEach((lv) => {
+      if (LEVER_CAC[lv]) totalCAC += LEVER_CAC[lv];
+    });
+    const avgCAC = selectedLevers.length > 0 ? totalCAC / selectedLevers.length : 10;
 
-    // Insights (analyse simplifiée : panier moyen)
-    const insights = [];
-    if (aov > sector.aov * 1.1) insights.push(`Votre panier moyen (${formatEur(aov)}) est supérieur à la moyenne de votre secteur (${formatEur(sector.aov)}).`);
-    else if (aov < sector.aov * 0.9) insights.push(`Votre panier moyen (${formatEur(aov)}) est inférieur à la moyenne de votre secteur (${formatEur(sector.aov)}).`);
-    else insights.push(`Votre panier moyen (${formatEur(aov)}) est cohérent avec la moyenne de votre secteur (${formatEur(sector.aov)}).`);
+    // --- Ventes capées par budget ---
+    const maxOrdersByBudget = budgetAnnuelMax / avgCAC;
+    const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
 
-    // Affichage
-    document.getElementById("kpi-revenue").textContent = formatEur(finalRevenue);
-    document.getElementById("kpi-orders").textContent  = formatInt(finalOrders);
-    document.getElementById("kpi-budget").textContent  = formatEur(budgetYear);
+    // --- Résultats ---
+    const finalRevenue = finalOrders * aov;
+    const budgetUsed = finalOrders * avgCAC;
 
+    // --- Affichage KPI ---
+    document.getElementById("kpi-revenue").textContent = format€(finalRevenue);
+    document.getElementById("kpi-orders").textContent = formatInt(finalOrders);
+    document.getElementById("kpi-budget").textContent = format€(budgetUsed);
+
+    // --- Analyse simple ---
     const insightsBox = document.getElementById("insights");
-    insightsBox.innerHTML = `<h3>Analyse rapide</h3><p>${insights[0]}</p>`;
+    insightsBox.innerHTML = `
+      <h3>Analyse rapide</h3>
+      <ul>
+        <li>Projection prudente sur 12 mois.</li>
+        <li>Panier moyen : ${format€(aov)}.</li>
+        <li>Taux de conversion simulé : ${(cr * 100).toFixed(2)} %.</li>
+        <li>Budget consommé : ${format€(budgetUsed)} (plafond : ${format€(budgetAnnuelMax)}).</li>
+      </ul>
+      <h3>Répartition estimée des ventes par levier</h3>
+      <canvas id="leversChart"></canvas>
+    `;
 
-    // Graphique
-    const ordersByLevers = distributeOrders(finalOrders, selectedLevers);
-    showLeversChart(ordersByLevers);
-
-    document.getElementById("results").style.display = "block";
+    // --- Graphique (Chart.js) ---
+    if (selectedLevers.length > 0) {
+      const ctx = document.getElementById("leversChart").getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: selectedLevers,
+          datasets: [
+            {
+              data: selectedLevers.map(() => Math.round(finalOrders / selectedLevers.length)),
+              backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56",
+                "#4BC0C0",
+                "#9966FF",
+                "#FF9F40"
+              ]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "bottom" }
+          }
+        }
+      });
+    }
   });
 });
+
+// === Helpers ===
+function format€(n) {
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0
+  }).format(n);
+}
+function formatInt(n) {
+  return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(
+    Math.round(n)
+  );
+}
