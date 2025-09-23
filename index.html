@@ -22,7 +22,8 @@
         <label>👥 Votre trafic mensuel actuel</label>
         <div class="range-container">
           <span>0 visiteurs</span>
-          <input type="range" name="traffic" min="0" max="1000000" step="1000" value="0" oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
+          <input type="range" name="traffic" min="0" max="1000000" step="1000" value="0" 
+                 oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
           <span>1 000 000 visiteurs</span>
         </div>
         <div class="range-value" id="trafficValue">0 visiteurs</div>
@@ -42,23 +43,22 @@
         <input type="number" name="budget" required>
 
         <!-- Leviers -->
-       <label>📌 Leviers que vous souhaitez autoriser</label>
+        <label>📌 Leviers que vous souhaitez autoriser</label>
         <div class="checkbox-group">
-  <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-  <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-  <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-  <label><input type="checkbox" name="levers" value="css"> CSS</label>
-  <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-  <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-  <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
-  <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
-  <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
-  <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
-  <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-  <label><input type="checkbox" name="levers" value="influence"> Influence</label>
-</div>
+          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+          <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+          <label><input type="checkbox" name="levers" value="css"> CSS</label>
+          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+          <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+          <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+          <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
+          <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+          <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
+          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+        </div>
 
-        
         <!-- Modèles hybrides -->
         <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
         <div class="radio-group">
@@ -66,21 +66,21 @@
           <label><input type="radio" name="hybrides" value="non"> Non</label>
         </div>
 
-           <!-- Secteur d’activité -->
-        <label>🏷️ Votre secteur d’activité</label>
-<select name="sector" required>
-  <option value="">-- Sélectionnez --</option>
-  <option value="fashion">Mode & Beauté</option>
-  <option value="electronics">Électronique & High-tech</option>
-  <option value="home">Maison & Décoration</option>
-  <option value="food">Alimentaire & Boissons</option>
-  <option value="sports">Sport & Loisirs</option>
-  <option value="travel">Voyage & Tourisme</option>
-  <option value="luxury">Luxe & Bijoux</option>
-  <option value="auto">Automobile</option>
-  <option value="services">Services / B2B / SaaS</option>
-  <option value="other">Autre</option>
-</select>
+        <!-- Secteur d’activité -->
+        <label>🏷 Votre secteur d’activité</label>
+        <select name="sector" required>
+          <option value="">-- Sélectionnez --</option>
+          <option value="fashion">Mode & Beauté</option>
+          <option value="electronics">Électronique & High-tech</option>
+          <option value="home">Maison & Décoration</option>
+          <option value="food">Alimentaire & Boissons</option>
+          <option value="sports">Sport & Loisirs</option>
+          <option value="travel">Voyage & Tourisme</option>
+          <option value="luxury">Luxe & Bijoux</option>
+          <option value="auto">Automobile</option>
+          <option value="services">Services / B2B / SaaS</option>
+          <option value="other">Autre</option>
+        </select>
 
         <!-- Email -->
         <label>📧 Votre email (obligatoire)</label>
@@ -91,50 +91,29 @@
       </form>
     </div>
 
-<!-- Résultats -->
-<div id="results" class="card" style="display:none;">
-  <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
+    <!-- Résultats -->
+    <div id="results" class="card" style="display:none;">
+      <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
 
-  <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
-  <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
-  <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
+      <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
+      <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
+      <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
 
-  <!-- Zone dynamique pour l'analyse -->
-  <div id="insights"></div>
+      <!-- Zone dynamique pour l'analyse -->
+      <div id="insights"></div>
 
-  <!-- Graphique parts de voix -->
-  <h3>Répartition estimée des ventes par levier</h3>
-  <canvas id="chart-levers" width="400" height="300"></canvas>
-</div>
+      <!-- Graphique parts de voix -->
+      <h3>Répartition estimée des ventes par levier</h3>
+      <canvas id="chart-levers" width="400" height="300"></canvas>
+    </div>
 
-  <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
-</div>
+    <p><em>⚠ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
+  </div>
 
-   <!-- 🔥 Import du vrai script -->
+  <!-- Chart.js (CDN officiel) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Ton script -->
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
