@@ -95,37 +95,34 @@
       </form>
     </div>
 
-    <!-- Résultats -->
-    <div id="results" class="card" style="display:none;">
-      <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
+  <!-- Résultats -->
+<div id="results" class="card" style="display:none;">
+  <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
 
-      <!-- KPIs principaux -->
-      <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
-      <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
-      <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
+  <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
+  <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
+  <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
 
-      <!-- KPIs secondaires -->
-      <div id="kpi-secondary">
-        <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
-        <p><strong>CAC estimé :</strong> <span id="kpi-cac"></span></p>
-        <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
-      </div>
+  <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
+  <p><strong>CAC estimé :</strong> <span id="kpi-cac"></span></p>
+  <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
 
-      <!-- Analyse -->
-      <div id="insights"></div>
+  <div id="insights"></div>
 
-      <!-- Graphique -->
-      <h3>Répartition estimée des ventes par levier</h3>
-      <canvas id="chart-levers" width="400" height="400"></canvas>
-
-      <!-- CTA final -->
-      <button id="cta-link" class="cta" style="display:none;"></button>
-    </div>
-
-    <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
+  <h3>Répartition estimée des ventes par levier</h3>
+  <div style="width: 100%; max-width: 780px; height: 360px;">
+    <canvas id="chart-levers"></canvas>
   </div>
+
+  <a id="cta-link" class="cta" href="https://www.lumigency.com/consultation-gratuite">
+    🚀 Prenez RDV gratuit pour booster vos performances en affiliation
+  </a>
+
+  <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
+</div>
 
   <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
+
