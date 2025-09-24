@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulateur Affiliation by Lumigency</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div class="logo">
       <img src="https://simulator-lac.vercel.app/LOGO2025.png" alt="Lumigency Logo">
     </div>
-
     <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
     <p class="subtitle">📈 Simulez vos ventes, votre CAC et votre potentiel de chiffre d'affaires.</p>
 
     <div class="card">
       <form id="form-simu">
+        
         <!-- Trafic -->
         <label>👥 Votre trafic mensuel actuel</label>
         <div class="range-container">
           <span>0 visiteurs</span>
-          <input type="range" name="traffic" min="0" max="1000000" step="1000" value="0"
+          <input type="range" name="traffic" min="0" max="1000000" step="1000" value="0" 
                  oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
           <span>1 000 000 visiteurs</span>
         </div>
@@ -82,7 +79,6 @@
           <option value="luxury">Luxe & Bijoux</option>
           <option value="auto">Automobile</option>
           <option value="services">Services / B2B / SaaS</option>
-          <option value="culture">Produits culturels</option>
           <option value="other">Autre</option>
         </select>
 
@@ -95,34 +91,35 @@
       </form>
     </div>
 
-  <!-- Résultats -->
-<div id="results" class="card" style="display:none;">
-  <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
+    <!-- Résultats -->
+    <div id="results" class="card" style="display:none;">
+      <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
 
-  <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
-  <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
-  <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
+      <!-- KPI principaux -->
+      <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
+      <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
+      <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
+      <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
+      <p><strong>CAC projeté :</strong> <span id="kpi-cac"></span></p>
+      <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
 
-  <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
-  <p><strong>CAC estimé :</strong> <span id="kpi-cac"></span></p>
-  <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
+      <!-- Zone dynamique pour l'analyse -->
+      <div id="insights"></div>
 
-  <div id="insights"></div>
+      <!-- Graphique parts de voix -->
+      <h3>Répartition estimée des ventes par levier</h3>
+      <canvas id="chart-levers" width="400" height="300"></canvas>
 
-  <h3>Répartition estimée des ventes par levier</h3>
-  <div style="width: 100%; max-width: 780px; height: 360px;">
-    <canvas id="chart-levers"></canvas>
+      <!-- CTA -->
+      <button id="cta-link" class="cta"></button>
+    </div>
+
+    <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
   </div>
 
-  <a id="cta-link" class="cta" href="https://www.lumigency.com/consultation-gratuite">
-    🚀 Prenez RDV gratuit pour booster vos performances en affiliation
-  </a>
-
-  <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
-</div>
-
-  <!-- Script -->
+  <!-- Chart.js (CDN officiel) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="script.js"></script>
 </body>
 </html>
-
