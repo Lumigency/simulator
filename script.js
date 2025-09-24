@@ -87,17 +87,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const insights = [];
     if (sectorKey !== "other") {
       if (aov > sector.aov * 1.1) {
-        insights.push(`💳 Votre panier moyen (${format€(aov)}) est supérieur à la moyenne de votre secteur (${format€(sector.aov)}).`);
+        insights.push(`💳 Votre panier moyen (${formatEUR(aov)}) est supérieur à la moyenne de votre secteur (${formatEUR(sector.aov)}).`);
       } else if (aov < sector.aov * 0.9) {
-        insights.push(`⚠️ Votre panier moyen (${format€(aov)}) est inférieur à la moyenne de votre secteur (${format€(sector.aov)}).`);
+        insights.push(`⚠️ Votre panier moyen (${formatEUR(aov)}) est inférieur à la moyenne de votre secteur (${formatEUR(sector.aov)}).`);
       } else {
-        insights.push(`✅ Votre panier moyen (${format€(aov)}) est proche de la moyenne de votre secteur (${format€(sector.aov)}).`);
+        insights.push(`✅ Votre panier moyen (${formatEUR(aov)}) est proche de la moyenne de votre secteur (${formatEUR(sector.aov)}).`);
       }
     }
 
     insights.push(`📊 Taux de conversion simulé : ${(cvr * 100).toFixed(2)} %.`);
     insights.push(`💡 L'année 1 est une montée en puissance progressive de votre programme.`);
-    insights.push(`💰 Le budget annuel saisi (${format€(budgetAnnuel)}) cappe potentiellement vos performances.`);
+    insights.push(`💰 Le budget annuel saisi (${formatEUR(budgetAnnuel)}) cappe potentiellement vos performances.`);
 
     showResults(revenue, finalOrders, budgetAnnuel, insights, selectedLevers);
   });
@@ -106,9 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // === AFFICHAGE ===
 function showResults(revenue, orders, budget, insights, selectedLevers) {
   document.getElementById("results").style.display = "block";
-  document.getElementById("kpi-revenue").textContent = format€(revenue);
+  document.getElementById("kpi-revenue").textContent = formatEUR(revenue);
   document.getElementById("kpi-orders").textContent = formatInt(orders);
-  document.getElementById("kpi-budget").textContent = format€(budget);
+  document.getElementById("kpi-budget").textContent = formatEUR(budget);
 
   const insightsBox = document.getElementById("insights");
   insightsBox.innerHTML = `<h3>Analyse rapide</h3><ul>${insights.map(t => `<li>${t}</li>`).join("")}</ul>`;
@@ -153,5 +153,5 @@ function showResults(revenue, orders, budget, insights, selectedLevers) {
 
 // === HELPERS ===
 function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
+function formatEUR(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
