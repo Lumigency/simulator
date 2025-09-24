@@ -1,6 +1,6 @@
-console.log("✅ script.js chargé");
+console.log("script.js chargé ✅");
 
-// === CONFIG SECTEURS (baromètre) ===
+// === CONFIG SECTEURS ===
 const SECTORS = {
   fashion: { aov: 67, cvr: 0.0155, label: "Mode & Beauté" },
   electronics: { aov: 111, cvr: 0.0171, label: "Électronique & High-tech" },
@@ -15,58 +15,34 @@ const SECTORS = {
   other: { aov: 80, cvr: 0.015, label: "Autre" }
 };
 
-// === TRAFIC ANNUALISÉ (nouvelle logique) ===
+// === PARTS DE VENTES PAR LEVIER (baromètre sectoriel simulé) ===
+const LEVER_SHARE = {
+  cashback: 0.23,
+  bonsplans: 0.18,
+  retargeting: 0.14,
+  css: 0.12,
+  comparateurs: 0.11,
+  "display-networks": 0.10,
+  retention: 0.06,
+  content: 0.04,
+  emailing: 0.02
+};
+
+// === TRAFIC ANNUALISÉ SELON PALIERS ===
 function annualAffiliatedTraffic(trafficMonthly) {
   if (trafficMonthly < 10000) {
-    return trafficMonthly * 0.10 * 6 + trafficMonthly * 0.15 * 6;
+    return trafficMonthly * 0.10 * 6 + trafficMonthly * 0.12 * 6;
   }
   if (trafficMonthly < 50000) {
-    return trafficMonthly * 0.12 * 6 + trafficMonthly * 0.15 * 6;
+    return trafficMonthly * 0.12 * 6 + trafficMonthly * 0.14 * 6;
   }
   if (trafficMonthly < 100000) {
     return trafficMonthly * 0.12 * 6 + trafficMonthly * 0.15 * 6;
   }
   if (trafficMonthly < 500000) {
-    return trafficMonthly * 0.20 * 12;
+    return trafficMonthly * 0.15 * 12;
   }
-  return trafficMonthly * 0.25 * 12;
-}
-
-// === CAC AJUSTÉ PAR LEVIER ===
-function adjustedCAC(baseCAC, levers, hybrides) {
-  let cac = baseCAC;
-
-  levers.forEach(lv => {
-    switch (lv) {
-      case "cashback": cac = Math.min(cac, baseCAC - 5); break;
-      case "bonsplans": cac = Math.min(cac, baseCAC - 9); break;
-      case "css":
-      case "comparateurs": cac = Math.min(cac, baseCAC - 2); break;
-      case "display-networks":
-      case "retargeting": cac = Math.min(cac, baseCAC - 3); break;
-      case "retention": cac = Math.min(cac, baseCAC - 11); break;
-      // Affinitaires/media : pas de réduction
-      case "emailing":
-      case "content":
-      case "ppc":
-        if (!hybrides) {
-          cac = cac; // pas d’impact direct, avertissement affiché
-        }
-        break;
-    }
-  });
-
-  // ⚖️ Correctif : éviter un CAC trop bas
-  if (cac < baseCAC * 0.7) {
-    cac = baseCAC * 0.8;
-  }
-
-  // Impact hybrides
-  if (hybrides) {
-    cac *= 1.3;
-  }
-
-  return cac;
+  return trafficMonthly * 0.18 * 12;
 }
 
 // === FONCTION PRINCIPALE ===
@@ -83,86 +59,87 @@ document.addEventListener("DOMContentLoaded", () => {
     const cacInput = numberOf(form.elements["cac"].value);
     const budgetMensuel = numberOf(form.elements["budget"].value);
     const sectorKey = form.elements["sector"].value || "other";
-    const hybrides = form.elements["hybrides"].value === "oui";
 
     const sector = SECTORS[sectorKey] || SECTORS.other;
 
-    // === Données de base ===
+    // === Ajustements ===
     const annualTraffic = annualAffiliatedTraffic(traffic);
     const aov = aovInput > 0 ? aovInput : sector.aov;
     let cvr = cvrInput > 0 ? cvrInput : sector.cvr;
 
-    const selectedLevers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(n => n.value);
+    // Leviers cochés
+    const selectedLevers = Array.from(
+      form.querySelectorAll('input[name="levers"]:checked')
+    ).map(n => n.value);
 
-    // Ajustements CR leviers
+    // Impact leviers sur CVR
     if (selectedLevers.includes("cashback")) cvr += 0.002;
     if (selectedLevers.includes("bonsplans")) cvr += 0.0015;
     if (selectedLevers.includes("retargeting")) cvr += 0.0025;
     if (selectedLevers.includes("css")) cvr += 0.001;
     if (selectedLevers.includes("display-networks")) cvr += 0.001;
 
-    // Ventes potentielles
+    // === Ventes potentielles (sans contrainte budget) ===
     let potentialOrders = annualTraffic * cvr;
 
-    // Budget
+    // === Budget annuel & capping ===
     const budgetAnnuel = budgetMensuel * 12;
-
-    // CAC ajusté
-    const cacFinal = adjustedCAC(cacInput, selectedLevers, hybrides);
-
-    // Capping ventes
-    const maxOrdersBudget = budgetAnnuel / cacFinal;
+    const maxOrdersBudget = budgetAnnuel / (cacInput > 0 ? cacInput : 1);
     const finalOrders = Math.min(potentialOrders, maxOrdersBudget);
 
-    // CA & ROI
     const revenue = finalOrders * aov;
+
+    // === CAC projeté (basé sur budget réel dépensé) ===
+    const cacProjected = finalOrders > 0 ? budgetAnnuel / finalOrders : cacInput;
+
+    // Correction : si trop bas par rapport au CAC cible → ajuster
+    let cacDisplayed = cacProjected;
+    if (cacProjected < cacInput * 0.8) {
+      cacDisplayed = cacInput * 0.9; // on rapproche vers l’objectif client
+    }
+
+    // === ROI ===
     const roi = budgetAnnuel > 0 ? revenue / budgetAnnuel : 0;
 
     // === Analyse ===
     const insights = [];
     if (sectorKey !== "other") {
       if (aov > sector.aov * 1.1) {
-        insights.push(`Votre panier moyen (${format€(aov)}) est supérieur à celui de votre secteur (${format€(sector.aov)}).`);
+        insights.push(`💳 Votre panier moyen (${formatEuro(aov)}) est supérieur à la moyenne de votre secteur (${formatEuro(sector.aov)}).`);
       } else if (aov < sector.aov * 0.9) {
-        insights.push(`Votre panier moyen (${format€(aov)}) est inférieur à celui de votre secteur (${format€(sector.aov)}).`);
+        insights.push(`⚠️ Votre panier moyen (${formatEuro(aov)}) est inférieur à la moyenne de votre secteur (${formatEuro(sector.aov)}).`);
       } else {
-        insights.push(`Votre panier moyen (${format€(aov)}) est proche de la moyenne de votre secteur (${format€(sector.aov)}).`);
+        insights.push(`✅ Votre panier moyen (${formatEuro(aov)}) est proche de la moyenne de votre secteur (${formatEuro(sector.aov)}).`);
       }
     }
 
-    insights.push(`Taux de conversion simulé : ${(cvr * 100).toFixed(2)} %.`);
-    insights.push(`💡 La première année correspond à une montée en puissance progressive de votre programme.`);
-    insights.push(`Le budget annuel saisi (${format€(budgetAnnuel)}) cappe potentiellement vos performances.`);
+    insights.push(`📊 Taux de conversion simulé : ${(cvr * 100).toFixed(2)} %.`);
+    insights.push(`💡 L'année 1 est une montée en puissance progressive de votre programme.`);
+    insights.push(`💰 Le budget annuel saisi (${formatEuro(budgetAnnuel)}) cappe potentiellement vos performances.`);
 
-    if (selectedLevers.some(lv => ["emailing", "content", "ppc"].includes(lv)) && !hybrides) {
-      insights.push(`⚠️ Pour activer certains leviers (Emailing, Content, SEA), il faut être ouvert aux modèles hybrides.`);
-    }
-
-    showResults(revenue, finalOrders, budgetAnnuel, aov, cacFinal, roi, insights, selectedLevers);
+    showResults(revenue, finalOrders, budgetAnnuel, aov, cacDisplayed, roi, insights, selectedLevers);
   });
 });
 
 // === AFFICHAGE ===
 function showResults(revenue, orders, budget, aov, cac, roi, insights, selectedLevers) {
   document.getElementById("results").style.display = "block";
-  document.getElementById("kpi-revenue").textContent = format€(revenue);
+  document.getElementById("kpi-revenue").textContent = formatEuro(revenue);
   document.getElementById("kpi-orders").textContent = formatInt(orders);
-  document.getElementById("kpi-budget").textContent = format€(budget);
+  document.getElementById("kpi-budget").textContent = formatEuro(budget);
 
-  // Ajouter KPIs avancés
-  document.getElementById("insights").innerHTML = `
-    <h3>Analyse rapide</h3>
-    <ul>
-      <li>Panier moyen estimé : ${format€(aov)}</li>
-      <li>CAC projeté : ${format€(cac)}</li>
-      <li>ROI estimé : ${(roi * 100).toFixed(1)} %</li>
-      ${insights.map(t => `<li>${t}</li>`).join("")}
-    </ul>
-  `;
+  // Nouveaux KPI
+  document.getElementById("kpi-aov").textContent = formatEuro(aov);
+  document.getElementById("kpi-cac").textContent = formatEuro(cac);
+  document.getElementById("kpi-roi").textContent = roi.toFixed(2) + "x";
 
-  // Graphique parts de ventes
-  const leverLabels = selectedLevers;
-  const leverData = leverLabels.map(lv => 1 / leverLabels.length); // répartition simple si cochés
+  // Analyse
+  const insightsBox = document.getElementById("insights");
+  insightsBox.innerHTML = `<h3>Analyse rapide</h3><ul>${insights.map(t => `<li>${t}</li>`).join("")}</ul>`;
+
+  // Graph
+  const leverData = selectedLevers.map(lv => LEVER_SHARE[lv] || 0);
+  const leverLabels = selectedLevers.map(lv => lv);
 
   const ctx = document.getElementById("chart-levers").getContext("2d");
   if (window.salesChart) window.salesChart.destroy();
@@ -186,11 +163,6 @@ function showResults(revenue, orders, budget, aov, cac, roi, insights, selectedL
           formatter: (value, ctx) => (value * 100).toFixed(1) + "%",
           color: "#fff",
           font: { weight: "bold", size: 11 }
-        },
-        tooltip: {
-          callbacks: {
-            label: (context) => context.label + ": " + (context.raw * 100).toFixed(1) + "%"
-          }
         }
       }
     },
@@ -205,5 +177,5 @@ function showResults(revenue, orders, budget, aov, cac, roi, insights, selectedL
 
 // === HELPERS ===
 function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
+function formatEuro(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
