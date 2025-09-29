@@ -123,15 +123,6 @@ legend {
   font-weight: 500;
 }
 
-/* ✅ Espacement harmonisé entre certains blocs */
-.checkbox-group,
-.radio-group,
-select,
-input[type="url"],
-input[type="email"] {
-  margin-top: 12px;
-}
-
 /* ✅ Bouton CTA */
 .cta {
   display: block;
@@ -152,6 +143,3 @@ input[type="email"] {
 .cta:hover {
   background: #0000FF;
 }
-
-
-
