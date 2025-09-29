@@ -129,7 +129,7 @@ legend {
 select,
 input[type="url"],
 input[type="email"] {
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 /* ✅ Bouton CTA */
@@ -152,5 +152,6 @@ input[type="email"] {
 .cta:hover {
   background: #0000FF;
 }
+
 
 
