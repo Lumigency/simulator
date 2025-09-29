@@ -1,118 +1,38 @@
-/* Style global */
+/* ========== STYLE GLOBAL ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, sans-serif;
   background: #f9f9fb;
   color: #333;
-  margin: 0;
-  padding: 0;
+  line-height: 1.6;
+  padding: 40px 20px;
   text-align: center;
 }
 
-/* Titre */
+/* ========== TITRES ========== */
 h1 {
   color: #1e1e9c;
-  margin-top: 20px;
+  margin-bottom: 10px;
   font-size: 1.8rem;
+  font-weight: 600;
 }
 
-/* Texte d’intro */
 p {
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-size: 1rem;
 }
 
-/* Container du formulaire */
+/* ========== CONTAINER FORMULAIRE ========== */
 form {
   max-width: 600px;
-  margin: 20px auto;
+  margin: 0 auto 30px;
   background: #fff;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
-  text-align: left;
-}
-
-/* Labels */
-label {
-  display: block;
-  margin: 12px 0 6px;
-  font-weight: 600;
-  color: #444;
-}
-
-/* Inputs */
-input, select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-/* Range */
-input[type="range"] {
-  width: 100%;
-}
-
-/* Fieldset (leviers) */
-fieldset {
-  margin: 15px 0;
-  padding: 15px;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  background: #fafafa;
-}
-
-legend {
-  font-weight: bold;
-  color: #333;
-}
-
-/* Bouton CTA */
-button {
-  display: block;
-  width: 100%;
-  background: linear-gradient(90deg, #4f46e5, #6366f1);
-  color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(90deg, #4338ca, #4f46e5);
-}
-
-/* Résultats */
-#results {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-  text-align: left;
-}
-
-/* CTA final */
-#cta-link {
-  background: #4f46e5;
-  color: white;
-  padding: 14px;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-#cta-link:hover {
-  background: #4338ca;
-  cursor: pointer;
-}
+  box-shadow: 0px 4px 10px rgb
