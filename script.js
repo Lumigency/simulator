@@ -1,171 +1,336 @@
-/* ========= LUMIGENCY SIMULATOR — JS COMPLET ========= */
+// ========== script.js — Simulateur Lumigency (version complète) ==========
 
-console.log("script.js chargé");
+console.log("✅ script.js chargé");
 
-// === CONFIG SECTEURS (extrait simplifié, à compléter avec ton baromètre CPA 2025) ===
+// ----------------- HELPERS -----------------
+function numberOf(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
+function fmtCurrency(n){ return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); }
+function fmtNumber(n){ return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(Math.round(n)); }
+function normalize(map){
+  const vals = Object.values(map);
+  const s = vals.reduce((a,b)=>a+b,0) || 1;
+  const out = {};
+  for(const k in map) out[k] = map[k] / s;
+  return out;
+}
+
+// ----------------- DONNÉES SECTEURS (baromètre 2025 résumé) -----------------
+// AOV (euros) et CVR (decimale). PDV = parts de voix estimées par levier (non-exhaustif)
 const SECTORS = {
-  fashion: { aov: 67, cvr: 0.0155, label: "Mode & Beauté" },
-  electronics: { aov: 113, cvr: 0.016, label: "High-tech & Électronique" },
-  home: { aov: 106, cvr: 0.017, label: "Maison & Décoration" },
-  food: { aov: 30, cvr: 0.016, label: "Alimentation & Drive" },
-  sports: { aov: 80, cvr: 0.021, label: "Sport & Loisirs" },
-  travel: { aov: 200, cvr: 0.010, label: "Voyage & Tourisme" },
-  luxury: { aov: 450, cvr: 0.008, label: "Luxe & Bijoux" },
-  auto: { aov: 150, cvr: 0.012, label: "Pièces Auto" },
-  services: { aov: 95, cvr: 0.014, label: "Services divers" },
-  other: { aov: 100, cvr: 0.015, label: "Autres" }
+  fashion: {
+    label: "Mode & Beauté", aov: 67, cvr: 0.0155,
+    pdv: normalize({ cashback:0.23, bonsplans:0.18, retargeting:0.14, css:0.12, comparateurs:0.11, "display-networks":0.10, retention:0.06, content:0.04, emailing:0.02 })
+  },
+  electronics: {
+    label: "High-tech & Électroménager", aov: 111, cvr: 0.0171,
+    pdv: normalize({ comparateurs:0.25, cashback:0.20, css:0.15, bonsplans:0.12, retargeting:0.12, "display-networks":0.08, emailing:0.03, content:0.03 })
+  },
+  home: {
+    label: "Maison & Décoration", aov: 113, cvr: 0.0160,
+    pdv: normalize({ cashback:0.20, bonsplans:0.16, css:0.12, comparateurs:0.10, retargeting:0.13, "display-networks":0.10, emailing:0.03, content:0.06, retention:0.10 })
+  },
+  food: {
+    label: "Alimentaire & Drive", aov: 81, cvr: 0.0216,
+    pdv: normalize({ cashback:0.18, bonsplans:0.20, comparateurs:0.12, retargeting:0.12, "display-networks":0.10, emailing:0.05, content:0.05, retention:0.08 })
+  },
+  sports: {
+    label: "Sport & Loisirs", aov: 79, cvr: 0.0107,
+    pdv: normalize({ cashback:0.25, bonsplans:0.18, comparateurs:0.11, retargeting:0.14, "display-networks":0.09, emailing:0.02, content:0.04 })
+  },
+  travel: {
+    label: "Voyage & Tourisme", aov: 172, cvr: 0.0125,
+    pdv: normalize({ affinitaires:0.25, comparateurs:0.20, cashback:0.15, retargeting:0.18, "display-networks":0.15, emailing:0.04 })
+  },
+  luxury: {
+    label: "Luxe & Bijoux", aov: 200, cvr: 0.0120,
+    pdv: normalize({ affinitaires:0.30, influence:0.20, cashback:0.20, "display-networks":0.10, comparateurs:0.10, emailing:0.05 })
+  },
+  auto: {
+    label: "Automobile", aov: 86, cvr: 0.0169,
+    pdv: normalize({ comparateurs:0.25, bonsplans:0.25, cashback:0.20, css:0.11, "display-networks":0.06, retargeting:0.08 })
+  },
+  culture: {
+    label: "Produits culturels", aov: 83, cvr: 0.0228,
+    pdv: normalize({ bonsplans:0.35, cashback:0.30, comparateurs:0.15, retargeting:0.07, "display-networks":0.05, emailing:0.03 })
+  },
+  other: {
+    label: "Autre", aov: 80, cvr: 0.0150,
+    pdv: normalize({ cashback:0.23, bonsplans:0.18, retargeting:0.14, css:0.12, comparateurs:0.11, "display-networks":0.10, content:0.04, emailing:0.02 })
+  }
 };
 
-// === CONFIG LEVIERS : CAC ajustés par rapport au CAC client ===
-const CAC_BY_LEVER = {
-  cashback: 0.67, // ex : 10€ si CAC client = 15€
-  bonsplans: 0.40,
-  css: 0.87,
-  comparateurs: 0.87,
-  "display-networks": 0.80,
-  retargeting: 0.80,
-  affinitaires: 1.0,
-  influence: 1.0,
-  retention: 0.27,
-  emailing: null, // nécessite hybrides
-  content: null,  // nécessite hybrides
-  ppc: null       // nécessite hybrides
+// ----------------- CAC par levier (valeur en euros estimée) -----------------
+const LEVER_CAC = {
+  cashback: 10,
+  bonsplans: 6,
+  css: 13,
+  comparateurs: 13,
+  "display-networks": 12,
+  retargeting: 12,
+  affinitaires: 15,
+  influence: 15,
+  retention: 4,
+  emailing: 14,
+  content: 14,
+  ppc: 14
 };
 
-// === TRAFIC ANNUALISÉ (paliers) ===
-function getTrafficUplift(traffic) {
-  if (traffic < 10000) return { mois1_6: 0.05, mois7_12: 0.08 };
-  if (traffic < 50000) return { mois1_6: 0.08, mois7_12: 0.10 };
-  if (traffic < 100000) return { mois1_6: 0.12, mois7_12: 0.15 };
-  if (traffic < 500000) return { mois1_6: 0.12, mois7_12: 0.17 };
-  return { mois1_6: 0.15, mois7_12: 0.18 };
+// ----------------- TRAFIC ANNUALISÉ (paliers finalisés) -----------------
+// conservative uplifts agreed: returns number of visits counted for year
+function annualAffiliatedTraffic(monthly) {
+  if (monthly < 10000) {
+    // <10k : 6 months at 5% + 6 months at 8%
+    return monthly * (0.05 * 6 + 0.08 * 6);
+  }
+  if (monthly < 50000) {
+    // 10k-50k : 6 months at 8% + 6 months at 10%
+    return monthly * (0.08 * 6 + 0.10 * 6);
+  }
+  if (monthly < 100000) {
+    // 50k-100k : 6 months at 12% + 6 months at 15%
+    return monthly * (0.12 * 6 + 0.15 * 6);
+  }
+  if (monthly < 500000) {
+    // 100k-500k : 6 months at 12% + 6 months at 17%
+    return monthly * (0.12 * 6 + 0.17 * 6);
+  }
+  // >= 500k : 6 months at 15% + 6 months at 18%
+  return monthly * (0.15 * 6 + 0.18 * 6);
 }
 
-// === AJUSTEMENTS AOV ===
-function adjustAOV(baseAOV, levers) {
-  let aov = baseAOV;
-  if (levers.includes("cashback")) aov *= 0.95;
-  if (levers.includes("bonsplans")) aov *= 0.95;
-  if (levers.includes("comparateurs")) aov *= 0.98;
-  if (levers.includes("affinitaires") || levers.includes("influence")) aov *= 1.05;
-  return aov;
+// ----------------- AJUSTEMENTS AOV selon leviers -----------------
+function adjustAOV(baseAov, levers) {
+  let a = baseAov;
+  if (levers.includes("cashback")) a *= 0.95;     // -5%
+  if (levers.includes("bonsplans")) a *= 0.95;    // -5%
+  if (levers.includes("comparateurs") || levers.includes("css")) a *= 0.98; // -2%
+  if (levers.includes("affinitaires")) a *= 1.05; // +5%
+  if (levers.includes("influence")) a *= 1.05;   // +5%
+  return a;
 }
 
-// === AJUSTEMENTS CVR ===
-function adjustCVR(baseCVR, levers) {
-  let cvr = baseCVR;
-  if (levers.includes("emailing")) cvr += 0.001;
-  if (levers.includes("ppc")) cvr += 0.002;
-  if (levers.length >= 8) cvr += 0.015;
-  return cvr;
+// ----------------- AJUSTEMENTS CVR selon leviers -----------------
+function adjustCVR(baseCvr, levers) {
+  let c = baseCvr;
+  if (levers.includes("emailing")) c += 0.001;
+  if (levers.includes("ppc")) c += 0.002;
+  if (levers.includes("retargeting")) c += 0.0025;
+  if (levers.includes("cashback")) c += 0.002;
+  if (levers.includes("bonsplans")) c += 0.0015;
+  if (levers.includes("css")) c += 0.001;
+  if (levers.includes("display-networks")) c += 0.001;
+  if (levers.includes("comparateurs")) c += 0.001;
+  if (levers.includes("influence")) c += 0.0015;
+  if (levers.includes("affinitaires")) c += 0.001;
+  if (levers.includes("retention")) c += 0.002;
+  if (levers.includes("content")) c += 0.001;
+
+  // si tous les leviers (très rare) -> bonus
+  const ALL_LEVERS = ["cashback","bonsplans","retargeting","css","comparateurs","display-networks","retention","content","emailing","ppc","affinitaires","influence"];
+  if (ALL_LEVERS.every(l => levers.includes(l))) c += 0.015;
+
+  // Si aucun levier "fin de tunnel" (cashback / bonsplans) sélectionné -> prudence (diviser par 2)
+  if (!levers.includes("cashback") && !levers.includes("bonsplans")) c *= 0.5;
+
+  // cap raisonnable pour éviter chiffres irréalistes
+  return Math.min(c, 0.08);
 }
 
-// === MAIN ===
+// ----------------- CAC projeté pondéré par PDV sectorielle -----------------
+function projectedCAC(sectorKey, levers, cacClient) {
+  const sector = SECTORS[sectorKey] || SECTORS.other;
+  const pdv = sector.pdv || {};
+  // Build selection PDV: if levers selected, take PDV for those (fallback equal share)
+  let sel = {};
+  if (levers.length) {
+    levers.forEach(lv => {
+      if (pdv[lv] != null) sel[lv] = pdv[lv];
+      else sel[lv] = 1; // if lev not in pdv mapping, give equal weight first
+    });
+  } else {
+    // no lever selected -> use top 5 PDV levers in sector
+    sel = Object.fromEntries(Object.entries(pdv).sort((a,b)=>b[1]-a[1]).slice(0,5));
+  }
+  sel = normalize(sel);
+
+  // compute weighted average of LEVER_CAC (fallback to client cac if lev has null)
+  let cac = 0;
+  for (const lv in sel) {
+    const base = (LEVER_CAC[lv] != null) ? LEVER_CAC[lv] : cacClient || 0;
+    cac += sel[lv] * base;
+  }
+
+  // If computed cac is very optimistic vs client, pull it up halfway to client
+  if (cacClient > 0 && cac < cacClient * 0.8) {
+    cac = (cac + cacClient) / 2;
+  }
+
+  // final floor
+  if (cac <= 0) cac = cacClient || 0;
+  return cac;
+}
+
+// ----------------- Préparer données camembert (labels + values) -----------------
+function chartDataFor(sectorKey, levers) {
+  const sector = SECTORS[sectorKey] || SECTORS.other;
+  let pdv = { ...sector.pdv };
+  // if levers selected, filter to them (if some not present, keep them with small share)
+  if (levers.length) {
+    const filtered = {};
+    levers.forEach(lv => { filtered[lv] = pdv[lv] != null ? pdv[lv] : 0.01; });
+    pdv = filtered;
+  }
+  const normalized = normalize(pdv);
+  const labels = Object.keys(normalized);
+  const data = labels.map(k => normalized[k]);
+  return { labels, data };
+}
+
+// ----------------- MAIN (DOM) -----------------
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
-  if (!form) return;
+  if (!form) { console.warn("form-simu introuvable"); return; }
 
-  // Gérer la case "pas de budget défini"
+  // support both id variants (historical)
+  const unlimitedCheckbox = document.getElementById("unlimited-budget") || document.getElementById("noBudget");
   const budgetInput = form.elements["budget"];
-  const noBudgetCheckbox = document.getElementById("noBudget");
 
-  if (budgetInput && noBudgetCheckbox) {
-    noBudgetCheckbox.addEventListener("change", () => {
-      if (noBudgetCheckbox.checked) {
-        budgetInput.disabled = true;
-        budgetInput.value = "";
-      } else {
-        budgetInput.disabled = false;
-      }
+  // toggle budget input when checkbox changes (defensive)
+  if (unlimitedCheckbox && budgetInput) {
+    unlimitedCheckbox.addEventListener("change", () => {
+      if (unlimitedCheckbox.checked) { budgetInput.disabled = true; budgetInput.value = ""; }
+      else { budgetInput.disabled = false; }
     });
   }
 
-  // Soumission formulaire
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
 
-    const traffic = Number(form.elements["traffic"].value);
-    const aovUser = Number(form.elements["aov"].value);
-    const cvrUser = Number(form.elements["cvr"].value) / 100;
-    const cacClient = Number(form.elements["cac"].value);
+    // --- Read inputs safely ---
+    const trafficMonthly = numberOf(form.elements["traffic"]?.value);
+    const aovUser = numberOf(form.elements["aov"]?.value);
+    const cvrUserInput = numberOf(form.elements["cvr"]?.value) / 100;
+    const cacClient = numberOf(form.elements["cac"]?.value);
+    const sectorKey = form.elements["sector"]?.value || "other";
 
-    let budgetMensuel = 0;
-    if (noBudgetCheckbox && noBudgetCheckbox.checked) {
-      budgetMensuel = Infinity;
-    } else {
-      budgetMensuel = Number(form.elements["budget"].value) || 0;
+    // levers checked
+    const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(i => i.value);
+
+    // budget handling (defensive)
+    let budgetMonthly = 0;
+    if (unlimitedCheckbox && unlimitedCheckbox.checked) budgetMonthly = Infinity;
+    else budgetMonthly = numberOf(form.elements["budget"]?.value) || 0;
+    const budgetAnnual = (budgetMonthly === Infinity) ? Infinity : budgetMonthly * 12;
+
+    // --- Base values & adjustments ---
+    const sector = SECTORS[sectorKey] || SECTORS.other;
+    const baseAov = (aovUser > 0) ? aovUser : sector.aov;
+    const baseCvr = (cvrUserInput > 0) ? cvrUserInput : sector.cvr;
+
+    const adjustedAov = adjustAOV(baseAov, levers);
+    const adjustedCvr = adjustCVR(baseCvr, levers);
+
+    // annualized affiliated traffic (visits) using agreed conservative rules
+    const affiliatedTrafficYear = annualAffiliatedTraffic(trafficMonthly);
+
+    // potential orders before budget cap
+    const potentialOrders = affiliatedTrafficYear * adjustedCvr;
+
+    // projected CAC (weighted by PDV / fallback to client cac)
+    const cacProjected = projectedCAC(sectorKey, levers, cacClient || 0);
+
+    // cap by budget (if budget provided)
+    const maxOrdersByBudget = (budgetAnnual === Infinity || cacProjected === 0) ? potentialOrders : (budgetAnnual / cacProjected);
+    const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
+
+    // revenue
+    const revenue = finalOrders * adjustedAov;
+
+    // computed budget consumed (prefer showing budgetAnnual or theoretical)
+    const budgetConsumed = (budgetAnnual === Infinity) ? finalOrders * cacProjected : Math.min(budgetAnnual, finalOrders * cacProjected);
+
+    // ROI (revenue / budgetConsumed) guard
+    const roi = (budgetConsumed > 0) ? (revenue / budgetConsumed) : (budgetAnnual === Infinity ? (revenue / (finalOrders * cacClient || 1)) : 0);
+
+    // --- Display results (safe DOM queries) ---
+    const results = document.getElementById("results");
+    if (results) results.style.display = "block";
+
+    const elRevenue = document.getElementById("kpi-revenue");
+    const elOrders = document.getElementById("kpi-orders");
+    const elBudget = document.getElementById("kpi-budget");
+    const elAov = document.getElementById("kpi-aov");
+    const elCac = document.getElementById("kpi-cac");
+    const elRoi = document.getElementById("kpi-roi");
+    const insightsBox = document.getElementById("insights");
+
+    if (elRevenue) elRevenue.textContent = fmtCurrency(revenue);
+    if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
+    if (elBudget) elBudget.textContent = (budgetAnnual === Infinity) ? "Illimité" : fmtCurrency(budgetAnnual);
+    if (elAov) elAov.textContent = fmtCurrency(adjustedAov);
+    if (elCac) elCac.textContent = fmtCurrency(cacProjected);
+    if (elRoi) elRoi.textContent = (roi > 0 ? roi.toFixed(2) + "x" : "—");
+
+    // analysis: only AOV vs sector as requested + one-line CR mention + budget cap note
+    const analysis = [];
+    if (sectorKey !== "other") {
+      if (adjustedAov > sector.aov * 1.1) analysis.push(`Votre panier moyen estimé (${fmtCurrency(adjustedAov)}) est supérieur à la moyenne du secteur.`);
+      else if (adjustedAov < sector.aov * 0.9) analysis.push(`Votre panier moyen estimé (${fmtCurrency(adjustedAov)}) est inférieur à la moyenne du secteur.`);
+      else analysis.push(`Votre panier moyen estimé (${fmtCurrency(adjustedAov)}) est proche de la moyenne du secteur.`);
+    }
+    analysis.push(`Taux de conversion simulé : ${(adjustedCvr * 100).toFixed(2)}% (montée en puissance sur l'année 1).`);
+    if (budgetAnnual !== Infinity) analysis.push(`Note : votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) peut limiter le volume de ventes affiché.`);
+
+    if (insightsBox) insightsBox.innerHTML = `<h3>Analyse rapide</h3><ul>${analysis.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+
+    // --- Chart (doughnut) : build from sector PDV filtered by levers ---
+    const canvas = document.getElementById("chart-levers");
+    if (canvas && window.Chart) {
+      const { labels, data } = chartDataFor(sectorKey, levers);
+      // convert data to percentages for display plugin
+      const dataPct = data.map(v => +(v*100).toFixed(2));
+
+      if (window.salesChart) window.salesChart.destroy();
+      window.salesChart = new Chart(canvas.getContext("2d"), {
+        type: "doughnut",
+        data: {
+          labels: labels.map(l => l.replace(/-/g, " ")),
+          datasets: [{
+            data: dataPct,
+            backgroundColor: [
+              "#3b82f6","#f97316","#22c55e","#eab308","#ef4444","#8b5cf6","#06b6d4","#f43f5e","#10b981","#a855f7","#64748b","#f59e0b"
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          cutout: "55%",
+          plugins: {
+            legend: { position: "right", labels: { boxWidth: 14, font: { size: 12 } } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx){
+                  const v = ctx.parsed || 0;
+                  return `${ctx.label}: ${v}%`;
+                }
+              }
+            },
+            datalabels: {
+              display: false // hide labels on chart to avoid clutter; tooltip shows %
+            }
+          }
+        },
+        plugins: (window.ChartDataLabels ? [ChartDataLabels] : [])
+      });
     }
 
-    const sectorKey = form.elements["sector"].value || "other";
-    const sectorData = SECTORS[sectorKey] || SECTORS["other"];
+    // CTA (single, short)
+    const ctaWrap = document.getElementById("cta-link");
+    if (ctaWrap) {
+      ctaWrap.innerHTML = `<a class="cta" href="https://www.lumigency.com/consultation-gratuite">🚀 Prenez RDV gratuit</a>`;
+      ctaWrap.style.display = "block";
+    }
 
-    const levers = Array.from(form.querySelectorAll("input[name='levers']:checked")).map(el => el.value);
-
-    // Ajustements AOV + CR
-    const adjustedAOV = adjustAOV(aovUser, levers);
-    const adjustedCVR = adjustCVR(cvrUser || sectorData.cvr, levers);
-
-    // Trafic annualisé
-    const uplift = getTrafficUplift(traffic);
-    const annualTraffic = (traffic * 6 * (1 + uplift.mois1_6)) + (traffic * 6 * (1 + uplift.mois7_12));
-
-    // Volume potentiel
-    const potentialOrders = annualTraffic * adjustedCVR;
-    const maxOrders = budgetMensuel === Infinity ? potentialOrders : Math.min(potentialOrders, (budgetMensuel * 12) / cacClient);
-    const revenue = maxOrders * adjustedAOV;
-
-    // CAC projeté
-    const cacProjete = (budgetMensuel === Infinity) ? cacClient : (budgetMensuel * 12) / maxOrders;
-
-    // ROI
-    const roi = (budgetMensuel === Infinity) ? (revenue / (cacClient * maxOrders)) : revenue / (budgetMensuel * 12);
-
-    // Injection résultats
-    document.getElementById("results").style.display = "block";
-    document.getElementById("kpi-revenue").textContent = revenue.toLocaleString("fr-FR") + " €";
-    document.getElementById("kpi-orders").textContent = Math.round(maxOrders).toLocaleString("fr-FR");
-    document.getElementById("kpi-budget").textContent = (budgetMensuel === Infinity ? "Budget illimité" : (budgetMensuel * 12).toLocaleString("fr-FR") + " €");
-    document.getElementById("kpi-aov").textContent = adjustedAOV.toFixed(0) + " €";
-    document.getElementById("kpi-cac").textContent = cacProjete.toFixed(2) + " €";
-    document.getElementById("kpi-roi").textContent = roi.toFixed(2) + "x";
-
-    // Insights rapides
-    const insights = document.getElementById("insights");
-    insights.innerHTML = `
-      <ul>
-        <li>💳 Votre panier moyen (${adjustedAOV.toFixed(0)} €) comparé au secteur (${sectorData.aov} €).</li>
-        <li>📊 Taux de conversion simulé : ${(adjustedCVR * 100).toFixed(2)} %.</li>
-        <li>💡 L'année 1 est une montée en puissance progressive.</li>
-        ${budgetMensuel !== Infinity ? `<li>💰 Le budget saisi (${(budgetMensuel * 12).toLocaleString("fr-FR")} €) peut limiter vos performances.</li>` : `<li>💰 Budget illimité : simulation au plein potentiel.</li>`}
-      </ul>
-    `;
-
-    // Graph camembert
-    const ctx = document.getElementById("chart-levers").getContext("2d");
-    if (window.leversChart) window.leversChart.destroy();
-    window.leversChart = new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        labels: levers,
-        datasets: [{
-          data: levers.map(() => 100 / levers.length),
-          backgroundColor: ["#4285F4", "#FBBC05", "#34A853", "#EA4335", "#46BDC6", "#9C27B0", "#FF7043", "#7E57C2", "#66BB6A", "#FFA726", "#8D6E63", "#26C6DA"]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "right" },
-          datalabels: {
-            color: "#fff",
-            formatter: (value) => value.toFixed(1) + "%"
-          }
-        }
-      },
-      plugins: [ChartDataLabels]
-    });
-
-    // CTA dynamique
-    document.getElementById("cta-link").textContent = "🚀 Prenez RDV gratuit pour booster vos performances en affiliation";
+    console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
