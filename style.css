@@ -132,11 +132,6 @@ input[type="email"] {
   margin-top: 15px;
 }
 
-/* ✅ Ajoute un peu d'air sous la case à cocher \"pas de budget défini\" */
-#noBudget {
-  margin-bottom: 12px;
-}
-
 /* ✅ Bouton CTA */
 .cta {
   display: block;
@@ -157,4 +152,5 @@ input[type="email"] {
 .cta:hover {
   background: #0000FF;
 }
+
 
