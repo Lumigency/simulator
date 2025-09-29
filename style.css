@@ -45,15 +45,35 @@ h1 {
 }
 
 /* ========== FORMULAIRES ========== */
-form#form-simu > *:not(.cta):not(#results) {
-  margin-bottom: 1.6rem;
+
+/* Espacement ciblé pour les éléments du formulaire */
+form#form-simu > label {
+  margin: 20px 0 6px;
+}
+
+form#form-simu input:not([type="checkbox"]),
+form#form-simu select,
+form#form-simu .range-value {
+  margin-bottom: 14px;
+}
+
+.checkbox-group,
+.radio-group {
+  margin-bottom: 18px;
+}
+
+form#form-simu .form-group {
+  margin-bottom: 18px;
+}
+
+.cta {
+  margin-top: 25px;
 }
 
 form > label {
   font-weight: 600;
   display: block;
-  margin-bottom: 6px;
-  color: #333;
+  color: #444;
 }
 
 input:not([type="checkbox"]),
@@ -99,7 +119,6 @@ select:focus {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px 30px;
-  margin-top: 10px;
 }
 
 .checkbox-group label,
@@ -117,7 +136,6 @@ select:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 20px 30px;
-  margin-top: 10px;
 }
 
 /* ========== CTA BUTTON ========== */
