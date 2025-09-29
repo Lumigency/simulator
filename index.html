@@ -2,124 +2,104 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulateur Affiliation by Lumigency</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <div class="logo">
-      <img src="https://simulator-lac.vercel.app/LOGO2025.png" alt="Lumigency Logo">
-    </div>
-    <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
-    <p class="subtitle">📈 Simulez vos ventes, votre CAC et votre potentiel de chiffre d'affaires.</p>
-
-    <div class="card">
-      <form id="form-simu">
-        
-        <!-- Trafic -->
-        <label>👥 Votre trafic mensuel actuel</label>
-        <div class="range-container">
-          <span>0 visiteurs</span>
-          <input type="range" name="traffic" min="0" max="1000000" step="1000" value="0" 
-                 oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
-          <span>1 000 000 visiteurs</span>
-        </div>
-        <div class="range-value" id="trafficValue">0 visiteurs</div>
-
-        <!-- Panier + Taux -->
-        <label>🛒 Panier moyen actuel (€)</label>
-        <input type="number" name="aov" required>
-
-        <label>📊 Taux de conversion actuel (%)</label>
-        <input type="number" step="0.1" name="cvr" required>
-
-        <!-- CAC + Budget -->
-        <label>🎯 Coût d’acquisition envisagé (€)</label>
-        <input type="number" name="cac" required>
-
-        <label>💰 Budget affiliation mensuel (€)</label>
-        <input type="number" name="budget" required>
-
-        <!-- Leviers -->
-        <label>📌 Leviers que vous souhaitez autoriser</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-          <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-          <label><input type="checkbox" name="levers" value="css"> CSS</label>
-          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-          <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-          <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
-          <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
-          <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
-          <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
-          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
-        </div>
-
-        <!-- Modèles hybrides -->
-        <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="hybrides" value="oui"> Oui</label>
-          <label><input type="radio" name="hybrides" value="non"> Non</label>
-        </div>
-
-        <!-- Secteur d’activité -->
-        <label>🏷️ Votre secteur d’activité</label>
-        <select name="sector" required>
-          <option value="">-- Sélectionnez --</option>
-          <option value="fashion">Mode & Beauté</option>
-          <option value="electronics">Électronique & High-tech</option>
-          <option value="home">Maison & Décoration</option>
-          <option value="food">Alimentaire & Boissons</option>
-          <option value="sports">Sport & Loisirs</option>
-          <option value="travel">Voyage & Tourisme</option>
-          <option value="luxury">Luxe & Bijoux</option>
-          <option value="auto">Automobile</option>
-          <option value="services">Services / B2B / SaaS</option>
-          <option value="other">Autre</option>
-        </select>
-
-        <!-- Email -->
-        <label>📧 Votre email (obligatoire)</label>
-        <input type="email" name="email" required>
-
-        <!-- CTA -->
-        <button type="submit" class="cta">🔥 Lancer ma simulation</button>
-      </form>
-    </div>
-
-    <!-- Résultats -->
-    <div id="results" class="card" style="display:none;">
-      <h2 id="results-title">📊 Analyse de vos potentielles futures performances en affiliation</h2>
-
-      <!-- KPI principaux -->
-      <p><strong>Chiffre d'affaires estimé :</strong> <span id="kpi-revenue"></span></p>
-      <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
-      <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
-      <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
-      <p><strong>CAC projeté :</strong> <span id="kpi-cac"></span></p>
-      <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
-
-      <!-- Zone dynamique pour l'analyse -->
-      <div id="insights"></div>
-
-      <!-- Graphique parts de voix -->
-      <h3>Répartition estimée des ventes par levier</h3>
-      <canvas id="chart-levers" width="400" height="300"></canvas>
-
-      <!-- CTA -->
-      <button id="cta-link" class="cta"></button>
-    </div>
-
-    <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
-  </div>
-
-  <!-- Chart.js (CDN officiel) -->
+  <title>Simulateur Lumigency</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🚀 Explorez votre potentiel en affiliation avec le simulateur Lumigency</h1>
+  <p>Simulez vos ventes, votre CAC et votre potentiel de chiffre d’affaires.</p>
+
+  <form id="form-simu">
+    <!-- Trafic -->
+    <label for="traffic">👥 Votre trafic mensuel actuel</label>
+    <input type="range" id="traffic" name="traffic" min="0" max="1000000" step="1000" value="0">
+    <span id="traffic-value">0 visiteurs</span>
+
+    <!-- AOV -->
+    <label for="aov">🛒 Panier moyen actuel (€)</label>
+    <input type="number" id="aov" name="aov" placeholder="100">
+
+    <!-- Conversion -->
+    <label for="cvr">📊 Taux de conversion actuel (%)</label>
+    <input type="number" id="cvr" name="cvr" placeholder="1">
+
+    <!-- CAC -->
+    <label for="cac">🎯 Coût d’acquisition envisagé (€)</label>
+    <input type="number" id="cac" name="cac" placeholder="15">
+
+    <!-- Budget -->
+    <label for="budget">💰 Budget affiliation mensuel (€)</label>
+    <input type="number" id="budget" name="budget" placeholder="3000">
+
+    <!-- Leviers -->
+    <fieldset>
+      <legend>📌 Leviers que vous souhaitez autoriser</legend>
+      <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+      <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+      <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+      <label><input type="checkbox" name="levers" value="css"> CSS</label>
+      <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+      <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+      <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
+      <label><input type="checkbox" name="levers" value="emailing"> Emailing</label>
+      <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+    </fieldset>
+
+    <!-- Hybrides -->
+    <label>Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM)… ?</label>
+    <label><input type="radio" name="hybrides" value="oui"> Oui</label>
+    <label><input type="radio" name="hybrides" value="non" checked> Non</label>
+
+    <!-- Secteur -->
+    <label for="sector">Votre secteur d’activité</label>
+    <select name="sector" id="sector">
+      <option value="fashion">Mode & Beauté</option>
+      <option value="electronics">Électronique & High-tech</option>
+      <option value="home">Maison & Décoration</option>
+      <option value="food">Alimentaire & Drive</option>
+      <option value="sports">Sport & Loisirs</option>
+      <option value="travel">Voyage & Tourisme</option>
+      <option value="luxury">Luxe & Bijoux</option>
+      <option value="auto">Automobile</option>
+      <option value="services">Services / B2B / SaaS</option>
+      <option value="culture">Produits culturels</option>
+      <option value="other">Autre</option>
+    </select>
+
+    <!-- Site web -->
+    <label for="website">🌐 Indiquez votre site internet</label>
+    <input type="url" name="website" id="website" placeholder="https://votre-site.com" required>
+
+    <!-- Email -->
+    <label for="email">📧 Votre email (obligatoire)</label>
+    <input type="email" name="email" id="email" required>
+
+    <!-- Submit -->
+    <button type="submit">🔥 Lancer ma simulation</button>
+  </form>
+
+  <!-- Résultats -->
+  <div id="results" style="display:none;">
+    <h2>📊 Analyse de vos potentielles futures performances en affiliation</h2>
+
+    <p><strong>Chiffre d’affaires estimé :</strong> <span id="kpi-revenue"></span></p>
+    <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
+    <p><strong>Budget affiliation annuel :</strong> <span id="kpi-budget"></span></p>
+    <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
+    <p><strong>CAC projeté :</strong> <span id="kpi-cac"></span></p>
+    <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
+
+    <div id="insights"></div>
+
+    <h3>Répartition estimée des ventes par levier</h3>
+    <canvas id="chart-levers" width="300" height="300"></canvas>
+
+    <!-- CTA -->
+    <div id="cta-link" style="display:none; margin-top:20px; font-weight:bold; text-align:center;"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
