@@ -1,151 +1,118 @@
+/* Style global */
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #F7F5F3;
-  color: #222;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f9f9fb;
+  color: #333;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  text-align: center;
 }
 
-.container {
-  max-width: 800px;
-  margin: auto;
-}
-
-.logo img {
-  max-width: 180px;
-  display: block;
-  margin: 0 auto 20px;
-}
-
+/* Titre */
 h1 {
-  color: #0000FF;
-  text-align: center;
-  margin-bottom: 10px;
+  color: #1e1e9c;
+  margin-top: 20px;
+  font-size: 1.8rem;
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 1rem;
-  margin-bottom: 25px;
+/* Texte d’intro */
+p {
+  color: #555;
+  margin-bottom: 20px;
 }
 
-.card {
-  background: white;
+/* Container du formulaire */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  margin-bottom: 25px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+  text-align: left;
 }
 
-/* ✅ Labels pour les champs classiques */
-form > label {
-  font-weight: 600;
+/* Labels */
+label {
   display: block;
-  margin-top: 20px;
-  margin-bottom: 8px;
+  margin: 12px 0 6px;
+  font-weight: 600;
+  color: #444;
 }
 
-/* ✅ On exclut les checkboxes de width: 100% */
-input:not([type="checkbox"]),
-select {
+/* Inputs */
+input, select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
-.range-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 5px;
+/* Range */
+input[type="range"] {
+  width: 100%;
 }
 
-.range-container input[type=range] {
-  flex: 1;
-  margin: 0 10px;
-  accent-color: #0000FF;
-}
-
-.range-value {
-  font-weight: 600;
-  color: #0000FF;
-  margin-top: 5px;
-  text-align: right;
-}
-
-/* ✅ CHAMPS LEVIERS — propre et aligné */
+/* Fieldset (leviers) */
 fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
+  margin: 15px 0;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fafafa;
 }
 
-/* 🆕 Plus d'espace sous le titre */
 legend {
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
-/* ✅ Grille 2 colonnes pour les leviers */
-.checkbox-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px 30px;
-  margin-top: 10px;
-}
-
-/* ✅ Alignement texte + case */
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #222;
-  white-space: nowrap;
-}
-
-.checkbox-group input[type="checkbox"] {
-  flex-shrink: 0;
-  width: auto;
-}
-
-/* ✅ Radios en ligne */
-.radio-group {
-  display: flex;
-  gap: 30px;
-  margin-top: 8px;
-}
-
-/* 🆕 Texte à côté des radios */
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-/* ✅ Bouton CTA */
-.cta {
+/* Bouton CTA */
+button {
   display: block;
   width: 100%;
-  padding: 16px;
-  margin-top: 30px;
-  background: #849BFF;
+  background: linear-gradient(90deg, #4f46e5, #6366f1);
   color: white;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
   border: none;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  margin-top: 10px;
+  transition: all 0.3s ease;
 }
 
-.cta:hover {
-  background: #0000FF;
+button:hover {
+  background: linear-gradient(90deg, #4338ca, #4f46e5);
+}
+
+/* Résultats */
+#results {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+/* CTA final */
+#cta-link {
+  background: #4f46e5;
+  color: white;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#cta-link:hover {
+  background: #4338ca;
+  cursor: pointer;
 }
