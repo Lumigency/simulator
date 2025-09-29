@@ -1,4 +1,3 @@
-/* ========= BASE ========= */
 body {
   font-family: 'Poppins', sans-serif;
   background: #F7F5F3;
@@ -10,11 +9,10 @@ body {
 .container {
   max-width: 800px;
   margin: auto;
-  padding-bottom: 60px;
 }
 
 .logo img {
-  max-width: 160px;
+  max-width: 180px;
   display: block;
   margin: 0 auto 20px;
 }
@@ -22,15 +20,13 @@ body {
 h1 {
   color: #0000FF;
   text-align: center;
-  margin-bottom: 8px;
-  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .subtitle {
   text-align: center;
   font-size: 1rem;
   margin-bottom: 25px;
-  color: #666;
 }
 
 .card {
@@ -41,50 +37,60 @@ h1 {
   margin-bottom: 25px;
 }
 
-/* ========= FORMULAIRE ========= */
-form > label {
+label {
   font-weight: 600;
   display: block;
-  margin: 18px 0 6px;
-  color: #222;
+  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
-input:not([type="checkbox"]):not([type="radio"]),
+input,
 select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 0.95rem;
-  margin-bottom: 12px;
-}
-
-input[type="range"] {
-  width: 100%;
-  accent-color: #0000FF;
 }
 
 .range-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
   margin-top: 5px;
+}
+
+.range-container input[type=range] {
+  flex: 1;
+  margin: 0 10px;
+  accent-color: #0000FF;
 }
 
 .range-value {
   font-weight: 600;
   color: #0000FF;
+  margin-top: 5px;
   text-align: right;
-  margin-top: 4px;
 }
 
-/* ========= CHECKBOXES ========= */
+/* ✅ Section Leviers */
+fieldset {
+  border: none;
+  padding: 0;
+  margin-top: 32px; /* ✅ Espacement au-dessus */
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* ✅ Grille 2 colonnes propre */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px 30px;
-  margin: 10px 0 0;
+  gap: 12px 30px;
+  margin-top: 10px;
 }
 
 .checkbox-group label {
@@ -99,15 +105,14 @@ input[type="range"] {
 
 .checkbox-group input[type="checkbox"] {
   flex-shrink: 0;
+  width: auto;
 }
 
-/* ========= RADIOS ========= */
+/* ✅ Radios en ligne avec texte à droite */
 .radio-group {
   display: flex;
-  gap: 30px;
-  margin-top: 10px;
-  margin-bottom: 8px;
-  align-items: center;
+  gap: 20px;
+  margin-top: 8px;
 }
 
 .radio-group label {
@@ -118,7 +123,7 @@ input[type="range"] {
   font-weight: 500;
 }
 
-/* ========= CTA ========= */
+/* ✅ Bouton CTA */
 .cta {
   display: block;
   width: 100%;
@@ -137,35 +142,4 @@ input[type="range"] {
 
 .cta:hover {
   background: #0000FF;
-}
-
-/* ========= RÉSULTATS ========= */
-#results {
-  margin-top: 40px;
-}
-
-#insights ul {
-  padding-left: 20px;
-  margin-top: 10px;
-}
-
-#insights li {
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-}
-
-/* ========= CHART ========= */
-canvas#chart-levers {
-  max-width: 100%;
-  margin: 20px auto 0;
-  display: block;
-}
-
-/* ========= MESSAGES ========= */
-p em {
-  font-size: 0.85rem;
-  color: #a0a0a0;
-  text-align: center;
-  display: block;
-  margin-top: 15px;
 }
