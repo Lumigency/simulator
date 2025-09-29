@@ -82,6 +82,10 @@
           <option value="other">Autre</option>
         </select>
 
+        <!-- Website -->
+        <label for="website">🌐 Indiquez votre site internet</label>
+        <input type="url" id="website" name="website" placeholder="https://votre-site.com">
+
         <!-- Email -->
         <label>📧 Votre email (obligatoire)</label>
         <input type="email" name="email" required>
@@ -108,13 +112,13 @@
 
       <!-- Graphique parts de voix -->
       <h3>Répartition estimée des ventes par levier</h3>
-      <canvas id="chart-levers" width="400" height="300"></canvas>
+      <canvas id="chart-levers" width="250" height="300"></canvas>
 
       <!-- CTA -->
       <button id="cta-link" class="cta"></button>
     </div>
 
-    <p><em>⚠️ Ces chiffres sont des estimations indicatives et non des valeurs garanties.</em></p>
+    <p><em>⚠️ Ces projections sont des estimations indicatives et non des valeurs garanties.</em></p>
   </div>
 
   <!-- Chart.js (CDN officiel) -->
@@ -123,3 +127,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
