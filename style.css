@@ -1,10 +1,10 @@
-/* ========== STYLE GLOBAL ========== */
+/* ========== BASE GLOBALE ========== */
 body {
   font-family: 'Poppins', sans-serif;
   background: #F7F5F3;
   color: #222;
   margin: 0;
-  padding: 20px;
+  padding: 40px 20px;
   line-height: 1.6;
 }
 
@@ -14,76 +14,54 @@ body {
   padding: 0 15px;
 }
 
+/* ========== LOGO + HEADERS ========== */
 .logo img {
   max-width: 180px;
   display: block;
-  margin: 0 auto 25px;
+  margin: 0 auto 30px;
 }
 
 h1 {
   color: #0000FF;
   text-align: center;
-  margin-bottom: 12px;
   font-size: 1.8rem;
   font-weight: 600;
+  margin: 0 0 15px;
 }
 
 .subtitle {
   text-align: center;
   font-size: 1rem;
-  margin-bottom: 30px;
   color: #555;
+  margin-bottom: 35px;
 }
 
-/* ========== COMPOSANT CARD ========== */
+/* ========== BLOC / CARTE ========== */
 .card {
-  background: white;
-  padding: 30px;
+  background: #fff;
+  padding: 35px 30px;
   border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   margin-bottom: 30px;
 }
 
-/* ========== FORMULAIRES ========== */
-
-/* Espacement ciblé pour les éléments du formulaire */
+/* ========== FORMULAIRE ========== */
 form#form-simu > label {
   margin: 20px 0 6px;
+  display: block;
+  font-weight: 600;
+  color: #333;
 }
 
 form#form-simu input:not([type="checkbox"]),
-form#form-simu select,
-form#form-simu .range-value {
-  margin-bottom: 14px;
-}
-
-.checkbox-group,
-.radio-group {
-  margin-bottom: 18px;
-}
-
-form#form-simu .form-group {
-  margin-bottom: 18px;
-}
-
-.cta {
-  margin-top: 25px;
-}
-
-form > label {
-  font-weight: 600;
-  display: block;
-  color: #444;
-}
-
-input:not([type="checkbox"]),
-select {
+form#form-simu select {
   width: 100%;
-  padding: 11px 14px;
+  padding: 12px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 0.95rem;
   background: #fdfdfd;
+  margin-bottom: 16px;
   transition: border-color 0.3s ease;
 }
 
@@ -93,12 +71,11 @@ select:focus {
   outline: none;
 }
 
-/* ========== SLIDER TRAFIC ========== */
 .range-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .range-container input[type=range] {
@@ -110,8 +87,8 @@ select:focus {
 .range-value {
   font-weight: 600;
   color: #0000FF;
-  margin-top: 5px;
   text-align: right;
+  margin-bottom: 16px;
 }
 
 /* ========== CHECKBOXES & RADIOS ========== */
@@ -119,6 +96,7 @@ select:focus {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px 30px;
+  margin-bottom: 24px;
 }
 
 .checkbox-group label,
@@ -129,13 +107,13 @@ select:focus {
   font-size: 0.95rem;
   font-weight: 500;
   color: #222;
-  white-space: nowrap;
 }
 
 .radio-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px 30px;
+  gap: 16px 24px;
+  margin-bottom: 24px;
 }
 
 /* ========== CTA BUTTON ========== */
@@ -143,6 +121,7 @@ select:focus {
   display: block;
   width: 100%;
   padding: 16px;
+  margin-top: 25px;
   background: #849BFF;
   color: white;
   text-align: center;
@@ -159,7 +138,7 @@ select:focus {
   transform: translateY(-1px);
 }
 
-/* ========== RÉSULTATS / GRAPHIQUE ========== */
+/* ========== RÉSULTATS ========== */
 #results h2 {
   font-size: 1.4rem;
   margin-bottom: 1.2rem;
