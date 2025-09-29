@@ -15,7 +15,7 @@ const SECTORS = {
   other: { aov: 80, cvr: 0.015, label: "Autre" }
 };
 
-// === PARTS DE VENTES PAR LEVIER (baromètre sectoriel simulé) ===
+// === PARTS DE VENTES PAR LEVIER ===
 const LEVER_SHARE = {
   cashback: 0.23,
   bonsplans: 0.18,
@@ -25,23 +25,30 @@ const LEVER_SHARE = {
   "display-networks": 0.10,
   retention: 0.06,
   content: 0.04,
-  emailing: 0.02
+  emailing: 0.02,
+  influence: 0.02
+};
+
+// === CAC PAR LEVIER (pondéré sur base CAC client = 15€ par défaut) ===
+const CAC_BASE = {
+  cashback: 10,
+  bonsplans: 6,
+  css: 13,
+  comparateurs: 13,
+  "display-networks": 12,
+  retargeting: 12,
+  retention: 4,
+  emailing: 8,
+  content: 9,
+  influence: 15
 };
 
 // === TRAFIC ANNUALISÉ SELON PALIERS ===
 function annualAffiliatedTraffic(trafficMonthly) {
-  if (trafficMonthly < 10000) {
-    return trafficMonthly * 0.10 * 6 + trafficMonthly * 0.12 * 6;
-  }
-  if (trafficMonthly < 50000) {
-    return trafficMonthly * 0.12 * 6 + trafficMonthly * 0.14 * 6;
-  }
-  if (trafficMonthly < 100000) {
-    return trafficMonthly * 0.12 * 6 + trafficMonthly * 0.15 * 6;
-  }
-  if (trafficMonthly < 500000) {
-    return trafficMonthly * 0.15 * 12;
-  }
+  if (trafficMonthly < 10000) return trafficMonthly * (0.10 * 6 + 0.12 * 6);
+  if (trafficMonthly < 50000) return trafficMonthly * (0.12 * 6 + 0.14 * 6);
+  if (trafficMonthly < 100000) return trafficMonthly * (0.12 * 6 + 0.15 * 6);
+  if (trafficMonthly < 500000) return trafficMonthly * 0.15 * 12;
   return trafficMonthly * 0.18 * 12;
 }
 
@@ -59,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cacInput = numberOf(form.elements["cac"].value);
     const budgetMensuel = numberOf(form.elements["budget"].value);
     const sectorKey = form.elements["sector"].value || "other";
+    const hybrides = form.elements["hybrides"].value === "oui";
 
     const sector = SECTORS[sectorKey] || SECTORS.other;
 
@@ -67,77 +75,87 @@ document.addEventListener("DOMContentLoaded", () => {
     const aov = aovInput > 0 ? aovInput : sector.aov;
     let cvr = cvrInput > 0 ? cvrInput : sector.cvr;
 
-    // Leviers cochés
-    const selectedLevers = Array.from(
-      form.querySelectorAll('input[name="levers"]:checked')
-    ).map(n => n.value);
+    // Pondération leviers
+    const selectedLevers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(n => n.value);
 
-    // Impact leviers sur CVR
     if (selectedLevers.includes("cashback")) cvr += 0.002;
     if (selectedLevers.includes("bonsplans")) cvr += 0.0015;
     if (selectedLevers.includes("retargeting")) cvr += 0.0025;
     if (selectedLevers.includes("css")) cvr += 0.001;
     if (selectedLevers.includes("display-networks")) cvr += 0.001;
 
-    // === Ventes potentielles (sans contrainte budget) ===
+    // Cap CVR
+    cvr = Math.min(cvr, 0.03);
+
+    // === Ventes potentielles ===
     let potentialOrders = annualTraffic * cvr;
 
-    // === Budget annuel & capping ===
+    // === Capping budget ===
     const budgetAnnuel = budgetMensuel * 12;
     const maxOrdersBudget = budgetAnnuel / (cacInput > 0 ? cacInput : 1);
     const finalOrders = Math.min(potentialOrders, maxOrdersBudget);
 
     const revenue = finalOrders * aov;
 
-    // === CAC projeté (basé sur budget réel dépensé) ===
-    const cacProjected = finalOrders > 0 ? budgetAnnuel / finalOrders : cacInput;
-
-    // Correction : si trop bas par rapport au CAC cible → ajuster
-    let cacDisplayed = cacProjected;
-    if (cacProjected < cacInput * 0.8) {
-      cacDisplayed = cacInput * 0.9; // on rapproche vers l’objectif client
+    // === CAC projeté pondéré ===
+    let cacProjete = 0;
+    if (selectedLevers.length > 0) {
+      let totalWeight = selectedLevers.reduce((sum, lv) => sum + (LEVER_SHARE[lv] || 0), 0);
+      selectedLevers.forEach(lv => {
+        cacProjete += (CAC_BASE[lv] || cacInput) * (LEVER_SHARE[lv] / totalWeight);
+      });
+    } else {
+      cacProjete = cacInput;
     }
 
-    // === ROI ===
-    const roi = budgetAnnuel > 0 ? revenue / budgetAnnuel : 0;
+    // Ajustement si trop éloigné du CAC client
+    if (cacProjete < cacInput * 0.8) {
+      cacProjete = cacInput * 0.9;
+    }
+
+    // Hybrides
+    if (hybrides) {
+      cacProjete *= 1.3;
+      potentialOrders *= 0.9;
+    }
+
+    // ROI
+    const roi = revenue / budgetAnnuel;
 
     // === Analyse ===
     const insights = [];
     if (sectorKey !== "other") {
       if (aov > sector.aov * 1.1) {
-        insights.push(`💳 Votre panier moyen (${formatEuro(aov)}) est supérieur à la moyenne de votre secteur (${formatEuro(sector.aov)}).`);
+        insights.push(`💳 Votre panier moyen (${format€(aov)}) est supérieur à la moyenne de votre secteur (${format€(sector.aov)}).`);
       } else if (aov < sector.aov * 0.9) {
-        insights.push(`⚠️ Votre panier moyen (${formatEuro(aov)}) est inférieur à la moyenne de votre secteur (${formatEuro(sector.aov)}).`);
+        insights.push(`⚠️ Votre panier moyen (${format€(aov)}) est inférieur à la moyenne de votre secteur (${format€(sector.aov)}).`);
       } else {
-        insights.push(`✅ Votre panier moyen (${formatEuro(aov)}) est proche de la moyenne de votre secteur (${formatEuro(sector.aov)}).`);
+        insights.push(`✅ Votre panier moyen (${format€(aov)}) est proche de la moyenne de votre secteur (${format€(sector.aov)}).`);
       }
     }
 
-    insights.push(`📊 Taux de conversion simulé : ${(cvr * 100).toFixed(2)} %.`);
+    insights.push(`📊 Taux de conversion simulé : ${(cvr * 100).toFixed(2)} %. `);
     insights.push(`💡 L'année 1 est une montée en puissance progressive de votre programme.`);
-    insights.push(`💰 Le budget annuel saisi (${formatEuro(budgetAnnuel)}) cappe potentiellement vos performances.`);
+    insights.push(`💰 Le budget annuel saisi (${format€(budgetAnnuel)}) cappe potentiellement vos performances.`);
 
-    showResults(revenue, finalOrders, budgetAnnuel, aov, cacDisplayed, roi, insights, selectedLevers);
+    showResults(revenue, finalOrders, budgetAnnuel, aov, cacProjete, roi, insights, selectedLevers);
   });
 });
 
 // === AFFICHAGE ===
 function showResults(revenue, orders, budget, aov, cac, roi, insights, selectedLevers) {
   document.getElementById("results").style.display = "block";
-  document.getElementById("kpi-revenue").textContent = formatEuro(revenue);
+  document.getElementById("kpi-revenue").textContent = format€(revenue);
   document.getElementById("kpi-orders").textContent = formatInt(orders);
-  document.getElementById("kpi-budget").textContent = formatEuro(budget);
-
-  // Nouveaux KPI
-  document.getElementById("kpi-aov").textContent = formatEuro(aov);
-  document.getElementById("kpi-cac").textContent = formatEuro(cac);
+  document.getElementById("kpi-budget").textContent = format€(budget);
+  document.getElementById("kpi-aov").textContent = format€(aov);
+  document.getElementById("kpi-cac").textContent = format€(cac);
   document.getElementById("kpi-roi").textContent = roi.toFixed(2) + "x";
 
-  // Analyse
   const insightsBox = document.getElementById("insights");
   insightsBox.innerHTML = `<h3>Analyse rapide</h3><ul>${insights.map(t => `<li>${t}</li>`).join("")}</ul>`;
 
-  // Graph
+  // Graphique
   const leverData = selectedLevers.map(lv => LEVER_SHARE[lv] || 0);
   const leverLabels = selectedLevers.map(lv => lv);
 
@@ -155,15 +173,8 @@ function showResults(revenue, orders, budget, aov, cac, roi, insights, selectedL
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: "right",
-          labels: { boxWidth: 15, font: { size: 12 } }
-        },
-        datalabels: {
-          formatter: (value, ctx) => (value * 100).toFixed(1) + "%",
-          color: "#fff",
-          font: { weight: "bold", size: 11 }
-        }
+        legend: { position: "right", labels: { boxWidth: 15, font: { size: 12 } } },
+        datalabels: { formatter: (value) => (value * 100).toFixed(1) + "%", color: "#fff" }
       }
     },
     plugins: [ChartDataLabels]
@@ -177,5 +188,5 @@ function showResults(revenue, orders, budget, aov, cac, roi, insights, selectedL
 
 // === HELPERS ===
 function numberOf(v) { const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-function formatEuro(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
+function format€(n) { return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n); }
 function formatInt(n) { return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(Math.round(n)); }
