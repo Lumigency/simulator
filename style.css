@@ -1,60 +1,79 @@
+/* ========== STYLE GLOBAL ========== */
 body {
   font-family: 'Poppins', sans-serif;
   background: #F7F5F3;
   color: #222;
   margin: 0;
   padding: 20px;
+  line-height: 1.6;
 }
 
 .container {
   max-width: 800px;
   margin: auto;
+  padding: 0 15px;
 }
 
 .logo img {
   max-width: 180px;
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
 }
 
 h1 {
   color: #0000FF;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .subtitle {
   text-align: center;
   font-size: 1rem;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  color: #555;
 }
 
+/* ========== COMPOSANT CARD ========== */
 .card {
   background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  margin-bottom: 25px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
 }
 
-/* ✅ Labels pour les champs classiques */
+/* ========== FORMULAIRES ========== */
+form#form-simu > *:not(.cta):not(#results) {
+  margin-bottom: 1.6rem;
+}
+
 form > label {
   font-weight: 600;
   display: block;
-  margin-top: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  color: #333;
 }
 
-/* ✅ On exclut les checkboxes de width: 100% */
 input:not([type="checkbox"]),
 select {
   width: 100%;
-  padding: 10px;
+  padding: 11px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 0.95rem;
+  background: #fdfdfd;
+  transition: border-color 0.3s ease;
 }
 
+input:focus,
+select:focus {
+  border-color: #0000FF;
+  outline: none;
+}
+
+/* ========== SLIDER TRAFIC ========== */
 .range-container {
   display: flex;
   justify-content: space-between;
@@ -75,20 +94,7 @@ select {
   text-align: right;
 }
 
-/* ✅ CHAMPS LEVIERS — propre et aligné */
-fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* 🆕 Plus d'espace sous le titre */
-legend {
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-/* ✅ Grille 2 colonnes pour les leviers */
+/* ========== CHECKBOXES & RADIOS ========== */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -96,8 +102,8 @@ legend {
   margin-top: 10px;
 }
 
-/* ✅ Alignement texte + case */
-.checkbox-group label {
+.checkbox-group label,
+.radio-group label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -107,34 +113,18 @@ legend {
   white-space: nowrap;
 }
 
-.checkbox-group input[type="checkbox"] {
-  flex-shrink: 0;
-  width: auto;
-}
-
-/* ✅ Radios en ligne */
 .radio-group {
   display: flex;
-  gap: 30px;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 20px 30px;
+  margin-top: 10px;
 }
 
-/* 🆕 Texte à côté des radios */
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-/* ✅ Bouton CTA */
+/* ========== CTA BUTTON ========== */
 .cta {
   display: block;
   width: 100%;
   padding: 16px;
-  margin-top: 30px;
   background: #849BFF;
   color: white;
   text-align: center;
@@ -143,9 +133,47 @@ legend {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .cta:hover {
   background: #0000FF;
+  transform: translateY(-1px);
+}
+
+/* ========== RÉSULTATS / GRAPHIQUE ========== */
+#results h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  color: #0000FF;
+}
+
+#results p {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+#insights {
+  margin-top: 20px;
+}
+
+canvas {
+  margin-top: 20px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cta {
+    font-size: 1rem;
+    padding: 14px;
+  }
 }
