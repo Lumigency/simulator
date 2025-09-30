@@ -252,17 +252,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // ROI (revenue / budgetConsumed) guard
     const roi = (budgetConsumed > 0) ? (revenue / budgetConsumed) : (budgetAnnual === Infinity ? (revenue / (finalOrders * cacClient || 1)) : 0);
 
-    // --- Display results (safe DOM queries) ---
-    const results = document.getElementById("results");
-    if (results) results.style.display = "block";
+   // --- Display results (safe DOM queries) ---
+const results = document.getElementById("results");
+const formContainer = document.querySelector(".right-column"); // container du formulaire
 
-    const elRevenue = document.getElementById("kpi-revenue");
-    const elOrders = document.getElementById("kpi-orders");
-    const elBudget = document.getElementById("kpi-budget");
-    const elAov = document.getElementById("kpi-aov");
-    const elCac = document.getElementById("kpi-cac");
-    const elRoi = document.getElementById("kpi-roi");
-    const insightsBox = document.getElementById("insights");
+// Cacher le formulaire
+if (formContainer) formContainer.style.display = "none";
+
+// Afficher les résultats
+if (results) results.style.display = "block";
+
+// Récupération des éléments à mettre à jour
+const elRevenue = document.getElementById("kpi-revenue");
+const elOrders = document.getElementById("kpi-orders");
+const elBudget = document.getElementById("kpi-budget");
+const elAov = document.getElementById("kpi-aov");
+const elCac = document.getElementById("kpi-cac");
+const elRoi = document.getElementById("kpi-roi");
+const insightsBox = document.getElementById("insights");
 
     if (elRevenue) elRevenue.textContent = fmtCurrency(revenue);
     if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
@@ -334,3 +341,4 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
