@@ -111,7 +111,28 @@
         <button type="submit" class="cta">🔥 Lancer ma simulation</button>
       </form>
     </div>
+
+    </div> <!-- fin de right-column -->
+  </div> <!-- fin de split-layout -->
+
+  <!-- Résultats -->
+  <div id="results" style="display:none;">
+    <p><strong>Chiffre d’affaires :</strong> <span id="kpi-revenue"></span></p>
+    <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
+    <p><strong>Budget :</strong> <span id="kpi-budget"></span></p>
+    <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
+    <p><strong>CAC projeté :</strong> <span id="kpi-cac"></span></p>
+    <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
+    <canvas id="chart-levers"></canvas>
+    <div id="insights"></div>
+    <div id="cta-link"></div>
   </div>
-</body>
+
+  <!-- Chart.js & Plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+  <!-- Script simulateur -->
+  <script src="script.js"></script>
 </body>
 </html>
