@@ -184,3 +184,13 @@ select {
   background: #0000FF;
   transform: translateY(-1px);
 }
+
+#chart-levers {
+  max-width: 300px;
+  max-height: 300px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+
