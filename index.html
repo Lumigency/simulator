@@ -74,7 +74,6 @@
       font-size: 1.4rem;
       margin-bottom: 25px;
       color: #0000FF;
-      font-family: 'Poppins', sans-serif;
     }
 
     .right-column h2 mark {
@@ -82,6 +81,21 @@
       padding: 0 4px;
       border-radius: 4px;
       color: #0000FF;
+    }
+
+    .insight-box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .insight-box strong {
+      font-weight: 600;
     }
 
     form {
@@ -134,8 +148,7 @@
     }
 
     .checkbox-group label,
-    .radio-group label,
-    .single-checkbox {
+    .radio-group label {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -146,7 +159,10 @@
 
     .single-checkbox {
       margin-top: 8px;
-      margin-left: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
     }
 
     .radio-group {
@@ -187,34 +203,46 @@
         <li>Estimez vos ventes</li>
         <li>Calculez votre chiffre d'affaires</li>
         <li>Définissez votre coût d'acquisition</li>
+        <li>Trouvez de nouveaux éditeurs</li>
       </ul>
+      <div class="insight-box">
+        <p><strong>💡 Le saviez-vous ?</strong> L’affiliation peut représenter jusqu’à <strong>30% de vos conversions digitales</strong> à coût maîtrisé.</p>
+      </div>
     </div>
 
     <div class="right-column">
       <h2>💰 Obtenez une estimation de vos performances en <mark>affiliation</mark></h2>
       <form id="form-simu">
+        <!-- Trafic -->
         <label>👥 Votre trafic mensuel actuel</label>
         <div class="range-container">
           <span>0 visiteurs</span>
-          <input type="range" name="traffic" min="0" max="1000000" step="1000" value="0" oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
+          <input type="range" name="traffic" min="0" max="1000000" step="1000"
+                 oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
           <span>1 000 000 visiteurs</span>
         </div>
         <div class="range-value" id="trafficValue">0 visiteurs</div>
 
+        <!-- Panier + Taux -->
         <label>🛒 Panier moyen actuel (€)</label>
         <input type="number" name="aov" required>
 
         <label>📊 Taux de conversion actuel (%)</label>
         <input type="number" step="0.1" name="cvr" required>
 
+        <!-- CAC + Budget -->
         <label>🎯 Coût d’acquisition envisagé (€)</label>
         <input type="number" name="cac" required>
 
         <label>💰 Budget affiliation mensuel (€)</label>
-        <input type="number" name="budget" id="budget"/>
+        <input type="number" name="budget" id="budget">
 
-        <label class="single-checkbox"><input type="checkbox" id="noBudget"> Je n’ai pas de budget défini (explorer le plein potentiel)</label>
+        <div class="single-checkbox">
+          <input type="checkbox" id="noBudget">
+          <label for="noBudget">Je n’ai pas de budget défini (explorer le plein potentiel)</label>
+        </div>
 
+        <!-- Leviers -->
         <label>📌 Leviers que vous souhaitez autoriser</label>
         <div class="checkbox-group">
           <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
@@ -231,18 +259,20 @@
           <label><input type="checkbox" name="levers" value="influence"> Influence</label>
         </div>
 
+        <!-- Modèles hybrides -->
         <label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
         <div class="radio-group">
           <label><input type="radio" name="hybrides" value="oui"> Oui</label>
           <label><input type="radio" name="hybrides" value="non"> Non</label>
         </div>
 
+        <!-- Secteur d’activité -->
         <label>🏷️ Votre secteur d’activité</label>
         <select name="sector" required>
           <option value="">-- Sélectionnez --</option>
           <option value="fashion">Mode</option>
-          <option value="beaute">Beauté, Santé & Hygiène</option>
-          <option value="loisirs">Produits cultures & Loisirs</option>
+          <option value="fashion">Beauté, Santé & Hygiène</option>
+          <option value="fashion">Produits cultures & Loisirs</option>
           <option value="electronics">High-tech & Électroménager</option>
           <option value="home">Maison & Décoration</option>
           <option value="food">Alimentation & Drive</option>
@@ -250,21 +280,25 @@
           <option value="travel">Voyage & Tourisme</option>
           <option value="luxury">Luxe & Bijoux</option>
           <option value="auto">Pièces automobiles</option>
-          <option value="toys">Jeux & Jouets</option>
-          <option value="garden">Maison & Jardin</option>
-          <option value="telecom">Télécom</option>
+          <option value="services">Jeux & Jouets</option>
+          <option value="services">Maison & Jardin</option>
+          <option value="services">Télécom</option>
           <option value="other">Autre</option>
         </select>
 
-        <label>🌐 Indiquez votre site internet</label>
+        <!-- Website -->
+        <label for="website">🌐 Indiquez votre site internet</label>
         <input type="url" id="website" name="website" placeholder="https://votre-site.com">
 
+        <!-- Email -->
         <label>📧 Votre email (obligatoire)</label>
         <input type="email" name="email" required>
 
+        <!-- CTA -->
         <button type="submit" class="cta">🔥 Lancer ma simulation</button>
       </form>
     </div>
   </div>
 </body>
-</html>
+</html>`}]}
+::contentReference[oaicite:0]{index=0}
