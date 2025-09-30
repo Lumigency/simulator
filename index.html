@@ -115,22 +115,59 @@
     </div> <!-- fin de right-column -->
   </div> <!-- fin de split-layout -->
 
-  <!-- Résultats -->
-  <div id="results" style="display:none;">
-    <p><strong>Chiffre d’affaires :</strong> <span id="kpi-revenue"></span></p>
-    <p><strong>Ventes :</strong> <span id="kpi-orders"></span></p>
-    <p><strong>Budget :</strong> <span id="kpi-budget"></span></p>
-    <p><strong>Panier moyen estimé :</strong> <span id="kpi-aov"></span></p>
-    <p><strong>CAC projeté :</strong> <span id="kpi-cac"></span></p>
-    <p><strong>ROI estimé :</strong> <span id="kpi-roi"></span></p>
-    <canvas id="chart-levers"></canvas>
-    <div id="insights"></div>
-    <div id="cta-link"></div>
+ <!-- Résultats -->
+<section id="results" class="results-section" style="display: none;">
+  <h2>🎯 Vos résultats de simulation personnalisée</h2>
+  <p class="subtitle">Basé sur vos données et notre expérience terrain, voici une estimation réaliste de votre performance potentielle en affiliation.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <strong>💸 Chiffre d'affaires estimé</strong>
+      <span id="kpi-revenue">45 000 €</span>
+    </div>
+    <div class="kpi-card">
+      <strong>📦 Commandes générées</strong>
+      <span id="kpi-orders">670</span>
+    </div>
+    <div class="kpi-card">
+      <strong>💼 Budget estimé</strong>
+      <span id="kpi-budget">12 000 €</span>
+    </div>
+    <div class="kpi-card">
+      <strong>🛍️ Panier moyen simulé</strong>
+      <span id="kpi-aov">67 €</span>
+    </div>
+    <div class="kpi-card">
+      <strong>🎯 CAC projeté</strong>
+      <span id="kpi-cac">18 €</span>
+    </div>
+    <div class="kpi-card">
+      <strong>📈 ROI potentiel</strong>
+      <span id="kpi-roi">3.75x</span>
+    </div>
   </div>
 
-  <!-- Chart.js & Plugin -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <div class="chart-container">
+    <h3>Répartition des leviers estimés</h3>
+    <canvas id="chart-levers"></canvas>
+  </div>
+
+  <div id="insights" class="analysis-block">
+    <h3>📊 Quelques informations marchés</h3>
+    <ul>
+      <li>Votre panier moyen estimé (67 €) est supérieur à la moyenne du secteur.</li>
+      <li>Taux de conversion simulé : 1.55% (montée en puissance sur l'année 1).</li>
+      <li>Note : votre budget annuel saisi (12 000 €) peut limiter le volume de ventes affiché.</li>
+    </ul>
+  </div>
+
+  <div id="cta-link" class="cta-final">
+    <a href="https://www.lumigency.com/consultation-gratuite">💬 On en discute plus longuement ?</a>
+  </div>
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Script simulateur -->
   <script src="script.js"></script>
