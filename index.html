@@ -30,7 +30,7 @@
         <label>👥 Votre trafic mensuel actuel</label>
         <div class="range-container">
           <span>0 visiteurs</span>
-          <input type="range" name="traffic" min="0" max="1000000" step="1000"
+          <input type="range" name="traffic" min="0" max="1000000" step="10000"
                  oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
           <span>1 000 000 visiteurs</span>
         </div>
@@ -57,19 +57,25 @@
 
         <!-- Leviers -->
         <label>📌 Leviers que vous souhaitez autoriser</label>
+        
+  <label class="single-checkbox">
+    <input type="checkbox" id="allLevers">
+    J’autorise tous les leviers
+  </label>
+        
         <div class="checkbox-group">
           <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
           <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-          <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
           <label><input type="checkbox" name="levers" value="css"> CSS</label>
           <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+           <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
           <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-          <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
           <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
           <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
           <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
           <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
           <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+            <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
         </div>
 
         <!-- Modèles hybrides -->
