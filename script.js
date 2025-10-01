@@ -189,20 +189,45 @@ function chartDataFor(sectorKey, levers) {
 // ----------------- MAIN (DOM) -----------------
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
-  if (!form) { console.warn("form-simu introuvable"); return; }
+  if (!form) {
+    console.warn("form-simu introuvable");
+    return;
+  }
 
-  // support both id variants (historical)
+  // Budget checkbox
   const unlimitedCheckbox = document.getElementById("unlimited-budget") || document.getElementById("noBudget");
   const budgetInput = form.elements["budget"];
 
-  // toggle budget input when checkbox changes (defensive)
   if (unlimitedCheckbox && budgetInput) {
     unlimitedCheckbox.addEventListener("change", () => {
-      if (unlimitedCheckbox.checked) { budgetInput.disabled = true; budgetInput.value = ""; }
-      else { budgetInput.disabled = false; }
+      budgetInput.disabled = unlimitedCheckbox.checked;
+      if (unlimitedCheckbox.checked) {
+        budgetInput.value = "";
+      }
     });
   }
 
+  // ✅ Gestion de la case "J’autorise tous les leviers"
+  const allLeversCheckbox = document.getElementById("allLevers");
+  const leverCheckboxes = form.querySelectorAll('input[name="levers"]');
+
+  if (allLeversCheckbox && leverCheckboxes.length > 0) {
+    allLeversCheckbox.addEventListener("change", () => {
+      leverCheckboxes.forEach(cb => {
+        cb.checked = allLeversCheckbox.checked;
+      });
+    });
+
+    leverCheckboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        if (!cb.checked) {
+          allLeversCheckbox.checked = false;
+        }
+      });
+    });
+  }
+
+// ✅ Début du submit handler (tout le calcul DOIT être dedans)
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
@@ -341,4 +366,5 @@ const insightsBox = document.getElementById("insights");
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
