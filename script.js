@@ -79,39 +79,58 @@ const EDITORS = {
   cashback: [
     { name: "iGraal", logo: "https://logo.clearbit.com/igraal.com" },
     { name: "Poulpeo", logo: "https://logo.clearbit.com/poulpeo.com" },
-    { name: "Joko", logo: "https://logo.clearbit.com/joko.io" }
+    { name: "Joko", logo: "https://logo.clearbit.com/joko.io" },
+    { name: "Widilo", logo: "https://logo.clearbit.com/widilo.fr" }
   ],
   bonsplans: [
     { name: "Ma Reduc", logo: "https://logo.clearbit.com/mareduc.com" },
     { name: "Dealabs", logo: "https://logo.clearbit.com/dealabs.com" },
-    { name: "Radins", logo: "https://logo.clearbit.com/radins.com" }
+    { name: "Radins", logo: "https://logo.clearbit.com/radins.com" },
+    { name: "Wanted", logo: "https://via.placeholder.com/80x40?text=Wanted" }
+  ],
+  css: [
+    { name: "Redbrain", logo: "https://logo.clearbit.com/redbrain.com" },
+    { name: "Velkashopping", logo: "https://via.placeholder.com/80x40?text=Velka" }
   ],
   comparateurs: [
     { name: "Idealo", logo: "https://logo.clearbit.com/idealo.fr" },
-    { name: "Kelkoo", logo: "https://logo.clearbit.com/kelkoo.com" },
-    { name: "Le Dénicheur", logo: "https://logo.clearbit.com/ledenicheur.fr" }
+    { name: "Le Dénicheur", logo: "https://logo.clearbit.com/ledenicheur.fr" },
+    { name: "Kelkoo", logo: "https://logo.clearbit.com/kelkoo.com" }
   ],
   retargeting: [
     { name: "Criteo", logo: "https://logo.clearbit.com/criteo.com" },
-    { name: "Uzerly", logo: "https://logo.clearbit.com/uzerly.com" }
+    { name: "Uzerly", logo: "https://via.placeholder.com/80x40?text=Uzerly" }
   ],
-  influence: [
-    { name: "Influence4You", logo: "https://logo.clearbit.com/influence4you.com" }
-  ],
-  affinitaires: [
-    { name: "Les Bons Plans de Naïma", logo: "https://logo.clearbit.com/lesbonsplansdenaima.fr" }
-  ],
-  emailing: [
-    { name: "EmailingNetwork", logo: "https://logo.clearbit.com/emailingnetwork.com" }
-  ],
-  css: [
-    { name: "Redbrain", logo: "https://logo.clearbit.com/redbrain.com" }
+  "display-networks": [
+    { name: "Audience Run", logo: "https://via.placeholder.com/80x40?text=AudienceRun" }
   ],
   content: [
-    { name: "Doctissimo", logo: "https://logo.clearbit.com/doctissimo.fr" },
-    { name: "Reworld Media", logo: "https://logo.clearbit.com/reworldmedia.com" }
+    { name: "Reworld Media", logo: "https://logo.clearbit.com/reworldmedia.com" },
+    { name: "DCE", logo: "https://via.placeholder.com/80x40?text=DCE" },
+    { name: "Doctissimo", logo: "https://logo.clearbit.com/doctissimo.fr" }
+  ],
+  emailing: [
+    { name: "Onssen", logo: "https://via.placeholder.com/80x40?text=Onssen" },
+    { name: "Emailing Network", logo: "https://logo.clearbit.com/emailingnetwork.com" }
+  ],
+  affinitaires: [
+    { name: "Les Bons Plans de Naïma", logo: "https://logo.clearbit.com/lesbonsplansdenaima.fr" },
+    { name: "FR Android", logo: "https://logo.clearbit.com/frandroid.com" }
+  ],
+  ppc: [
+    { name: "JVWEB", logo: "https://logo.clearbit.com/jvweb.fr" },
+    { name: "Ad's Up", logo: "https://logo.clearbit.com/ads-up.fr" }
+  ],
+  influence: [
+    { name: "Influence4You", logo: "https://logo.clearbit.com/influence4you.com" },
+    { name: "Stellar", logo: "https://via.placeholder.com/80x40?text=Stellar" }
+  ],
+  retention: [
+    { name: "Beyable", logo: "https://logo.clearbit.com/beyable.com" },
+    { name: "Salecycle", logo: "https://logo.clearbit.com/salecycle.com" }
   ]
 };
+
 
 // ----------------- ANNUAL TRAFFIC -----------------
 function annualAffiliatedTraffic(monthly) {
@@ -318,3 +337,4 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
