@@ -296,6 +296,42 @@ select {
   margin: 0;
 }
 
+/* === Suggestions d’éditeurs === */
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 par ligne */
+  gap: 18px;
+  justify-items: center;
+}
+
+.editor-card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+  width: 120px; /* garantit l’alignement 5x2 */
+}
+
+.editor-card img {
+  max-width: 80px;
+  max-height: 40px;
+  margin-bottom: 8px;
+  object-fit: contain;
+}
+
+.editor-card span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #0000FF;
+  display: block;
+}
+
+/* Responsive : sur petits écrans, 2 par ligne */
+@media (max-width: 800px) {
+  .editor-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* Responsive renforcé pour mobile */
 @media (max-width: 600px) {
   .checkbox-group {
