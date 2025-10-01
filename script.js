@@ -15,6 +15,7 @@ function normalize(map){
 }
 
 // ----------------- DONNÉES SECTEURS (baromètre 2025 résumé) -----------------
+// AOV (euros) et CVR (decimale). PDV = parts de voix estimées par levier (non-exhaustif)
 const SECTORS = {
   fashion: {
     label: "Mode & Beauté", aov: 67, cvr: 0.0155,
@@ -74,64 +75,41 @@ const LEVER_CAC = {
   ppc: 14
 };
 
-// ----------------- MAPPING ÉDITEURS -----------------
-const EDITORS = {
-  cashback: [
-    { name: "iGraal", logo: "https://logo.clearbit.com/igraal.com" },
-    { name: "Poulpeo", logo: "https://logo.clearbit.com/poulpeo.com" },
-    { name: "Joko", logo: "https://logo.clearbit.com/joko.io" }
-  ],
-  bonsplans: [
-    { name: "Ma Reduc", logo: "https://logo.clearbit.com/mareduc.com" },
-    { name: "Dealabs", logo: "https://logo.clearbit.com/dealabs.com" },
-    { name: "Radins", logo: "https://logo.clearbit.com/radins.com" }
-  ],
-  comparateurs: [
-    { name: "Idealo", logo: "https://logo.clearbit.com/idealo.fr" },
-    { name: "Kelkoo", logo: "https://logo.clearbit.com/kelkoo.com" },
-    { name: "Le Dénicheur", logo: "https://logo.clearbit.com/ledenicheur.fr" }
-  ],
-  retargeting: [
-    { name: "Criteo", logo: "https://logo.clearbit.com/criteo.com" },
-    { name: "Uzerly", logo: "https://logo.clearbit.com/uzerly.com" }
-  ],
-  influence: [
-    { name: "Influence4You", logo: "https://logo.clearbit.com/influence4you.com" }
-  ],
-  affinitaires: [
-    { name: "Les Bons Plans de Naïma", logo: "https://logo.clearbit.com/lesbonsplansdenaima.fr" }
-  ],
-  emailing: [
-    { name: "EmailingNetwork", logo: "https://logo.clearbit.com/emailingnetwork.com" }
-  ],
-  css: [
-    { name: "Redbrain", logo: "https://logo.clearbit.com/redbrain.com" }
-  ],
-  content: [
-    { name: "Doctissimo", logo: "https://logo.clearbit.com/doctissimo.fr" },
-    { name: "Reworld Media", logo: "https://logo.clearbit.com/reworldmedia.com" }
-  ]
-};
-
-// ----------------- ANNUAL TRAFFIC -----------------
+// ----------------- TRAFIC ANNUALISÉ (paliers finalisés) -----------------
+// conservative uplifts agreed: returns number of visits counted for year
 function annualAffiliatedTraffic(monthly) {
-  if (monthly < 10000) return monthly * (0.05 * 6 + 0.08 * 6);
-  if (monthly < 50000) return monthly * (0.08 * 6 + 0.10 * 6);
-  if (monthly < 100000) return monthly * (0.12 * 6 + 0.15 * 6);
-  if (monthly < 500000) return monthly * (0.12 * 6 + 0.17 * 6);
+  if (monthly < 10000) {
+    // <10k : 6 months at 5% + 6 months at 8%
+    return monthly * (0.05 * 6 + 0.08 * 6);
+  }
+  if (monthly < 50000) {
+    // 10k-50k : 6 months at 8% + 6 months at 10%
+    return monthly * (0.08 * 6 + 0.10 * 6);
+  }
+  if (monthly < 100000) {
+    // 50k-100k : 6 months at 12% + 6 months at 15%
+    return monthly * (0.12 * 6 + 0.15 * 6);
+  }
+  if (monthly < 500000) {
+    // 100k-500k : 6 months at 12% + 6 months at 17%
+    return monthly * (0.12 * 6 + 0.17 * 6);
+  }
+  // >= 500k : 6 months at 15% + 6 months at 18%
   return monthly * (0.15 * 6 + 0.18 * 6);
 }
 
-// ----------------- AJUSTEMENTS -----------------
+// ----------------- AJUSTEMENTS AOV selon leviers -----------------
 function adjustAOV(baseAov, levers) {
   let a = baseAov;
-  if (levers.includes("cashback")) a *= 0.95;
-  if (levers.includes("bonsplans")) a *= 0.95;
-  if (levers.includes("comparateurs") || levers.includes("css")) a *= 0.98;
-  if (levers.includes("affinitaires")) a *= 1.05;
-  if (levers.includes("influence")) a *= 1.05;
+  if (levers.includes("cashback")) a *= 0.95;     // -5%
+  if (levers.includes("bonsplans")) a *= 0.95;    // -5%
+  if (levers.includes("comparateurs") || levers.includes("css")) a *= 0.98; // -2%
+  if (levers.includes("affinitaires")) a *= 1.05; // +5%
+  if (levers.includes("influence")) a *= 1.05;   // +5%
   return a;
 }
+
+// ----------------- AJUSTEMENTS CVR selon leviers -----------------
 function adjustCVR(baseCvr, levers) {
   let c = baseCvr;
   if (levers.includes("emailing")) c += 0.001;
@@ -147,39 +125,56 @@ function adjustCVR(baseCvr, levers) {
   if (levers.includes("retention")) c += 0.002;
   if (levers.includes("content")) c += 0.001;
 
+  // si tous les leviers (très rare) -> bonus
   const ALL_LEVERS = ["cashback","bonsplans","retargeting","css","comparateurs","display-networks","retention","content","emailing","ppc","affinitaires","influence"];
   if (ALL_LEVERS.every(l => levers.includes(l))) c += 0.015;
+
+  // Si aucun levier "fin de tunnel" (cashback / bonsplans) sélectionné -> prudence (diviser par 2)
   if (!levers.includes("cashback") && !levers.includes("bonsplans")) c *= 0.5;
+
+  // cap raisonnable pour éviter chiffres irréalistes
   return Math.min(c, 0.08);
 }
 
-// ----------------- CAC PROJETÉ -----------------
+// ----------------- CAC projeté pondéré par PDV sectorielle -----------------
 function projectedCAC(sectorKey, levers, cacClient) {
   const sector = SECTORS[sectorKey] || SECTORS.other;
   const pdv = sector.pdv || {};
+  // Build selection PDV: if levers selected, take PDV for those (fallback equal share)
   let sel = {};
   if (levers.length) {
-    levers.forEach(lv => { sel[lv] = pdv[lv] != null ? pdv[lv] : 1; });
+    levers.forEach(lv => {
+      if (pdv[lv] != null) sel[lv] = pdv[lv];
+      else sel[lv] = 1; // if lev not in pdv mapping, give equal weight first
+    });
   } else {
+    // no lever selected -> use top 5 PDV levers in sector
     sel = Object.fromEntries(Object.entries(pdv).sort((a,b)=>b[1]-a[1]).slice(0,5));
   }
   sel = normalize(sel);
 
+  // compute weighted average of LEVER_CAC (fallback to client cac if lev has null)
   let cac = 0;
   for (const lv in sel) {
     const base = (LEVER_CAC[lv] != null) ? LEVER_CAC[lv] : cacClient || 0;
     cac += sel[lv] * base;
   }
 
-  if (cacClient > 0 && cac < cacClient * 0.8) cac = (cac + cacClient) / 2;
+  // If computed cac is very optimistic vs client, pull it up halfway to client
+  if (cacClient > 0 && cac < cacClient * 0.8) {
+    cac = (cac + cacClient) / 2;
+  }
+
+  // final floor
   if (cac <= 0) cac = cacClient || 0;
   return cac;
 }
 
-// ----------------- DATA CAMEMBERT -----------------
+// ----------------- Préparer données camembert (labels + values) -----------------
 function chartDataFor(sectorKey, levers) {
   const sector = SECTORS[sectorKey] || SECTORS.other;
   let pdv = { ...sector.pdv };
+  // if levers selected, filter to them (if some not present, keep them with small share)
   if (levers.length) {
     const filtered = {};
     levers.forEach(lv => { filtered[lv] = pdv[lv] != null ? pdv[lv] : 0.01; });
@@ -191,27 +186,7 @@ function chartDataFor(sectorKey, levers) {
   return { labels, data };
 }
 
-// ----------------- AFFICHAGE ÉDITEURS -----------------
-function afficherEditeurs(levers) {
-  const container = document.querySelector(".editor-grid");
-  if (!container) return;
-  container.innerHTML = "";
-
-  let suggestions = [];
-  levers.forEach(l => { if (EDITORS[l]) suggestions = suggestions.concat(EDITORS[l]); });
-
-  suggestions = suggestions.sort(() => 0.5 - Math.random());
-  suggestions = suggestions.slice(0, 8);
-
-  suggestions.forEach(e => {
-    const card = document.createElement("div");
-    card.className = "editor-card";
-    card.innerHTML = `<img src="${e.logo}" alt="${e.name}"><span>${e.name}</span>`;
-    container.appendChild(card);
-  });
-}
-
-// ----------------- MAIN -----------------
+// ----------------- MAIN (DOM) -----------------
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
   if (!form) {
@@ -219,37 +194,60 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Budget checkbox
   const unlimitedCheckbox = document.getElementById("unlimited-budget") || document.getElementById("noBudget");
   const budgetInput = form.elements["budget"];
+
   if (unlimitedCheckbox && budgetInput) {
     unlimitedCheckbox.addEventListener("change", () => {
       budgetInput.disabled = unlimitedCheckbox.checked;
-      if (unlimitedCheckbox.checked) budgetInput.value = "";
+      if (unlimitedCheckbox.checked) {
+        budgetInput.value = "";
+      }
     });
   }
 
+  // ✅ Gestion de la case "J’autorise tous les leviers"
   const allLeversCheckbox = document.getElementById("allLevers");
   const leverCheckboxes = form.querySelectorAll('input[name="levers"]');
+
   if (allLeversCheckbox && leverCheckboxes.length > 0) {
-    allLeversCheckbox.addEventListener("change", () => { leverCheckboxes.forEach(cb => cb.checked = allLeversCheckbox.checked); });
-    leverCheckboxes.forEach(cb => { cb.addEventListener("change", () => { if (!cb.checked) allLeversCheckbox.checked = false; }); });
+    allLeversCheckbox.addEventListener("change", () => {
+      leverCheckboxes.forEach(cb => {
+        cb.checked = allLeversCheckbox.checked;
+      });
+    });
+
+    leverCheckboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        if (!cb.checked) {
+          allLeversCheckbox.checked = false;
+        }
+      });
+    });
   }
 
+// ✅ Début du submit handler (tout le calcul DOIT être dedans)
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
+    // --- Read inputs safely ---
     const trafficMonthly = numberOf(form.elements["traffic"]?.value);
     const aovUser = numberOf(form.elements["aov"]?.value);
     const cvrUserInput = numberOf(form.elements["cvr"]?.value) / 100;
     const cacClient = numberOf(form.elements["cac"]?.value);
     const sectorKey = form.elements["sector"]?.value || "other";
+
+    // levers checked
     const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(i => i.value);
 
+    // budget handling (defensive)
     let budgetMonthly = 0;
     if (unlimitedCheckbox && unlimitedCheckbox.checked) budgetMonthly = Infinity;
     else budgetMonthly = numberOf(form.elements["budget"]?.value) || 0;
     const budgetAnnual = (budgetMonthly === Infinity) ? Infinity : budgetMonthly * 12;
 
+    // --- Base values & adjustments ---
     const sector = SECTORS[sectorKey] || SECTORS.other;
     const baseAov = (aovUser > 0) ? aovUser : sector.aov;
     const baseCvr = (cvrUserInput > 0) ? cvrUserInput : sector.cvr;
@@ -257,22 +255,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const adjustedAov = adjustAOV(baseAov, levers);
     const adjustedCvr = adjustCVR(baseCvr, levers);
 
+    // annualized affiliated traffic (visits) using agreed conservative rules
     const affiliatedTrafficYear = annualAffiliatedTraffic(trafficMonthly);
+
+    // potential orders before budget cap
     const potentialOrders = affiliatedTrafficYear * adjustedCvr;
+
+    // projected CAC (weighted by PDV / fallback to client cac)
     const cacProjected = projectedCAC(sectorKey, levers, cacClient || 0);
+
+    // cap by budget (if budget provided)
     const maxOrdersByBudget = (budgetAnnual === Infinity || cacProjected === 0) ? potentialOrders : (budgetAnnual / cacProjected);
     const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
 
+    // revenue
     const revenue = finalOrders * adjustedAov;
+
+    // computed budget consumed (prefer showing budgetAnnual or theoretical)
     const budgetConsumed = (budgetAnnual === Infinity) ? finalOrders * cacProjected : Math.min(budgetAnnual, finalOrders * cacProjected);
+
+    // ROI (revenue / budgetConsumed) guard
     const roi = (budgetConsumed > 0) ? (revenue / budgetConsumed) : (budgetAnnual === Infinity ? (revenue / (finalOrders * cacClient || 1)) : 0);
 
-    const elRevenue = document.getElementById("kpi-revenue");
-    const elOrders = document.getElementById("kpi-orders");
-    const elBudget = document.getElementById("kpi-budget");
-    const elAov = document.getElementById("kpi-aov");
-    const elCac = document.getElementById("kpi-cac");
-    const elRoi = document.getElementById("kpi-roi");
+   // --- Display results (safe DOM queries) ---
+const results = document.getElementById("results");
+const formContainer = document.querySelector(".right-column"); // container du formulaire
+
+// Cacher le formulaire
+if (formContainer) formContainer.style.display = "none";
+
+// Afficher les résultats
+if (results) results.style.display = "block";
+
+// Récupération des éléments à mettre à jour
+const elRevenue = document.getElementById("kpi-revenue");
+const elOrders = document.getElementById("kpi-orders");
+const elBudget = document.getElementById("kpi-budget");
+const elAov = document.getElementById("kpi-aov");
+const elCac = document.getElementById("kpi-cac");
+const elRoi = document.getElementById("kpi-roi");
+const insightsBox = document.getElementById("insights");
+
     if (elRevenue) elRevenue.textContent = fmtCurrency(revenue);
     if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
     if (elBudget) elBudget.textContent = (budgetAnnual === Infinity) ? "Illimité" : fmtCurrency(budgetAnnual);
@@ -280,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (elCac) elCac.textContent = fmtCurrency(cacProjected);
     if (elRoi) elRoi.textContent = (roi > 0 ? roi.toFixed(2) + "x" : "—");
 
-    const insightsBox = document.getElementById("insights");
+    // analysis: only AOV vs sector as requested + one-line CR mention + budget cap note
     const analysis = [];
     if (sectorKey !== "other") {
       if (adjustedAov > sector.aov * 1.1) analysis.push(`Votre panier moyen estimé (${fmtCurrency(adjustedAov)}) est supérieur à la moyenne du secteur.`);
@@ -289,26 +312,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     analysis.push(`Taux de conversion simulé : ${(adjustedCvr * 100).toFixed(2)}% (montée en puissance sur l'année 1).`);
     if (budgetAnnual !== Infinity) analysis.push(`Note : votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) peut limiter le volume de ventes affiché.`);
+
     if (insightsBox) insightsBox.innerHTML = `<h3>Analyse rapide</h3><ul>${analysis.map(t=>`<li>${t}</li>`).join("")}</ul>`;
 
+    // --- Chart (doughnut) : build from sector PDV filtered by levers ---
     const canvas = document.getElementById("chart-levers");
     if (canvas && window.Chart) {
       const { labels, data } = chartDataFor(sectorKey, levers);
+      // convert data to percentages for display plugin
       const dataPct = data.map(v => +(v*100).toFixed(2));
+
       if (window.salesChart) window.salesChart.destroy();
       window.salesChart = new Chart(canvas.getContext("2d"), {
         type: "doughnut",
         data: {
           labels: labels.map(l => l.replace(/-/g, " ")),
-          datasets: [{ data: dataPct, backgroundColor: ["#3b82f6","#f97316","#22c55e","#eab308","#ef4444","#8b5cf6","#06b6d4","#f43f5e","#10b981","#a855f7","#64748b","#f59e0b"] }]
+          datasets: [{
+            data: dataPct,
+            backgroundColor: [
+              "#3b82f6","#f97316","#22c55e","#eab308","#ef4444","#8b5cf6","#06b6d4","#f43f5e","#10b981","#a855f7","#64748b","#f59e0b"
+            ]
+          }]
         },
-        options: { responsive: true, cutout: "55%", plugins: { legend: { position: "right" } } }
+        options: {
+          responsive: true,
+          cutout: "55%",
+          plugins: {
+            legend: { position: "right", labels: { boxWidth: 14, font: { size: 12 } } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx){
+                  const v = ctx.parsed || 0;
+                  return `${ctx.label}: ${v}%`;
+                }
+              }
+            },
+            datalabels: {
+              display: false // hide labels on chart to avoid clutter; tooltip shows %
+            }
+          }
+        },
+        plugins: (window.ChartDataLabels ? [ChartDataLabels] : [])
       });
     }
 
-    // ✅ Affichage éditeurs
-    afficherEditeurs(levers);
-
+    // CTA (single, short)
     const ctaWrap = document.getElementById("cta-link");
     if (ctaWrap) {
       ctaWrap.innerHTML = `<a class="cta" href="https://www.lumigency.com/consultation-gratuite">🚀 Prenez RDV gratuit</a>`;
@@ -318,3 +366,4 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
