@@ -285,3 +285,25 @@ select {
 .cta-final a:hover {
   background: #0000FF;
 }
+
+/* Correction alignement case "Je n’ai pas de budget" */
+.single-checkbox input[type=checkbox] {
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.single-checkbox label {
+  margin: 0;
+}
+
+/* Responsive renforcé pour mobile */
+@media (max-width: 600px) {
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  .radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
