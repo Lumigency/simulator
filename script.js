@@ -170,6 +170,52 @@ function projectedCAC(sectorKey, levers, cacClient) {
   return cac;
 }
 
+// ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
+const EDITORS = {
+  cashback: [
+    { name: "iGraal", logo: "assets/igraal.png" },
+    { name: "Poulpeo", logo: "assets/poulpeo.png" }
+  ],
+  bonsplans: [
+    { name: "Ma Reduc", logo: "assets/mareduc.png" },
+    { name: "Dealabs", logo: "assets/dealabs-logo-png.png" }
+  ],
+  css: [
+    { name: "Redbrain", logo: "assets/redbrain.png" },
+    { name: "Velkashopping", logo: "assets/velkashopping.png" }
+  ],
+  comparateurs: [
+    { name: "Idealo", logo: "assets/idealo.png" },
+    { name: "Kelkoo", logo: "assets/logo kelkoo.webp" }
+  ],
+  retargeting: [
+    { name: "Criteo", logo: "assets/logo-criteo.jpg" },
+    { name: "Uzerly", logo: "assets/uzerly.png" }
+  ],
+  display: [
+    { name: "Digidip", logo: "assets/logo-digidip.png" },
+    { name: "Skimlinks", logo: "assets/skimlinks.png" }
+  ],
+  content: [
+    { name: "Reworld Media", logo: "assets/reworldmedia.png" },
+    { name: "DCE", logo: "assets/digital_content_expert_logo.jpg" }
+  ],
+  emailing: [
+    { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" }
+  ],
+  affinitaires: [
+    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" },
+    { name: "FR Android", logo: "assets/frandroid-logo.png" }
+  ],
+  sea: [
+    { name: "JVWEB", logo: "assets/jvweb.png" },
+    { name: "Ad's up", logo: "assets/adsup.png" }
+  ],
+  retention: [
+    { name: "Beyable", logo: "assets/logo-beyable.png" }
+  ]
+};
+
 // ----------------- Préparer données camembert (labels + values) -----------------
 function chartDataFor(sectorKey, levers) {
   const sector = SECTORS[sectorKey] || SECTORS.other;
@@ -363,7 +409,11 @@ const insightsBox = document.getElementById("insights");
       ctaWrap.style.display = "block";
     }
 
+    // --- Editors suggestions ---
+afficherEditeurs(levers);
+
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
