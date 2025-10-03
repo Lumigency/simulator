@@ -171,7 +171,6 @@ function projectedCAC(sectorKey, levers, cacClient) {
 }
 
 // ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
-// ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
 const EDITORS = {
   cashback: [
     { name: "iGraal", logo: "assets/logo-igraal.png" },
@@ -219,19 +218,18 @@ const EDITORS = {
   ]
 };
 
-
 // ----------------- AFFICHAGE ÉDITEURS -----------------
-function afficherEditeurs(levers) {
+function afficherEditeurs(leviers) {
   const container = document.querySelector(".editor-grid");
   if (!container) return;
   container.innerHTML = "";
 
   let suggestions = [];
-  levers.forEach(l => {
+  leviers.forEach(l => {
     if (EDITORS[l]) {
       // On ajoute le levier comme champ supplémentaire
       suggestions = suggestions.concat(
-        EDITORS[l].map(e => ({ ...e, lever: l }))
+        EDITORS[l].map(e => ({ ...e, levier: l }))
       );
     }
   });
@@ -245,7 +243,7 @@ function afficherEditeurs(levers) {
     card.className = "editor-card";
     card.innerHTML = `
       <img src="${e.logo}" alt="${e.name}">
-      <span>${e.lever.charAt(0).toUpperCase() + e.lever.slice(1)}</span>
+      <span>${e.levier.charAt(0).toUpperCase() + e.levier.slice(1)}</span>
     `;
     container.appendChild(card);
   });
@@ -450,6 +448,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
