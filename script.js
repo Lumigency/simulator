@@ -173,31 +173,31 @@ function projectedCAC(sectorKey, levers, cacClient) {
 // ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
 const EDITORS = {
   cashback: [
-    { name: "iGraal", logo: "assets/igraal.png" },
-    { name: "Poulpeo", logo: "assets/poulpeo.png" }
+    { name: "iGraal", logo: "assets/logo-igraal-png.png" },
+    { name: "Poulpeo", logo: "assets/logo-poulpeo.png" },
+    { name: "Joko", logo: "assets/joko-logo.png" }
   ],
   bonsplans: [
-    { name: "Ma Reduc", logo: "assets/mareduc.png" },
+    { name: "Ma Reduc", logo: "assets/ma-reduc-png.png" },
     { name: "Dealabs", logo: "assets/dealabs-logo-png.png" }
   ],
   css: [
-    { name: "Redbrain", logo: "assets/redbrain.png" },
-    { name: "Velkashopping", logo: "assets/velkashopping.png" }
+    { name: "Redbrain", logo: "assets/redbrain-logo.png" },
+    { name: "Velkashopping", logo: "assets/logo-velkashopping.jpg" }
   ],
   comparateurs: [
-    { name: "Idealo", logo: "assets/idealo.png" },
-    { name: "Kelkoo", logo: "assets/logo kelkoo.webp" }
+    { name: "Idealo", logo: "assets/logo-idealo.png" }
   ],
   retargeting: [
     { name: "Criteo", logo: "assets/logo-criteo.jpg" },
-    { name: "Uzerly", logo: "assets/uzerly.png" }
+    { name: "Uzerly", logo: "assets/logo-uzerly.jpeg" }
   ],
   display: [
     { name: "Digidip", logo: "assets/logo-digidip.png" },
-    { name: "Skimlinks", logo: "assets/skimlinks.png" }
+    { name: "Skimlinks", logo: "assets/logo-skimlinks.png" }
   ],
   content: [
-    { name: "Reworld Media", logo: "assets/reworldmedia.png" },
+    { name: "Reworld Media", logo: "assets/logo-reworld-media.png" },
     { name: "DCE", logo: "assets/digital_content_expert_logo.jpg" }
   ],
   emailing: [
@@ -208,7 +208,7 @@ const EDITORS = {
     { name: "FR Android", logo: "assets/frandroid-logo.png" }
   ],
   sea: [
-    { name: "JVWEB", logo: "assets/jvweb.png" },
+    { name: "JVWEB", logo: "assets/logo-jvweb.png" },
     { name: "Ad's up", logo: "assets/adsup.png" }
   ],
   retention: [
@@ -442,6 +442,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
