@@ -180,7 +180,6 @@ const EDITORS = {
   bonsplans: [
     { name: "Ma Reduc", logo: "assets/logo-mareduc.png" },
     { name: "Dealabs", logo: "assets/dealabs-logo.png" },
-    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
   ],
   css: [
     { name: "Redbrain", logo: "assets/redbrain-logo.png" },
@@ -188,7 +187,6 @@ const EDITORS = {
   ],
   comparateurs: [
     { name: "Idealo", logo: "assets/logo-idealo.png" },
-    { name: "Kelkoo", logo: "assets/logo-kelkoo.webp" }
   ],
   retargeting: [
     { name: "Criteo", logo: "assets/logo-criteo.jpg" },
@@ -448,6 +446,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
