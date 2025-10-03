@@ -173,20 +173,21 @@ function projectedCAC(sectorKey, levers, cacClient) {
 // ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
 const EDITORS = {
   cashback: [
-    { name: "iGraal", logo: "assets/logo-igraal.png" },
+    { name: "iGraal", logo: "assets/logo-igraal-png.png" },
     { name: "Poulpeo", logo: "assets/logo-poulpeo.png" },
     { name: "Joko", logo: "assets/joko-logo.png" }
   ],
   bonsplans: [
-    { name: "Ma Reduc", logo: "assets/logo-mareduc.png" },
-    { name: "Dealabs", logo: "assets/dealabs-logo.png" },
+    { name: "Ma Reduc", logo: "assets/ma-reduc-png.png" },
+    { name: "Dealabs", logo: "assets/dealabs-logo-png.png" },
+    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
   ],
   css: [
     { name: "Redbrain", logo: "assets/redbrain-logo.png" },
     { name: "Velkashopping", logo: "assets/logo-velkashopping.jpg" }
   ],
   comparateurs: [
-    { name: "Idealo", logo: "assets/logo-idealo.png" },
+    { name: "Idealo", logo: "assets/logo-idealo.png" }
   ],
   retargeting: [
     { name: "Criteo", logo: "assets/logo-criteo.jpg" },
@@ -198,14 +199,13 @@ const EDITORS = {
   ],
   content: [
     { name: "Reworld Media", logo: "assets/logo-reworld-media.png" },
-    { name: "DCE", logo: "assets/logo-dce.jpg" }
+    { name: "DCE", logo: "assets/digital_content_expert_logo.jpg" }
   ],
   emailing: [
     { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" }
   ],
   affinitaires: [
-    { name: "FR Android", logo: "assets/frandroid-logo.png" },
-    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
+    { name: "FR Android", logo: "assets/frandroid-logo.png" }
   ],
   sea: [
     { name: "JVWEB", logo: "assets/logo-jvweb.png" },
@@ -446,6 +446,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
