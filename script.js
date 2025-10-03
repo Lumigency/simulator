@@ -216,6 +216,33 @@ const EDITORS = {
   ]
 };
 
+// ----------------- AFFICHAGE ÉDITEURS -----------------
+function afficherEditeurs(levers) {
+  const container = document.querySelector(".editor-grid");
+  if (!container) return;
+  container.innerHTML = "";
+
+  let suggestions = [];
+  levers.forEach(l => {
+    if (EDITORS[l]) suggestions = suggestions.concat(EDITORS[l]);
+  });
+
+  // mélanger et limiter à 8 max
+  suggestions = suggestions.sort(() => 0.5 - Math.random()).slice(0, 8);
+
+  // injecter dans le DOM
+  suggestions.forEach(e => {
+    const card = document.createElement("div");
+    card.className = "editor-card";
+    card.innerHTML = `
+      <img src="${e.logo}" alt="${e.name}">
+      <span>${e.name}</span>
+    `;
+    container.appendChild(card);
+  });
+}
+
+
 // ----------------- Préparer données camembert (labels + values) -----------------
 function chartDataFor(sectorKey, levers) {
   const sector = SECTORS[sectorKey] || SECTORS.other;
@@ -415,5 +442,6 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
