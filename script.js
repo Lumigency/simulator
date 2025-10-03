@@ -171,22 +171,25 @@ function projectedCAC(sectorKey, levers, cacClient) {
 }
 
 // ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
+// ----------------- MAPPING ÉDITEURS (logos en local /assets) -----------------
 const EDITORS = {
   cashback: [
-    { name: "iGraal", logo: "assets/logo-igraal-png.png" },
+    { name: "iGraal", logo: "assets/logo-igraal.png" },
     { name: "Poulpeo", logo: "assets/logo-poulpeo.png" },
     { name: "Joko", logo: "assets/joko-logo.png" }
   ],
   bonsplans: [
-    { name: "Ma Reduc", logo: "assets/ma-reduc-png.png" },
-    { name: "Dealabs", logo: "assets/dealabs-logo-png.png" }
+    { name: "Ma Reduc", logo: "assets/logo-mareduc.png" },
+    { name: "Dealabs", logo: "assets/dealabs-logo.png" },
+    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
   ],
   css: [
     { name: "Redbrain", logo: "assets/redbrain-logo.png" },
     { name: "Velkashopping", logo: "assets/logo-velkashopping.jpg" }
   ],
   comparateurs: [
-    { name: "Idealo", logo: "assets/logo-idealo.png" }
+    { name: "Idealo", logo: "assets/logo-idealo.png" },
+    { name: "Kelkoo", logo: "assets/logo-kelkoo.webp" }
   ],
   retargeting: [
     { name: "Criteo", logo: "assets/logo-criteo.jpg" },
@@ -198,14 +201,14 @@ const EDITORS = {
   ],
   content: [
     { name: "Reworld Media", logo: "assets/logo-reworld-media.png" },
-    { name: "DCE", logo: "assets/digital_content_expert_logo.jpg" }
+    { name: "DCE", logo: "assets/logo-dce.jpg" }
   ],
   emailing: [
     { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" }
   ],
   affinitaires: [
-    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" },
-    { name: "FR Android", logo: "assets/frandroid-logo.png" }
+    { name: "FR Android", logo: "assets/frandroid-logo.png" },
+    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
   ],
   sea: [
     { name: "JVWEB", logo: "assets/logo-jvweb.png" },
@@ -216,6 +219,7 @@ const EDITORS = {
   ]
 };
 
+
 // ----------------- AFFICHAGE ÉDITEURS -----------------
 function afficherEditeurs(levers) {
   const container = document.querySelector(".editor-grid");
@@ -224,24 +228,28 @@ function afficherEditeurs(levers) {
 
   let suggestions = [];
   levers.forEach(l => {
-    if (EDITORS[l]) suggestions = suggestions.concat(EDITORS[l]);
+    if (EDITORS[l]) {
+      // On ajoute le levier comme champ supplémentaire
+      suggestions = suggestions.concat(
+        EDITORS[l].map(e => ({ ...e, lever: l }))
+      );
+    }
   });
 
-  // mélanger et limiter à 8 max
+  // Mélanger et limiter à 8 max
   suggestions = suggestions.sort(() => 0.5 - Math.random()).slice(0, 8);
 
-  // injecter dans le DOM
+  // Injecter dans le DOM
   suggestions.forEach(e => {
     const card = document.createElement("div");
     card.className = "editor-card";
     card.innerHTML = `
       <img src="${e.logo}" alt="${e.name}">
-      <span>${e.name}</span>
+      <span>${e.lever.charAt(0).toUpperCase() + e.lever.slice(1)}</span>
     `;
     container.appendChild(card);
   });
 }
-
 
 // ----------------- Préparer données camembert (labels + values) -----------------
 function chartDataFor(sectorKey, levers) {
@@ -442,6 +450,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
