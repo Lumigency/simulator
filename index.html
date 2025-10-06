@@ -25,17 +25,26 @@
     </div>
 
     <div class="right-column">
-      <h2>💰 Obtenez une estimation de vos performances en <mark>affiliation</mark></h2>
+    <h2 class="subtitle">
+  ⚙️ Renseignez vos données clés et obtenez une projection fiable de <mark>votre potentiel en affiliation</mark>.
+</h2>
       <form id="form-simu">
         <!-- Trafic -->
         <label>👥 Votre trafic mensuel actuel</label>
-        <div class="range-container">
-          <span>0 visiteurs</span>
-          <input type="range" name="traffic" min="0" max="1000000" step="10000"
-                 oninput="document.getElementById('trafficValue').textContent=this.value + ' visiteurs'">
-          <span>1 000 000 visiteurs</span>
-        </div>
-        <div class="range-value" id="trafficValue">0 visiteurs</div>
+  <div class="traffic-slider-container">
+    <div class="slider-wrapper">
+      <input type="range" id="trafficRange" min="0" max="1000000" step="10000" value="50000">
+      <div class="slider-labels">
+        <span>0</span>
+        <span>10k</span>
+        <span>50k</span>
+        <span>100k</span>
+        <span>500k</span>
+        <span>1M</span>
+      </div>
+    </div>
+    <input type="number" id="trafficInput" value="50000">
+  </div>
 
         <!-- Panier + Taux -->
         <label>🛒 Panier moyen actuel (€)</label>
@@ -114,10 +123,10 @@
         <label>📧 Votre email (obligatoire)</label>
         <input type="email" name="email" required>
 
-        <!-- CTA -->
-        <button type="submit" class="cta">🔥 Lancer ma simulation</button>
-      </form>
-    </div>
+      <!-- CTA principal + CTA secondaire -->
+<button type="submit" class="cta">🔥 Lancer ma simulation</button>
+<a href="https://www.lumigency.com/consultation-gratuite" class="cta-secondary">💬 Discuter avec un expert Lumigency</a>
+</form>
 
      <!-- Résultats -->
 <section id="results" class="results-section" style="display: none;">
