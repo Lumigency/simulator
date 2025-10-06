@@ -383,6 +383,28 @@ select {
   margin-top: -6px; /* aligne la case au curseur */
 }
 
+/* === CTA secondaire (lien discret sous le bouton principal) === */
+.cta-secondary {
+  display: inline-block;
+  margin-top: 14px;
+  color: #0000FF; /* Bleu Lumigency */
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.25s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.cta-secondary:hover {
+  opacity: 1;
+  color: #0732ef;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
 /* Responsive tablette */
 @media (max-width: 900px) {
   .traffic-slider-container {
