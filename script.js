@@ -303,6 +303,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  // === Synchronisation curseur <-> input du trafic mensuel ===
+  const trafficRange = document.getElementById('trafficRange');
+  const trafficInput = document.getElementById('trafficInput');
+
+  if (trafficRange && trafficInput) {
+    // Quand on bouge le curseur → met à jour la case
+    trafficRange.addEventListener('input', (e) => {
+      trafficInput.value = e.target.value;
+    });
+
+    // Quand on change la valeur manuellement → met à jour le curseur
+    trafficInput.addEventListener('input', (e) => {
+      let value = parseInt(e.target.value, 10);
+      if (isNaN(value)) value = 0;
+      if (value < 0) value = 0;
+      if (value > 1000000) value = 1000000;
+      trafficRange.value = value;
+    });
+  }
 
 // ✅ Début du submit handler (tout le calcul DOIT être dedans)
   form.addEventListener("submit", (ev) => {
@@ -446,6 +465,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
