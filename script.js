@@ -179,8 +179,7 @@ const EDITORS = {
   ],
   bonsplans: [
     { name: "Ma Reduc", logo: "assets/ma-reduc-png.png" },
-    { name: "Dealabs", logo: "assets/dealabs-logo-png.png" },
-    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
+    { name: "Dealabs", logo: "assets/dealabs-logo-png.png" }
   ],
   css: [
     { name: "Redbrain", logo: "assets/redbrain-logo.png" },
@@ -205,7 +204,8 @@ const EDITORS = {
     { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" }
   ],
   affinitaires: [
-    { name: "FR Android", logo: "assets/frandroid-logo.png" }
+    { name: "FR Android", logo: "assets/frandroid-logo.png" },
+    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
   ],
   sea: [
     { name: "JVWEB", logo: "assets/logo-jvweb.png" },
@@ -446,6 +446,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
