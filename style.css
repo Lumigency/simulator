@@ -6,54 +6,93 @@ body {
   padding: 0;
 }
 
-.split-layout {
-  display: flex;
-  min-height: 100vh;
-}
-
+/* === Colonne gauche === */
 .left-column {
   background: linear-gradient(to right, #2020ff, #809fff);
   color: white;
-  width: 40%;
-  padding: 40px 30px;
+  width: 35%; /* ✅ colonne plus fine */
+  padding: 50px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  text-align: left;
+  justify-content: space-between; /* pousse la signature vers le bas */
+  text-align: center;
+  min-height: 100vh;
 }
 
+/* Logo */
 .left-column img {
   max-width: 160px;
   margin-bottom: 25px;
 }
 
+/* Titre principal */
 .left-column h1 {
-  font-size: 1.6rem;
-  margin-bottom: 15px;
+  font-size: 1.7rem;
+  margin-bottom: 30px;
   line-height: 1.3;
+}
+
+/* Liste des bénéfices */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 40px auto;
+  width: 100%;
+  max-width: 320px;
   text-align: center;
 }
 
-.left-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.left-column ul li {
-  margin: 12px 0;
+.benefits-list li {
   font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin: 10px 0;
+  line-height: 1.5;
+  color: #f7f7f7;
 }
 
+/* ✅ Supprime les icônes "✅" ou puces */
 .left-column ul li::before {
-  content: "✅";
-  display: inline-block;
-  margin-right: 8px;
+  content: none;
+}
+
+/* === Bloc "Le saviez-vous ?" === */
+.insight-card {
+  background: #ffffff; /* ✅ fond blanc */
+  color: #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  padding: 18px 22px;
+  text-align: left;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 320px;
+  font-size: 0.9rem;
+}
+
+.insight-card strong {
+  color: #0000FF;
+}
+
+/* Ligne séparatrice */
+.divider {
+  width: 60%;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+  margin: 30px auto;
+}
+
+/* === Signature Lumigency === */
+.signature {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  text-align: center;
+  margin-top: auto; /* ✅ reste en bas */
+  padding-top: 20px;
+}
+
+.signature strong {
+  color: #fff;
+  font-weight: 600;
 }
 
 .right-column {
@@ -477,21 +516,6 @@ select {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Colonne gauche inchangée (tu gardes ton look Lumigency 💙) */
-.left-column {
-  flex-shrink: 0;
-  width: 40%;
-  position: sticky;
-  top: 0;
-  align-self: flex-start;
-}
-
-/* Centrage du bloc de résultats */
-.results-section {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
 /* Amélioration du rendu responsive */
 @media (max-width: 960px) {
   .split-layout {
@@ -621,29 +645,6 @@ select {
 .split-layout.show-results .results-section {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* === Correction : colonne bleue pleine hauteur === */
-.split-layout {
-  display: flex;
-  align-items: stretch !important; /* forcer la hauteur égale */
-  min-height: 100vh;
-}
-
-.left-column {
-  flex: 0 0 40%;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #2020ff, #809fff);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.right-column {
-  flex: 1;
-  background: #fff;
 }
 
 /* === Ajustement proximité phrase budget === */
