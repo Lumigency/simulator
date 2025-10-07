@@ -521,3 +521,90 @@ select {
   }
 }
 
+/* === Ajustement alignement des résultats === */
+
+.results-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.kpi-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.kpi-card {
+  flex: 1 1 250px;
+  max-width: 250px;
+  text-align: center;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 40px auto;
+}
+
+#chart-levers {
+  display: block;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+.analysis-block {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.editor-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+.editor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+}
+
+.editor-card img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.editor-card span {
+  font-weight: 600;
+  color: #0000ff;
+}
+
+/* Animation douce (optionnelle) */
+.results-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.split-layout.show-results .results-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
