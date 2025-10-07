@@ -644,19 +644,6 @@ select {
   background: #fff;
 }
 
-/* === Disposition alignée des 4 champs principaux === */
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px 50px;
-  justify-content: center;
-}
-
-.form-row > div {
-  flex: 1 1 40%;
-  min-width: 240px;
-}
-
 /* === Ajustement proximité phrase budget === */
 .checkbox-budget {
   margin-top: 2px; /* rapproche le texte du champ budget */
@@ -670,6 +657,64 @@ select {
 .checkbox-budget input[type="checkbox"] {
   transform: scale(1.1);
   accent-color: #0000FF;
+}
+
+/* === Alignement parfait des 4 champs principaux (UX améliorée) === */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 50px;
+  margin-top: 25px;
+}
+
+.form-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.form-row input[type="number"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fdfdfd;
+  transition: all 0.2s ease;
+}
+
+.form-row input[type="number"]:focus {
+  border-color: #0000FF;
+  box-shadow: 0 0 4px rgba(0, 0, 255, 0.2);
+}
+
+/* Alignement + proximité du texte budget */
+.checkbox-budget {
+  margin-top: 4px; /* léger espace, harmonieux */
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+
+.checkbox-budget label {
+  margin: 0;
+  color: #333;
+}
+
+.checkbox-budget input[type="checkbox"] {
+  transform: scale(1.1);
+  accent-color: #0000FF;
+  margin-top: 2px;
+}
+
+/* Responsive ajusté */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 
