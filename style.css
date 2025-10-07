@@ -644,6 +644,35 @@ select {
   background: #fff;
 }
 
+/* === Disposition alignée des 4 champs principaux === */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px 50px;
+  justify-content: center;
+}
+
+.form-row > div {
+  flex: 1 1 40%;
+  min-width: 240px;
+}
+
+/* === Ajustement proximité phrase budget === */
+.checkbox-budget {
+  margin-top: 2px; /* rapproche le texte du champ budget */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.checkbox-budget input[type="checkbox"] {
+  transform: scale(1.1);
+  accent-color: #0000FF;
+}
+
+
 html, body {
   height: 100%;
 }
