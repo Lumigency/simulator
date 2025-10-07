@@ -383,6 +383,10 @@ if (formContainer) formContainer.style.display = "none";
 // Afficher les résultats
 if (results) results.style.display = "block";
 
+// ✅ Ajout UX : active la classe show-results pour la mise en page CSS
+const splitLayout = document.querySelector(".split-layout");
+if (splitLayout) splitLayout.classList.add("show-results");
+
 // Récupération des éléments à mettre à jour
 const elRevenue = document.getElementById("kpi-revenue");
 const elOrders = document.getElementById("kpi-orders");
@@ -465,6 +469,7 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
   });
 });
+
 
 
 
