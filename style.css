@@ -10,14 +10,16 @@ body {
 .left-column {
   background: linear-gradient(to right, #2020ff, #809fff);
   color: white;
-  width: 35%; /* ✅ colonne plus fine */
-  padding: 50px 40px;
+  width: 35%;
+  padding: 60px 40px 40px; /* un peu plus d’air en haut */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* pousse la signature vers le bas */
+  justify-content: flex-start; /* pour un bon flux vertical */
   text-align: center;
   min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
 }
 
 /* Logo */
@@ -739,6 +741,52 @@ select {
   }
 }
 
+/* Alignement des éléments dans la colonne gauche */
+.left-column .content-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* Ajustement du bloc "Le saviez-vous" + ligne séparatrice */
+.insight-card {
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  padding: 20px 22px;
+  text-align: left;
+  margin: 20px auto 40px;
+  width: 100%;
+  max-width: 320px;
+  font-size: 0.9rem;
+}
+
+.divider {
+  width: 70%;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+  margin: 10px auto 30px; /* descend la ligne plus bas */
+}
+
+/* Signature toujours collée en bas */
+.signature {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  text-align: center;
+}
+
+/* Étend le fond bleu sur toute la hauteur, même si le formulaire est plus long */
+.split-layout {
+  align-items: stretch;
+}
 
 html, body {
   height: 100%;
