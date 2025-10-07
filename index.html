@@ -29,22 +29,30 @@
   ⚙️ Renseignez vos données clés et obtenez une projection fiable de <mark>votre potentiel en affiliation</mark>.
 </h2>
       <form id="form-simu">
-        <!-- Trafic -->
-        <label>👥 Votre trafic mensuel actuel</label>
-  <div class="traffic-slider-container">
-    <div class="slider-wrapper">
-      <input type="range" id="trafficRange" min="0" max="1000000" step="10000" value="50000">
-      <div class="slider-labels">
-        <span>0</span>
-        <span>10k</span>
-        <span>50k</span>
-        <span>100k</span>
-        <span>500k</span>
-        <span>1M</span>
-      </div>
+        
+<!-- Trafic -->
+<label>👥 Votre trafic mensuel actuel</label>
+<div class="traffic-slider-container">
+  <div class="slider-wrapper">
+    <input 
+      type="range" 
+      id="trafficRange" 
+      min="0" 
+      max="1000000" 
+      step="1000" 
+      value="50000" 
+      oninput="document.getElementById('trafficInput').value=this.value">
+    <div class="slider-labels">
+      <span>0</span>
+      <span>10k</span>
+      <span>50k</span>
+      <span>100k</span>
+      <span>500k</span>
+      <span>1M</span>
     </div>
-   <input type="number" id="trafficInput" name="traffic" value="50000">
   </div>
+  <input type="number" id="trafficInput" name="traffic" value="50000">
+</div>
 
         <!-- Panier + Taux -->
         <label>🛒 Panier moyen actuel (€)</label>
