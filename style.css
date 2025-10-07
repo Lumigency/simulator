@@ -444,3 +444,80 @@ select {
     gap: 10px;
   }
 }
+/* === Amélioration UX globale du simulateur === */
+
+/* Structure principale */
+.split-layout {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: stretch;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Quand les résultats sont visibles */
+.split-layout.show-results .right-column {
+  display: none;
+}
+
+.split-layout.show-results #results {
+  display: block;
+  width: 60%;
+  padding: 50px;
+  background: #fff;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Animation douce à l’affichage */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Colonne gauche inchangée (tu gardes ton look Lumigency 💙) */
+.left-column {
+  flex-shrink: 0;
+  width: 40%;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+
+/* Centrage du bloc de résultats */
+.results-section {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Amélioration du rendu responsive */
+@media (max-width: 960px) {
+  .split-layout {
+    flex-direction: column;
+  }
+
+  .left-column {
+    width: 100%;
+    position: relative;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .right-column,
+  #results {
+    width: 100%;
+    padding: 25px 20px;
+  }
+
+  .split-layout.show-results .right-column {
+    display: none;
+  }
+}
+
+/* Petits écrans */
+@media (max-width: 600px) {
+  .results-section {
+    padding: 30px 20px;
+  }
+}
+
