@@ -561,6 +561,19 @@ select {
   max-width: 320px;
 }
 
+/* === Correction : l'analyse passe sous le camembert === */
+.chart-container,
+.analysis-block {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+}
+
+.analysis-block {
+  text-align: left;
+}
+
 .analysis-block {
   max-width: 900px;
   margin: 0 auto;
@@ -608,3 +621,29 @@ select {
   transform: translateY(0);
 }
 
+/* === Correction : colonne bleue pleine hauteur === */
+.split-layout {
+  display: flex;
+  align-items: stretch !important; /* forcer la hauteur égale */
+  min-height: 100vh;
+}
+
+.left-column {
+  flex: 0 0 40%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2020ff, #809fff);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right-column {
+  flex: 1;
+  background: #fff;
+}
+
+html, body {
+  height: 100%;
+}
