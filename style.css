@@ -44,13 +44,26 @@ body {
   max-width: 320px;
   text-align: center;
 }
-
 .benefits-list li {
   font-size: 0.95rem;
-  margin: 10px 0;
-  line-height: 1.5;
+  margin: 8px 0;
+  line-height: 1.4;
   color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  white-space: nowrap;
 }
+
+@media (max-width: 420px) {
+  .benefits-list li {
+    white-space: normal; /* ✅ autorise le retour à la ligne sur mobile */
+  }
+}
+
+
 
 /* ✅ Supprime les icônes "✅" ou puces */
 .left-column ul li::before {
