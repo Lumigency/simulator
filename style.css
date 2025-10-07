@@ -35,34 +35,37 @@ body {
   line-height: 1.3;
 }
 
-/* Liste des bénéfices */
-.benefits-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto 40px auto;
-  width: 100%;
-  max-width: 320px;
-  text-align: center;
+/* Bénefits */
+.benefits-list li::first-letter {
+  line-height: 1;
 }
 .benefits-list li {
+
   font-size: 0.95rem;
-  margin: 8px 0;
-  line-height: 1.4;
+  margin: 10px 0;
+  line-height: 1.6;
   color: #f7f7f7;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  align-items: center;          /* ✅ centre parfaitement verticalement emoji + texte */
+  justify-content: center;      /* ✅ centre horizontalement dans la colonne */
+  gap: 10px;                    /* espace fixe entre emoji et texte */
   text-align: center;
-  white-space: nowrap;
+  white-space: nowrap;          /* ✅ empêche le retour à la ligne */
 }
 
+.benefits-list li span {
+  display: inline-block;
+  line-height: 1;               /* ✅ garde le texte centré verticalement */
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+/* Pour mobile */
 @media (max-width: 420px) {
   .benefits-list li {
-    white-space: normal; /* ✅ autorise le retour à la ligne sur mobile */
+    white-space: normal;
   }
 }
-
 
 
 /* ✅ Supprime les icônes "✅" ou puces */
@@ -88,13 +91,6 @@ body {
   color: #0000FF;
 }
 
-/* Ligne séparatrice */
-.divider {
-  width: 60%;
-  height: 1px;
-  background: rgba(255,255,255,0.4);
-  margin: 30px auto;
-}
 
 /* === Signature Lumigency === */
 .signature {
@@ -761,20 +757,6 @@ select {
   flex-direction: column;
   justify-content: center;
   gap: 25px;
-}
-
-/* Ajustement du bloc "Le saviez-vous" + ligne séparatrice */
-.insight-card {
-  background: #fff;
-  color: #1a1a1a;
-  border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-  padding: 20px 22px;
-  text-align: left;
-  margin: 20px auto 40px;
-  width: 100%;
-  max-width: 320px;
-  font-size: 0.9rem;
 }
 
 .divider {
