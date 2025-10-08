@@ -786,3 +786,64 @@ select {
 html, body {
   height: 100%;
 }
+
+/* === Ajustement final : alignement, bloc blanc, ligne signature === */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+}
+
+.benefits-list li {
+  display: grid;
+  grid-template-columns: 28px auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f7f7f7;
+  margin: 8px 0;
+  text-align: left;
+}
+
+.benefits-list li span {
+  display: block;
+}
+
+.insight-card {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  padding: 28px 30px;
+  text-align: left;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.divider {
+  width: 70%;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+  margin: 80px auto 15px;
+}
+
+.signature {
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #fff;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
