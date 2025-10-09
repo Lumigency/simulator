@@ -1004,3 +1004,31 @@ html, body {
   transform: translateX(2px);
 }
 
+/* === Alerte hybrides === */
+.alert-hybride {
+  display: none;
+  background: #fff4e5; /* fond beige doux */
+  color: #663c00; /* texte brun chaud */
+  border: 1px solid #ffcc80;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  animation: fadeIn 0.4s ease;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.1);
+}
+
+.alert-hybride strong {
+  color: #000;
+}
+
+/* Animation d’apparition douce */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* (optionnel) Effet léger de pulsation quand elle s'affiche */
+@keyframes softPulse {
