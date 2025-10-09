@@ -393,6 +393,18 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
     const adjustedAov = adjustAOV(baseAov, levers);
     const adjustedCvr = adjustCVR(baseCvr, levers);
 
+    // ✅ Détection du choix sur les hybrides
+const hybridChoice = form.querySelector('input[name="hybrides"]:checked')?.value || "non";
+const saidNoToHybrid = hybridChoice === "non";
+const hybridLevers = ["affinitaires", "influence", "emailing", "content", "ppc"];
+
+// ⚠️ Si refus des modèles hybrides + leviers hybrides cochés → baisse automatique
+if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
+  console.log("⚠️ Refus des modèles hybrides — ajustement automatique des performances");
+  adjustedCvr *= 0.7; // -30% sur le taux de conversion
+  adjustedAov *= 0.9; // -10% sur le panier moyen
+}
+
     // annualized affiliated traffic (visits) using agreed conservative rules
     const affiliatedTrafficYear = annualAffiliatedTraffic(trafficMonthly);
 
@@ -549,6 +561,7 @@ if (restartBtn) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
 
 
 
