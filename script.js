@@ -390,8 +390,8 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
     const baseAov = (aovUser > 0) ? aovUser : sector.aov;
     const baseCvr = (cvrUserInput > 0) ? cvrUserInput : sector.cvr;
 
-    const adjustedAov = adjustAOV(baseAov, levers);
-    const adjustedCvr = adjustCVR(baseCvr, levers);
+   let adjustedAov = adjustAOV(baseAov, levers);
+   let adjustedCvr = adjustCVR(baseCvr, levers);
 
     // ✅ Détection du choix sur les hybrides
 const hybridChoice = form.querySelector('input[name="hybrides"]:checked')?.value || "non";
@@ -561,6 +561,7 @@ if (restartBtn) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
 
 
 
