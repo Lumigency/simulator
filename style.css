@@ -925,3 +925,32 @@ html, body {
     flex: 0 0 100%; /* 1 témoignage à la fois sur mobile */
   }
 }
+
+/* Liste des arguments */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.benefits-list li span {
+  display: inline-block;
+}
+
