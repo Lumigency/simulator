@@ -913,3 +913,15 @@ html, body {
   color: #777;
 }
 
+/* === Responsive pour le slider de témoignages === */
+@media (max-width: 900px) {
+  .review {
+    flex: 0 0 50%; /* 2 témoignages visibles à la fois sur tablette */
+  }
+}
+
+@media (max-width: 600px) {
+  .review {
+    flex: 0 0 100%; /* 1 témoignage à la fois sur mobile */
+  }
+}
