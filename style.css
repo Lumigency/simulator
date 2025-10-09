@@ -954,18 +954,18 @@ html, body {
   display: inline-block;
   line-height: 1.4;
 }
-/* ✅ Signature Lumigency collée en bas */
+
+/* ✅ Signature Lumigency sur une ligne */
 .lumigency-signature {
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   text-align: center;
   line-height: 1.4;
-  width: 90%;
-  max-width: 300px;
+  white-space: nowrap; /* ✅ empêche le retour à la ligne */
 }
 
 .lumigency-signature strong {
