@@ -480,16 +480,20 @@ afficherEditeurs(levers);
 });
 
 // === Slider Témoignages ===
-const slider = document.getElementById('slider');
-const slides = document.querySelectorAll('.review');
-let index = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.getElementById('slider');
+  const slides = document.querySelectorAll('.review');
+  if (!slider || slides.length === 0) return;
 
-function slideTestimonials() {
-  index = (index + 1) % (slides.length - 2);
-  slider.style.transform = `translateX(-${index * 33.33}%)`;
-}
+  let index = 0;
 
-setInterval(slideTestimonials, 4000);
+  function slideTestimonials() {
+    index = (index + 1) % slides.length;
+    slider.style.transform = `translateX(-${index * 33.33}%)`;
+  }
+
+  setInterval(slideTestimonials, 4000);
+});
 
 
 
