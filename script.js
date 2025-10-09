@@ -479,13 +479,17 @@ afficherEditeurs(levers);
   });
 });
 
+// === Slider Témoignages ===
+const slider = document.getElementById('slider');
+const slides = document.querySelectorAll('.review');
+let index = 0;
 
+function slideTestimonials() {
+  index = (index + 1) % (slides.length - 2);
+  slider.style.transform = `translateX(-${index * 33.33}%)`;
+}
 
-
-
-
-
-
+setInterval(slideTestimonials, 4000);
 
 
 
