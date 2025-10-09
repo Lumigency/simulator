@@ -495,6 +495,22 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(slideTestimonials, 4000);
 });
 
+document.getElementById("restart-btn")?.addEventListener("click", () => {
+  // Cache la section résultats
+  document.getElementById("results").style.display = "none";
+
+  // Réaffiche le formulaire
+  const formContainer = document.querySelector(".right-column");
+  if (formContainer) formContainer.style.display = "block";
+
+  // Retire la classe show-results pour réinitialiser la mise en page
+  const splitLayout = document.querySelector(".split-layout");
+  if (splitLayout) splitLayout.classList.remove("show-results");
+
+  // Retourne en haut de page
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 
 
 
