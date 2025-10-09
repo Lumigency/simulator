@@ -849,9 +849,9 @@ html, body {
 /* === Témoignages en bas de page === */
 .testimonials-section {
   background: #fff;
-  padding: 20px 0 60px;
+  padding: 40px 0 60px;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 0; /* ✅ supprime la bande vide au-dessus */
 }
 
 .testimonials-section h2 {
