@@ -985,7 +985,7 @@ html, body {
 }
 #restart-btn {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 35px; /* plus d’espace au-dessus */
   background: none;
   color: #0000FF;
   border: none;
@@ -1003,5 +1003,4 @@ html, body {
   text-underline-offset: 3px;
   transform: translateX(2px);
 }
-
 
