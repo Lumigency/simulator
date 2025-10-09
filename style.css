@@ -926,34 +926,46 @@ html, body {
   }
 }
 
-/* ✅ Liste des arguments — version corrigée et bien alignée */
+/* ✅ Liste des arguments — alignement parfait emoji + texte */
 .benefits-list {
   list-style: none;
   padding: 0;
   margin: 0 auto 25px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-start; /* aligne tout à gauche, plus naturel */
+  gap: 16px;
   width: 100%;
-  max-width: 340px;
+  max-width: 360px;
 }
 
 .benefits-list li {
   display: flex;
-  align-items: center;     /* ✅ emoji + texte sur la même ligne */
+  align-items: center;        /* ✅ centre emoji + texte verticalement */
   justify-content: flex-start;
-  gap: 12px;
+  gap: 10px;
   font-size: 0.95rem;
   color: #fff;
   line-height: 1.6;
   text-align: left;
 }
 
+.benefits-list li::before {
+  content: attr(data-emoji);
+  font-size: 1.2rem;          /* ✅ taille uniforme */
+  line-height: 1;             /* ✅ corrige le décalage vertical */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;            /* ✅ espace constant */
+}
+
 .benefits-list li span {
   display: inline-block;
+  vertical-align: middle;
   line-height: 1.4;
 }
+
 
 /* ✅ Signature Lumigency sur une ligne */
 .lumigency-signature {
