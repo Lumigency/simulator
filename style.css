@@ -983,4 +983,19 @@ html, body {
 .lumigency-signature strong {
   color: #fff;
 }
+#restart-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: transparent;
+  color: #0000FF;
+  border: 1px solid #849BFF;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#restart-btn:hover {
 
