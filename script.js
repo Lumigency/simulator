@@ -263,6 +263,34 @@ function chartDataFor(sectorKey, levers) {
   return { labels, data };
 }
 
+// === Vérification des leviers hybrides avant simulation ===
+function checkHybridWarning() {
+  const hybridRadio = document.querySelector('input[name="hybrides"]:checked');
+  const selectedLevers = Array.from(document.querySelectorAll('input[name="levers"]:checked')).map(el => el.value);
+  const riskyLevers = ["affinitaires", "content", "influence", "emailing", "ppc"];
+  const alertZone = document.getElementById("hybrid-alert");
+
+  if (!alertZone) return;
+
+  const hasRiskyLever = selectedLevers.some(l => riskyLevers.includes(l));
+  const saidNoToHybrid = hybridRadio && hybridRadio.value === "non";
+
+  if (hasRiskyLever && saidNoToHybrid) {
+    alertZone.innerHTML = `
+      ⚠️ <strong>Attention :</strong> Vous cochez des leviers qui nécessitent souvent des
+      <strong>modèles hybrides (CPC, CPM ou fixes)</strong>.
+      <br><br>
+      ➜ Pour obtenir des volumes réalistes, pensez à autoriser une part de modèle fixe,
+      ou attendez-vous à des projections plus limitées.
+    `;
+    alertZone.style.display = "block";
+  } else {
+    alertZone.style.display = "none";
+  }
+}
+// Lance une vérification initiale au chargement
+checkHybridWarning();
+
 // ----------------- MAIN (DOM) -----------------
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-simu");
@@ -330,6 +358,11 @@ if (trafficRange && trafficInput) {
   // initialisation
   trafficInput.value = parseInt(trafficRange.value, 10);
 }
+
+  // Vérifie à chaque changement de levier ou de choix "hybride"
+form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el => {
+  el.addEventListener("change", checkHybridWarning);
+});
 
 
 // ✅ Début du submit handler (tout le calcul DOIT être dedans)
@@ -495,21 +528,29 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(slideTestimonials, 4000);
 });
 
-document.getElementById("restart-btn")?.addEventListener("click", () => {
-  // Cache la section résultats
-  document.getElementById("results").style.display = "none";
 
-  // Réaffiche le formulaire
-  const formContainer = document.querySelector(".right-column");
-  if (formContainer) formContainer.style.display = "block";
+// === Bouton "Faire une nouvelle simulation" ===
+const restartBtn = document.getElementById("restart-btn");
+if (restartBtn) {
+  restartBtn.addEventListener("click", () => {
+    // Cache la section résultats
+    const results = document.getElementById("results");
+    if (results) results.style.display = "none";
 
-  // Retire la classe show-results pour réinitialiser la mise en page
-  const splitLayout = document.querySelector(".split-layout");
-  if (splitLayout) splitLayout.classList.remove("show-results");
+    // Réaffiche le formulaire
+    const formContainer = document.querySelector(".right-column");
+    if (formContainer) formContainer.style.display = "block";
 
-  // Retourne en haut de page
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+    // Retire la classe show-results pour réinitialiser la mise en page
+    const splitLayout = document.querySelector(".split-layout");
+    if (splitLayout) splitLayout.classList.remove("show-results");
+
+    // Retourne en haut de page
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+
 
 
 
