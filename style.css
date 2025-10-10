@@ -1151,10 +1151,5 @@ html, body {
   .editor-grid {
     max-width: 100%;
   }
-
-  /* 🎨 TEST DEBUG : vérifier que le responsive s’applique */
-  body {
-    background: pink !important; /* debug visuel */
-  }
 }
 /* === FIN DU STYLE GLOBAL + RESPONSIVE MOBILE === */
