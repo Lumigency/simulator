@@ -1020,47 +1020,65 @@ html, body {
   justify-content: center;
 }
 
-/* === RESPONSIVE MOBILE – version stable et validée === */
-@media (max-width: 600px) {
-  body {
-    background: #F7F5F3;
-    padding: 0;
-  }
-
+/* === RESPONSIVE PRIORITAIRE — version stable Lumigency === */
+@media (max-width: 900px) {
   .split-layout {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
 
   .left-column,
   .right-column,
   #results {
-    width: 100%;
-    padding: 20px;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 18px !important;
+    min-height: auto !important;
+  }
+
+  .left-column {
+    text-align: center;
+    background: linear-gradient(to bottom, #2020ff, #809fff);
   }
 
   .left-column img {
-    max-width: 120px;
-    margin-bottom: 15px;
+    max-width: 130px;
+    margin-bottom: 12px;
   }
 
   .left-column h1 {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
     line-height: 1.4;
   }
 
   .benefits-list {
-    align-items: flex-start;
-    text-align: left;
     margin: 20px auto;
-    gap: 10px;
+    padding: 0;
+    text-align: left;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .benefits-list li {
+    font-size: 0.9rem;
+    gap: 6px;
   }
 
   .insight-card {
+    margin-top: 20px;
     max-width: 100%;
     padding: 18px;
     font-size: 0.9rem;
+  }
+
+  .lumigency-signature {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px;
+    white-space: normal;
   }
 
   form {
@@ -1069,14 +1087,9 @@ html, body {
     box-shadow: none;
   }
 
-  label {
-    font-size: 0.9rem;
-  }
-
-  input,
-  select {
-    width: 100%;
-    font-size: 1rem;
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
   }
 
   .checkbox-group {
@@ -1087,14 +1100,12 @@ html, body {
 
   .single-checkbox,
   .checkbox-budget {
-    display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     font-size: 0.9rem;
   }
 
   .radio-group {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
@@ -1106,6 +1117,7 @@ html, body {
     padding: 14px;
   }
 
+  /* === Bloc résultats === */
   .results-section {
     padding: 25px 18px;
   }
@@ -1121,8 +1133,9 @@ html, body {
     max-width: 100%;
   }
 
-  /* Témoignages */
+  /* Témoignages : 1 seul à la fois */
   .review {
     flex: 0 0 100%;
+    margin: 0 5px;
   }
 }
