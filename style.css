@@ -1032,3 +1032,26 @@ html, body {
 
 /* (optionnel) Effet léger de pulsation quand elle s'affiche */
 @keyframes softPulse {
+
+  /* === Bloc opt-in éditeurs + CTA === */
+.editor-optin {
+  margin-top: 35px; /* espace au-dessus du bloc */
+  margin-bottom: 25px; /* espace avant le CTA */
+  text-align: center;
+  font-size: 15px;
+  color: #222;
+  font-weight: 500;
+}
+
+.editor-optin input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 8px;
+  accent-color: #0732ef;
+  vertical-align: middle;
+}
+
+#cta-link {
+  margin-top: 40px; /* espace au-dessus du bouton */
+  display: flex;
+  justify-content: center;
+}
