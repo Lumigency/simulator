@@ -1061,3 +1061,95 @@ html, body {
   display: flex;
   justify-content: center;
 }
+
+/* === RESPONSIVE MOBILE – Optimisation UX === */
+@media (max-width: 600px) {
+  body {
+    background: var(--beige, #F7F5F3);
+    padding: 0;
+  }
+
+  .split-layout {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .left-column h1 {
+    font-size: 1.4rem;
+  }
+
+  form {
+    padding: 16px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  select {
+    width: 100%;
+    margin-left: 0;
+    font-size: 1rem;
+  }
+
+  .checkbox-budget,
+  .single-checkbox {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .checkbox-budget label,
+  .single-checkbox label {
+    font-size: 0.85rem;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr; /* ✅ passe en une colonne sur mobile */
+    gap: 10px;
+  }
+
+  .radio-group {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .cta {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  .cta-secondary {
+    font-size: 0.9rem;
+  }
+
+  /* === Bloc résultats === */
+  .results-section {
+    padding: 25px 18px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .chart-container,
+  .analysis-block,
+  .editor-grid {
+    max-width: 100%;
+  }
+}
+/* === FIN DU STYLE GLOBAL + RESPONSIVE MOBILE === */
