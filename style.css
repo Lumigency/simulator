@@ -1033,10 +1033,10 @@ html, body {
 /* (optionnel) Effet léger de pulsation quand elle s'affiche */
 @keyframes softPulse {
 
-  /* === Bloc opt-in éditeurs + CTA === */
+ /* === Bloc opt-in éditeurs + CTA === */
 .editor-optin {
   margin-top: 35px; /* espace au-dessus du bloc */
-  margin-bottom: 25px; /* espace avant le CTA */
+  margin-bottom: 50px; /* ✅ plus d’air avant le CTA */
   text-align: center;
   font-size: 15px;
   color: #222;
@@ -1055,3 +1055,4 @@ html, body {
   display: flex;
   justify-content: center;
 }
+
