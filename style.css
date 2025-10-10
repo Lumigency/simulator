@@ -1136,7 +1136,7 @@ html, body {
     font-size: 0.9rem;
   }
 
-  /* === Bloc résultats === */
+   /* === Bloc résultats === */
   .results-section {
     padding: 25px 18px;
   }
@@ -1150,6 +1150,11 @@ html, body {
   .analysis-block,
   .editor-grid {
     max-width: 100%;
+  }
+
+  /* 🎨 TEST DEBUG : vérifier que le responsive s’applique */
+  body {
+    background: pink !important; /* debug visuel */
   }
 }
 /* === FIN DU STYLE GLOBAL + RESPONSIVE MOBILE === */
