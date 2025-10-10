@@ -1032,11 +1032,15 @@ html, body {
 
 /* (optionnel) Effet léger de pulsation quand elle s'affiche */
 @keyframes softPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.95; }
+  100% { transform: scale(1); opacity: 1; }
+} /* ✅ on ferme enfin la keyframe ! */
 
 /* === Bloc opt-in éditeurs + CTA === */
 .editor-optin {
   margin-top: 35px;
-  padding-bottom: 40px; /* ✅ ajoute de l’espace avant le CTA sans être “absorbée” */
+  padding-bottom: 40px; /* ✅ espace avant le CTA */
   text-align: center;
   font-size: 15px;
   color: #222;
@@ -1052,9 +1056,8 @@ html, body {
 
 /* === CTA principal === */
 #cta-link {
-  margin-top: 0; /* ✅ on retire la marge ici pour ne pas cumuler */
+  margin-top: 0;
+  padding-top: 25px; /* ✅ ajoute de l’air au-dessus du bouton */
   display: flex;
   justify-content: center;
 }
-
-
