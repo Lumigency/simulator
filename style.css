@@ -1051,19 +1051,21 @@ html, body {
   justify-content: center;
 }
 
-/* === RESPONSIVE MOBILE – Optimisation UX === */
+/* === RESPONSIVE MOBILE – version stable et validée === */
 @media (max-width: 600px) {
   body {
-    background: var(--beige, #F7F5F3);
+    background: #F7F5F3;
     padding: 0;
   }
 
   .split-layout {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .left-column,
-  .right-column {
+  .right-column,
+  #results {
     width: 100%;
     padding: 20px;
   }
@@ -1075,31 +1077,27 @@ html, body {
 
   .left-column h1 {
     font-size: 1.3rem;
+    margin-bottom: 20px;
     line-height: 1.4;
-    margin-bottom: 15px;
   }
 
   .benefits-list {
-    align-items: center;
+    align-items: flex-start;
     text-align: left;
-    gap: 10px;
     margin: 20px auto;
+    gap: 10px;
   }
 
   .insight-card {
     max-width: 100%;
+    padding: 18px;
     font-size: 0.9rem;
-    padding: 20px;
-  }
-
-  .right-column {
-    padding: 20px;
   }
 
   form {
     padding: 20px;
-    box-shadow: none;
     border-radius: 10px;
+    box-shadow: none;
   }
 
   label {
@@ -1109,32 +1107,28 @@ html, body {
   input,
   select {
     width: 100%;
-    margin-left: 0;
     font-size: 1rem;
   }
 
-  .checkbox-budget,
-  .single-checkbox {
-    width: 100%;
-    margin-left: 0;
-    justify-content: flex-start;
-    gap: 6px;
-  }
-
-  .checkbox-budget label,
-  .single-checkbox label {
-    font-size: 0.85rem;
-  }
-
   .checkbox-group {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .single-checkbox,
+  .checkbox-budget {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
   }
 
   .radio-group {
-    justify-content: flex-start;
-    gap: 20px;
+    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .cta {
@@ -1143,11 +1137,6 @@ html, body {
     padding: 14px;
   }
 
-  .cta-secondary {
-    font-size: 0.9rem;
-  }
-
-  /* === Bloc résultats === */
   .results-section {
     padding: 25px 18px;
   }
@@ -1163,9 +1152,8 @@ html, body {
     max-width: 100%;
   }
 
-  /* === Témoignages === */
+  /* Témoignages */
   .review {
     flex: 0 0 100%;
   }
 }
-/* === FIN DU STYLE GLOBAL + RESPONSIVE MOBILE === */
