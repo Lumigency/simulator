@@ -1033,10 +1033,10 @@ html, body {
 /* (optionnel) Effet léger de pulsation quand elle s'affiche */
 @keyframes softPulse {
 
- /* === Bloc opt-in éditeurs + CTA === */
+/* === Bloc opt-in éditeurs + CTA === */
 .editor-optin {
-  margin-top: 35px; /* espace au-dessus du bloc */
-  margin-bottom: 50px; /* ✅ plus d’air avant le CTA */
+  margin-top: 35px;
+  padding-bottom: 40px; /* ✅ ajoute de l’espace avant le CTA sans être “absorbée” */
   text-align: center;
   font-size: 15px;
   color: #222;
@@ -1050,9 +1050,11 @@ html, body {
   vertical-align: middle;
 }
 
+/* === CTA principal === */
 #cta-link {
-  margin-top: 40px; /* espace au-dessus du bouton */
+  margin-top: 0; /* ✅ on retire la marge ici pour ne pas cumuler */
   display: flex;
   justify-content: center;
 }
+
 
