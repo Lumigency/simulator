@@ -1152,4 +1152,64 @@ html, body {
     max-width: 100%;
   }
 }
+
+@media (max-width: 600px) {
+
+  /* === Optimisation visuelle mobile === */
+  .left-column {
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .left-column img {
+    max-width: 120px;
+    margin-bottom: 15px;
+  }
+
+  .left-column h1 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+
+  .benefits-list {
+    align-items: center;
+    text-align: left;
+    gap: 10px;
+    margin: 20px auto;
+  }
+
+  .insight-card {
+    max-width: 100%;
+    font-size: 0.9rem;
+    padding: 20px;
+  }
+
+  .right-column {
+    padding: 20px;
+  }
+
+  form {
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 10px;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input, select {
+    font-size: 1rem;
+  }
+
+  .cta {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .cta-secondary {
+    font-size: 0.9rem;
+  }
+}
 /* === FIN DU STYLE GLOBAL + RESPONSIVE MOBILE === */
