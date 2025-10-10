@@ -485,17 +485,6 @@ select {
   }
 }
 
-/* Responsive mobile */
-@media (max-width: 600px) {
-  .editor-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .radio-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
 /* === Amélioration UX globale du simulateur === */
 
 /* Structure principale */
@@ -1079,88 +1068,6 @@ html, body {
     padding: 20px;
   }
 
-  .left-column h1 {
-    font-size: 1.4rem;
-  }
-
-  form {
-    padding: 16px;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  label {
-    font-size: 0.9rem;
-  }
-
-  input[type="text"],
-  input[type="number"],
-  input[type="email"],
-  input[type="url"],
-  select {
-    width: 100%;
-    margin-left: 0;
-    font-size: 1rem;
-  }
-
-  .checkbox-budget,
-  .single-checkbox {
-    width: 100%;
-    margin-left: 0;
-    justify-content: flex-start;
-    gap: 6px;
-  }
-
-  .checkbox-budget label,
-  .single-checkbox label {
-    font-size: 0.85rem;
-  }
-
-  .checkbox-group {
-    grid-template-columns: 1fr; /* ✅ passe en une colonne sur mobile */
-    gap: 10px;
-  }
-
-  .radio-group {
-    justify-content: flex-start;
-    gap: 20px;
-  }
-
-  .cta {
-    width: 100%;
-    font-size: 1rem;
-    padding: 14px;
-  }
-
-  .cta-secondary {
-    font-size: 0.9rem;
-  }
-
-   /* === Bloc résultats === */
-  .results-section {
-    padding: 25px 18px;
-  }
-
-  .kpi-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .chart-container,
-  .analysis-block,
-  .editor-grid {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-
-  /* === Optimisation visuelle mobile === */
-  .left-column {
-    padding: 30px 20px;
-    text-align: center;
-  }
-
   .left-column img {
     max-width: 120px;
     margin-bottom: 15px;
@@ -1199,17 +1106,66 @@ html, body {
     font-size: 0.9rem;
   }
 
-  input, select {
+  input,
+  select {
+    width: 100%;
+    margin-left: 0;
     font-size: 1rem;
   }
 
+  .checkbox-budget,
+  .single-checkbox {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .checkbox-budget label,
+  .single-checkbox label {
+    font-size: 0.85rem;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .radio-group {
+    justify-content: flex-start;
+    gap: 20px;
+    flex-direction: column;
+  }
+
   .cta {
-    padding: 14px;
+    width: 100%;
     font-size: 1rem;
+    padding: 14px;
   }
 
   .cta-secondary {
     font-size: 0.9rem;
+  }
+
+  /* === Bloc résultats === */
+  .results-section {
+    padding: 25px 18px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .chart-container,
+  .analysis-block,
+  .editor-grid {
+    max-width: 100%;
+  }
+
+  /* === Témoignages === */
+  .review {
+    flex: 0 0 100%;
   }
 }
 /* === FIN DU STYLE GLOBAL + RESPONSIVE MOBILE === */
