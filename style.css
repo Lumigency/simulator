@@ -1612,4 +1612,61 @@ canvas {
     box-sizing: border-box;
   }
 }
+/* === PATCH CORRECTIF FINAL MOBILE LUMIGENCY (v2.0) === */
+@media (max-width: 768px) {
+
+  /* ✅ Correction centrage global */
+  .right-column,
+  #results,
+  form,
+  .results-section {
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* ✅ Titre “Renseignez vos données clés” centré */
+  h2, h3, .section-title, .intro-text {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ✅ “Oui / Non” sur la même ligne */
+  .radio-group {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 30px !important;
+    margin-top: 8px !important;
+  }
+
+  .radio-group label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* ✅ Réduction espace entre opt-in et CTA */
+  .editor-optin {
+    margin-bottom: 12px !important;
+  }
+
+  #cta-link {
+    margin-top: 0 !important;
+  }
+
+  /* ✅ Ajustement fin du centrage visuel global */
+  .traffic-slider-container,
+  .checkbox-budget,
+  .single-checkbox,
+  .editor-grid {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
 
