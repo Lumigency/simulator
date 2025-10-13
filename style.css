@@ -1443,3 +1443,86 @@ canvas {
     }
   }
 }
+/* === Correctifs version mobile (affichage et alignements) === */
+@media (max-width: 768px) {
+
+  /* ✅ Correction slider "trafic mensuel" */
+  .traffic-slider-container {
+    align-items: center;
+  }
+
+  .traffic-slider-container input[type="number"] {
+    width: 120px;
+    text-align: center;
+  }
+
+  /* ✅ Case + texte sur la même ligne */
+  .checkbox-budget,
+  .single-checkbox {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start;
+  }
+
+  .checkbox-budget label,
+  .single-checkbox label {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 0.9rem;
+    white-space: normal;
+  }
+
+  .checkbox-budget input[type="checkbox"],
+  .single-checkbox input[type="checkbox"] {
+    flex-shrink: 0;
+    transform: scale(1.2);
+    margin-right: 8px;
+  }
+
+  /* ✅ Résultats stabilisés et centrés */
+  .results-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .results-section h2,
+  .results-section .subtitle {
+    text-align: center;
+  }
+
+  /* ✅ Bloc analyse pas coupé */
+  .analysis-block {
+    max-width: 100%;
+    overflow-x: hidden;
+    text-align: left;
+    word-break: break-word;
+    margin: 0 auto 20px;
+  }
+
+  /* ✅ Éditeurs : 2 par ligne sur mobile */
+  .editor-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    justify-content: center !important;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .editor-card {
+    width: 100%;
+    height: auto;
+    min-height: 110px;
+  }
+
+  .editor-card img {
+    max-width: 70px;
+    margin-bottom: 6px;
+  }
+
+  .editor-card span {
+    font-size: 0.85rem;
+  }
+}
