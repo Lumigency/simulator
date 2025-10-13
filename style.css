@@ -456,191 +456,686 @@ select {
   text-underline-offset: 3px;
 }
 
-/* === PATCH RESPONSIVE STABLE — v4 Lumigency === */
-@media (max-width: 768px) {
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background: #F7F5F3;
-    font-size: 16px;
+/* Responsive tablette */
+@media (max-width: 900px) {
+  .traffic-slider-container {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  /* Structure */
-  .split-layout {
-    display: flex;
-    flex-direction: column;
+  .slider-wrapper {
+    max-width: 100%;
+  }
+
+  .slider-labels {
+    font-size: 0.7rem;
+    padding: 0;
+    margin-top: 4px;
+  }
+
+  .traffic-slider-container input[type="number"] {
     width: 100%;
+    text-align: left;
+    margin-top: 4px;
+  }
+
+  .editor-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* === Amélioration UX globale du simulateur === */
+
+/* Structure principale */
+.split-layout {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: stretch;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Quand les résultats sont visibles */
+.split-layout.show-results .right-column {
+  display: none;
+}
+
+.split-layout.show-results #results {
+  display: block;
+  width: 60%;
+  padding: 50px;
+  background: #fff;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Animation douce à l’affichage */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Ajustement alignement des résultats === */
+
+.results-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.kpi-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.kpi-card {
+  flex: 1 1 250px;
+  max-width: 250px;
+  text-align: center;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 40px auto;
+}
+
+#chart-levers {
+  display: block;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+/* === Correction : l'analyse passe sous le camembert === */
+.chart-container,
+.analysis-block {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+}
+
+.analysis-block {
+  text-align: left;
+}
+
+.analysis-block {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.editor-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+.editor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+}
+
+.editor-card img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.editor-card span {
+  font-weight: 600;
+  color: #0000ff;
+}
+
+/* Animation douce (optionnelle) */
+.results-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.split-layout.show-results .results-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Ajustement proximité phrase budget === */
+.checkbox-budget {
+  margin-top: 2px; /* rapproche le texte du champ budget */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.checkbox-budget input[type="checkbox"] {
+  transform: scale(1.1);
+  accent-color: #0000FF;
+}
+
+/* === Alignement parfait des 4 champs principaux (UX améliorée) === */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 50px;
+  margin-top: 25px;
+}
+
+.form-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.form-row input[type="number"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fdfdfd;
+  transition: all 0.2s ease;
+}
+
+.form-row input[type="number"]:focus {
+  border-color: #0000FF;
+  box-shadow: 0 0 4px rgba(0, 0, 255, 0.2);
+}
+
+/* Correction micro-alignement case budget */
+.checkbox-budget {
+  display: flex;
+  align-items: center; /* centre parfaitement verticalement */
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.checkbox-budget input[type="checkbox"] {
+  transform: scale(1.1);
+  accent-color: #0000FF;
+  margin-top: 0; /* retire le décalage */
+}
+
+.checkbox-budget label {
+  margin: 0;
+  line-height: 1.2;
+  font-size: 0.9rem;
+}
+
+/* === Correction alignement radio Oui / Non === */
+.radio-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px; /* espace horizontal équilibré entre Oui et Non */
+  margin-top: 6px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #222;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Responsive ajusté */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Alignement des éléments dans la colonne gauche */
+.left-column .content-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+}
+
+.divider {
+  width: 70%;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+  margin: 10px auto 30px; /* descend la ligne plus bas */
+}
+
+/* Signature toujours collée en bas */
+.signature {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  text-align: center;
+}
+
+/* Étend le fond bleu sur toute la hauteur, même si le formulaire est plus long */
+.split-layout {
+  align-items: stretch;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* === Ajustement final : alignement, bloc blanc, ligne signature === */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+}
+
+.benefits-list li {
+  display: grid;
+  grid-template-columns: 28px auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f7f7f7;
+  margin: 8px 0;
+  text-align: left;
+}
+
+.benefits-list li span {
+  display: block;
+}
+
+.insight-card {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  padding: 28px 30px;
+  text-align: left;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.divider {
+  width: 70%;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+  margin: 80px auto 15px;
+}
+
+.signature {
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #fff;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+/* === Témoignages en bas de page === */
+.testimonials-section {
+  background: #fff;
+  padding: 40px 0 60px;
+  text-align: center;
+  margin-top: 0; /* ✅ supprime la bande vide au-dessus */
+}
+
+.testimonials-section h2 {
+  color: #0000FF; /* Bleu Lumigency */
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.testimonials-slider {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+}
+
+.review {
+  flex: 0 0 33.33%;
+  background: #f8f9ff;
+  border: 1px solid #e0e3ff;
+  border-radius: 12px;
+  padding: 20px 18px;
+  margin: 0 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  color: #222;
+  text-align: left;
+}
+
+.stars {
+  color: #00c853;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.review strong {
+  display: block;
+  color: #0000FF;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.review p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.review span {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* === Responsive pour le slider de témoignages === */
+@media (max-width: 900px) {
+  .review {
+    flex: 0 0 50%; /* 2 témoignages visibles à la fois sur tablette */
+  }
+}
+
+@media (max-width: 600px) {
+  .review {
+    flex: 0 0 100%; /* 1 témoignage à la fois sur mobile */
+  }
+}
+
+/* ✅ Liste des arguments — alignement parfait emoji + texte */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 25px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* aligne tout à gauche, plus naturel */
+  gap: 16px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: center;        /* ✅ centre emoji + texte verticalement */
+  justify-content: flex-start;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #fff;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.benefits-list li::before {
+  content: attr(data-emoji);
+  font-size: 1.2rem;          /* ✅ taille uniforme */
+  line-height: 1;             /* ✅ corrige le décalage vertical */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;            /* ✅ espace constant */
+}
+
+.benefits-list li span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+
+/* ✅ Signature Lumigency sur une ligne */
+.lumigency-signature {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  line-height: 1.4;
+  white-space: nowrap; /* ✅ empêche le retour à la ligne */
+}
+
+.lumigency-signature strong {
+  color: #fff;
+}
+#restart-btn {
+  display: inline-block;
+  margin-top: 35px; /* plus d’espace au-dessus */
+  background: none;
+  color: #0000FF;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  padding: 0;
+}
+
+#restart-btn:hover {
+  color: #0732ef;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transform: translateX(2px);
+}
+
+/* === Alerte hybrides === */
+.alert-hybride {
+  display: none;
+  background: #fff4e5; /* fond beige doux */
+  color: #663c00; /* texte brun chaud */
+  border: 1px solid #ffcc80;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  animation: fadeIn 0.4s ease;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.1);
+}
+
+.alert-hybride strong {
+  color: #000;
+}
+
+/* Animation d’apparition douce */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* (optionnel) Effet léger de pulsation quand elle s'affiche */
+@keyframes softPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.95; }
+  100% { transform: scale(1); opacity: 1; }
+} /* ✅ on ferme enfin la keyframe ! */
+
+/* === Bloc opt-in éditeurs + CTA === */
+.editor-optin {
+  margin-top: 35px;
+  padding-bottom: 40px; /* ✅ espace avant le CTA */
+  text-align: center;
+  font-size: 15px;
+  color: #222;
+  font-weight: 500;
+}
+
+.editor-optin input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 8px;
+  accent-color: #0732ef;
+  vertical-align: middle;
+}
+
+/* === CTA principal === */
+#cta-link {
+  margin-top: 0;
+  padding-top: 25px; /* ✅ ajoute de l’air au-dessus du bouton */
+  display: flex;
+  justify-content: center;
+}
+
+/* === RESPONSIVE PRIORITAIRE — version stable Lumigency === */
+@media (max-width: 900px) {
+  .split-layout {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .left-column,
+  .right-column,
+  #results {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 18px !important;
+    min-height: auto !important;
   }
 
   .left-column {
-    width: 100%;
-    background: linear-gradient(to bottom, #2020ff, #849BFF);
-    color: white;
     text-align: center;
-    padding: 40px 20px 25px;
-    border-radius: 0 0 25px 25px;
+    background: linear-gradient(to bottom, #2020ff, #809fff);
+  }
+
+  .left-column img {
+    max-width: 130px;
+    margin-bottom: 12px;
   }
 
   .left-column h1 {
     font-size: 1.4rem;
-    margin-bottom: 15px;
-  }
-
-  .left-column img {
-    max-width: 120px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+    line-height: 1.4;
   }
 
   .benefits-list {
-    margin: 15px auto;
+    margin: 20px auto;
     padding: 0;
-    list-style: none;
     text-align: left;
-    max-width: 360px;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .benefits-list li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #fff;
     font-size: 0.9rem;
-    line-height: 1.5;
+    gap: 6px;
+  }
+
+  .insight-card {
+    margin-top: 20px;
+    max-width: 100%;
+    padding: 18px;
+    font-size: 0.9rem;
   }
 
   .lumigency-signature {
     position: relative;
-    margin-top: 25px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.9);
-  }
-
-  /* Formulaire */
-  .right-column {
-    width: 100%;
-    padding: 25px 18px;
-    background: #fff;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px;
+    white-space: normal;
   }
 
   form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    background: #fff;
-    border-radius: 12px;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: none;
   }
 
-  label {
-    font-weight: 600;
-    font-size: 0.95rem;
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
   }
 
-  input, select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-
-  /* Curseur trafic */
-  .traffic-slider-container {
+  .checkbox-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .traffic-slider-container input[type="number"] {
-    text-align: center;
-    font-weight: 600;
-  }
-
-  /* Checkbox budget + single */
-  .checkbox-budget,
-  .single-checkbox {
-    display: flex;
-    align-items: center;
+  .single-checkbox,
+  .checkbox-budget {
+    align-items: flex-start;
     gap: 8px;
-    flex-wrap: nowrap;
-    margin-top: 5px;
-  }
-
-  .checkbox-budget label,
-  .single-checkbox label {
-    white-space: normal;
     font-size: 0.9rem;
   }
 
-  /* Groupe leviers */
-  .checkbox-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 20px;
-    margin-top: 10px;
-  }
-
-  .checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.9rem;
-  }
-
-  /* Radios Oui / Non */
   .radio-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin: 10px 0 20px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
-  .radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* CTA */
   .cta {
     width: 100%;
+    font-size: 1rem;
     padding: 14px;
-    font-size: 1.1rem;
-    background: #849BFF;
-    color: #fff;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 600;
   }
 
-  .cta:hover {
-    background: #0000FF;
+  /* === Bloc résultats === */
+  .results-section {
+    padding: 25px 18px;
   }
 
-  /* Résultats + éditeurs */
-  .results-section,
-  .testimonials-section {
-    padding: 20px 16px;
-    width: 100%;
+  .kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
+  .chart-container,
+  .analysis-block,
   .editor-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    max-width: 100%;
   }
 
-  .editor-card {
-    max-width: 150px;
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  .editor-card span {
-    font-size: 0.85rem;
+  /* Témoignages : 1 seul à la fois */
+  .review {
+    flex: 0 0 100%;
+    margin: 0 5px;
   }
 }
