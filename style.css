@@ -1020,8 +1020,29 @@ html, body {
   justify-content: center;
 }
 
-/* === RESPONSIVE PRIORITAIRE — version stable Lumigency === */
+/* === Correctifs généraux pré-mobile === */
+html, body {
+  overflow-x: hidden; /* ✅ évite le scroll horizontal */
+}
+
+input, select, button {
+  font-size: 16px; /* ✅ évite le zoom automatique iOS */
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* améliore la transition formulaire > résultats */
+#results {
+  transition: all 0.4s ease;
+}
+
+
+/* === RESPONSIVE — STABILISATION MOBILE Lumigency === */
 @media (max-width: 900px) {
+  /* --- Layout global --- */
   .split-layout {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -1039,21 +1060,24 @@ html, body {
   .left-column {
     text-align: center;
     background: linear-gradient(to bottom, #2020ff, #809fff);
+    border-radius: 0 0 24px 24px;
+    padding-bottom: 40px !important;
   }
 
   .left-column img {
-    max-width: 130px;
-    margin-bottom: 12px;
+    max-width: 120px;
+    margin-bottom: 10px;
   }
 
   .left-column h1 {
-    font-size: 1.4rem;
-    margin-bottom: 16px;
+    font-size: 1.3rem;
     line-height: 1.4;
+    margin-bottom: 14px;
   }
 
+  /* --- Avantages --- */
   .benefits-list {
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
     padding: 0;
     text-align: left;
     align-items: flex-start;
@@ -1062,11 +1086,13 @@ html, body {
 
   .benefits-list li {
     font-size: 0.9rem;
-    gap: 6px;
+    gap: 8px;
+    line-height: 1.4;
   }
 
+  /* --- Carte “Le saviez-vous” --- */
   .insight-card {
-    margin-top: 20px;
+    margin-top: 18px;
     max-width: 100%;
     padding: 18px;
     font-size: 0.9rem;
@@ -1077,47 +1103,73 @@ html, body {
     bottom: auto;
     left: auto;
     transform: none;
-    margin-top: 20px;
+    margin-top: 25px;
     white-space: normal;
+    font-size: 0.8rem;
   }
 
+  /* --- Formulaire --- */
   form {
-    padding: 20px;
+    padding: 22px;
     border-radius: 10px;
     box-shadow: none;
   }
 
   .form-row {
     grid-template-columns: 1fr !important;
-    gap: 16px;
+    gap: 18px;
+  }
+
+  .traffic-slider-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .slider-wrapper {
+    max-width: 100%;
+  }
+
+  .slider-labels {
+    font-size: 0.75rem;
+    padding: 0;
+  }
+
+  .traffic-slider-container input[type="number"] {
+    width: 100%;
+    text-align: left;
+    margin-top: 4px;
   }
 
   .checkbox-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .single-checkbox,
-  .checkbox-budget {
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 0.9rem;
-  }
-
+  .checkbox-budget,
   .radio-group {
-    flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+    line-height: 1.3;
   }
 
   .cta {
     width: 100%;
     font-size: 1rem;
     padding: 14px;
+    margin-top: 20px;
   }
 
-  /* === Bloc résultats === */
+  .cta-secondary {
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+
+  /* --- Résultats --- */
   .results-section {
     padding: 25px 18px;
   }
@@ -1127,15 +1179,29 @@ html, body {
     gap: 16px;
   }
 
+  .kpi-card {
+    padding: 18px;
+  }
+
   .chart-container,
   .analysis-block,
   .editor-grid {
     max-width: 100%;
+    padding: 0;
   }
 
-  /* Témoignages : 1 seul à la fois */
+  /* --- Slider Témoignages --- */
   .review {
     flex: 0 0 100%;
     margin: 0 5px;
+  }
+
+  .testimonials-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+  }
+
+  .review p {
+    font-size: 0.9rem;
   }
 }
