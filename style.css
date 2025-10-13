@@ -456,195 +456,191 @@ select {
   text-underline-offset: 3px;
 }
 
-/* === PATCH GLOBAL RESPONSIVE — LUMIGENCY SIMULATOR v3.2 (STABLE & CENTRÉ) === */
+/* === PATCH RESPONSIVE STABLE — v4 Lumigency === */
 @media (max-width: 768px) {
 
   html, body {
-    overflow-x: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #F7F5F3 !important;
-    font-size: 16px !important;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #F7F5F3;
+    font-size: 16px;
   }
 
-  /* 🧱 Structure générale */
+  /* Structure */
   .split-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
-  /* 💙 Colonne gauche */
   .left-column {
-    width: 100% !important;
-    text-align: center !important;
-    padding: 35px 25px 25px !important;
+    width: 100%;
+    background: linear-gradient(to bottom, #2020ff, #849BFF);
+    color: white;
+    text-align: center;
+    padding: 40px 20px 25px;
     border-radius: 0 0 25px 25px;
-    background: linear-gradient(to bottom, #2020ff, #849BFF) !important;
-  }
-
-  .left-column img {
-    max-width: 130px !important;
-    margin-bottom: 20px !important;
   }
 
   .left-column h1 {
-    font-size: 1.4rem !important;
-    margin-bottom: 15px !important;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+
+  .left-column img {
+    max-width: 120px;
+    margin-bottom: 15px;
   }
 
   .benefits-list {
-    margin: 15px auto !important;
-    text-align: left !important;
-    align-items: flex-start !important;
-    width: 100% !important;
-    max-width: 360px !important;
+    margin: 15px auto;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+    max-width: 360px;
   }
 
   .benefits-list li {
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
-  /* ✨ Signature Lumigency visible et centrée */
-  .lumigency-signature, .signature {
-    position: relative !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    margin-top: 25px !important;
-    color: rgba(255, 255, 255, 0.95) !important;
-    font-size: 0.85rem !important;
-    text-align: center !important;
-    display: block !important;
+  .lumigency-signature {
+    position: relative;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.9);
   }
 
-  /* 📋 Formulaire */
+  /* Formulaire */
   .right-column {
-    width: 100% !important;
-    padding: 25px 18px !important;
-    background: #fff !important;
+    width: 100%;
+    padding: 25px 18px;
+    background: #fff;
   }
 
   form {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    background: #fff !important;
-    padding: 20px 18px !important;
-    border-radius: 12px !important;
-    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
   }
 
   label {
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 6px !important;
+    font-weight: 600;
+    font-size: 0.95rem;
   }
 
   input, select {
-    width: 100% !important;
-    padding: 10px 12px !important;
-    border-radius: 8px !important;
-    border: 1px solid #ccc !important;
-    font-size: 1rem !important;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
   }
 
-  /* 🎚 Curseur trafic */
+  /* Curseur trafic */
   .traffic-slider-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .traffic-slider-container input[type="number"] {
-    text-align: center !important;
-    font-weight: 600 !important;
+    text-align: center;
+    font-weight: 600;
   }
 
-  /* 🧩 Checkboxes stables */
+  /* Checkbox budget + single */
+  .checkbox-budget,
+  .single-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    margin-top: 5px;
+  }
+
+  .checkbox-budget label,
+  .single-checkbox label {
+    white-space: normal;
+    font-size: 0.9rem;
+  }
+
+  /* Groupe leviers */
   .checkbox-group {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
-    gap: 8px !important;
-    width: 100% !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+    margin-top: 10px;
   }
 
   .checkbox-group label {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    font-size: 0.95rem !important;
-    width: 100% !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
   }
 
-  .checkbox-group input[type="checkbox"] {
-    transform: scale(1.2);
-    flex-shrink: 0;
-    accent-color: #0000FF;
-  }
-
-  /* ⚙️ Case “Pas de budget” */
-  .checkbox-budget {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-
-  /* ✅ Radios (Oui / Non) bien centrées */
+  /* Radios Oui / Non */
   .radio-group {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 30px !important;
-    margin: 10px 0 20px 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 10px 0 20px 0;
   }
 
   .radio-group label {
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    font-size: 1rem !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  /* 💡 CTA */
+  /* CTA */
   .cta {
-    width: 100% !important;
-    padding: 14px !important;
-    background: #849BFF !important;
-    border-radius: 10px !important;
-    font-size: 1.1rem !important;
-    font-weight: 600 !important;
-    color: #fff !important;
-    text-align: center !important;
-    margin-top: 20px !important;
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    background: #849BFF;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
   }
 
-  /* 💬 Section résultats et témoignages */
-  .results-section, .testimonials-section {
-    padding: 20px 16px !important;
-    width: 100% !important;
+  .cta:hover {
+    background: #0000FF;
+  }
+
+  /* Résultats + éditeurs */
+  .results-section,
+  .testimonials-section {
+    padding: 20px 16px;
+    width: 100%;
   }
 
   .editor-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
-    justify-items: center !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .editor-card {
-    max-width: 150px !important;
-    padding: 10px !important;
-    border-radius: 10px !important;
+    max-width: 150px;
+    padding: 10px;
+    border-radius: 10px;
   }
 
   .editor-card span {
-    font-size: 0.85rem !important;
+    font-size: 0.85rem;
   }
 }
-
