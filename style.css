@@ -1139,3 +1139,69 @@ html, body {
     margin: 0 5px;
   }
 }
+/* === PATCH #1 — Centrage & page statique Lumigency === */
+
+/* Empêche tout scroll horizontal et centre verticalement le contenu */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F7F5F3; /* même fond que ta charte */
+}
+
+/* Structure principale centrée dans la fenêtre */
+.split-layout {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  max-width: 1300px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Colonne gauche toujours pleine hauteur, parfaitement centrée */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centre verticalement */
+  align-items: center;       /* centre horizontalement */
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Colonne droite centrée dans sa partie */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Supprime tout décalage visuel entre les colonnes */
+body > * {
+  box-sizing: border-box;
+}
+
+/* Assure que rien ne dépasse sur mobile */
+@media (max-width: 900px) {
+  html, body {
+    display: block;
+    height: auto;
+    overflow-x: hidden;
+  }
+  .split-layout {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: auto;
+  }
+  .left-column {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+}
+
