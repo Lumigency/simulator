@@ -1039,634 +1039,191 @@ canvas {
   transition: all 0.4s ease;
 }
 
+/* === PATCH MOBILE STABILISÉ — LUMIGENCY SIMULATOR (v3.0) === */
+@media (max-width: 768px) {
 
-/* === RESPONSIVE — STABILISATION MOBILE Lumigency === */
-@media (max-width: 900px) {
-  /* --- Layout global --- */
-  .split-layout {
-    flex-direction: column !important;
-    align-items: stretch !important;
+  html, body {
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #F7F5F3 !important;
   }
 
-  .left-column,
-  .right-column,
-  #results {
+  /* 🧱 Structure principale */
+  .split-layout {
+    display: flex;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
     width: 100% !important;
-    max-width: 100% !important;
-    padding: 24px 18px !important;
-    min-height: auto !important;
+    margin: 0 auto !important;
   }
 
   .left-column {
-    text-align: center;
-    background: linear-gradient(to bottom, #2020ff, #809fff);
-    border-radius: 0 0 24px 24px;
-    padding-bottom: 40px !important;
+    width: 100% !important;
+    padding: 40px 25px 30px !important;
+    background: linear-gradient(to bottom, #2020ff, #849BFF) !important;
+    text-align: center !important;
+    border-radius: 0 0 25px 25px;
   }
 
   .left-column img {
     max-width: 120px;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
   }
 
   .left-column h1 {
-    font-size: 1.3rem;
-    line-height: 1.4;
-    margin-bottom: 14px;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin-bottom: 18px;
   }
 
-  /* --- Avantages --- */
-  .benefits-list {
-    margin: 20px auto 0 auto;
-    padding: 0;
-    text-align: left;
-    align-items: flex-start;
-    gap: 8px;
+  /* 🧭 Formulaire */
+  .right-column {
+    width: 100% !important;
+    padding: 25px 18px !important;
+    text-align: left !important;
+    background: #fff !important;
   }
 
-  .benefits-list li {
-    font-size: 0.9rem;
-    gap: 8px;
-    line-height: 1.4;
-  }
-
-  /* --- Carte “Le saviez-vous” --- */
-  .insight-card {
-    margin-top: 18px;
-    max-width: 100%;
-    padding: 18px;
-    font-size: 0.9rem;
-  }
-
-  .lumigency-signature {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    margin-top: 25px;
-    white-space: normal;
-    font-size: 0.8rem;
-  }
-
-  /* --- Formulaire --- */
   form {
-    padding: 22px;
-    border-radius: 10px;
+    background: #fff !important;
+    border-radius: 14px;
     box-shadow: none;
+    padding: 20px 16px !important;
   }
 
-  .form-row {
-    grid-template-columns: 1fr !important;
-    gap: 18px;
+  label {
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    display: block;
   }
 
+  input, select {
+    width: 100% !important;
+    padding: 10px !important;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+  }
+
+  /* 🎚 Slider trafic */
   .traffic-slider-container {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
+    margin-bottom: 25px;
   }
 
-  .slider-wrapper {
-    max-width: 100%;
-  }
-
-  .slider-labels {
-    font-size: 0.75rem;
-    padding: 0;
+  .traffic-slider-container input[type="range"] {
+    width: 100%;
   }
 
   .traffic-slider-container input[type="number"] {
     width: 100%;
-    text-align: left;
-    margin-top: 4px;
-  }
-
-  .checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .single-checkbox,
-  .checkbox-budget,
-  .radio-group {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.9rem;
-    line-height: 1.3;
-  }
-
-  .cta {
-    width: 100%;
-    font-size: 1rem;
-    padding: 14px;
-    margin-top: 20px;
-  }
-
-  .cta-secondary {
-    margin-top: 10px;
-    font-size: 0.9rem;
-  }
-
-  /* --- Résultats --- */
-  .results-section {
-    padding: 25px 18px;
-  }
-
-  .kpi-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .kpi-card {
-    padding: 18px;
-  }
-
-  .chart-container,
-  .analysis-block,
-  .editor-grid {
-    max-width: 100%;
-    padding: 0;
-  }
-
-  /* --- Slider Témoignages --- */
-  .review {
-    flex: 0 0 100%;
-    margin: 0 5px;
-  }
-
-  .testimonials-section h2 {
-    font-size: 1.4rem;
-    margin-bottom: 18px;
-  }
-
-  .review p {
-    font-size: 0.9rem;
-  }
-}
-/* === 🌙 OPTIMISATION MOBILE DU SIMULATEUR LUMIGENCY === */
-@media (max-width: 768px) {
-
-  /* === GLOBAL === */
-  body {
-    background-color: #f8f9ff;
-    overflow-x: hidden;
-  }
-
-  .split-layout {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 16px;
-  }
-
-  .left-column, .right-column {
-    width: 100%;
-  }
-
-  h1, h2, h3 {
     text-align: center;
-    line-height: 1.3;
+    font-weight: 600;
   }
 
-  .cta, .cta-secondary {
-    width: 100%;
-    display: block;
-    text-align: center;
-    margin: 18px auto;
-  }
-
-  /* === ALIGNEMENT INPUTS === */
-  input[type="number"], input[type="url"], input[type="email"], select {
-    width: 100%;
-    padding: 12px;
-    font-size: 0.95rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-  }
-
-  /* Range bien centré */
-  .traffic-slider-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .slider-wrapper {
-    width: 100%;
-    text-align: center;
-  }
-
-  .slider-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    width: 100%;
-    margin-top: 4px;
-  }
-
-  /* === CHECKBOXES & RADIOS === */
+  /* ✅ Checkboxes + radios */
   .checkbox-budget,
   .single-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: nowrap;
-    margin: 10px 0;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
     font-size: 0.9rem;
     line-height: 1.4;
+    margin: 10px 0 !important;
   }
 
-  .checkbox-budget input[type="checkbox"],
-  .single-checkbox input[type="checkbox"] {
+  .checkbox-budget label,
+  .single-checkbox label {
+    margin: 0 !important;
+    white-space: normal !important;
+  }
+
+  .checkbox-budget input,
+  .single-checkbox input {
     flex-shrink: 0;
     transform: scale(1.2);
     accent-color: #0000FF;
   }
 
-  .radio-group {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 15px;
-  }
-
-  /* === SECTION RÉSULTATS === */
-  .results-section {
-    background-color: #f8f9ff;
-    padding: 30px 16px;
-  }
-
-  .results-section h2 {
-    font-size: 1.25rem;
-    color: #0000FF;
-    margin-bottom: 10px;
-  }
-
-  .results-section .subtitle {
-    font-size: 0.95rem;
-    text-align: center;
-    margin-bottom: 25px;
-    line-height: 1.4;
-  }
-
-  /* === KPI GRID === */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 25px;
-  }
-
-  .kpi-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    font-size: 0.9rem;
-  }
-
-  .kpi-card strong {
-    display: block;
-    font-size: 0.8rem;
-    color: #333;
-    margin-bottom: 4px;
-  }
-
-  .kpi-card span {
-    color: #0000FF;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  /* === GRAPHIQUE === */
-  .chart-container {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto 25px auto;
-  }
-
-  /* === ANALYSE === */
-  .analysis-block {
-    background: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-
-  .analysis-block h3 {
-    font-size: 1rem;
-    color: #0000FF;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  .analysis-block ul {
-    padding-left: 18px;
-  }
-
-  /* === SUGGESTIONS ÉDITEURS === */
-  .editor-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .editor-grid .editor-card {
-    background: #fff;
-    border-radius: 12px;
-    text-align: center;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    font-size: 0.85rem;
-  }
-
-  /* === OPT-IN & CTA === */
-  .editor-optin {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-  }
-
-  #cta-link .cta {
-    display: block;
-    text-align: center;
-    background-color: #849BFF;
-    border-radius: 10px;
-    color: white;
-    padding: 14px;
-    font-weight: 600;
-    margin: 0 auto 15px auto;
-  }
-
-  #restart-btn {
-    text-align: center;
-    margin-top: 8px;
-    font-size: 0.9rem;
-    color: #0000FF;
-  }
-
-  /* === MARGES FINALES === */
-  .results-section,
-  .editor-grid,
-  .analysis-block,
-  .kpi-grid {
-    scroll-margin-top: 70px;
-  }
-
-  .results-section h3,
-  .editor-suggestions h3 {
-    color: #0000FF;
-  }
-}
-
-/* === BONUS PREMIUM === */
-@media (prefers-reduced-motion: no-preference) {
-  .kpi-card, .editor-card {
-    opacity: 0;
-    transform: translateY(15px);
-    animation: fadeUp 0.6s ease forwards;
-  }
-
-  @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-/* === Correctifs version mobile (affichage et alignements) === */
-@media (max-width: 768px) {
-
-  /* ✅ Correction slider "trafic mensuel" */
-  .traffic-slider-container {
-    align-items: center;
-  }
-
-  .traffic-slider-container input[type="number"] {
-    width: 120px;
-    text-align: center;
-  }
-
-  /* ✅ Case + texte sur la même ligne */
-  .checkbox-budget,
-  .single-checkbox {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-start;
-  }
-
-  .checkbox-budget label,
-  .single-checkbox label {
-    margin: 0;
-    line-height: 1.2;
-    font-size: 0.9rem;
-    white-space: normal;
-  }
-
-  .checkbox-budget input[type="checkbox"],
-  .single-checkbox input[type="checkbox"] {
-    flex-shrink: 0;
-    transform: scale(1.2);
-    margin-right: 8px;
-  }
-
-  /* ✅ Résultats stabilisés et centrés */
-  .results-section {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .results-section h2,
-  .results-section .subtitle {
-    text-align: center;
-  }
-
-  /* ✅ Bloc analyse pas coupé */
-  .analysis-block {
-    max-width: 100%;
-    overflow-x: hidden;
-    text-align: left;
-    word-break: break-word;
-    margin: 0 auto 20px;
-  }
-
-  /* ✅ Éditeurs : 2 par ligne sur mobile */
-  .editor-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
-    justify-content: center !important;
-    max-width: 100%;
-    padding: 0 10px;
-  }
-
-  .editor-card {
-    width: 100%;
-    height: auto;
-    min-height: 110px;
-  }
-
-  .editor-card img {
-    max-width: 70px;
-    margin-bottom: 6px;
-  }
-
-  .editor-card span {
-    font-size: 0.85rem;
-  }
-}
-
-/* === CORRECTIF ALIGNEMENT GLOBAL MOBILE (v1.1) === */
-@media (max-width: 768px) {
-
-  /* ✅ Forcer le centrage horizontal de tout le contenu */
-  body, html {
-    overflow-x: hidden !important;
-    text-align: center !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-  }
-
-  .split-layout,
-  .right-column,
-  #results,
-  form,
-  .results-section,
-  .chart-container,
-  .analysis-block,
-  .editor-grid,
-  .cta-final,
-  .testimonials-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-
-  /* ✅ Titre principal et sous-titres */
-  h1, h2, h3, .subtitle {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* ✅ Bloc analyse lisible et centré */
-  .analysis-block {
-    text-align: left !important;
-    width: 90% !important;
-    margin: 0 auto 25px auto !important;
-    padding: 16px !important;
-    word-break: break-word !important;
-  }
-
-  /* ✅ Éditeurs : centrés, pas de chevauchement */
-  .editor-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 16px !important;
-    justify-items: center !important;
-    align-items: stretch !important;
-    width: 90% !important;
-    margin: 0 auto 25px auto !important;
-  }
-
-  .editor-card {
-    width: 100% !important;
-    max-width: 160px !important;
-    height: auto !important;
-    min-height: 120px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-
-  .editor-card img {
-    max-width: 80px !important;
-    margin-bottom: 8px !important;
-  }
-
-  /* ✅ CTA bien centré */
-  .cta, .cta-secondary, #cta-link, #restart-btn {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    display: block !important;
-  }
-
-  /* ✅ Corrige légères marges parasites sur iPhone */
-  * {
-    box-sizing: border-box;
-  }
-}
-/* === PATCH CORRECTIF FINAL MOBILE LUMIGENCY (v2.0) === */
-@media (max-width: 768px) {
-
-  /* ✅ Correction centrage global */
-  .right-column,
-  #results,
-  form,
-  .results-section {
-    width: 100% !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  /* ✅ Titre “Renseignez vos données clés” centré */
-  h2, h3, .section-title, .intro-text {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* ✅ “Oui / Non” sur la même ligne */
+  /* ✅ Radio “Oui / Non” corrigé */
   .radio-group {
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
     gap: 30px !important;
-    margin-top: 8px !important;
+    margin: 10px auto 20px auto !important;
   }
 
   .radio-group label {
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    font-size: 0.95rem !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
   }
 
-  /* ✅ Réduction espace entre opt-in et CTA */
-  .editor-optin {
-    margin-bottom: 12px !important;
+  /* 📦 CTA */
+  .cta {
+    width: 100% !important;
+    padding: 14px !important;
+    font-size: 1.1rem !important;
+    text-align: center !important;
+    background: #849BFF !important;
+    color: white !important;
+    border-radius: 10px;
+    margin-top: 25px !important;
   }
 
-  #cta-link {
-    margin-top: 0 !important;
+  .cta:hover {
+    background: #0000FF !important;
   }
 
-  /* ✅ Ajustement fin du centrage visuel global */
-  .traffic-slider-container,
-  .checkbox-budget,
-  .single-checkbox,
+  /* 💬 Section témoignages & résultats */
+  .results-section,
+  .testimonials-section {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    padding: 20px 16px !important;
+  }
+
+  .kpi-grid,
   .editor-grid {
-    margin-left: auto !important;
-    margin-right: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+    justify-items: center !important;
+  }
+
+  .editor-card {
+    width: 100%;
+    max-width: 160px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .analysis-block {
+    background: #F0F4FF;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: left !important;
+  }
+
+  /* ⚙️ Divers */
+  .benefits-list {
+    margin-top: 10px !important;
+    text-align: left !important;
+  }
+
+  .benefits-list li {
+    font-size: 0.9rem !important;
   }
 }
-
