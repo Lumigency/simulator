@@ -1526,3 +1526,90 @@ canvas {
     font-size: 0.85rem;
   }
 }
+
+/* === CORRECTIF ALIGNEMENT GLOBAL MOBILE (v1.1) === */
+@media (max-width: 768px) {
+
+  /* ✅ Forcer le centrage horizontal de tout le contenu */
+  body, html {
+    overflow-x: hidden !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .split-layout,
+  .right-column,
+  #results,
+  form,
+  .results-section,
+  .chart-container,
+  .analysis-block,
+  .editor-grid,
+  .cta-final,
+  .testimonials-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* ✅ Titre principal et sous-titres */
+  h1, h2, h3, .subtitle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ✅ Bloc analyse lisible et centré */
+  .analysis-block {
+    text-align: left !important;
+    width: 90% !important;
+    margin: 0 auto 25px auto !important;
+    padding: 16px !important;
+    word-break: break-word !important;
+  }
+
+  /* ✅ Éditeurs : centrés, pas de chevauchement */
+  .editor-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 90% !important;
+    margin: 0 auto 25px auto !important;
+  }
+
+  .editor-card {
+    width: 100% !important;
+    max-width: 160px !important;
+    height: auto !important;
+    min-height: 120px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .editor-card img {
+    max-width: 80px !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* ✅ CTA bien centré */
+  .cta, .cta-secondary, #cta-link, #restart-btn {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+
+  /* ✅ Corrige légères marges parasites sur iPhone */
+  * {
+    box-sizing: border-box;
+  }
+}
+
