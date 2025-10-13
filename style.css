@@ -1227,3 +1227,64 @@ canvas {
     font-size: 0.9rem !important;
   }
 }
+/* === Correctif ultra-stable mobile (v3.1) === */
+@media (max-width: 768px) {
+  /* Forcer un layout 100% fluide et centré */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  /* 🔧 Stabilise les groupes de cases à cocher */
+  .checkbox-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  /* 🔧 Chaque ligne de levier */
+  .checkbox-group label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    width: 100% !important;
+    font-size: 0.95rem !important;
+    line-height: 1.4;
+  }
+
+  /* 🧩 Centrage visuel des inputs + textes */
+  input[type="checkbox"], input[type="radio"] {
+    flex-shrink: 0;
+    transform: scale(1.2);
+    accent-color: #0000FF;
+    margin: 0;
+  }
+
+  /* 🔄 Fix radio "Oui / Non" */
+  .radio-group {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 30px !important;
+    margin-top: 10px;
+  }
+
+  /* 🧱 Bloc formulaire */
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px 15px !important;
+  }
+
+  /* 💡 Tout le texte centré et stable */
+  label, h2, p {
+    text-align: left !important;
+  }
+}
