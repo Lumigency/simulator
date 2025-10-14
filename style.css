@@ -245,6 +245,20 @@ textarea {
   gap: 24px;
 }
 
+.levers-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.levers-section .section-title {
+  font-weight: 600;
+}
+
+.checkbox-group label {
+  width: 100%;
+}
+
 .alert-hybride {
   display: none;
   background: #fff4e5;
@@ -556,24 +570,98 @@ textarea {
 
   .right-column {
     width: 100%;
-    padding: 40px 36px;
+    max-width: 420px;
+    padding: 28px 24px;
+    margin: 0 auto;
+    align-items: center;
   }
 
   .results-section {
-    max-width: 720px;
-    padding: 32px;
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    margin: 0 auto;
+    gap: 24px;
   }
 
   .kpi-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    justify-items: center;
   }
 
   .editor-grid {
-    grid-template-columns: repeat(3, minmax(140px, 1fr));
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 0 8px;
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: 16px;
   }
 
   .review {
     flex: 0 0 50%;
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px;
+    align-items: stretch;
+  }
+
+  .levers-section {
+    align-items: center;
+  }
+
+  .levers-section .section-title {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .checkbox-group label {
+    justify-content: flex-start;
+  }
+
+  .single-checkbox {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .single-checkbox input,
+  .checkbox-group input {
+    flex-shrink: 0;
+  }
+
+  .editor-optin {
+    margin-top: 16px;
+  }
+
+  .editor-optin-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    font-size: clamp(0.35rem, 1.4vw, 0.95rem);
+    text-align: center;
+    padding: 0 12px;
+    max-width: 100%;
+  }
+
+  #cta-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 }
 
@@ -596,8 +684,7 @@ textarea {
   }
 
   .right-column {
-    padding: 26px 22px;
-    max-width: 100%;
+    padding: 24px 20px;
   }
 
   form {
@@ -627,10 +714,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .checkbox-group {
-    grid-template-columns: 1fr;
-  }
-
   .radio-group {
     flex-direction: column;
     align-items: flex-start;
@@ -639,6 +722,9 @@ textarea {
 
   .cta {
     font-size: 1rem;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
   }
 
   .cta:hover {
@@ -646,8 +732,9 @@ textarea {
   }
 
   .results-section {
-    padding: 28px 22px;
+    padding: 24px 20px;
     align-items: center;
+    margin-bottom: 40px;
   }
 
   .results-section .subtitle {
@@ -655,7 +742,18 @@ textarea {
   }
 
   .kpi-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .kpi-card {
+    padding: 18px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .analysis-block {
@@ -669,5 +767,11 @@ textarea {
   .review {
     flex: 0 0 100%;
     margin: 0 6px;
+  }
+
+  .cta-secondary {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
   }
 }

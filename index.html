@@ -102,26 +102,28 @@
   </div> <!-- ✅ fermeture du .form-row -->
 
         <!-- Leviers -->
-        <label>📌 Leviers que vous souhaitez autoriser</label>
-        
-  <label class="single-checkbox">
-    <input type="checkbox" id="allLevers">
-    J’autorise tous les leviers
-  </label>
-        
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-          <label><input type="checkbox" name="levers" value="css"> CSS</label>
-          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-           <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-          <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-          <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
-          <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
-          <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
-          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+        <div class="levers-section">
+          <label class="section-title">📌 Leviers que vous souhaitez autoriser</label>
+
+          <label class="single-checkbox">
+            <input type="checkbox" id="allLevers">
+            J’autorise tous les leviers
+          </label>
+
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+            <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+            <label><input type="checkbox" name="levers" value="css"> CSS</label>
+            <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+            <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+            <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
+            <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
+            <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
+            <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
+            <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+            <label><input type="checkbox" name="levers" value="influence"> Influence</label>
             <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+          </div>
         </div>
 
         <!-- Modèles hybrides -->
@@ -223,7 +225,7 @@
 
 <!-- Bloc opt-in + CTA correctement séparé -->
 <div class="editor-optin">
-  <label>
+  <label class="editor-optin-label">
     <input type="checkbox" id="optin-editeurs">
     Je souhaite recevoir plus d’informations sur ces partenaires.
   </label>
