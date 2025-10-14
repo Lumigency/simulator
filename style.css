@@ -1165,3 +1165,66 @@ html, body {
     margin-bottom: 4px;
   }
 }
+/* 🟣 VERSION MOBILE UX FRIENDLY */
+@media screen and (max-width: 480px) {
+  body {
+    background: #F7F5F3;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container, .mockup {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 16px;
+  }
+
+  .header {
+    padding: 24px 10px;
+    font-size: 0.95rem;
+  }
+
+  .benefits li {
+    font-size: 0.85rem;
+    margin: 4px 0;
+  }
+
+  input, select {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  /* ✅ Alignement des cases à cocher mobile */
+  .checkbox-group {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .checkbox-group label {
+    height: 55px;
+    justify-content: flex-start;
+    padding-left: 8px;
+    font-size: 0.9rem;
+  }
+
+  .checkbox-group input[type=checkbox] {
+    margin-left: 4px;
+    margin-right: 8px;
+  }
+
+  /* ✅ Alignement des sous-questions */
+  .no-budget, .all-levers {
+    margin-left: 0;
+    gap: 8px;
+  }
+
+  /* ✅ Boutons CTA centrés */
+  .cta, .cta-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
