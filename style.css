@@ -87,8 +87,9 @@ body {
     width: 18px;
     height: 18px;
     min-width: 18px;
-    margin-top: 2px;
-    transform: none;
+    margin-top: 0px;
+    transform: translateY(-1px);
+
     line-height: 1;
     font-size: 1.1rem;
   }
