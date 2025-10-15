@@ -1791,26 +1791,3 @@ canvas {
     margin-right: auto !important;
   }
 }
-/* === PATCH FINAL IPHONE / SAFARI — ALIGNEMENT ✔ === */
-.benefits-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #fff;
-  position: relative;
-  padding-left: 28px; /* espace réservé au ✔ */
-}
-
-.benefits-list li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-45%); /* ✅ recentre parfaitement sur la hauteur visuelle du texte */
-  color: #fff;
-  font-size: 1rem;
-  line-height: 1;
-}
