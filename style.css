@@ -510,8 +510,10 @@ select {
   /* Colonne bleue plein écran */
   .left-column {
     width: 100%;
-    min-height: auto;
+    min-height: unset;
+    height: auto;
     padding: 40px 24px;
+    padding-bottom: 48px;
     border-radius: 0;
     box-sizing: border-box;
     display: flex;
@@ -552,11 +554,18 @@ select {
   }
 
   .left-column .benefits-list li {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 8px;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
   }
 
   .left-column .benefits-list li span {
     text-align: center;
+    line-height: 1.35;
   }
 
   .left-column .insight-card {
@@ -568,7 +577,11 @@ select {
     bottom: auto;
     left: auto;
     transform: none;
-    margin-top: 32px;
+    margin: 32px auto 0;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+    max-width: 360px;
   }
 
   /* Bloc formulaire en pleine largeur */
