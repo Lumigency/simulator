@@ -72,21 +72,25 @@ body {
 @media (max-width: 768px) {
   .left-column .benefits-list li {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 10px;
     text-align: left;
-    line-height: 1.4;
+    line-height: 1.5;
     white-space: normal;
   }
 
   .left-column .benefits-list li::before,
   .left-column .check-icon {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(0.15em);
-    font-size: 1.1rem;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-top: 2px;
+    transform: none;
     line-height: 1;
+    font-size: 1.1rem;
   }
 
   .left-column .benefits-list li span {
