@@ -61,6 +61,24 @@ body {
 }
 
 /* Pour mobile */
+@media (max-width: 768px) {
+  .left-column .benefits-list li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .left-column .benefits-list li span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 @media (max-width: 420px) {
   .benefits-list li {
     white-space: normal;
