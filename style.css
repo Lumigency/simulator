@@ -53,6 +53,14 @@ body {
   white-space: nowrap;          /* ✅ empêche le retour à la ligne */
 }
 
+.left-column .benefits-list li .check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
 .benefits-list li span {
   display: inline-block;
   line-height: 1;               /* ✅ garde le texte centré verticalement */
@@ -71,6 +79,10 @@ body {
     text-align: left;
     white-space: normal;
     line-height: 1.35;
+  }
+
+  .left-column .benefits-list li .check-icon {
+    transform: translateY(2px);
   }
 
   .left-column .benefits-list li span {
