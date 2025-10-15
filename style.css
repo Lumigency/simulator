@@ -1791,7 +1791,7 @@ canvas {
     margin-right: auto !important;
   }
 }
-/* === ALIGNEMENT FINAL ✔️ LUMIGENCY (version stable multi-lignes) === */
+/* === ALIGNEMENT PIXEL-PERFECT DES ✔ LUMIGENCY === */
 .benefits-list {
   list-style: none;
   padding: 0;
@@ -1805,10 +1805,9 @@ canvas {
 }
 
 .benefits-list li {
-  display: grid;
-  grid-template-columns: 24px 1fr; /* ✅ colonne fixe pour le ✔ + colonne fluide pour le texte */
-  align-items: center;
-  column-gap: 10px;
+  display: flex;
+  align-items: center; /* centre parfaitement texte + icône */
+  gap: 10px;
   text-align: left;
   font-size: 0.95rem;
   line-height: 1.5;
@@ -1818,16 +1817,12 @@ canvas {
 .benefits-list li::before {
   content: "✔";
   color: #fff;
-  font-size: 1.1rem;
-  line-height: 1;
-  display: flex;
+  font-size: 0.95rem; /* ✅ même taille que le texte */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  transform: translateY(1px); /* ajustement fin */
-}
-
-.benefits-list li span {
-  display: block;
-  line-height: 1.5;
+  height: 1em;
+  width: 1em;
+  transform: translateY(2px); /* ✅ descend légèrement le ✔ pour l’aligner parfaitement */
+  flex-shrink: 0;
 }
