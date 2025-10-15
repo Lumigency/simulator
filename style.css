@@ -69,43 +69,43 @@ body {
 }
 
 /* Pour mobile */
-@media (max-width: 768px) {
-  .left-column .benefits-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    text-align: left;
-    line-height: 1.5;
-    white-space: normal;
-  }
-
-  .left-column .benefits-list li::before,
-  .left-column .check-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    min-width: 18px;
-    margin-top: 0px;
-    transform: translateY(-1px);
-
-    line-height: 1;
-    font-size: 1.1rem;
-  }
-
-  .left-column .benefits-list li span {
-    display: inline-block;
-    vertical-align: middle;
-  }
+/* === ✅ ALIGNEMENT PARFAIT DES ✔ DANS LA LISTE LUMIGENCY === */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  width: 100%;
 }
 
-@media (max-width: 420px) {
-  .benefits-list li {
-    white-space: normal;
-  }
+.benefits-list li {
+  display: flex;
+  align-items: center;   /* aligne ✔ + texte verticalement */
+  gap: 10px;             /* espace entre ✔ et texte */
+  text-align: left;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
+.benefits-list .check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;           /* largeur fixe pour alignement stable */
+  height: 20px;
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1;
+  transform: translateY(1px); /* ajuste la hauteur visuelle */
+}
+
+.benefits-list li::before {
+  content: none !important;
+}
 
 /* ✅ Supprime les icônes "✅" ou puces */
 .left-column ul li::before {
