@@ -497,6 +497,98 @@ select {
   transition: all 0.3s ease;
 }
 
+/* === Responsive mobile : structure principale (≤768px) === */
+@media (max-width: 768px) {
+  /* Layout vertical et espace respirant */
+  .split-layout {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    gap: 28px;
+  }
+
+  /* Colonne bleue plein écran */
+  .left-column {
+    width: 100%;
+    min-height: auto;
+    padding: 40px 24px;
+    border-radius: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 24px;
+  }
+
+  /* --- Colonne gauche : centrage complet --- */
+  .left-column img {
+    margin: 0 auto;
+  }
+
+  .left-column h1 {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  .left-column .benefits-list,
+  .left-column .benefits-list li,
+  .left-column .insight-card,
+  .left-column .lumigency-signature {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .left-column .benefits-list {
+    width: 100%;
+    max-width: 360px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .left-column .benefits-list li {
+    justify-content: center;
+  }
+
+  .left-column .benefits-list li span {
+    text-align: center;
+  }
+
+  .left-column .insight-card {
+    margin-top: 24px;
+  }
+
+  .left-column .lumigency-signature {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 32px;
+  }
+
+  /* Bloc formulaire en pleine largeur */
+  .right-column {
+    width: 100%;
+    padding: 32px 24px 40px;
+    box-sizing: border-box;
+  }
+
+  /* Formulaire : padding mobile et suppression de l'ombre */
+  form {
+    width: 100%;
+    padding: 24px 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+}
+
 /* Quand les résultats sont visibles */
 .split-layout.show-results .right-column {
   display: none;
@@ -1040,8 +1132,8 @@ canvas {
 }
 
 
-/* === RESPONSIVE — STABILISATION MOBILE Lumigency === */
-@media (max-width: 900px) {
+/* === RESPONSIVE — STABILISATION TABLETTE Lumigency === */
+@media (max-width: 900px) and (min-width: 769px) {
   /* --- Layout global --- */
   .split-layout {
     flex-direction: column !important;
@@ -1106,13 +1198,6 @@ canvas {
     margin-top: 25px;
     white-space: normal;
     font-size: 0.8rem;
-  }
-
-  /* --- Formulaire --- */
-  form {
-    padding: 22px;
-    border-radius: 10px;
-    box-shadow: none;
   }
 
   .form-row {
@@ -1212,16 +1297,6 @@ canvas {
   body {
     background-color: #f8f9ff;
     overflow-x: hidden;
-  }
-
-  .split-layout {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 16px;
-  }
-
-  .left-column, .right-column {
-    width: 100%;
   }
 
   h1, h2, h3 {
@@ -1538,10 +1613,7 @@ canvas {
     padding: 0 !important;
   }
 
-  .split-layout,
-  .right-column,
   #results,
-  form,
   .results-section,
   .chart-container,
   .analysis-block,
@@ -1616,9 +1688,7 @@ canvas {
 @media (max-width: 768px) {
 
   /* ✅ Correction centrage global */
-  .right-column,
   #results,
-  form,
   .results-section {
     width: 100% !important;
     margin: 0 auto !important;
