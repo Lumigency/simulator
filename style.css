@@ -53,6 +53,14 @@ body {
   white-space: nowrap;          /* ✅ empêche le retour à la ligne */
 }
 
+.left-column .benefits-list li .check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
 .benefits-list li span {
   display: inline-block;
   line-height: 1;               /* ✅ garde le texte centré verticalement */
@@ -61,6 +69,32 @@ body {
 }
 
 /* Pour mobile */
+@media (max-width: 768px) {
+  .left-column .benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .left-column .benefits-list li::before,
+  .left-column .check-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0.15em);
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .left-column .benefits-list li span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 @media (max-width: 420px) {
   .benefits-list li {
     white-space: normal;
