@@ -1645,7 +1645,7 @@ canvas {
   }
 }
 
-/* === ✅ Correction mobile : alignement des leviers et boutons radio === */
+/* === ✅ Correction mobile : alignement des leviers, coches et boutons radio === */
 @media (max-width: 768px) {
 
   /* ✔️ Alignement parfait des coches ✓ (liste des bénéfices) */
@@ -1673,26 +1673,25 @@ canvas {
     font-size: 0.9rem;
   }
 
- /* ✅ Correctif final mobile : question "Êtes-vous ouverts aux modèles hybrides" */
-.radio-group {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 24px !important;
-  flex-wrap: nowrap !important; /* empêche le retour à la ligne */
-}
+  /* === ✅ PATCH FINAL : alignement Oui / Non uniquement sur mobile === */
+  .radio-group {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 28px !important; /* ajuste ici si tu veux un peu plus ou moins d’espace */
+    flex-wrap: nowrap !important; /* empêche le retour à la ligne */
+  }
 
-.radio-group label {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  white-space: nowrap !important; /* garde "Oui" et "Non" sur une ligne */
-  font-size: 0.95rem !important;
-}
+  .radio-group label {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.95rem !important;
+    white-space: nowrap !important; /* garde Oui & Non sur une seule ligne */
+  }
 
-.radio-group input[type="radio"] {
-  flex-shrink: 0; /* empêche la bulle de rapetisser */
-}
-}
+  .radio-group input[type="radio"] {
+    flex-shrink: 0 !important;
+  }
 }
