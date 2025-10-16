@@ -37,68 +37,69 @@ body {
   width: 100%;
 }
 
-/* Bénefits */
+/* === Section Bénéfices === */
 .benefits-list {
   list-style: none;
   padding: 0;
   margin: 0 auto 32px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   max-width: 360px;
 }
 
 .benefits-list li {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
+  display: flex;
+  align-items: flex-start; /* gère l’alignement vertical si 2 lignes */
+  gap: 10px;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #f7f7f7;
   text-align: left;
-  white-space: nowrap;
+  word-break: break-word; /* évite les débordements */
 }
 
-.benefits-list .check-icon {
-  display: inline-flex;
+.check-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
   font-size: 1rem;
-  line-height: 1;
-  margin-right: 0;
+  flex-shrink: 0;
+  margin-top: 2px; /* légère correction d’alignement visuel */
 }
 
 .benefits-list li span {
   flex: 1;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1.5;
-  white-space: normal;
+  display: block;
+  line-height: 1.4;
+  white-space: normal; /* autorise les retours à la ligne naturels */
 }
 
-@media (min-width: 769px) {
+/* === Version tablette et desktop === */
+@media (min-width: 768px) {
   .left-column {
     align-items: center;
   }
 
   .benefits-list {
-    align-items: center;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .benefits-list li {
-    justify-content: center;
-    width: auto;
+    align-items: center;
+    justify-content: flex-start;
     max-width: none;
-    margin: 0 auto;
+  }
+
+  .check-icon {
+    margin-top: 0;
   }
 
   .benefits-list li span {
-    justify-content: flex-start;
     text-align: left;
   }
 }
@@ -108,6 +109,7 @@ body {
 .left-column ul li::before {
   content: none;
 }
+
 
 /* === Bloc "Le saviez-vous ?" === */
 .insight-card {
