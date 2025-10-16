@@ -762,15 +762,6 @@ select {
   font-size: 0.9rem;
 }
 
-/* === Correction alignement radio Oui / Non === */
-.radio-group {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 40px; /* espace horizontal équilibré entre Oui et Non */
-  margin-top: 6px;
-}
-
 .radio-group label {
   display: flex;
   align-items: center;
@@ -1608,17 +1599,6 @@ canvas {
     margin-left: auto !important;
     margin-right: auto !important;
   }
-
-  /* ✅ “Oui / Non” sur la même ligne */
-  .radio-group {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 30px !important;
-    margin-top: 8px !important;
-  }
-
   .radio-group label {
     display: flex !important;
     align-items: center !important;
