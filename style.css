@@ -44,6 +44,8 @@ body {
   margin: 0 auto 32px;
   width: 100%;
   max-width: 480px;
+  text-align: left;
+  transform: translateX(8px); /* ✅ léger recentrage du bloc vers le centre */
 }
 
 .benefits-list li {
@@ -72,9 +74,14 @@ body {
 
 /* ✅ Responsive : texte qui passe à la ligne sans décaler le ✓ */
 @media (max-width: 600px) {
+  .benefits-list {
+    transform: none; /* centré naturellement sur mobile */
+    text-align: center;
+  }
   .benefits-list li {
     align-items: flex-start;
     gap: 8px;
+    justify-content: center;
   }
 }
 
