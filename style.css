@@ -1644,3 +1644,50 @@ canvas {
     margin-right: auto !important;
   }
 }
+
+/* === ✅ Correction mobile : alignement des leviers et boutons radio === */
+@media (max-width: 768px) {
+
+  /* ✔️ Alignement parfait des coches ✓ (liste des bénéfices) */
+  .benefits-list li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    white-space: nowrap; /* garde sur une seule ligne si possible */
+  }
+
+  /* ✔️ Les leviers (checkbox) sur la même ligne, textes alignés */
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* deux colonnes */
+    gap: 10px 18px; /* espace entre colonnes et lignes */
+    align-items: center;
+  }
+
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap; /* garde le texte sur une seule ligne */
+    font-size: 0.9rem;
+  }
+
+  /* ✔️ "Oui / Non" bien alignés sur la même ligne */
+  .radio-group {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    margin-top: 8px !important;
+  }
+
+  .radio-group label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.95rem !important;
+    white-space: nowrap;
+  }
+}
