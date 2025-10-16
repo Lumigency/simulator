@@ -1716,3 +1716,33 @@ canvas {
   }
 }
 
+/* === Correctif alignement radio Oui / Non (Safari iOS & Chrome Android) === */
+.radio-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.radio-item {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+}
+
+.radio-item input[type="radio"] {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  appearance: auto !important;
+  -webkit-appearance: radio !important;
+  transform: none !important;
+  position: static !important;
+}
+
+.radio-item span {
+  display: inline-block;
+  line-height: 1.2;
+}
