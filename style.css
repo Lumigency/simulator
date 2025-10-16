@@ -1680,35 +1680,39 @@ canvas {
     margin-right: 4px !important;
   }
 }
-/* ✅ Fix définitif iOS Safari - radio Oui/Non sur une seule ligne */
+/* ✅ Fix définitif Safari/iPhone : "Oui" et "Non" collés aux bulles radio */
 @media (max-width: 768px) {
   .radio-group {
     display: flex !important;
-    flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 18px !important;
+    gap: 24px !important;
     flex-wrap: nowrap !important;
-    line-height: 1 !important;
   }
 
-  .radio-group label {
-    display: flex !important;
-    flex-direction: row !important;
+  .radio-item {
+    display: inline-flex !important;
     align-items: center !important;
-    justify-content: center !important;
     gap: 8px !important;
-    font-size: 1rem !important;
-    white-space: nowrap !important;
+    font-size: 0.95rem !important;
     line-height: 1 !important;
+    white-space: nowrap !important;
   }
 
-  .radio-group input[type="radio"] {
-    flex-shrink: 0 !important;
-    margin: 0 !important;
+  .radio-item input[type="radio"] {
+    appearance: auto !important;
+    -webkit-appearance: radio !important;
     transform: scale(1.1) !important;
+    margin: 0 !important;
     vertical-align: middle !important;
     position: relative !important;
     top: 0 !important;
   }
+
+  .radio-item span {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    line-height: 1 !important;
+  }
 }
+
