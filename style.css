@@ -37,50 +37,46 @@ body {
   width: 100%;
 }
 
-/* === Bénéfices — version alignée en deux colonnes === */
+/* === Bénéfices — alignement parfait des ✓ et du texte === */
 .benefits-list {
   list-style: none;
   padding: 0;
   margin: 0 auto 32px;
-  display: grid;
-  grid-template-columns: 24px 1fr; /* ✅ 1 colonne fixe pour les ✓, 1 fluide pour le texte */
-  row-gap: 10px;
-  column-gap: 10px;
   width: 100%;
   max-width: 480px;
-  align-items: start;
 }
 
 .benefits-list li {
-  display: contents; /* ✅ pour que chaque ✓ + texte restent liés dans la grille */
+  display: flex;
+  align-items: center; /* ✅ centre verticalement le ✓ avec le texte */
+  justify-content: flex-start;
+  gap: 10px; /* espace constant entre ✓ et texte */
   font-size: 0.95rem;
   line-height: 1.5;
   color: #f7f7f7;
+  margin-bottom: 10px;
 }
 
-.check-icon {
+.benefits-list li:last-child {
+  margin-bottom: 0;
+}
+
+.benefits-list li .check-icon {
+  flex-shrink: 0;
+  width: 16px;
   font-size: 1rem;
-  line-height: 1;
-  text-align: right; /* ✅ pour que les ✓ soient alignés à droite dans leur colonne */
+  text-align: center;
+  line-height: 1; /* ✅ aligne parfaitement le ✓ */
+  margin-top: 2px; /* micro-ajustement visuel */
 }
 
-.benefits-list li span {
-  white-space: nowrap;
-}
-
+/* ✅ Responsive : texte qui passe à la ligne sans décaler le ✓ */
 @media (max-width: 600px) {
-  .benefits-list {
-    grid-template-columns: 18px 1fr;
-    row-gap: 8px;
-    column-gap: 8px;
-    max-width: 100%;
-  }
-
-  .benefits-list li span {
-    white-space: normal; /* ✅ permet le retour à la ligne sur mobile */
+  .benefits-list li {
+    align-items: flex-start;
+    gap: 8px;
   }
 }
-
 
 /* === Bloc "Le saviez-vous ?" === */
 .insight-card {
