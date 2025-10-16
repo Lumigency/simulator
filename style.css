@@ -1672,15 +1672,19 @@ canvas {
     white-space: nowrap; /* garde le texte sur une seule ligne */
     font-size: 0.9rem;
   }
+}
 
-  /* === ✅ PATCH FINAL : alignement Oui / Non uniquement sur mobile === */
+/* === 💡 Correctif ciblé : "Oui / Non" alignés sur la même ligne (mobile only) — version forcée === */
+@media (max-width: 768px) {
   .radio-group {
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 28px !important; /* ajuste ici si tu veux un peu plus ou moins d’espace */
-    flex-wrap: nowrap !important; /* empêche le retour à la ligne */
+    gap: 24px !important;
+    flex-wrap: nowrap !important;
+    margin-top: 6px !important;
+    width: 100% !important;
   }
 
   .radio-group label {
@@ -1688,10 +1692,15 @@ canvas {
     align-items: center !important;
     gap: 6px !important;
     font-size: 0.95rem !important;
-    white-space: nowrap !important; /* garde Oui & Non sur une seule ligne */
+    line-height: 1.2 !important;
+    white-space: nowrap !important; /* empêche le retour à la ligne */
+    justify-content: center !important;
+    text-align: center !important;
   }
 
   .radio-group input[type="radio"] {
     flex-shrink: 0 !important;
+    transform: scale(1.1) !important;
+    margin: 0 4px 0 0 !important; /* espace doux à gauche */
   }
 }
