@@ -45,7 +45,7 @@ body {
   width: 100%;
   max-width: 480px;
   text-align: left;
-  transform: translateX(22px); /* ✅ léger recentrage du bloc vers le centre */
+  transform: translateX(32px); /* ✅ léger recentrage du bloc vers le centre */
 }
 
 .benefits-list li {
