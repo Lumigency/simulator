@@ -63,15 +63,6 @@ body {
   margin-bottom: 0;
 }
 
-.benefits-list li .check-icon {
-  flex-shrink: 0;
-  width: 16px;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 1; /* ✅ aligne parfaitement le ✓ */
-  margin-top: 2px; /* micro-ajustement visuel */
-}
-
 /* ✅ Responsive : texte qui passe à la ligne sans décaler le ✓ */
 @media (max-width: 600px) {
   .benefits-list {
