@@ -37,7 +37,6 @@ body {
   width: 100%;
 }
 
-/* === Bénéfices — Version finale clean & responsive === */
 .benefits-list {
   list-style: none;
   padding: 0;
@@ -51,13 +50,12 @@ body {
 
 .benefits-list li {
   display: flex;
-  align-items: center; /* Aligne la coche et le texte verticalement */
-  gap: 8px; /* Espace équilibré */
+  align-items: center;
+  gap: 6px; /* 🔹 espace réduit entre la coche et le texte */
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #f7f7f7;
   text-align: left;
-  word-break: break-word;
 }
 
 .check-icon {
@@ -66,29 +64,28 @@ body {
   justify-content: center;
   font-size: 1rem;
   flex-shrink: 0;
+  margin-right: 2px; /* 🔹 rapproche légèrement */
 }
 
 .benefits-list li span {
   flex: 1;
+  display: inline-block;
   line-height: 1.4;
-  white-space: nowrap; /* ✅ garde sur une ligne tant que possible */
+  white-space: normal; /* 🔹 permet un retour à la ligne naturel */
 }
 
-/* === Responsive : mobile === */
+/* Responsive : mobile */
 @media (max-width: 600px) {
   .benefits-list {
     max-width: 100%;
-    gap: 10px;
+    gap: 8px;
   }
 
   .benefits-list li {
     align-items: flex-start;
   }
-
-  .benefits-list li span {
-    white-space: normal; /* ✅ passe à la ligne si espace réduit */
-  }
 }
+
 
 
 /* === Bloc "Le saviez-vous ?" === */
