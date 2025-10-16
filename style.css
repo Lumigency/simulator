@@ -1673,21 +1673,26 @@ canvas {
     font-size: 0.9rem;
   }
 
-  /* ✔️ "Oui / Non" bien alignés sur la même ligne */
-  .radio-group {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 20px !important;
-    margin-top: 8px !important;
-  }
+ /* ✅ Correctif final mobile : question "Êtes-vous ouverts aux modèles hybrides" */
+.radio-group {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 24px !important;
+  flex-wrap: nowrap !important; /* empêche le retour à la ligne */
+}
 
-  .radio-group label {
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    font-size: 0.95rem !important;
-    white-space: nowrap;
-  }
+.radio-group label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important; /* garde "Oui" et "Non" sur une ligne */
+  font-size: 0.95rem !important;
+}
+
+.radio-group input[type="radio"] {
+  flex-shrink: 0; /* empêche la bulle de rapetisser */
+}
+}
 }
