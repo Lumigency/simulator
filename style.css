@@ -37,6 +37,7 @@ body {
   width: 100%;
 }
 
+/* === Bénéfices — version alignée sur une seule ligne === */
 .benefits-list {
   list-style: none;
   padding: 0;
@@ -45,48 +46,49 @@ body {
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 420px;
+  max-width: 500px; /* 🔹 plus large pour éviter les retours à la ligne */
 }
 
 .benefits-list li {
   display: flex;
   align-items: center;
-  gap: 6px; /* 🔹 espace réduit entre la coche et le texte */
+  gap: 10px; /* 🔹 espace entre ✓ et texte */
   font-size: 0.95rem;
   line-height: 1.5;
   color: #f7f7f7;
   text-align: left;
+  white-space: nowrap; /* ✅ empêche le retour à la ligne */
+  overflow: hidden;
+  text-overflow: ellipsis; /* coupe proprement si trop long */
 }
 
 .check-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
   flex-shrink: 0;
-  margin-right: 2px; /* 🔹 rapproche légèrement */
+  font-size: 1rem;
+  line-height: 1;
+  margin-right: 2px;
 }
 
 .benefits-list li span {
   flex: 1;
   display: inline-block;
-  line-height: 1.4;
-  white-space: normal; /* 🔹 permet un retour à la ligne naturel */
+  white-space: nowrap; /* ✅ maintient sur une ligne */
 }
 
-/* Responsive : mobile */
+/* === Responsive : mobile === */
 @media (max-width: 600px) {
   .benefits-list {
     max-width: 100%;
-    gap: 8px;
   }
 
   .benefits-list li {
-    align-items: flex-start;
+    white-space: normal; /* ✅ autorise retour à la ligne sur mobile */
+  }
+
+  .benefits-list li span {
+    white-space: normal;
   }
 }
-
-
 
 /* === Bloc "Le saviez-vous ?" === */
 .insight-card {
