@@ -37,7 +37,7 @@ body {
   width: 100%;
 }
 
-/* === Section Bénéfices === */
+/* === Bénéfices — Version finale clean & responsive === */
 .benefits-list {
   list-style: none;
   padding: 0;
@@ -46,68 +46,48 @@ body {
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
 }
 
 .benefits-list li {
   display: flex;
-  align-items: flex-start; /* gère l’alignement vertical si 2 lignes */
-  gap: 10px;
+  align-items: center; /* Aligne la coche et le texte verticalement */
+  gap: 8px; /* Espace équilibré */
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #f7f7f7;
   text-align: left;
-  word-break: break-word; /* évite les débordements */
+  word-break: break-word;
 }
 
 .check-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
   font-size: 1rem;
   flex-shrink: 0;
-  margin-top: 2px; /* légère correction d’alignement visuel */
 }
 
 .benefits-list li span {
   flex: 1;
-  display: block;
   line-height: 1.4;
-  white-space: normal; /* autorise les retours à la ligne naturels */
+  white-space: nowrap; /* ✅ garde sur une ligne tant que possible */
 }
 
-/* === Version tablette et desktop === */
-@media (min-width: 768px) {
-  .left-column {
-    align-items: center;
-  }
-
+/* === Responsive : mobile === */
+@media (max-width: 600px) {
   .benefits-list {
-    align-items: flex-start;
-    gap: 12px;
+    max-width: 100%;
+    gap: 10px;
   }
 
   .benefits-list li {
-    align-items: center;
-    justify-content: flex-start;
-    max-width: none;
-  }
-
-  .check-icon {
-    margin-top: 0;
+    align-items: flex-start;
   }
 
   .benefits-list li span {
-    text-align: left;
+    white-space: normal; /* ✅ passe à la ligne si espace réduit */
   }
-}
-
-/* ✅ Supprime les puces natives */
-.benefits-list li::before,
-.left-column ul li::before {
-  content: none;
 }
 
 
