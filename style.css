@@ -1784,4 +1784,73 @@ form#form-simu {
   position: relative;
 }
 
+/* === 🎯 CTA NAVIGATION ÉLÉGANTS ET DISCRETS (VERSION LUMIGENCY) === */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.4rem;
+}
+
+.step-actions.single {
+  justify-content: flex-end; /* Étape avec un seul bouton */
+}
+
+/* Boutons minimalistes */
+.btn-prev,
+.btn-next {
+  background: none;
+  border: none;
+  color: #0000FF; /* Bleu Lumigency */
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.85;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+  background: rgba(0, 0, 255, 0.05);
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+/* Effet “clic” doux */
+.btn-prev:active,
+.btn-next:active {
+  transform: translateY(0);
+  opacity: 0.8;
+}
+
+/* Petites flèches intégrées */
+.btn-prev::before {
+  content: "←";
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.btn-next::after {
+  content: "→";
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* Responsive – version plus fine sur mobile */
+@media (max-width: 768px) {
+  .btn-prev,
+  .btn-next {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
+.step-actions {
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
+}
 
