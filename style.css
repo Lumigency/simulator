@@ -1871,4 +1871,31 @@ form#form-simu {
   border-color: #849BFF;
   box-shadow: 0 2px 8px rgba(132,155,255,0.3);
 }
+/* ✅ Espacement uniforme entre chaque question du bloc 1 */
+.question-label {
+  display: block;
+  margin-top: 1.8rem;  /* espace avant chaque question */
+  margin-bottom: 0.6rem; /* espace entre le label et les réponses */
+  font-weight: 600;
+  color: #000;
+}
+
+.pill-group,
+.radio-group,
+.select-group {
+  margin-bottom: 1.8rem; /* espace après chaque bloc de réponses */
+}
+
+/* Ajustement léger pour garder l’équilibre visuel sur mobile */
+@media (max-width: 768px) {
+  .question-label {
+    margin-top: 1.4rem;
+  }
+  .pill-group,
+  .radio-group,
+  .select-group {
+    margin-bottom: 1.4rem;
+  }
+}
+
 
