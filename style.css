@@ -1783,67 +1783,55 @@ form#form-simu {
   margin-bottom: 28px;
   position: relative;
 }
+/* === ✨ CTA PRINCIPAL STYLE LUMIGENCY === */
+.btn-next,
+.btn-prev,
+.cta {
+  background: #849BFF; /* Bleu pastel Lumigency */
+  color: #111;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 26px;
+  border-radius: 999px; /* forme pilule */
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(132, 155, 255, 0.35);
+  display: inline-block;
+  text-align: center;
+}
 
-/* === 🎯 CTA NAVIGATION ÉLÉGANTS ET DISCRETS (VERSION LUMIGENCY) === */
+/* Hover : léger éclat */
+.btn-next:hover,
+.btn-prev:hover,
+.cta:hover {
+  background: #0000FF; /* Bleu plus intense */
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 255, 0.3);
+}
+
+/* Flèches douces */
+.btn-next::after {
+  content: "›";
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.btn-prev::before {
+  content: "‹";
+  margin-right: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Désactive la version “bloc” large des CTA */
 .step-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  margin-top: 1.4rem;
-}
-
-.step-actions.single {
-  justify-content: flex-end; /* Étape avec un seul bouton */
-}
-
-/* Boutons minimalistes */
-.btn-prev,
-.btn-next {
-  background: none;
-  border: none;
-  color: #0000FF; /* Bleu Lumigency */
-  font-weight: 500;
-  font-size: 0.95rem;
-  cursor: pointer;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  opacity: 0.85;
-}
-
-.btn-prev:hover,
-.btn-next:hover {
-  background: rgba(0, 0, 255, 0.05);
-  transform: translateY(-1px);
-  opacity: 1;
-}
-
-/* Effet “clic” doux */
-.btn-prev:active,
-.btn-next:active {
-  transform: translateY(0);
-  opacity: 0.8;
-}
-
-.btn-next::after {
-  content: "→";
-  font-weight: 600;
-  margin-left: 4px;
-}
-
-/* Responsive – version plus fine sur mobile */
-@media (max-width: 768px) {
-  .btn-prev,
-  .btn-next {
-    font-size: 0.9rem;
-    padding: 6px 8px;
-  }
-}
-.step-actions {
-  margin-top: 1.8rem;
-  margin-bottom: 0.5rem;
+  gap: 12px;
+  margin-top: 1.5rem;
 }
 
