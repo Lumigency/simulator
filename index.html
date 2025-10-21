@@ -48,7 +48,35 @@
   ⚙️ Renseignez vos données clés et obtenez une projection fiable de <mark>votre potentiel en affiliation</mark>.
 </h2>
       <form id="form-simu">
-        
+
+        <!-- CONTEXTE INITIAL -->
+<h3 class="section-title">🧭 Démarrons</h3>
+
+<!-- Programme existant -->
+<label>📈 Avez-vous déjà un programme d’affiliation en place ?</label>
+<div class="radio-group">
+  <label class="radio-item">
+    <input type="radio" name="programme" value="non" checked>
+    <span>Non, je n’en ai pas encore</span>
+  </label>
+  <label class="radio-item">
+    <input type="radio" name="programme" value="oui">
+    <span>Oui, j’en ai déjà un</span>
+  </label>
+</div>
+
+<!-- Objectif principal -->
+<label>🎯 Votre objectif principal avec l’affiliation</label>
+<select name="objectif" required>
+  <option value="">-- Sélectionnez --</option>
+  <option value="lancer">Lancer un programme performant</option>
+  <option value="optimiser">Optimiser un programme existant</option>
+  <option value="diversifier">Tester de nouveaux leviers</option>
+  <option value="scaler">Scaler les ventes et le ROI</option>
+</select>
+
+<hr class="separator">
+       
 <!-- Trafic -->
 <label>👥 Votre trafic mensuel actuel</label>
 <div class="traffic-slider-container">
