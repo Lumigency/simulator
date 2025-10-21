@@ -48,8 +48,15 @@
   ⚙️ Renseignez vos données clés et obtenez une projection fiable de <mark>votre potentiel en affiliation</mark>.
 </h2>
       <form id="form-simu">
+        
+        <!-- Barre de progression -->
+<div class="progress-bar">
+  <div class="progress" id="progress" style="width:33%;"></div>
+</div>
 
-        <!-- CONTEXTE INITIAL -->
+        <!-- 🔹 ÉTAPE 1 : Contexte -->
+        <div class="form-step active" id="step-1">
+    <h3 class="section-title">🧭 Démarrons</h3>
 
 <!-- Programme existant -->
 <label>📈 Avez-vous déjà un programme d’affiliation en place ?</label>
@@ -75,7 +82,13 @@
 </select>
 
  <div style="margin: 1.5rem 0;"></div>
-       
+          <div class="step-actions">
+      <button type="button" class="cta" id="next-step-1">Suivant ➡️</button>
+    </div>
+  </div>
+        
+        <!-- 🔹 ÉTAPE 2 : Données de simulation -->
+        <div class="form-step" id="step-2">
 <!-- Trafic -->
 <label>👥 Votre trafic mensuel actuel</label>
 <div class="traffic-slider-container">
@@ -162,6 +175,15 @@
   </label>
 </div>
 <div id="hybrid-alert" class="alert-hybride" style="display:none;"></div>
+          <div class="step-actions">
+      <button type="button" class="cta-secondary" id="prev-step-2">⬅️ Précédent</button>
+      <button type="button" class="cta" id="next-step-2">Suivant ➡️</button>
+    </div>
+  </div>
+        
+<!-- 🔹 ÉTAPE 3 : Données prospects -->
+
+          <div class="form-step" id="step-3">
 
         <!-- Secteur d’activité -->
         <label>🏷️ Votre secteur d’activité</label>
@@ -195,6 +217,11 @@
       <!-- CTA principal + CTA secondaire -->
 <button type="submit" class="cta">🔥 Lancer ma simulation</button>
 <a href="https://www.lumigency.com/consultation-gratuite" class="cta-secondary">💬 Discuter avec un expert Lumigency</a>
+
+        <div class="step-actions">
+      <button type="button" class="cta-secondary" id="prev-step-3">⬅️ Précédent</button>
+    </div>
+  </div>
 </form>
 </div> <!-- fin de right-column -->
 
