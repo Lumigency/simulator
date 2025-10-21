@@ -1874,8 +1874,8 @@ form#form-simu {
 /* ✅ Espacement uniforme entre chaque question du bloc 1 */
 .question-label {
   display: block;
-  margin-top: 1.8rem;  /* espace avant chaque question */
-  margin-bottom: 0.6rem; /* espace entre le label et les réponses */
+  margin-top: 1.8rem;        /* espace avant chaque question */
+  margin-bottom: 0.4rem;     /* espace réduit entre la question et ses réponses */
   font-weight: 600;
   color: #000;
 }
@@ -1883,29 +1883,21 @@ form#form-simu {
 .pill-group,
 .radio-group,
 .select-group {
-  margin-bottom: 1.8rem; /* espace après chaque bloc de réponses */
+  margin-bottom: 1.8rem;     /* espace après chaque bloc de réponses */
 }
 
-/* Ajustement léger pour garder l’équilibre visuel sur mobile */
+/* ✅ Ajustement léger pour garder l’équilibre visuel sur mobile */
 @media (max-width: 768px) {
   .question-label {
     margin-top: 1.4rem;
+    margin-bottom: 0.35rem;
   }
+
   .pill-group,
   .radio-group,
   .select-group {
     margin-bottom: 1.4rem;
   }
-}
-.progress-container {
-  position: relative;
-  width: 90%;
-  max-width: 600px;
-  height: 12px;
-  background-color: #e9ecff;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 1.5rem auto 2rem auto;
 }
 
 .progress-bar {
