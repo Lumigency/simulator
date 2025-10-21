@@ -1770,6 +1770,7 @@ form#form-simu {
   display: block;
   opacity: 1;
   transform: translateY(0);
+  animation: fadeIn 0.4s ease forwards;
 }
 
 /* === BARRE DE PROGRESSION === */
@@ -1783,11 +1784,4 @@ form#form-simu {
   position: relative;
 }
 
-.progress-bar {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(to right, #849BFF, #0000FF);
-  transition: width 0.4s ease;
-  border-radius: 6px;
-}
 
