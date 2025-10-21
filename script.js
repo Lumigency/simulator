@@ -2,6 +2,48 @@
 
 console.log("✅ script.js chargé");
 
+// === Gestion du formulaire multi-étapes ===
+const steps = document.querySelectorAll('.form-step');
+const progress = document.querySelector('#progress');
+let currentStep = 0;
+
+function showStep(index) {
+  steps.forEach((step, i) => step.classList.toggle('active', i === index));
+  if (progress) progress.style.width = `${((index + 1) / steps.length) * 100}%`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Navigation entre les étapes
+document.getElementById('next-step-1')?.addEventListener('click', () => {
+  const objectif = document.querySelector('[name="objectif"]');
+  if (!objectif.value) {
+    objectif.classList.add('is-invalid');
+    setTimeout(() => objectif.classList.remove('is-invalid'), 1200);
+    return;
+  }
+  currentStep = 1;
+  showStep(currentStep);
+});
+
+document.getElementById('next-step-2')?.addEventListener('click', () => {
+  currentStep = 2;
+  showStep(currentStep);
+});
+
+document.getElementById('prev-step-2')?.addEventListener('click', () => {
+  currentStep = 0;
+  showStep(currentStep);
+});
+
+document.getElementById('prev-step-3')?.addEventListener('click', () => {
+  currentStep = 1;
+  showStep(currentStep);
+});
+
+// Initialisation
+showStep(currentStep);
+
+
 // ----------------- HELPERS -----------------
 function numberOf(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
 function fmtCurrency(n){ return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); }
@@ -576,6 +618,7 @@ if (restartBtn) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
 
 
 
