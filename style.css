@@ -1871,37 +1871,37 @@ form#form-simu {
   border-color: #849BFF;
   box-shadow: 0 2px 8px rgba(132,155,255,0.3);
 }
-/* ✅ Espacement plus compact entre les questions et leurs réponses */
+/* 🩵 Espacement serré entre question et réponses */
 .question-label {
   display: block;
-  margin-top: 1.4rem;       /* espace avant chaque question */
-  margin-bottom: 0.25rem;   /* espace très réduit entre la question et ses réponses */
+  margin-top: 1rem;        /* espace avant la question */
+  margin-bottom: 0.15rem;  /* espace minimal entre la question et les réponses */
   font-weight: 600;
   color: #000;
 }
 
-/* ✅ Regroupe mieux les blocs de réponses */
+/* 🩵 Espacement entre chaque groupe de réponses */
 .pill-group,
 .radio-group,
 .select-group,
 .checkbox-group,
 .form-row {
-  margin-bottom: 1.4rem;    /* réduit l’espace après chaque groupe */
+  margin-top: 0.2rem;      /* resserre le haut du bloc réponses */
+  margin-bottom: 1rem;     /* espace après chaque groupe */
 }
 
-/* ✅ Responsive : équilibre sur mobile */
+/* 🩵 Sur mobile : équilibre sans étouffer */
 @media (max-width: 768px) {
   .question-label {
-    margin-top: 1.2rem;
-    margin-bottom: 0.2rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.1rem;
   }
-
   .pill-group,
   .radio-group,
   .select-group,
   .checkbox-group,
   .form-row {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.9rem;
   }
 }
 
