@@ -81,22 +81,31 @@
   <option value="scaler">Scaler les ventes et le ROI</option>
 </select>
 
+       <!-- 🌍 Vos ventes se font principalement sur... -->
+<label class="question-label">🌍 Vos ventes se font principalement sur...</label>
+<div class="pill-group">
+  <input type="radio" id="marche-france" name="marche" value="france" checked>
+  <label for="marche-france">France uniquement</label>
 
-          <!-- National ou internationnal -->
-  <label>🌎 Vos ventes se font principalement sur...</label>
-  <div class="radio-group">
-    <label class="radio-item"><input type="radio" name="marche" value="france" checked><span>France uniquement</span></label>
-    <label class="radio-item"><input type="radio" name="marche" value="europe"><span>Europe</span></label>
-    <label class="radio-item"><input type="radio" name="marche" value="international"><span>International</span></label>
-  </div>
+  <input type="radio" id="marche-europe" name="marche" value="europe">
+  <label for="marche-europe">Europe</label>
 
-          <!-- gestion campagnes -->
-  <label>🏗️ Comment gérez-vous aujourd’hui vos campagnes d’acquisition ?</label>
-  <div class="radio-group">
-    <label class="radio-item"><input type="radio" name="organisation" value="interne"><span>En interne</span></label>
-    <label class="radio-item"><input type="radio" name="organisation" value="agence"><span>Avec une agence</span></label>
-    <label class="radio-item"><input type="radio" name="organisation" value="mixte"><span>Un mix des deux</span></label>
-  </div>
+  <input type="radio" id="marche-international" name="marche" value="international">
+  <label for="marche-international">International</label>
+</div>
+
+<!-- ⚙️ Exemple pour la gestion des campagnes -->
+<label class="question-label">⚙️ Comment gérez-vous aujourd’hui vos campagnes d’acquisition ?</label>
+<div class="pill-group">
+  <input type="radio" id="orga-interne" name="organisation" value="interne">
+  <label for="orga-interne">En interne</label>
+
+  <input type="radio" id="orga-agence" name="organisation" value="agence">
+  <label for="orga-agence">Avec une agence</label>
+
+  <input type="radio" id="orga-mixte" name="organisation" value="mixte">
+  <label for="orga-mixte">Un mix des deux</label>
+</div>
 
   <!-- connaissance -->
   <label>💡 Quel est votre niveau de connaissance du levier affiliation ?</label>
