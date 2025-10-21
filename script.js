@@ -619,6 +619,20 @@ if (restartBtn) {
   });
 }
 
+function updateProgress(percent) {
+  const bar = document.getElementById('progress-bar');
+  const text = document.getElementById('progress-text');
+  
+  bar.style.width = percent + '%';
+  text.textContent = percent + '%';
+}
+
+// Exemple : simulateur avec 3 étapes
+// Appelle cette fonction à chaque changement d’étape :
+updateProgress(33); // bloc 1 terminé
+// updateProgress(66); // bloc 2 terminé
+// updateProgress(100); // bloc 3 terminé
+
 
 
 
