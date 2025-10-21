@@ -1828,13 +1828,6 @@ form#form-simu {
   opacity: 0.8;
 }
 
-/* Petites flèches intégrées */
-.btn-prev::before {
-  content: "←";
-  font-weight: 600;
-  margin-right: 4px;
-}
-
 .btn-next::after {
   content: "→";
   font-weight: 600;
