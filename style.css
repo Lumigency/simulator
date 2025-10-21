@@ -1746,3 +1746,15 @@ canvas {
   display: inline-block;
   line-height: 1.2;
 }
+.subtitle {
+  margin-bottom: 0.8rem; /* Réduit l’espace sous la phrase d’intro */
+}
+
+form#form-simu {
+  margin-top: 0.5rem; /* Colle un peu plus le formulaire */
+}
+
+.section-title:first-of-type {
+  margin-top: 0; /* Supprime le haut du premier titre de section */
+}
+
