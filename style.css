@@ -1897,5 +1897,33 @@ form#form-simu {
     margin-bottom: 1.4rem;
   }
 }
+.progress-container {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  height: 12px;
+  background-color: #e9ecff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1.5rem auto 2rem auto;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 9%; /* valeur de départ */
+  background: linear-gradient(90deg, #849BFF, #0000FF);
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+.progress-text {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  font-size: 0.9rem;
+  color: #000;
+  font-weight: 600;
+}
+
 
 
