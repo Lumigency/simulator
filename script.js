@@ -136,37 +136,52 @@ function adjustCVR(baseCvr, levers) {
   return Math.min(c, 0.08);
 }
 
-// ----------------- CAC projeté pondéré par PDV sectorielle -----------------
+// ----------------- CAC projeté pondéré (version smart 2025) -----------------
 function projectedCAC(sectorKey, levers, cacClient) {
   const sector = SECTORS[sectorKey] || SECTORS.other;
   const pdv = sector.pdv || {};
-  // Build selection PDV: if levers selected, take PDV for those (fallback equal share)
+
+  // 1️⃣ Sélection PDV pour les leviers cochés
   let sel = {};
   if (levers.length) {
-    levers.forEach(lv => {
-      if (pdv[lv] != null) sel[lv] = pdv[lv];
-      else sel[lv] = 1; // if lev not in pdv mapping, give equal weight first
-    });
+    levers.forEach(lv => sel[lv] = pdv[lv] ?? 1);
   } else {
-    // no lever selected -> use top 5 PDV levers in sector
     sel = Object.fromEntries(Object.entries(pdv).sort((a,b)=>b[1]-a[1]).slice(0,5));
   }
   sel = normalize(sel);
 
-  // compute weighted average of LEVER_CAC (fallback to client cac if lev has null)
+  // 2️⃣ Moyenne pondérée du CAC de base
   let cac = 0;
   for (const lv in sel) {
-    const base = (LEVER_CAC[lv] != null) ? LEVER_CAC[lv] : cacClient || 0;
+    const base = LEVER_CAC[lv] ?? cacClient ?? 0;
     cac += sel[lv] * base;
   }
 
-  // If computed cac is very optimistic vs client, pull it up halfway to client
-  if (cacClient > 0 && cac < cacClient * 0.8) {
-    cac = (cac + cacClient) / 2;
+  // 3️⃣ Déterminer le profil du mix
+  const premiumLevers = ["affinitaires", "influence", "content", "emailing"];
+  const massLevers = ["cashback", "bonsplans", "retargeting", "comparateurs", "css"];
+  const nbPremium = levers.filter(l => premiumLevers.includes(l)).length;
+  const nbMass = levers.filter(l => massLevers.includes(l)).length;
+
+  // 4️⃣ Mix factor = effet stabilisateur selon le nombre total de leviers
+  const diversityFactor = 1 - Math.min(levers.length / 10, 0.3); // max -30% si >10 leviers
+  cac *= diversityFactor;
+
+  // 5️⃣ Ajustement premium/mass
+  if (nbPremium && !nbMass) cac *= 1.25; // que des premium
+  else if (nbMass && !nbPremium) cac *= 0.9; // que des mass
+  else if (nbPremium && nbMass) cac *= 1.05; // mix équilibré
+
+  // 6️⃣ Ajustement progressif selon CAC client
+  if (cacClient > 0) {
+    const diffRatio = cac / cacClient;
+    if (diffRatio < 0.7) cac = (cac + cacClient * 0.8) / 2; // lisse vers client
+    else if (diffRatio > 1.4) cac = (cac + cacClient * 1.2) / 2; // plafonne la hausse excessive
   }
 
-  // final floor
-  if (cac <= 0) cac = cacClient || 0;
+  // 7️⃣ Sécurité : floor minimum
+  if (cac <= 0) cac = cacClient || 10;
+
   return cac;
 }
 
@@ -561,6 +576,7 @@ if (restartBtn) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
 
 
 
