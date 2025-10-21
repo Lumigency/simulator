@@ -1835,3 +1835,40 @@ form#form-simu {
   margin-top: 1.5rem;
 }
 
+.question-label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.6rem;
+  color: #000;
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1.4rem;
+}
+
+.pill-group input[type="radio"] {
+  display: none;
+}
+
+.pill-group label {
+  padding: 8px 16px;
+  border: 1px solid #d1d5ff;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #1a1a1a;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.pill-group input[type="radio"]:checked + label {
+  background-color: #849BFF; /* ton bleu pastel Lumigency */
+  color: white;
+  border-color: #849BFF;
+  box-shadow: 0 2px 8px rgba(132,155,255,0.3);
+}
+
