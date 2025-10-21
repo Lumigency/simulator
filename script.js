@@ -597,7 +597,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(slideTestimonials, 4000);
 });
 
-
 // === Bouton "Faire une nouvelle simulation" ===
 const restartBtn = document.getElementById("restart-btn");
 if (restartBtn) {
@@ -614,10 +613,27 @@ if (restartBtn) {
     const splitLayout = document.querySelector(".split-layout");
     if (splitLayout) splitLayout.classList.remove("show-results");
 
+    // 🔁 Réinitialise le formulaire et la progression
+    const form = document.getElementById("form-simu");
+    if (form) form.reset();
+
+    // 🔁 Revient à la toute première étape
+    currentStep = 0;
+    showStep(currentStep);
+
+    // 🔁 Réinitialise la barre de progression
+    const progressBar = document.getElementById("progress-bar");
+    const progressText = document.getElementById("progress-text");
+    if (progressBar && progressText) {
+      progressBar.style.width = "0%";
+      progressText.textContent = "0%";
+    }
+
     // Retourne en haut de page
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
 
 function updateProgress(percent) {
   const bar = document.getElementById('progress-bar');
@@ -632,6 +648,7 @@ function updateProgress(percent) {
 updateProgress(33); // bloc 1 terminé
 // updateProgress(66); // bloc 2 terminé
 // updateProgress(100); // bloc 3 terminé
+
 
 
 
