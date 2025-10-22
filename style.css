@@ -1968,15 +1968,16 @@ form#form-simu {
     margin-bottom: 0.9rem;
   }
 }
-/* ✅ Ajustement fin bloc 1 — espace plus serré entre question et réponses */
-.form-step:first-child .question-label {
-  margin-bottom: 0.35rem !important;
+/* 🔧 Harmonisation des espacements question / réponse */
+.question-label + .pill-group,
+.question-label + .radio-group,
+.question-label + .checkbox-group,
+.question-label + select {
+  margin-top: 0.4rem !important;
 }
 
-.form-step:first-child .pill-group {
-  margin-top: 0.2rem !important;
-  margin-bottom: 1.0rem !important;
-}
-
+.pill-group {
+  margin-bottom: 1rem;
+  gap: 0.5rem;
 }
 
