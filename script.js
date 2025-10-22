@@ -46,7 +46,8 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
 
 // Initialisation
 showStep(currentStep);
-
+// ✅ Forcer la barre à 0 % au tout démarrage
+updateProgress(0);
 
 // ----------------- HELPERS -----------------
 function numberOf(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
@@ -646,6 +647,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
