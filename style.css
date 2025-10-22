@@ -1968,21 +1968,15 @@ form#form-simu {
     margin-bottom: 0.9rem;
   }
 }
-/* 🔧 Ajustement ultra-fin pour les groupes de boutons (pills) */
-.pill-group {
-  margin-top: 0rem !important; /* supprime le petit espace trop visible */
-  gap: 0.4rem !important;      /* réduit l’écart entre les boutons eux-mêmes */
+/* ✅ Ajustement fin bloc 1 — espace plus serré entre question et réponses */
+.form-step:first-child .question-label {
+  margin-bottom: 0.35rem !important;
 }
 
-.question-label + .pill-group {
-  margin-top: 0.2rem !important; /* rapproche la question et ses boutons */
+.form-step:first-child .pill-group {
+  margin-top: 0.2rem !important;
+  margin-bottom: 1.0rem !important;
 }
 
-/* Optionnel : équilibre global sur mobile */
-@media (max-width: 768px) {
-  .pill-group {
-    margin-top: 0rem !important;
-    gap: 0.3rem !important;
-  }
 }
 
