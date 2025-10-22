@@ -1936,48 +1936,17 @@ form#form-simu {
   text-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 
-/* === Ajustements fins des espacements questions / réponses (version finale) === */
-.question-label {
-  margin-top: 1rem;
-  margin-bottom: 0.25rem; /* rapproche davantage la question des réponses */
-}
-
-.pill-group {
-  margin-top: 0.1rem;     /* espace minimal au-dessus des boutons */
-  margin-bottom: 1.1rem;  /* respiration après le bloc */
-}
-
-.radio-group,
-.select-group,
-.checkbox-group,
-.form-row {
-  margin-top: 0.3rem;
-  margin-bottom: 1.1rem;
-}
-
-@media (max-width: 768px) {
-  .question-label {
-    margin-top: 0.8rem;
-    margin-bottom: 0.15rem;
-  }
-  .pill-group,
-  .radio-group,
-  .select-group,
-  .checkbox-group {
-    margin-top: 0.2rem;
-    margin-bottom: 0.9rem;
-  }
-}
 /* 🔧 Harmonisation des espacements question / réponse */
 .question-label + .pill-group,
 .question-label + .radio-group,
 .question-label + .checkbox-group,
 .question-label + select {
-  margin-top: 0.4rem !important;
+  margin-top: 0.2rem !important; /* 🔽 rapproche encore les boutons de la question */
 }
 
 .pill-group {
-  margin-bottom: 1rem;
-  gap: 0.5rem;
+  margin-bottom: 0.8rem; /* 🔽 espace un peu plus compact entre les groupes */
+  gap: 0.45rem;          /* légère réduction de l’espace entre les options */
 }
+
 
