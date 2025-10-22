@@ -9,7 +9,11 @@ let currentStep = 0;
 
 function showStep(index) {
   steps.forEach((step, i) => step.classList.toggle('active', i === index));
-  if (progress) progress.style.width = `${((index + 1) / steps.length) * 100}%`;
+
+  // ✅ Met automatiquement à jour le pourcentage
+  const percent = Math.round(((index + 1) / steps.length) * 100);
+  updateProgress(percent);
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -643,11 +647,6 @@ function updateProgress(percent) {
   text.textContent = percent + '%';
 }
 
-// Exemple : simulateur avec 3 étapes
-// Appelle cette fonction à chaque changement d’étape :
-updateProgress(33); // bloc 1 terminé
-// updateProgress(66); // bloc 2 terminé
-// updateProgress(100); // bloc 3 terminé
 
 
 
