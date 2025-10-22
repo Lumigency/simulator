@@ -1949,4 +1949,25 @@ form#form-simu {
   gap: 0.45rem;          /* légère réduction de l’espace entre les options */
 }
 
+/* ✅ Position cohérente du footer sur toutes les pages */
+.footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2.5rem;
+  padding-bottom: 1rem;
+  position: relative; /* S'adapte à la hauteur du contenu */
+}
+
+/* 🔧 Si la première étape est plus courte, force un espace minimal */
+.form-step:first-child .footer {
+  margin-top: 4rem; /* pousse le footer plus bas sur la première page */
+}
+
+/* Optionnel : ajustement responsive */
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 2rem;
+  }
+}
 
