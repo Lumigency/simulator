@@ -1905,14 +1905,14 @@ form#form-simu {
 
 /* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
 .question-label {
-  margin-top: 1.6rem !important;   /* espace avant chaque question (même rythme que page 2) */
+  margin-top: 2.2rem !important;   /* espace avant chaque question (même rythme que page 2) */
   margin-bottom: 0.4rem !important; /* colle légèrement les réponses, mais respire */
   font-weight: 600;
 }
 
 .pill-group {
   margin-top: 0 !important;         /* pas d’espace inutile au-dessus */
-  margin-bottom: 1.6rem !important; /* plus d’air avant la question suivante */
+  margin-bottom: 2rem !important; /* plus d’air avant la question suivante */
   gap: 6px !important;              /* espace équilibré entre options */
 }
 
