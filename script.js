@@ -589,27 +589,6 @@ afficherEditeurs(levers);
   });
 });
 
-// === Interaction opt-in éditeurs ===
-const optinCheckbox = document.getElementById("optin-editeurs");
-const sendOptinBtn = document.getElementById("send-optin-btn");
-const optinConfirmation = document.getElementById("optin-confirmation");
-
-if (optinCheckbox && sendOptinBtn && optinConfirmation) {
-  optinCheckbox.addEventListener("change", () => {
-    sendOptinBtn.style.display = optinCheckbox.checked ? "inline-block" : "none";
-    optinConfirmation.style.display = "none";
-    optinConfirmation.classList.remove("show");
-  });
-
-  sendOptinBtn.addEventListener("click", () => {
-    // 👉 Ici, tu pourras plus tard brancher un envoi (Zapier, Formspree, webhook…)
-    optinConfirmation.style.display = "block";
-    setTimeout(() => optinConfirmation.classList.add("show"), 10);
-    sendOptinBtn.style.display = "none";
-  });
-}
-
-
 // === Slider Témoignages ===
 document.addEventListener("DOMContentLoaded", () => {
   const slider = document.getElementById('slider');
@@ -663,7 +642,6 @@ if (restartBtn) {
   });
 }
 
-
 function updateProgress(percent) {
   const bar = document.getElementById('progress-bar');
   const text = document.getElementById('progress-text');
@@ -672,9 +650,18 @@ function updateProgress(percent) {
   text.textContent = percent + '%';
 }
 
+// === Toast opt-in éditeurs ===
+const optinEditeurs = document.getElementById("optin-editeurs");
+const toast = document.getElementById("toast");
 
-
-
+if (optinEditeurs && toast) {
+  optinEditeurs.addEventListener("change", () => {
+    if (optinEditeurs.checked) {
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 4000);
+    }
+  });
+}
 
 
 
