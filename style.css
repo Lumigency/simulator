@@ -2011,4 +2011,23 @@ form#form-simu {
   .form-step {
     scroll-margin-top: 20px;
   }
- 
+ /* === Correction : le CTA principal ne doit pas être souligné === */
+#cta-link .cta {
+  text-decoration: none !important;
+  color: white; /* pour éviter le bleu souligné par défaut */
+}
+
+#cta-link .cta:hover {
+  text-decoration: none !important;
+}
+#cta-link {
+  max-width: 400px;
+  margin: 30px auto 0;
+}
+
+#cta-link .cta {
+  display: inline-block;
+  width: auto;
+  padding: 14px 32px;
+  border-radius: 999px;
+}
