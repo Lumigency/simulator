@@ -1939,4 +1939,28 @@ form#form-simu {
   line-height: 1.4;
   z-index: 2; /* ✅ s’assure qu’elle passe au-dessus du dégradé */
 }
+/* === 📱 Ajustements Mobile (lisibilité + padding bas) === */
+@media (max-width: 768px) {
+
+  .question-label {
+    margin-top: 2.2rem !important;   /* plus d'air avant chaque question */
+    margin-bottom: 0.6rem !important;
+    line-height: 1.4; /* améliore la lisibilité */
+  }
+
+  .pill-group {
+    gap: 8px !important;             /* espace un peu plus les boutons */
+    margin-bottom: 2rem !important;  /* plus d’air avant la question suivante */
+    flex-wrap: wrap;                 /* évite les débordements horizontaux */
+  }
+
+  /* 🧭 Empêche la dernière question d’être coupée */
+  .form-step.active {
+    padding-bottom: 90px !important;
+  }
+
+  /* 🌙 Petit confort de lecture global */
+  .form-step {
+    scroll-margin-top: 20px;
+  }
 }
