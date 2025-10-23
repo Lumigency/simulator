@@ -1963,4 +1963,49 @@ form#form-simu {
   .form-step {
     scroll-margin-top: 20px;
   }
+  /* === Bloc opt-in éditeurs === */
+.editor-optin {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.editor-optin label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#send-optin-btn {
+  margin-top: 1rem;
+  padding: 10px 22px;
+  background-color: #0000FF;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#send-optin-btn:hover {
+  background-color: #0732ef;
+}
+
+.optin-message {
+  margin-top: 1rem;
+  color: #22c55e;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.optin-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
