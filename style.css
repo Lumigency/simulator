@@ -1939,6 +1939,54 @@ form#form-simu {
   line-height: 1.4;
   z-index: 2; /* ✅ s’assure qu’elle passe au-dessus du dégradé */
 }
+
+/* === ✅ Bloc opt-in éditeurs — version desktop par défaut === */
+.editor-optin {
+  margin-top: 35px;
+  padding-bottom: 40px;
+  text-align: center;
+  font-size: 15px;
+  color: #222;
+  font-weight: 500;
+}
+
+.editor-optin label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.editor-optin input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #0732ef;
+  margin-right: 8px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* ✅ Toast notification */
+.toast {
+  display: none;
+  background: #e9f7ef;
+  color: #222;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  border-left: 4px solid #00b37a;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.toast.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* === 📱 Ajustements Mobile (lisibilité + padding bas) === */
 @media (max-width: 768px) {
 
@@ -1963,70 +2011,4 @@ form#form-simu {
   .form-step {
     scroll-margin-top: 20px;
   }
-  /* === Bloc opt-in éditeurs === */
-.editor-optin {
-  margin-top: 2.5rem;
-  text-align: center;
-}
-
-.editor-optin label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-#send-optin-btn {
-  margin-top: 1rem;
-  padding: 10px 22px;
-  background-color: #0000FF;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-#send-optin-btn:hover {
-  background-color: #0732ef;
-}
-
-.optin-message {
-  margin-top: 1rem;
-  color: #22c55e;
-  font-weight: 500;
-  opacity: 0;
-  transform: translateY(5px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.optin-message.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* ✅ Toast masqué par défaut */
-.toast {
-  display: none;
-  background: #e9f7ef;
-  color: #222;
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  margin-top: 10px;
-  border-left: 4px solid #00b37a;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: translateY(5px);
-}
-
-/* ✅ Lorsqu’il est actif */
-.toast.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-}
+ 
