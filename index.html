@@ -328,22 +328,33 @@
  <!-- Les cartes éditeurs seront injectées ici -->
 <div class="editor-grid"></div>
 
-<!-- Bloc opt-in + CTA correctement séparé -->
+<!-- Bloc opt-in + CTA -->
 <div class="editor-optin">
   <label>
     <input type="checkbox" id="optin-editeurs">
     Je souhaite recevoir plus d’informations sur ces partenaires.
   </label>
+
+  <!-- Bouton apparaissant uniquement si case cochée -->
+  <button id="send-optin-btn" class="cta-secondary" style="display:none;">
+    📩 Je veux plus d’informations
+  </button>
+
+  <!-- Message de confirmation -->
+  <p id="optin-confirmation" class="optin-message" style="display:none;">
+    ✅ Merci ! Un expert Lumigency reviendra vers vous très prochainement avec les informations des partenaires sélectionnés.
+  </p>
 </div>
 
-<!-- ✅ CTA placé dans un bloc distinct -->
+<!-- CTA principal -->
 <div id="cta-link">
-  <a href="#contact" class="cta">🚀 Discutons ensemble de votre stratégie d’affiliation</a>
+  <a href="https://www.lumigency.com/consultation-gratuite" class="cta">
+    🚀 Discutons ensemble de votre stratégie d’affiliation
+  </a>
 </div>
 
-   <button id="restart-btn" class="cta-secondary">↩️ Faire une nouvelle simulation</button>
-</div>
 </div> <!-- fin du bloc éditeurs -->
+  
 </section> <!-- ✅ fin du bloc résultats -->
 
 </div> <!-- ✅ fin de split-layout -->
