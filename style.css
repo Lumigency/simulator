@@ -1871,39 +1871,6 @@ form#form-simu {
   border-color: #849BFF;
   box-shadow: 0 2px 8px rgba(132,155,255,0.3);
 }
-/* 🩵 Espacement serré entre question et réponses */
-.question-label {
-  display: block;
-  margin-top: 1rem;        /* espace avant la question */
-  margin-bottom: 0.15rem;  /* espace minimal entre la question et les réponses */
-  font-weight: 600;
-  color: #000;
-}
-
-/* 🩵 Espacement entre chaque groupe de réponses */
-.pill-group,
-.radio-group,
-.select-group,
-.checkbox-group,
-.form-row {
-  margin-top: 0.2rem;      /* resserre le haut du bloc réponses */
-  margin-bottom: 1rem;     /* espace après chaque groupe */
-}
-
-/* 🩵 Sur mobile : équilibre sans étouffer */
-@media (max-width: 768px) {
-  .question-label {
-    margin-top: 0.8rem;
-    margin-bottom: 0.1rem;
-  }
-  .pill-group,
-  .radio-group,
-  .select-group,
-  .checkbox-group,
-  .form-row {
-    margin-bottom: 0.9rem;
-  }
-}
 
 .progress-container {
   position: relative;
@@ -1936,38 +1903,20 @@ form#form-simu {
   text-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 
-/* 🔧 Harmonisation des espacements question / réponse */
-.question-label + .pill-group,
-.question-label + .radio-group,
-.question-label + .checkbox-group,
-.question-label + select {
-  margin-top: 0.2rem !important; /* 🔽 rapproche encore les boutons de la question */
+/* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
+.question-label {
+  margin-top: 0.8rem !important;   /* léger espace avant la question */
+  margin-bottom: 0.25rem !important; /* colle les réponses au texte */
 }
 
 .pill-group {
-  margin-bottom: 0.8rem; /* 🔽 espace un peu plus compact entre les groupes */
-  gap: 0.45rem;          /* légère réduction de l’espace entre les options */
+  margin-top: 0 !important;        /* supprime l’espace inutile au-dessus */
+  margin-bottom: 1rem !important;  /* petit espace avant la question suivante */
+  gap: 6px !important;             /* espace serré entre les options */
 }
 
-/* ✅ Position cohérente du footer sur toutes les pages */
-.footer {
-  text-align: center;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 2.5rem;
-  padding-bottom: 1rem;
-  position: relative; /* S'adapte à la hauteur du contenu */
+.pill-group label {
+  margin: 2px 6px 2px 0 !important; /* resserre verticalement */
 }
 
-/* 🔧 Si la première étape est plus courte, force un espace minimal */
-.form-step:first-child .footer {
-  margin-top: 4rem; /* pousse le footer plus bas sur la première page */
 }
-
-/* Optionnel : ajustement responsive */
-@media (max-width: 768px) {
-  .footer {
-    margin-top: 2rem;
-  }
-}
-
