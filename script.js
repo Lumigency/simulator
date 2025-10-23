@@ -432,6 +432,8 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
+      updateProgress(100); // ✅ passe à 100% quand on lance la simulation
+
     // --- Read inputs safely ---
     const trafficMonthly = numberOf(form.elements["traffic"]?.value);
     const aovUser = numberOf(form.elements["aov"]?.value);
@@ -648,6 +650,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
