@@ -2021,6 +2021,26 @@ form#form-simu {
   box-shadow: 0 6px 16px rgba(0, 0, 255, 0.2);
 }
 
+/* ✅ Bouton "Refaire une simulation" */
+#restart-btn {
+  display: inline-block;
+  margin-top: 16px;
+  background: none;
+  color: #0000FF;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+#restart-btn:hover {
+  color: #0732ef;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transform: translateX(2px);
+}
 
 /* === 📱 Ajustements Mobile (lisibilité + padding bas) === */
 @media (max-width: 768px) {
