@@ -1919,4 +1919,13 @@ form#form-simu {
   margin: 2px 6px 2px 0 !important; /* resserre verticalement */
 }
 
+/* === 🌤️ ESPACEMENT ENTRE BLOCS DE QUESTIONS === */
+.question-label {
+  margin-top: 1.8rem !important;  /* espace avant chaque question */
+  margin-bottom: 0.25rem !important; /* garde les réponses proches */
+}
+
+.pill-group {
+  margin-bottom: 1.4rem !important; /* petit air après les réponses */
+}
 }
