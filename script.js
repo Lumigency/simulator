@@ -10,10 +10,11 @@ let currentStep = 0;
 function showStep(index) {
   steps.forEach((step, i) => step.classList.toggle('active', i === index));
 
-  // ✅ Met automatiquement à jour le pourcentage
- const percent = Math.round((index / (steps.length - 1)) * 100);
-  updateProgress(percent);
 
+   // ✅ Met automatiquement à jour le pourcentage
+  let percent = Math.round((index / (steps.length - 1)) * 100);
+  if (index === steps.length - 1) percent = 85; // limite à 85% avant soumission
+  updateProgress(percent);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -647,6 +648,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
