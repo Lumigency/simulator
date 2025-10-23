@@ -586,6 +586,8 @@ const insightsBox = document.getElementById("insights");
 afficherEditeurs(levers);
 
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
   });
 });
 
@@ -662,6 +664,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
