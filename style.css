@@ -2008,4 +2008,27 @@ form#form-simu {
   opacity: 1;
   transform: translateY(0);
 }
+  /* === Toast notification Lumigency === */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #EDE1D8; /* beige rosé Lumigency */
+  color: #0732ef; /* bleu profond Lumigency */
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
