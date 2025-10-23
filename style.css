@@ -1999,32 +1999,26 @@ form#form-simu {
   }
 }
 
-/* === ✅ CTA principal (desktop & mobile) === */
-#cta-link {
-  display: flex;
-  justify-content: center;
-  margin: 30px auto 0;
-  max-width: 420px;
-}
-
+/* ✅ CTA principal — version allongée */
 #cta-link .cta {
   display: inline-block;
   background: #849BFF;
   color: white;
-  padding: 14px 32px;
+  padding: 14px 60px; /* ✅ élargit le bouton horizontalement */
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
   font-size: 1rem;
   transition: all 0.25s ease;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 #cta-link .cta:hover {
-  background: #0000FF; /* ton survol bleu Lumigency */
+  background: #0000FF;
   color: #fff;
-  text-decoration: none;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 255, 0.2);
 }
 
 
