@@ -1905,28 +1905,19 @@ form#form-simu {
 
 /* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
 .question-label {
-  margin-top: 0.8rem !important;   /* léger espace avant la question */
-  margin-bottom: 0.25rem !important; /* colle les réponses au texte */
+  margin-top: 1.6rem !important;   /* espace avant chaque question (même rythme que page 2) */
+  margin-bottom: 0.4rem !important; /* colle légèrement les réponses, mais respire */
+  font-weight: 600;
 }
 
 .pill-group {
-  margin-top: 0 !important;        /* supprime l’espace inutile au-dessus */
-  margin-bottom: 1rem !important;  /* petit espace avant la question suivante */
-  gap: 6px !important;             /* espace serré entre les options */
+  margin-top: 0 !important;         /* pas d’espace inutile au-dessus */
+  margin-bottom: 1.6rem !important; /* plus d’air avant la question suivante */
+  gap: 6px !important;              /* espace équilibré entre options */
 }
 
 .pill-group label {
   margin: 2px 6px 2px 0 !important; /* resserre verticalement */
-}
-
-/* === 🌤️ ESPACEMENT ENTRE BLOCS DE QUESTIONS === */
-.question-label {
-  margin-top: 1.8rem !important;  /* espace avant chaque question */
-  margin-bottom: 0.25rem !important; /* garde les réponses proches */
-}
-
-.pill-group {
-  margin-bottom: 1.4rem !important; /* petit air après les réponses */
 }
 
 /* === 🌙 Correction visibilité de la signature Lumigency === */
