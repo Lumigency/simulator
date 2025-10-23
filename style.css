@@ -1928,4 +1928,24 @@ form#form-simu {
 .pill-group {
   margin-bottom: 1.4rem !important; /* petit air après les réponses */
 }
+
+/* === 🌙 Correction visibilité de la signature Lumigency === */
+.left-column {
+  position: relative;
+  padding-bottom: 80px; /* ✅ espace réservé pour que la signature ne soit plus cachée */
+  overflow: visible;    /* ✅ assure que rien ne coupe le texte en bas */
+}
+
+.lumigency-signature {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  z-index: 2; /* ✅ s’assure qu’elle passe au-dessus du dégradé */
+}
 }
