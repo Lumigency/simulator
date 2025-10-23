@@ -575,13 +575,6 @@ const insightsBox = document.getElementById("insights");
       });
     }
 
-    // CTA (single, short)
-    const ctaWrap = document.getElementById("cta-link");
-    if (ctaWrap) {
-      ctaWrap.innerHTML = `<a class="cta" href="https://www.lumigency.com/consultation-gratuite">🚀 Prenez RDV gratuit</a>`;
-      ctaWrap.style.display = "block";
-    }
-
     // --- Editors suggestions ---
 afficherEditeurs(levers);
 
@@ -664,6 +657,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
