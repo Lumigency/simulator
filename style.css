@@ -1987,6 +1987,35 @@ form#form-simu {
   transform: translateY(0);
 }
 
+/* === ✅ CTA principal (desktop & mobile) === */
+#cta-link {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 0;
+  max-width: 420px;
+}
+
+#cta-link .cta {
+  display: inline-block;
+  background: #849BFF;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+#cta-link .cta:hover {
+  background: #0000FF; /* ton survol bleu Lumigency */
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+
 /* === 📱 Ajustements Mobile (lisibilité + padding bas) === */
 @media (max-width: 768px) {
 
@@ -2011,23 +2040,4 @@ form#form-simu {
   .form-step {
     scroll-margin-top: 20px;
   }
- /* === Correction : le CTA principal ne doit pas être souligné === */
-#cta-link .cta {
-  text-decoration: none !important;
-  color: white; /* pour éviter le bleu souligné par défaut */
-}
 
-#cta-link .cta:hover {
-  text-decoration: none !important;
-}
-#cta-link {
-  max-width: 400px;
-  margin: 30px auto 0;
-}
-
-#cta-link .cta {
-  display: inline-block;
-  width: auto;
-  padding: 14px 32px;
-  border-radius: 999px;
-}
