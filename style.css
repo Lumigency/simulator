@@ -2034,47 +2034,20 @@ select {
 }
 
 @media (max-width: 768px) {
-  .pill-group {
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 2rem;
+  /* Resserre l'espace question <-> réponses */
+  .question-label {
+    margin-top: 0.8rem !important;
+    margin-bottom: -1rem !important;
   }
 
-  .pill-group label {
-    flex: 1 1 45%;
-    text-align: center;
+  /* Resserre entre deux questions consécutives */
+  .pill-group + .question-label {
+    margin-top: 0.4rem !important;
   }
-} 
 
-/* === 🔧 PATCH ESPACEMENT INTER-GROUPES (v3.1) === */
-@media (max-width: 768px) {
-  /* Resserre les groupes entre eux */
+  /* Réduit les marges globales des groupes */
   .pill-group {
     margin-top: 0.1rem !important;
     margin-bottom: 0.2rem !important;
   }
-
-  /* Annule les marges redondantes entre questions consécutives */
-  .question-label + .pill-group {
-    margin-top: 0.2rem !important;
-  }
-
-  .pill-group + .question-label {
-    margin-top: 0.7rem !important;
-  }
-
-  /* Uniformise la hauteur et le centrage des boutons */
-  .pill-group label {
-    min-height: 36px !important;
-    padding: 8px 14px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Supprime le “trou” sous les lignes isolées */
-  .pill-group label:only-of-type {
-    margin-top: -8px !important;
-  }
 }
-
