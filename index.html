@@ -65,16 +65,13 @@
     <h3 class="section-title">🧭 Démarrons</h3>
 
 <!-- Programme existant -->
-<label>📈 Avez-vous déjà un programme d’affiliation en place ?</label>
-<div class="radio-group">
-  <label class="radio-item">
-    <input type="radio" name="programme" value="non" checked>
-    <span>Non, je n’en ai pas encore</span>
-  </label>
-  <label class="radio-item">
-    <input type="radio" name="programme" value="oui">
-    <span>Oui, j’en ai déjà un</span>
-  </label>
+<label class="question-label">📈 Avez-vous déjà un programme d’affiliation en place ?</label>
+<div class="pill-group">
+  <input type="radio" id="programme-non" name="programme" value="non" checked>
+  <label for="programme-non">Non</label>
+
+  <input type="radio" id="programme-oui" name="programme" value="oui">
+  <label for="programme-oui">Oui</label>
 </div>
 
 <!-- Objectif principal -->
@@ -114,12 +111,17 @@
 </div>
 
   <!-- connaissance -->
-  <label>💡 Quel est votre niveau de connaissance du levier affiliation ?</label>
-  <div class="radio-group">
-    <label class="radio-item"><input type="radio" name="maturite" value="debutant"><span>Je découvre</span></label>
-    <label class="radio-item"><input type="radio" name="maturite" value="intermediaire"><span>J’ai déjà testé</span></label>
-    <label class="radio-item"><input type="radio" name="maturite" value="avance"><span>Programme structuré en place</span></label>
-  </div>
+  <label class="question-label">💡 Votre niveau de connaissance du levier affiliation</label>
+<div class="pill-group">
+  <input type="radio" id="maturite-debutant" name="maturite" value="debutant">
+  <label for="maturite-debutant">Je découvre</label>
+
+  <input type="radio" id="maturite-intermediaire" name="maturite" value="intermediaire">
+  <label for="maturite-intermediaire">J’ai déjà testé</label>
+
+  <input type="radio" id="maturite-avance" name="maturite" value="avance">
+  <label for="maturite-avance">Programme structuré</label>
+</div>
 <div style="margin: 1.5rem 0;"></div>
 
 <!-- ✅ Navigation étape 1 -->
@@ -204,17 +206,15 @@
         </div>
 
       <!-- Modèles hybrides -->
-<label>⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
-<div class="radio-group">
-  <label class="radio-item">
-    <input type="radio" name="hybrides" value="oui">
-    <span>Oui</span>
-  </label>
-  <label class="radio-item">
-    <input type="radio" name="hybrides" value="non">
-    <span>Non</span>
-  </label>
+<label class="question-label">⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
+<div class="pill-group">
+  <input type="radio" id="hybrides-oui" name="hybrides" value="oui">
+  <label for="hybrides-oui">Oui</label>
+
+  <input type="radio" id="hybrides-non" name="hybrides" value="non">
+  <label for="hybrides-non">Non</label>
 </div>
+
 <div id="hybrid-alert" class="alert-hybride" style="display:none;"></div>
   <div style="margin: 1.5rem 0;"></div>
 <!-- ✅ Navigation étape 2 -->
@@ -224,8 +224,6 @@
 </div>
 </div>
 
-
-        
 <!-- 🔹 ÉTAPE 3 : Données prospects -->
 
           <div class="form-step" id="step-3">
