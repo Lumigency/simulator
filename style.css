@@ -2033,25 +2033,33 @@ select {
   box-shadow: 0 2px 8px rgba(132,155,255,0.3);
 }
 
-/* === ✅ Correctif final — suppression totale des grands espaces entre réponses === */
+  /* === 🚀 Fix ultra-ciblé : resserre les lignes de réponses sur mobile === */
 @media (max-width: 768px) {
+  /* Réduit l’écart entre les boutons dans un même groupe */
   .pill-group {
-    margin-top: 0.2rem !important;
-    margin-bottom: 0.2rem !important; /* resserre les groupes */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px !important; /* ↓ réduit drastiquement l’espacement horizontal et vertical */
+    margin-bottom: 0.2rem !important;
   }
 
-  .pill-group + .question-label {
-    margin-top: 0.5rem !important; /* rapproche la question suivante */
-  }
-
-  .question-label {
-    margin-top: 0.6rem !important; /* rapproche la question des boutons */
-    margin-bottom: -0.8rem !important; /* colle les boutons à la question */
-  }
-
+  /* Corrige l’alignement vertical entre 2 lignes de boutons */
   .pill-group label {
-    padding: 6px 12px !important;
-    min-height: 30px !important;
+    margin: 2px 3px !important; /* ↓ espace mini autour de chaque bouton */
+    padding: 8px 12px !important;
+    min-height: 32px !important;
     line-height: 1 !important;
+  }
+
+  /* Resserre aussi la question suivante */
+  .pill-group + .question-label {
+    margin-top: 0.5rem !important;
+  }
+
+  /* Colle les réponses à la question */
+  .question-label {
+    margin-top: 0.6rem !important;
+    margin-bottom: -0.6rem !important;
   }
 }
