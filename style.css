@@ -2050,8 +2050,8 @@ select {
 @media (max-width: 768px) {
   /* Resserre les groupes entre eux */
   .pill-group {
-    margin-top: 0.4rem !important;
-    margin-bottom: 0.4rem !important;
+    margin-top: 0.1rem !important;
+    margin-bottom: 0.2rem !important;
   }
 
   /* Annule les marges redondantes entre questions consécutives */
