@@ -2046,43 +2046,50 @@ select {
   }
 }
 
-/* === 📱 PATCH ALIGNEMENT FLUIDE ET ISO DES BOUTONS === */
+/* === 📱 PATCH ALIGNEMENT FLUIDE, ISO & ESPACEMENT HARMONISÉ === */
 @media (max-width: 768px) {
 
+  /* Groupes de boutons */
   .pill-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.7rem !important; /* resserre globalement */
   }
 
-  /* Tous les boutons ont la même hauteur et sont centrés */
+  /* Tous les boutons ont la même hauteur et un centrage parfait */
   .pill-group label {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 14px !important;
+    padding: 8px 14px !important;
     min-width: 135px !important;
-    min-height: 40px !important; /* ✅ force une hauteur uniforme */
+    min-height: 38px !important;
     font-size: 0.92rem !important;
     border-radius: 22px !important;
     box-sizing: border-box;
   }
 
-  /* Corrige le centrage vertical du texte sur les lignes seules */
+  /* Supprime les radios natifs */
   .pill-group input[type="radio"] {
     display: none;
   }
 
-  /* Resserre encore les espaces verticaux globaux */
+  /* Réduit les marges globales des questions */
   .question-label {
     margin-top: 1.2rem !important;
     margin-bottom: -0.4rem !important;
   }
 
-  /* Evite les décalages “isolés” sur les lignes uniques */
+  /* Centrage des boutons isolés */
   .pill-group label:nth-child(odd):last-child {
     margin: 0 auto !important;
+  }
+
+  /* Réduit l'espace au-dessus des lignes uniques */
+  .pill-group label:only-of-type,
+  .pill-group label:nth-last-child(1):nth-child(odd) {
+    margin-top: -6px !important;
   }
 }
