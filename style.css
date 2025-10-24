@@ -2045,7 +2045,6 @@ select {
     text-align: center;
   }
 }
-
 /* === 📱 PATCH ALIGNEMENT FLUIDE, ISO & ESPACEMENT HARMONISÉ === */
 @media (max-width: 768px) {
 
@@ -2093,3 +2092,28 @@ select {
     margin-top: -6px !important;
   }
 }
+
+/* === 🚀 PATCH COMPACT MOBILE — SUPPRESSION ESPACES EXCESSIFS === */
+@media (max-width: 768px) {
+  
+  .pill-group {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.4rem !important; /* 🔥 réduit drastiquement les espaces */
+  }
+
+  .pill-group label {
+    padding: 8px 14px !important;
+    min-height: 36px !important;
+  }
+
+  .question-label {
+    margin-top: 1rem !important;
+    margin-bottom: -0.8rem !important; /* colle les réponses juste en dessous */
+  }
+
+  .pill-group label:only-of-type,
+  .pill-group label:nth-last-child(1):nth-child(odd) {
+    margin-top: -8px !important;
+  }
+}
+
