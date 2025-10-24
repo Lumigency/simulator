@@ -1848,6 +1848,7 @@ form#form-simu {
   justify-content: flex-end; /* aligne le texte à droite de la barre */
   padding-right: 6px;
   color: #fff;
+
 }
 
 .progress-text-inside {
@@ -1858,11 +1859,12 @@ form#form-simu {
 }
 
 /* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
-..question-label {
-  margin-top: 1.6rem !important;   /* rythme plus naturel entre les questions */
-  margin-bottom: 0.25rem !important; /* rapproche les réponses, sans les coller */
+.question-label {
+  margin-bottom: 0.05rem !important; /* quasi collé aux réponses */
+  margin-top: 1.8rem !important; /* garde un rythme professionnel entre les questions */
   font-weight: 600;
 }
+
 /* === 🌙 Correction visibilité de la signature Lumigency === */
 .left-column {
   position: relative;
