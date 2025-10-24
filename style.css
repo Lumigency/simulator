@@ -1859,8 +1859,8 @@ form#form-simu {
 
 /* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
 .question-label {
-  margin-top: 1.8rem !important;   /* un peu moins d’air avant la question */
-  margin-bottom: 0.25rem !important; /* rapproche les boutons au maximum sans coller */
+  margin-top: 1.4rem !important;   /* question suivante un peu plus proche */
+  margin-bottom: 0.1rem !important; /* réponses quasi collées à la question */
   font-weight: 600;
 }
 /* === 🌙 Correction visibilité de la signature Lumigency === */
