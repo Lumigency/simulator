@@ -2044,76 +2044,47 @@ select {
     flex: 1 1 45%;
     text-align: center;
   }
-}
-/* === 📱 PATCH ALIGNEMENT FLUIDE, ISO & ESPACEMENT HARMONISÉ === */
+} 
+
+/* === ✅ FIX FINAL MOBILE ESPACEMENT QUESTIONS / RÉPONSES (v3.0) === */
 @media (max-width: 768px) {
 
-  /* Groupes de boutons */
+  /* Resserre uniformément chaque groupe de boutons */
   .pill-group {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.3rem !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px !important;
-    margin-bottom: 0.7rem !important; /* resserre globalement */
   }
 
-  /* Tous les boutons ont la même hauteur et un centrage parfait */
+  /* Hauteur uniforme des boutons */
   .pill-group label {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px 14px !important;
-    min-width: 135px !important;
-    min-height: 38px !important;
-    font-size: 0.92rem !important;
-    border-radius: 22px !important;
-    box-sizing: border-box;
-  }
-
-  /* Supprime les radios natifs */
-  .pill-group input[type="radio"] {
-    display: none;
-  }
-
-  /* Réduit les marges globales des questions */
-  .question-label {
-    margin-top: 1.2rem !important;
-    margin-bottom: -0.4rem !important;
-  }
-
-  /* Centrage des boutons isolés */
-  .pill-group label:nth-child(odd):last-child {
-    margin: 0 auto !important;
-  }
-
-  /* Réduit l'espace au-dessus des lignes uniques */
-  .pill-group label:only-of-type,
-  .pill-group label:nth-last-child(1):nth-child(odd) {
-    margin-top: -6px !important;
-  }
-}
-
-/* === 🚀 PATCH COMPACT MOBILE — SUPPRESSION ESPACES EXCESSIFS === */
-@media (max-width: 768px) {
-  
-  .pill-group {
-    margin-top: 0.2rem !important;
-    margin-bottom: 0.4rem !important; /* 🔥 réduit drastiquement les espaces */
-  }
-
-  .pill-group label {
-    padding: 8px 14px !important;
+    min-width: 120px !important;
     min-height: 36px !important;
+    border-radius: 22px !important;
+    font-size: 0.92rem !important;
   }
 
+  /* Colle les réponses à leur question */
   .question-label {
     margin-top: 1rem !important;
-    margin-bottom: -0.8rem !important; /* colle les réponses juste en dessous */
+    margin-bottom: -0.7rem !important;
   }
 
+  /* Réduit encore l’espace avant les lignes isolées */
   .pill-group label:only-of-type,
   .pill-group label:nth-last-child(1):nth-child(odd) {
-    margin-top: -8px !important;
+    margin-top: -10px !important;
+  }
+
+  /* Corrige la distance entre les questions consécutives */
+  .pill-group + .question-label {
+    margin-top: 0.9rem !important;
   }
 }
-
