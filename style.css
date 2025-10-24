@@ -2046,45 +2046,35 @@ select {
   }
 } 
 
-/* === ✅ FIX FINAL MOBILE ESPACEMENT QUESTIONS / RÉPONSES (v3.0) === */
+/* === 🔧 PATCH ESPACEMENT INTER-GROUPES (v3.1) === */
 @media (max-width: 768px) {
-
-  /* Resserre uniformément chaque groupe de boutons */
+  /* Resserre les groupes entre eux */
   .pill-group {
-    margin-top: 0.2rem !important;
-    margin-bottom: 0.3rem !important;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px !important;
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.4rem !important;
   }
 
-  /* Hauteur uniforme des boutons */
+  /* Annule les marges redondantes entre questions consécutives */
+  .question-label + .pill-group {
+    margin-top: 0.2rem !important;
+  }
+
+  .pill-group + .question-label {
+    margin-top: 0.7rem !important;
+  }
+
+  /* Uniformise la hauteur et le centrage des boutons */
   .pill-group label {
+    min-height: 36px !important;
+    padding: 8px 14px !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 14px !important;
-    min-width: 120px !important;
-    min-height: 36px !important;
-    border-radius: 22px !important;
-    font-size: 0.92rem !important;
   }
 
-  /* Colle les réponses à leur question */
-  .question-label {
-    margin-top: 1rem !important;
-    margin-bottom: -0.7rem !important;
-  }
-
-  /* Réduit encore l’espace avant les lignes isolées */
-  .pill-group label:only-of-type,
-  .pill-group label:nth-last-child(1):nth-child(odd) {
-    margin-top: -10px !important;
-  }
-
-  /* Corrige la distance entre les questions consécutives */
-  .pill-group + .question-label {
-    margin-top: 0.9rem !important;
+  /* Supprime le “trou” sous les lignes isolées */
+  .pill-group label:only-of-type {
+    margin-top: -8px !important;
   }
 }
+
