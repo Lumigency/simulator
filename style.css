@@ -2045,5 +2045,41 @@ select {
     text-align: center;
   }
 }
+/* === 📱 Ajustements fluides mobile (espacements + alignement) === */
+@media (max-width: 768px) {
+
+  /* Réduit les marges autour des questions */
+  .question-label {
+    margin-top: 1.2rem !important;
+    margin-bottom: -0.4rem !important;
+    line-height: 1.3;
+  }
+
+  /* Harmonise l'espacement entre groupes de réponses */
+  .pill-group {
+    gap: 6px !important;            /* réduit légèrement l'espace entre boutons */
+    margin-bottom: 1.2rem !important; /* évite les trous entre questions */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Resserre les boutons pour un look plus aéré */
+  .pill-group label {
+    padding: 8px 14px !important;   /* réduit la hauteur */
+    font-size: 0.95rem !important;
+    border-radius: 22px !important; /* effet plus “bubble” sur mobile */
+  }
+
+  /* Réduit les marges des selects pour cohérence */
+  select {
+    margin-bottom: 0.3rem !important;
+  }
+
+  /* Empêche le scroll coupé sur la dernière question */
+  .form-step.active {
+    padding-bottom: 80px !important;
+  }
+}
+
 
 
