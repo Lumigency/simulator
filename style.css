@@ -1859,11 +1859,10 @@ form#form-simu {
 
 /* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
 .question-label {
-  margin-top: 2.2rem !important;   /* espace avant chaque question (même rythme que page 2) */
-  margin-bottom: 0.4rem !important; /* colle légèrement les réponses, mais respire */
+  margin-top: 1.8rem !important;   /* un peu moins d’air avant la question */
+  margin-bottom: 0.25rem !important; /* rapproche les boutons au maximum sans coller */
   font-weight: 600;
 }
-
 /* === 🌙 Correction visibilité de la signature Lumigency === */
 .left-column {
   position: relative;
