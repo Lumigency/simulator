@@ -2045,41 +2045,49 @@ select {
     text-align: center;
   }
 }
-/* === 📱 Ajustements fluides mobile (espacements + alignement) === */
+/* === 📱 VERSION MOBILE REWORK CLEAN & FLUID === */
 @media (max-width: 768px) {
 
-  /* Réduit les marges autour des questions */
+  /* Réduit l'espacement entre questions */
   .question-label {
-    margin-top: 1.2rem !important;
-    margin-bottom: -0.4rem !important;
-    line-height: 1.3;
+    margin-top: 1.1rem !important;   /* espace homogène entre les blocs */
+    margin-bottom: -0.6rem !important; /* colle les réponses */
+    line-height: 1.35;
+    font-size: 0.95rem;
   }
 
-  /* Harmonise l'espacement entre groupes de réponses */
+  /* Resserre les groupes de réponses */
   .pill-group {
-    gap: 6px !important;            /* réduit légèrement l'espace entre boutons */
-    margin-bottom: 1.2rem !important; /* évite les trous entre questions */
+    gap: 5px !important;               /* boutons plus rapprochés */
+    margin-bottom: 0.9rem !important;  /* resserre l'espace avant la prochaine question */
     flex-wrap: wrap;
     justify-content: center;
   }
 
-  /* Resserre les boutons pour un look plus aéré */
+  /* Style des boutons (plus fins et élégants) */
   .pill-group label {
-    padding: 8px 14px !important;   /* réduit la hauteur */
-    font-size: 0.95rem !important;
-    border-radius: 22px !important; /* effet plus “bubble” sur mobile */
+    padding: 7px 14px !important;     /* moins haut, plus “bouton pro” */
+    font-size: 0.9rem !important;
+    border-radius: 20px !important;   /* plus fluide et doux */
+    min-width: 130px !important;
+    text-align: center;
   }
 
-  /* Réduit les marges des selects pour cohérence */
+  /* Ajuste les select pour cohérence visuelle */
   select {
-    margin-bottom: 0.3rem !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 0.95rem !important;
+    height: 38px;
   }
 
-  /* Empêche le scroll coupé sur la dernière question */
+  /* Allège le rendu global */
+  .form-step {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  /* Empêche le scroll coupé */
   .form-step.active {
-    padding-bottom: 80px !important;
+    padding-bottom: 70px !important;
   }
 }
-
-
-
