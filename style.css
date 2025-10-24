@@ -1864,6 +1864,10 @@ form#form-simu {
   margin-bottom: -0.5rem !important; /* ↓ garde les réponses collées à la question */
   font-weight: 600;
 }
+/* Harmonisation du select (évite le trou visuel après le menu déroulant) */
+select {
+  margin-bottom: 0.4rem !important;
+}
 
 /* === 🌙 Correction visibilité de la signature Lumigency === */
 .left-column {
