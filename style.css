@@ -2033,21 +2033,30 @@ select {
   box-shadow: 0 2px 8px rgba(132,155,255,0.3);
 }
 
+  /* === ✅ Correctif final mobile — espacement et alignement boutons === */
 @media (max-width: 768px) {
-  /* Resserre l'espace question <-> réponses */
+  /* Resserre les groupes entre eux */
+  .pill-group {
+    margin-top: 0.1rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  /* Réduit l'espace question <-> réponses */
   .question-label {
     margin-top: 0.8rem !important;
     margin-bottom: -1rem !important;
   }
 
-  /* Resserre entre deux questions consécutives */
+  /* Supprime la marge au-dessus des boutons seuls */
+  .pill-group label:only-of-type,
+  .pill-group label:nth-last-child(1):nth-child(odd) {
+    margin-top: -10px !important;
+    margin-bottom: -4px !important;
+  }
+
+  /* Resserre encore les groupes successifs */
   .pill-group + .question-label {
     margin-top: 0.4rem !important;
   }
-
-  /* Réduit les marges globales des groupes */
-  .pill-group {
-    margin-top: 0.1rem !important;
-    margin-bottom: 0.2rem !important;
-  }
 }
+
