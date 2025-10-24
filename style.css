@@ -1860,8 +1860,8 @@ form#form-simu {
 
 /* === 🎯 PATCH FINAL ESPACEMENT QUESTIONS / RÉPONSES === */
 .question-label {
-  margin-bottom: 0.05rem !important; /* quasi collé aux réponses */
-  margin-top: 1.8rem !important; /* garde un rythme professionnel entre les questions */
+  margin-top: 1.3rem !important;
+  margin-bottom: 0 !important;
   font-weight: 600;
 }
 
