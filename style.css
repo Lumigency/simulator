@@ -2033,30 +2033,25 @@ select {
   box-shadow: 0 2px 8px rgba(132,155,255,0.3);
 }
 
-  /* === ✅ Correctif final mobile — espacement et alignement boutons === */
+/* === ✅ Correctif final — suppression totale des grands espaces entre réponses === */
 @media (max-width: 768px) {
-  /* Resserre les groupes entre eux */
   .pill-group {
-    margin-top: 0.1rem !important;
-    margin-bottom: 0.2rem !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.2rem !important; /* resserre les groupes */
   }
 
-  /* Réduit l'espace question <-> réponses */
-  .question-label {
-    margin-top: 0.8rem !important;
-    margin-bottom: -1rem !important;
-  }
-
-  /* Supprime la marge au-dessus des boutons seuls */
-  .pill-group label:only-of-type,
-  .pill-group label:nth-last-child(1):nth-child(odd) {
-    margin-top: -10px !important;
-    margin-bottom: -4px !important;
-  }
-
-  /* Resserre encore les groupes successifs */
   .pill-group + .question-label {
-    margin-top: 0.4rem !important;
+    margin-top: 0.5rem !important; /* rapproche la question suivante */
+  }
+
+  .question-label {
+    margin-top: 0.6rem !important; /* rapproche la question des boutons */
+    margin-bottom: -0.8rem !important; /* colle les boutons à la question */
+  }
+
+  .pill-group label {
+    padding: 6px 12px !important;
+    min-height: 30px !important;
+    line-height: 1 !important;
   }
 }
-
