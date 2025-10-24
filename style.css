@@ -2045,49 +2045,44 @@ select {
     text-align: center;
   }
 }
-/* === 📱 VERSION MOBILE REWORK CLEAN & FLUID === */
+
+/* === 📱 PATCH ALIGNEMENT FLUIDE ET ISO DES BOUTONS === */
 @media (max-width: 768px) {
 
-  /* Réduit l'espacement entre questions */
-  .question-label {
-    margin-top: 1.1rem !important;   /* espace homogène entre les blocs */
-    margin-bottom: -0.6rem !important; /* colle les réponses */
-    line-height: 1.35;
-    font-size: 0.95rem;
-  }
-
-  /* Resserre les groupes de réponses */
   .pill-group {
-    gap: 5px !important;               /* boutons plus rapprochés */
-    margin-bottom: 0.9rem !important;  /* resserre l'espace avant la prochaine question */
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 6px !important;
+    margin-bottom: 1rem !important;
   }
 
-  /* Style des boutons (plus fins et élégants) */
+  /* Tous les boutons ont la même hauteur et sont centrés */
   .pill-group label {
-    padding: 7px 14px !important;     /* moins haut, plus “bouton pro” */
-    font-size: 0.9rem !important;
-    border-radius: 20px !important;   /* plus fluide et doux */
-    min-width: 130px !important;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px !important;
+    min-width: 135px !important;
+    min-height: 40px !important; /* ✅ force une hauteur uniforme */
+    font-size: 0.92rem !important;
+    border-radius: 22px !important;
+    box-sizing: border-box;
   }
 
-  /* Ajuste les select pour cohérence visuelle */
-  select {
-    margin-bottom: 0.5rem !important;
-    font-size: 0.95rem !important;
-    height: 38px;
+  /* Corrige le centrage vertical du texte sur les lignes seules */
+  .pill-group input[type="radio"] {
+    display: none;
   }
 
-  /* Allège le rendu global */
-  .form-step {
-    padding-left: 6px;
-    padding-right: 6px;
+  /* Resserre encore les espaces verticaux globaux */
+  .question-label {
+    margin-top: 1.2rem !important;
+    margin-bottom: -0.4rem !important;
   }
 
-  /* Empêche le scroll coupé */
-  .form-step.active {
-    padding-bottom: 70px !important;
+  /* Evite les décalages “isolés” sur les lignes uniques */
+  .pill-group label:nth-child(odd):last-child {
+    margin: 0 auto !important;
   }
 }
