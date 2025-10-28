@@ -2044,37 +2044,43 @@ select {
     margin-top: 0.3rem !important; /* ✅ ajoute un mini espace au-dessus du premier bouton */
   }
 
-  /* Corrige l’alignement vertical entre 2 lignes de boutons */
-  .pill-group label {
-    margin: 3px 4px !important;
-    padding: 9px 14px !important;
-    min-height: 32px !important;
-    line-height: 1 !important;
-  }
-
-  /* Resserre aussi la question suivante */
-  .pill-group + .question-label {
-    margin-top: 0.5rem !important;
-  }
-
-/* ✅ Ajustement des espacements du bloc opt-in + CTA */
-.editor-optin {
-  margin-bottom: 0.2rem !important;
+ /* Corrige l’alignement vertical entre 2 lignes de boutons */
+.pill-group label {
+  margin: 3px 4px !important;
+  padding: 9px 14px !important;
+  min-height: 32px !important;
+  line-height: 1 !important;
 }
 
-#toast {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.6rem !important;
-}
-
-#cta-link {
-  margin-top: 0.6rem !important;
-  margin-bottom: 0.4rem !important;
-}
-
-#restart-btn {
+/* Resserre aussi la question suivante */
+.pill-group + .question-label {
   margin-top: 0.4rem !important;
 }
 
+/* 🎯 Compactage du bloc opt-in / merci / CTA */
+.editor-optin {
+  margin-bottom: 0.1rem !important;
+}
+
+#toast {
+  margin-top: 0.15rem !important;
+  margin-bottom: 0.4rem !important;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+#cta-link {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.3rem !important;
+}
+
+#restart-btn {
+  margin-top: 0.3rem !important;
+}
+
+/* Resserre un peu les questions globalement */
+.form-group {
+  margin-bottom: 0.6rem !important;
+}
 }
 
