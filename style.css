@@ -1915,7 +1915,7 @@ select {
   vertical-align: middle;
 }
 
-/* ✅ Toast notification */
+/* ✅ Toast notification (animation douce + persistance) */
 .toast {
   display: none;
   background: #e9f7ef;
@@ -1923,20 +1923,19 @@ select {
   padding: 10px 14px;
   border-radius: 6px;
   font-size: 0.9rem;
-  margin-top: 4px; /*✅ réduit l’espace */
+  margin-top: 4px; /* réduit l’espace */
   border-left: 4px solid #00b37a;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 0;
   transform: translateY(5px);
 }
 
+/* ✅ Quand le toast est visible */
 .toast.show {
   display: block;
-  opacity: 1;
-  transform: translateY(0);
-  animation: fadeSlideIn 0.3s ease;
+  animation: fadeSlideIn 0.3s ease forwards; /* ✅ le “forwards” garde l’état final */
 }
 
+/* ✅ Animation d’apparition fluide */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
@@ -2058,23 +2057,24 @@ select {
     margin-top: 0.5rem !important;
   }
 
-  /* ✅ Espace harmonieux entre la question et les réponses */
-  .question-label {
-    margin-top: 1.4rem !important; /* ↑ plus d’air entre la question et le groupe */
-    margin-bottom: 0rem !important; /* ↓ garde les boutons proches entre eux */
-  }
-  /* Réduit les espaces dans le bloc résultats */
+/* ✅ Ajustement des espacements du bloc opt-in + CTA */
 .editor-optin {
-  margin-bottom: 0.5rem !important; /* au lieu d’un grand espace */
+  margin-bottom: 0.2rem !important;
 }
 
 #toast {
-  margin-top: 0.3rem !important; /* rapproche le message */
-  margin-bottom: 1rem !important; /* rapproche le CTA */
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.6rem !important;
 }
 
 #cta-link {
-  margin-top: 0.8rem !important; /* au lieu de 2rem ou plus */
+  margin-top: 0.6rem !important;
+  margin-bottom: 0.4rem !important;
 }
+
+#restart-btn {
+  margin-top: 0.4rem !important;
+}
+
 }
 
