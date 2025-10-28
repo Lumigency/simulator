@@ -1915,24 +1915,21 @@ select {
   vertical-align: middle;
 }
 
-/* ✅ Toast notification (animation douce + persistance) */
-.toast {
-  display: none;
+/* ✅ Toast notification (animation douce + persistance corrigée) */
+#toast {
   background: #e9f7ef;
   color: #222;
-  padding: 10px 14px;
+  padding: 7px 11px;
   border-radius: 6px;
-  font-size: 0.9rem;
-  margin-top: 4px; /* réduit l’espace */
+  font-size: 0.84rem;
+  margin-top: -0.35rem !important;
+  margin-bottom: 0.15rem !important;
   border-left: 4px solid #00b37a;
-  opacity: 0;
-  transform: translateY(5px);
-}
-
-/* ✅ Quand le toast est visible */
-.toast.show {
-  display: block;
-  animation: fadeSlideIn 0.3s ease forwards; /* ✅ le “forwards” garde l’état final */
+  opacity: 1;
+  transform: none;
+  display: block; /* ✅ visible en permanence une fois affiché */
+  transition: all 0.3s ease;
+  animation: fadeSlideIn 0.3s ease forwards;
 }
 
 /* ✅ Animation d’apparition fluide */
@@ -2056,27 +2053,5 @@ select {
 .pill-group + .question-label {
   margin-top: 0.4rem !important;
 }
-
-/* ✅ Compactage parfait du bloc opt-in / merci / CTA */
-.editor-optin {
-  margin-bottom: 0.05rem !important;
-}
-
-#toast {
-  margin-top: -0.2rem !important; /* rapproche encore du checkbox */
-  margin-bottom: 0.25rem !important;
-  padding: 7px 11px;
-  font-size: 0.84rem;
-}
-
-#cta-link {
-  margin-top: 0.3rem !important;
-  margin-bottom: 0.25rem !important;
-}
-
-#restart-btn {
-  margin-top: 0.25rem !important;
-}
-
 }
 
