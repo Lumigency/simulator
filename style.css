@@ -2057,30 +2057,25 @@ select {
   margin-top: 0.4rem !important;
 }
 
-/* 🎯 Compactage du bloc opt-in / merci / CTA */
+/* ✅ Compactage final du bloc opt-in / merci / CTA */
 .editor-optin {
-  margin-bottom: 0.1rem !important;
+  margin-bottom: 0.05rem !important;
 }
 
 #toast {
-  margin-top: 0.15rem !important;
-  margin-bottom: 0.4rem !important;
-  padding: 8px 12px;
-  font-size: 0.85rem;
+  margin-top: 0.05rem !important;
+  margin-bottom: 0.3rem !important;
+  padding: 7px 11px;
+  font-size: 0.84rem;
 }
 
 #cta-link {
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.3rem !important;
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.25rem !important;
 }
 
 #restart-btn {
-  margin-top: 0.3rem !important;
-}
-
-/* Resserre un peu les questions globalement */
-.form-group {
-  margin-bottom: 0.6rem !important;
+  margin-top: 0.25rem !important;
 }
 }
 
