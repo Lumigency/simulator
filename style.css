@@ -1915,8 +1915,9 @@ select {
   vertical-align: middle;
 }
 
-/* ✅ Toast notification (animation douce + persistance corrigée) */
+/* ✅ Toast notification (apparition douce, invisible par défaut) */
 #toast {
+  display: none;
   background: #e9f7ef;
   color: #222;
   padding: 7px 11px;
@@ -1925,10 +1926,16 @@ select {
   margin-top: -0.35rem !important;
   margin-bottom: 0.15rem !important;
   border-left: 4px solid #00b37a;
-  opacity: 1;
-  transform: none;
-  display: block; /* ✅ visible en permanence une fois affiché */
+  opacity: 0;
+  transform: translateY(5px);
   transition: all 0.3s ease;
+}
+
+/* ✅ Quand le message est affiché */
+#toast.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
   animation: fadeSlideIn 0.3s ease forwards;
 }
 
