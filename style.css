@@ -2063,5 +2063,18 @@ select {
     margin-top: 1.4rem !important; /* ↑ plus d’air entre la question et le groupe */
     margin-bottom: 0rem !important; /* ↓ garde les boutons proches entre eux */
   }
+  /* Réduit les espaces dans le bloc résultats */
+.editor-optin {
+  margin-bottom: 0.5rem !important; /* au lieu d’un grand espace */
+}
+
+#toast {
+  margin-top: 0.3rem !important; /* rapproche le message */
+  margin-bottom: 1rem !important; /* rapproche le CTA */
+}
+
+#cta-link {
+  margin-top: 0.8rem !important; /* au lieu de 2rem ou plus */
+}
 }
 
