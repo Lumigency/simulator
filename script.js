@@ -652,11 +652,14 @@ const toast = document.getElementById("toast");
 if (optinEditeurs && toast) {
   optinEditeurs.addEventListener("change", () => {
     if (optinEditeurs.checked) {
-      toast.classList.add("show"); // ✅ le message apparaît
+      toast.classList.add("show");
+    } else {
+      toast.classList.remove("show");
     }
-    // ❌ On ne le retire plus, il reste affiché
   });
 }
+
+
 
 
 
