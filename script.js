@@ -578,29 +578,38 @@ const insightsBox = document.getElementById("insights");
       });
     }
 
-    // ✅ Message de maturité (objectif + budget)
-const objectifValue = document.querySelector('input[name="objectif"]:checked')?.value;
-const hasBudget = !document.getElementById("budget-checkbox")?.checked; // checkbox = "je n'ai pas de budget"
+ // ✅ Message personnalisé (objectif + budget)
+const objectifValue = form.elements["objectif"]?.value;
+const hasBudget = !(unlimitedCheckbox && unlimitedCheckbox.checked);
 
-if (objectifValue === "ouvrir") {
-    if (hasBudget) {
-        maturityMessage = "🌱 Vous êtes à l’aube d’un programme solide. Avec un budget dédié, vous pouvez poser des bases durables et sélectionner des partenaires alignés avec votre univers.";
-    } else {
-        maturityMessage = "🌱 Belle intention d'ouvrir un programme. Même sans budget initial, un démarrage progressif avec des partenaires qualifiés peut vous permettre d'avancer en douceur.";
-    }
-} else if (objectifValue === "tester") {
-    maturityMessage = "✨ Vous avez déjà planté des graines. Tester de nouveaux leviers va permettre d'élargir votre portée en douceur, étape par étape.";
-} else if (objectifValue === "scaler") {
-    maturityMessage = "🚀 Vous êtes en phase d’accélération. Amplifier ce qui fonctionne déjà, tout en préservant la qualité des partenaires, est la clé d’une croissance maîtrisée.";
+if (objectifValue === "lancer") {
+    maturityMessage = hasBudget
+      ? "🌱 Vous êtes au début d’un beau programme. Avec un budget dédié, vous pouvez poser une base saine et attirer les bons partenaires dès le départ."
+      : "🌱 Vous souhaitez lancer un programme. Même sans budget défini, un démarrage progressif avec des partenaires sélectionnés peut vous permettre d’apprendre et d'avancer sereinement.";
 }
 
-// ✅ Injection dans le DOM
+if (objectifValue === "optimiser") {
+    maturityMessage = "🧩 Vous avez déjà des fondations. Optimiser votre mix partenaires, votre tracking et votre pilotage peut débloquer un vrai palier de performance.";
+}
+
+if (objectifValue === "diversifier") {
+    maturityMessage = "✨ Vous êtes prêt(e) à tester de nouveaux leviers. En élargissant votre mix partenaires progressivement, vous sécurisez votre acquisition tout en capturant de nouvelles audiences.";
+}
+
+if (objectifValue === "scaler") {
+    maturityMessage = "🚀 Vous entrez en phase d’accélération. Capitaliser sur ce qui fonctionne déjà tout en apportant plus de granularité dans vos partenariats sera clé pour scaler efficacement.";
+}
+
+// ✅ Affichage dans l’UI + animation
 const insightText = document.getElementById("insight-text");
 const insightMessage = document.getElementById("insight-message");
 
 if (insightMessage && insightText && maturityMessage) {
     insightText.textContent = maturityMessage;
     insightMessage.style.display = "block";
+    
+    // animation douce
+    setTimeout(() => insightMessage.classList.add("show"), 20);
 }
 
     // --- Editors suggestions ---
@@ -686,6 +695,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
