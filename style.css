@@ -2084,5 +2084,30 @@ select {
 .pill-group + .question-label {
   margin-top: 0.4rem !important;
 }
+  /* === CTA dynamique global === */
+.cta-dynamic {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #0000FF;
+  color: #fff;
+  padding: 14px 60px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all .25s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 14px rgba(0,0,255,0.15);
+}
+
+.cta-button:hover {
+  background: #849BFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,255,0.25);
+}
 }
 
