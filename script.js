@@ -21,38 +21,6 @@ function showStep(index) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Navigation entre les étapes
-document.getElementById('next-step-1')?.addEventListener('click', () => {
-  const objectif = document.querySelector('[name="objectif"]');
-  if (!objectif.value) {
-    objectif.classList.add('is-invalid');
-    setTimeout(() => objectif.classList.remove('is-invalid'), 1200);
-    return;
-  }
-  currentStep = 1;
-  showStep(currentStep);
-});
-
-document.getElementById('next-step-2')?.addEventListener('click', () => {
-  currentStep = 2;
-  showStep(currentStep);
-});
-
-document.getElementById('prev-step-2')?.addEventListener('click', () => {
-  currentStep = 0;
-  showStep(currentStep);
-});
-
-document.getElementById('prev-step-3')?.addEventListener('click', () => {
-  currentStep = 1;
-  showStep(currentStep);
-});
-
-// Initialisation
-showStep(currentStep);
-// ✅ Forcer la barre à 0 % au tout démarrage
-updateProgress(0);
-
 // ----------------- HELPERS -----------------
 function numberOf(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
 function fmtCurrency(n){ return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); }
@@ -365,6 +333,38 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+// Initialisation
+showStep(currentStep);
+// ✅ Forcer la barre à 0 % au tout démarrage
+updateProgress(0);
+
+  // Navigation entre les étapes
+document.getElementById('next-step-1')?.addEventListener('click', () => {
+  const objectif = document.querySelector('[name="objectif"]');
+  if (!objectif.value) {
+    objectif.classList.add('is-invalid');
+    setTimeout(() => objectif.classList.remove('is-invalid'), 1200);
+    return;
+  }
+  currentStep = 1;
+  showStep(currentStep);
+});
+
+document.getElementById('next-step-2')?.addEventListener('click', () => {
+  currentStep = 2;
+  showStep(currentStep);
+});
+
+document.getElementById('prev-step-2')?.addEventListener('click', () => {
+  currentStep = 0;
+  showStep(currentStep);
+});
+
+document.getElementById('prev-step-3')?.addEventListener('click', () => {
+  currentStep = 1;
+  showStep(currentStep);
+});
+
   // Budget checkbox
   const unlimitedCheckbox = document.getElementById("unlimited-budget") || document.getElementById("noBudget");
   const budgetInput = form.elements["budget"];
@@ -430,9 +430,7 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
   el.addEventListener("change", checkHybridWarning);
 });
 
-
-// ✅ Début du submit handler (tout le calcul D
-  OIT être dedans)
+// ✅ Début du submit handler (tout le calcul DOIT être dedans)
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
@@ -653,20 +651,19 @@ if (ctaWrapper && ctaBtn) {
 });
 
 // === Slider Témoignages ===
-document.addEventListener("DOMContentLoaded", () => {
+(function() {
   const slider = document.getElementById('slider');
   const slides = document.querySelectorAll('.review');
   if (!slider || slides.length === 0) return;
 
   let index = 0;
-
   function slideTestimonials() {
     index = (index + 1) % slides.length;
     slider.style.transform = `translateX(-${index * 33.33}%)`;
   }
-
   setInterval(slideTestimonials, 4000);
-});
+})();
+
 
 // === Bouton "Faire une nouvelle simulation" ===
 const restartBtn = document.getElementById("restart-btn");
@@ -726,6 +723,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
