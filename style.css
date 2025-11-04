@@ -2090,24 +2090,29 @@ select {
   margin-top: 30px;
 }
 
+/* ✅ Style CTA dynamique = copie CTA principal */
 .cta-button {
   display: inline-block;
-  background: #0000FF;
-  color: #fff;
+  background: #849BFF;
+  color: white;
   padding: 14px 60px;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 1rem;
   text-decoration: none;
-  transition: all .25s ease;
-  border: 2px solid transparent;
-  box-shadow: 0 4px 14px rgba(0,0,255,0.15);
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: none;
 }
 
+/* Hover */
 .cta-button:hover {
-  background: #849BFF;
+  background: #0000FF;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,255,0.25);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,255,0.2);
 }
+
 }
 
