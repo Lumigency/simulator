@@ -63,6 +63,30 @@ body {
   margin-bottom: 0;
 }
 
+ /* ✅ Message de recommandation personnalisé */
+.insight-personal-message {
+  background: #F5F4FF;
+  border-left: 4px solid #6B64F3;
+  padding: 16px;
+  margin-top: 24px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all .35s ease;
+}
+
+.insight-personal-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#insight-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #2b2b2b;
+}
+
 /* ✅ Responsive : texte qui passe à la ligne sans décaler le ✓ */
 @media (max-width: 600px) {
   .benefits-list {
