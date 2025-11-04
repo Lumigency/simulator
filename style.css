@@ -2089,30 +2089,5 @@ select {
   text-align: center;
   margin-top: 30px;
 }
-
-/* ✅ Style CTA dynamique = copie CTA principal */
-.cta-button {
-  display: inline-block;
-  background: #849BFF;
-  color: white;
-  padding: 14px 60px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: all 0.25s ease;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: none;
-}
-
-/* Hover */
-.cta-button:hover {
-  background: #0000FF;
-  transform: translateY(-2px);
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(0,0,255,0.2);
-}
-
 }
 
