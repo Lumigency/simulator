@@ -431,7 +431,8 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
 });
 
 
-// ✅ Début du submit handler (tout le calcul DOIT être dedans)
+// ✅ Début du submit handler (tout le calcul D
+  OIT être dedans)
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
@@ -618,6 +619,36 @@ afficherEditeurs(levers);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
+    // ✅ CTA dynamique selon l'objectif
+const objectif = form.elements["objectif"]?.value;
+const ctaWrapper = document.getElementById("cta-dynamic");
+const ctaBtn = document.getElementById("cta-button");
+
+if (ctaWrapper && ctaBtn) {
+  let ctaText = "";
+  let ctaLink = "https://www.lumigency.com/consultation-gratuite";
+
+  switch (objectif) {
+    case "lancer":
+      ctaText = "📂 Obtenir un blueprint de lancement";
+      break;
+    case "optimiser":
+      ctaText = "🧠 Recevoir un audit personnalisé";
+      break;
+    case "diversifier":
+      ctaText = "🎯 Recevoir une shortlist d’éditeurs";
+      break;
+    case "scaler":
+      ctaText = "🚀 Accélérer ma stratégie d’acquisition";
+      break;
+    default:
+      ctaText = "💬 Parler à un expert Lumigency";
+  }
+
+  ctaBtn.textContent = ctaText;
+  ctaBtn.href = ctaLink;
+  ctaWrapper.style.display = "block";
+}
   });
 });
 
@@ -695,6 +726,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
