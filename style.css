@@ -2089,41 +2089,4 @@ select {
   text-align: center;
   margin-top: 30px;
 }
-
-  /* === 🎯 CTA FINAL DYNAMIQUE LUMIGENCY === */
-#cta-link .cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #849BFF;              /* Bleu pastel Lumigency */
-  color: #111;
-  font-weight: 700;
-  font-size: 1.05rem;
-  text-decoration: none;
-  border: none;
-  border-radius: 999px;             /* Forme pilule */
-  padding: 16px 56px;
-  cursor: pointer;
-  box-shadow: 0 10px 24px rgba(132, 155, 255, 0.25);
-  transition: all 0.3s ease;
-  text-align: center;
-  margin: 25px auto 15px;
-}
-
-#cta-link .cta:hover {
-  background: #0000FF;              /* Bleu électrique */
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(0, 0, 255, 0.25);
-}
-
-@media (max-width: 768px) {
-  #cta-link .cta {
-    width: 100%;
-    max-width: 320px;
-    padding: 13px 28px;
-    font-size: 0.95rem;
-  }
-}
-
 }
