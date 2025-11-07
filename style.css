@@ -1376,14 +1376,17 @@ canvas {
   }
 
   #cta-link .cta {
-    display: block;
-    text-align: center;
-    background-color: #849BFF;
-    border-radius: 10px;
-    color: white;
-    padding: 14px;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #849BFF;
+    color: #111;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 999px;
     margin: 0 auto 15px auto;
+    box-shadow: 0 8px 20px rgba(132, 155, 255, 0.25);
   }
 
   #restart-btn {
@@ -1791,56 +1794,75 @@ form#form-simu {
   margin-bottom: 28px;
   position: relative;
 }
-/* === ✨ CTA PRINCIPAL STYLE LUMIGENCY === */
-.btn-next,
-.btn-prev,
-.cta {
-  background: #849BFF; /* Bleu pastel Lumigency */
-  color: #111;
-  border: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 26px;
-  border-radius: 999px; /* forme pilule */
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 3px 10px rgba(132, 155, 255, 0.35);
-  display: inline-block;
-  text-align: center;
-}
-
-/* Hover : léger éclat */
-.btn-next:hover,
-.btn-prev:hover,
-.cta:hover {
-  background: #0000FF; /* Bleu plus intense */
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 255, 0.3);
-}
-
-/* Flèches douces */
-.btn-next::after {
-  content: "›";
-  margin-left: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.btn-prev::before {
-  content: "‹";
-  margin-right: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-/* Désactive la version “bloc” large des CTA */
+/* === 🎯 CTA NAVIGATION ÉLÉGANTS ET DISCRETS (VERSION LUMIGENCY) === */
 .step-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  margin-top: 1.5rem;
+  margin-top: 1.4rem;
+}
+
+.step-actions.single {
+  justify-content: flex-end; /* Étape avec un seul bouton */
+}
+
+/* Boutons minimalistes */
+.btn-prev,
+.btn-next {
+  background: none;
+  border: none;
+  color: #0000FF; /* Bleu Lumigency */
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.85;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+  background: rgba(0, 0, 255, 0.05);
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+/* Effet “clic” doux */
+.btn-prev:active,
+.btn-next:active {
+  transform: translateY(0);
+  opacity: 0.8;
+}
+
+/* Petites flèches intégrées */
+.btn-prev::before {
+  content: "←";
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.btn-next::after {
+  content: "→";
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* Responsive – version plus fine sur mobile */
+@media (max-width: 768px) {
+  .btn-prev,
+  .btn-next {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
+
+.step-actions {
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .question-label {
@@ -1977,24 +1999,37 @@ select {
 
 /* ✅ CTA principal — version allongée */
 #cta-link .cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 64px;
   background: #849BFF;
-  color: white;
-  padding: 14px 60px; /* ✅ élargit le bouton horizontalement */
+  color: #111;
+  font-weight: 700;
+  font-size: 1.05rem;
   border-radius: 999px;
-  font-weight: 600;
   text-decoration: none;
-  font-size: 1rem;
-  transition: all 0.25s ease;
+  box-shadow: 0 10px 24px rgba(132, 155, 255, 0.28);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  letter-spacing: 0.01em;
 }
 
 #cta-link .cta:hover {
   background: #0000FF;
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 255, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 0, 255, 0.24);
+}
+
+@media (max-width: 480px) {
+  #cta-link .cta {
+    width: 100%;
+    max-width: 320px;
+    padding: 13px 28px;
+    font-size: 0.95rem;
+  }
 }
 
 /* ✅ Bouton "Refaire une simulation" */
