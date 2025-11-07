@@ -628,16 +628,16 @@ if (ctaWrapper && ctaBtn) {
 
   switch (objectif) {
     case "lancer":
-      ctaText = "📂 Obtenir un blueprint de lancement";
+      ctaText = "🚀 Bénéficier d’une consultation gratuite de lancement";
       break;
     case "optimiser":
-      ctaText = "🧠 Recevoir un audit personnalisé";
+      ctaText = "🧠 Obtenir un audit de votre stratégie d’affiliation";
       break;
     case "diversifier":
-      ctaText = "🎯 Recevoir une shortlist d’éditeurs";
+      ctaText = "🤝 Échanger sur les bons leviers à activer pour votre marques";
       break;
     case "scaler":
-      ctaText = "🚀 Accélérer ma stratégie d’acquisition";
+      ctaText = "📈 Planifier un call stratégique pour passer à l’échelle";
       break;
     default:
       ctaText = "💬 Parler à un expert Lumigency";
@@ -723,6 +723,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
