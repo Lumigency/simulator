@@ -347,24 +347,6 @@ select {
   color: #0000FF;
 }
 
-.cta-final {
-  text-align: center;
-}
-
-.cta-final a {
-  background: #849BFF;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 10px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.cta-final a:hover {
-  background: #0000FF;
-}
-
 /* Correction alignement case "Je n’ai pas de budget" */
 .single-checkbox input[type=checkbox] {
   margin-top: 0;
@@ -1031,6 +1013,42 @@ html, body {
   justify-content: center;
 }
 
+/* === CTA dynamique final Lumigency === */
+#cta-link .cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 56px;
+  margin: 32px auto 0;
+  background-color: #849BFF;
+  color: #111;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(132, 155, 255, 0.25);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#cta-link .cta:hover {
+  background-color: #0000FF;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(132, 155, 255, 0.28);
+}
+
+@media (max-width: 600px) {
+  #cta-link .cta {
+    width: 100%;
+    max-width: 320px;
+    padding: 13px 28px;
+  }
+}
+
 /* === Correctifs généraux pré-mobile === */
 html, body {
   overflow-x: hidden; /* ✅ évite le scroll horizontal */
@@ -1375,17 +1393,6 @@ canvas {
     margin-bottom: 20px;
   }
 
-  #cta-link .cta {
-    display: block;
-    text-align: center;
-    background-color: #849BFF;
-    border-radius: 10px;
-    color: white;
-    padding: 14px;
-    font-weight: 600;
-    margin: 0 auto 15px auto;
-  }
-
   #restart-btn {
     text-align: center;
     margin-top: 8px;
@@ -1522,7 +1529,6 @@ canvas {
   .chart-container,
   .analysis-block,
   .editor-grid,
-  .cta-final,
   .testimonials-section {
     width: 100% !important;
     max-width: 100% !important;
@@ -1973,28 +1979,6 @@ select {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* ✅ CTA principal — version allongée */
-#cta-link .cta {
-  display: inline-block;
-  background: #849BFF;
-  color: white;
-  padding: 14px 60px; /* ✅ élargit le bouton horizontalement */
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: all 0.25s ease;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-#cta-link .cta:hover {
-  background: #0000FF;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 255, 0.2);
 }
 
 /* ✅ Bouton "Refaire une simulation" */
