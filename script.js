@@ -227,7 +227,7 @@ const EDITORS = {
     { name: "Uzerly", logo: "assets/logo-uzerly.jpeg" }
   ],
   display: [
-    { name: "Digidip", logo: "assets/logo-digidip.png" },
+    { name: "Sirdata", logo: "assets/logo-sirdata.png" },
     { name: "Skimlinks", logo: "assets/logo-skimlinks.png" }
   ],
   content: [
@@ -236,10 +236,6 @@ const EDITORS = {
   ],
   emailing: [
     { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" }
-  ],
-  affinitaires: [
-    { name: "FR Android", logo: "assets/frandroid-logo.png" },
-    { name: "Les Bons Plans de Naïma", logo: "assets/bonsplans-naima-logo.jpg" }
   ],
   sea: [
     { name: "JVWEB", logo: "assets/logo-jvweb.png" },
@@ -250,26 +246,126 @@ const EDITORS = {
   ]
 };
 
-// ----------------- AFFICHAGE ÉDITEURS -----------------
-function afficherEditeurs(leviers) {
+// ----------------- MAPPING AFFINITAIRE PAR SECTEUR -----------------
+const EDITORS_AFFINITAIRE = {
+  // 👗 MODE
+  fashion: [
+    { name: "Grazia", logo: "assets/grazia-logo.png" },
+    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
+    { name: "Stylight", logo: "assets/stylight-logo.png" },
+    { name: "Unidays", logo: "assets/unidays-logo.png" }
+  ],
+
+  // 🎭 PRODUITS CULTURELS & LOISIRS
+  culture: [
+    { name: "Konbini", logo: "assets/konbini-logo.png" },
+    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" },
+    { name: "Geo", logo: "assets/geo-logo.png" },
+    { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" }
+  ],
+
+  // 💻 HIGH-TECH & ÉLECTROMÉNAGER
+  electronics: [
+    { name: "Les Numériques", logo: "assets/lesnumeriques-logo.png" },
+    { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" },
+    { name: "FrAndroid", logo: "assets/frandroid-logo.png" }
+  ],
+
+  // 🏡 MAISON & DÉCORATION
+  home: [
+    { name: "Maison Travaux", logo: "assets/maisontravaux-logo.png" },
+    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
+    { name: "Potoroze", logo: "assets/potoroze-logo.png" }
+  ],
+
+  // 🥗 ALIMENTATION & DRIVE
+  food: [
+    { name: "Marmiton", logo: "assets/marmiton-logo.png" },
+    { name: "Cuisine Actuelle", logo: "assets/cuisineactuelle-logo.png" },
+    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" }
+  ],
+
+  // 🏋️ SPORT
+  sports: [
+    { name: "Top Santé", logo: "assets/topsante-logo.jpg" },
+    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" }
+  ],
+
+  // ✈️ VOYAGE & TOURISME
+  travel: [
+    { name: "Lonely Planet", logo: "assets/lonelyplanet-logo.png" },
+    { name: "Geo", logo: "assets/geo-logo.png" },
+    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" }
+  ],
+
+  // 💎 LUXE & BIJOUX
+  luxury: [
+    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
+    { name: "Grazia", logo: "assets/grazia-logo.png" },
+    { name: "Stylight", logo: "assets/stylight-logo.png" }
+  ],
+
+  // 🚗 PIÈCES AUTOMOBILES
+  auto: [
+    { name: "Auto Moto", logo: "assets/automoto-logo.png" },
+    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" }
+  ],
+
+  // 🧸 JEUX & JOUETS
+  games: [
+    { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" },
+    { name: "Konbini", logo: "assets/konbini-logo.png" }
+  ],
+
+  // 🌿 MAISON & JARDIN
+  garden: [
+    { name: "Maison Travaux", logo: "assets/maisontravaux-logo.png" },
+    { name: "Potoroze", logo: "assets/potoroze-logo.png" }
+  ],
+
+  // 📱 TÉLÉCOM
+  telecom: [
+    { name: "Les Numériques", logo: "assets/lesnumeriques-logo.png" },
+    { name: "FrAndroid", logo: "assets/frandroid-logo.png" }
+  ],
+
+  // 🌀 AUTRE (fallback)
+  other: [
+    { name: "Konbini", logo: "assets/konbini-logo.png" },
+    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" },
+    { name: "Geo", logo: "assets/geo-logo.png" }
+  ]
+};
+
+// ----------------- AFFICHAGE ÉDITEURS (fusion leviers + affinitaires secteur) -----------------
+function afficherEditeurs(leviers, sectorKey) {
   const container = document.querySelector(".editor-grid");
   if (!container) return;
   container.innerHTML = "";
 
   let suggestions = [];
+
+  // 🔹 Étape 1 — Ajouter les éditeurs selon les leviers cochés
   leviers.forEach(l => {
     if (EDITORS[l]) {
-      // On ajoute le levier comme champ supplémentaire
       suggestions = suggestions.concat(
         EDITORS[l].map(e => ({ ...e, levier: l }))
       );
     }
   });
 
-  // Mélanger et limiter à 8 max
-  suggestions = suggestions.sort(() => 0.5 - Math.random()).slice(0, 8);
+  // 🔹 Étape 2 — Ajouter les éditeurs affinitaires liés au secteur choisi
+  if (sectorKey) {
+    const affinitaires = EDITORS_AFFINITAIRE[sectorKey] || EDITORS_AFFINITAIRE.other;
+    suggestions = suggestions.concat(
+      affinitaires.map(e => ({ ...e, levier: "Affinitaires" }))
+    );
+  }
 
-  // Injecter dans le DOM
+  // 🔹 Étape 3 — Mélanger et limiter à 6 max
+  suggestions = suggestions.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+  // 🔹 Étape 4 — Injecter dans le DOM
   suggestions.forEach(e => {
     const card = document.createElement("div");
     card.className = "editor-card";
@@ -280,6 +376,7 @@ function afficherEditeurs(leviers) {
     container.appendChild(card);
   });
 }
+
 
 // ----------------- Préparer données camembert (labels + values) -----------------
 function chartDataFor(sectorKey, levers) {
@@ -612,7 +709,7 @@ if (insightMessage && insightText && maturityMessage) {
 }
 
     // --- Editors suggestions ---
-afficherEditeurs(levers);
+afficherEditeurs(levers, sectorKey);
 
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -723,6 +820,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
