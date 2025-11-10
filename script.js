@@ -350,7 +350,7 @@ const EDITORS_AFFINITAIRE = {
   ]
 };
 
-// ----------------- AFFICHAGE ÉDITEURS (fusion leviers + affinitaires secteur) -----------------
+// ----------------- AFFICHAGE ÉDITEURS (priorité affinitaires + limite à 6) -----------------
 function afficherEditeurs(leviers, sectorKey) {
   const container = document.querySelector(".editor-grid");
   if (!container) return;
@@ -358,25 +358,26 @@ function afficherEditeurs(leviers, sectorKey) {
 
   let suggestions = [];
 
-  // 🔹 Étape 1 — Ajouter les éditeurs selon les leviers cochés
+  // 🔹 Étape 1 — Ajouter en priorité les affinitaires du secteur
+  let affinitaires = [];
+  if (sectorKey) {
+    affinitaires = EDITORS_AFFINITAIRE[sectorKey] || EDITORS_AFFINITAIRE.other;
+    affinitaires = affinitaires.map(e => ({ ...e, levier: "Affinitaires" }));
+  }
+
+  // 🔹 Étape 2 — Ajouter les éditeurs liés aux leviers cochés
+  let autres = [];
   leviers.forEach(l => {
     if (EDITORS[l]) {
-      suggestions = suggestions.concat(
+      autres = autres.concat(
         EDITORS[l].map(e => ({ ...e, levier: l }))
       );
     }
   });
 
-  // 🔹 Étape 2 — Ajouter les éditeurs affinitaires liés au secteur choisi
-  if (sectorKey) {
-    const affinitaires = EDITORS_AFFINITAIRE[sectorKey] || EDITORS_AFFINITAIRE.other;
-    suggestions = suggestions.concat(
-      affinitaires.map(e => ({ ...e, levier: "Affinitaires" }))
-    );
-  }
-
-  // 🔹 Étape 3 — Mélanger et limiter à 6 max
-  suggestions = suggestions.sort(() => 0.5 - Math.random()).slice(0, 10);
+  // 🔹 Étape 3 — Fusionner : affinitaires en premier, puis compléter avec autres
+  const shuffledOthers = autres.sort(() => 0.5 - Math.random());
+  suggestions = [...affinitaires, ...shuffledOthers].slice(0, 6); // max 6
 
   // 🔹 Étape 4 — Injecter dans le DOM
   suggestions.forEach(e => {
@@ -389,6 +390,7 @@ function afficherEditeurs(leviers, sectorKey) {
     container.appendChild(card);
   });
 }
+
 
 
 // ----------------- Préparer données camembert (labels + values) -----------------
@@ -833,6 +835,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
