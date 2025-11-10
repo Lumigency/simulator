@@ -40,6 +40,10 @@ const SECTORS = {
     label: "Mode & Beauté", aov: 67, cvr: 0.0155,
     pdv: normalize({ cashback:0.23, bonsplans:0.18, retargeting:0.14, css:0.12, comparateurs:0.11, "display-networks":0.10, retention:0.06, content:0.04, emailing:0.02 })
   },
+  beauty: {
+  label: "Beauté & Cosmétique", aov: 72, cvr: 0.0168,
+    pdv: normalize({ cashback: 0.22, bonsplans: 0.17, influence: 0.18, affinitaires: 0.15, comparateurs: 0.10, "display-networks": 0.08, emailing: 0.05,content: 0.05 })
+},
   electronics: {
     label: "High-tech & Électroménager", aov: 111, cvr: 0.0171,
     pdv: normalize({ comparateurs:0.25, cashback:0.20, css:0.15, bonsplans:0.12, retargeting:0.12, "display-networks":0.08, emailing:0.03, content:0.03 })
@@ -254,6 +258,15 @@ const EDITORS_AFFINITAIRE = {
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
     { name: "Stylight", logo: "assets/stylight-logo.png" },
     { name: "Unidays", logo: "assets/unidays-logo.png" }
+  ],
+  
+// 💅 BEAUTÉ, SANTÉ & HYGIÈNE
+  beauty: [
+    { name: "Madame Figaro", logo: "assets/madamefigaro-logo.png" },
+    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
+    { name: "Doctissimo", logo: "assets/doctissimo-logo.png" },
+    { name: "Beauté Test", logo: "assets/beautetest-logo.png" },
+    { name: "Aufeminin", logo: "assets/aufeminin-logo.png" }
   ],
 
   // 🎭 PRODUITS CULTURELS & LOISIRS
@@ -820,6 +833,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
