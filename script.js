@@ -262,11 +262,10 @@ const EDITORS_AFFINITAIRE = {
   
 // 💅 BEAUTÉ, SANTÉ & HYGIÈNE
   beauty: [
-    { name: "Madame Figaro", logo: "assets/madamefigaro-logo.png" },
+  { name: "Grazia", logo: "assets/grazia-logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
-    { name: "Doctissimo", logo: "assets/doctissimo-logo.png" },
-    { name: "Beauté Test", logo: "assets/beautetest-logo.png" },
-    { name: "Aufeminin", logo: "assets/aufeminin-logo.png" }
+    { name: "Stylight", logo: "assets/stylight-logo.png" },
+    { name: "Unidays", logo: "assets/unidays-logo.png" }
   ],
 
   // 🎭 PRODUITS CULTURELS & LOISIRS
@@ -835,6 +834,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
