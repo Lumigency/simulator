@@ -357,17 +357,15 @@ select {
   margin: 0;
 }
 
-/* === ✅ Suggestions d’éditeurs Lumigency (3x2 fixes + alignement parfait) === */
+/* === 🎯 Bloc ÉDITEURS — structure stable et propre (8 cartes = 4x2) === */
 .editor-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 28px;
   justify-items: center;
   align-items: start;
-  margin-top: 25px;
-  max-width: 850px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 950px;
+  margin: 25px auto;
 }
 
 .editor-card {
@@ -376,7 +374,7 @@ select {
   border-radius: 12px;
   padding: 18px 14px;
   width: 170px;
-  height: 140px; /* même hauteur pour tout aligner */
+  height: 140px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -384,11 +382,6 @@ select {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-}
-
-.editor-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
 .editor-card img {
@@ -403,23 +396,25 @@ select {
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
-  min-height: 22px;
-}
-
-/* === Responsive === */
-@media (max-width: 900px) {
-  .editor-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
 }
 
 @media (max-width: 600px) {
   .editor-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+
+  .editor-card {
+    width: 100%;
+    height: auto;
+    min-height: 120px;
+  }
+
+  .editor-card img {
+    max-width: 80px;
+  }
 }
+
 
 
 /* === Curseur + input trafic mensuel === */
