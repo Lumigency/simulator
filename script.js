@@ -256,7 +256,7 @@ const EDITORS_AFFINITAIRE = {
   fashion: [
     { name: "Grazia", logo: "assets/grazia-logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
-    { name: "Stylight", logo: "assets/stylight-logo.png" },
+    { name: "Stylight", logo: "assets/sytlight-logo.png" },
     { name: "Unidays", logo: "assets/unidays-logo.png" }
   ],
   
@@ -264,7 +264,7 @@ const EDITORS_AFFINITAIRE = {
   beauty: [
   { name: "Grazia", logo: "assets/grazia-logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
-    { name: "Stylight", logo: "assets/stylight-logo.png" },
+    { name: "Stylight", logo: "assets/sytlight-logo.png" },
     { name: "Unidays", logo: "assets/unidays-logo.png" }
   ],
 
@@ -834,6 +834,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
