@@ -357,12 +357,13 @@ select {
   margin: 0;
 }
 
-/* === Suggestions d’éditeurs (version finale clean & alignée) === */
+/* === Suggestions d’éditeurs (grille 3x2 équilibrée) === */
 .editor-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* centre même si nombre impair */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes fixes */
   gap: 20px;
+  justify-items: center;
+  align-items: start;
   margin-top: 20px;
 }
 
@@ -372,7 +373,7 @@ select {
   border-radius: 12px;
   padding: 16px 12px;
   width: 150px;
-  height: 130px; /* hauteur fixe pour tout aligner */
+  height: 130px; /* garde ta hauteur fixe pour l’alignement */
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -400,6 +401,20 @@ select {
   color: #0000FF; /* bleu Lumigency */
   min-height: 20px; /* stabilise l’espace du texte */
 }
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .editor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* === Curseur + input trafic mensuel === */
 .traffic-slider-container {
