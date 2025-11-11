@@ -409,19 +409,6 @@ select {
   display: block;
 }
 
-/* ✅ Texte bleu parfaitement aligné entre les cartes */
-.editor-card span {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #0000FF;
-  line-height: 1.2;
-  text-align: center;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /* ✅ Responsive tablette et mobile */
 @media (max-width: 900px) {
   .editor-grid {
