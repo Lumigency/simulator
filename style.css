@@ -387,9 +387,19 @@ select {
 }
 
 .editor-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 0, 255, 0.2);
+  border-color: #0000ff;
+  background-color: #f0f3ff;
 }
+
+.editor-card img {
+  transition: transform 0.3s ease;
+}
+.editor-card:hover img {
+  transform: scale(1.05);
+}
+
 
 /* ✅ Zone logo : hauteur fixe identique pour toutes les cartes */
 .logo-wrapper {
