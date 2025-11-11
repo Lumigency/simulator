@@ -357,24 +357,24 @@ select {
   margin: 0;
 }
 
-/* === 🎯 Bloc ÉDITEURS — structure stable et propre (8 cartes = 4x2) === */
+/* === 🎯 Bloc ÉDITEURS — structure compacte et élégante (8 cartes = 4x2) === */
 .editor-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  gap: 24px;
   justify-items: center;
   align-items: start;
-  max-width: 950px;
+  max-width: 880px;
   margin: 25px auto;
 }
 
-/* ✅ Carte éditeur — structure */
+/* ✅ Cartes plus compactes et visuellement équilibrées */
 .editor-card {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  width: 170px;
-  height: 150px;
+  width: 140px;         /* ↘️ taille réduite */
+  height: 120px;        /* ↘️ hauteur adaptée */
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -382,52 +382,70 @@ select {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 14px 14px;
+  padding: 14px 10px;
+  cursor: default;
 }
 
-/* ✅ Zone logo avec hauteur fixe et centrage parfait */
-.editor-card .logo-wrapper {
-  height: 70px; /* fixe la hauteur disponible pour le logo */
+.editor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* ✅ Zone logo uniforme & parfaitement centrée */
+.logo-wrapper {
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
+/* ✅ Logos légèrement agrandis et centrés */
 .editor-card img {
-  max-height: 55px;
-  max-width: 90px;
+  max-height: 70px;      /* ↗️ logo plus grand */
+  max-width: 110px;
   object-fit: contain;
   display: block;
 }
 
-/* ✅ Texte bleu toujours aligné à la même hauteur */
+/* ✅ Texte bleu aligné et compact */
 .editor-card span {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
   margin-top: auto;
 }
 
-/* ✅ Responsive */
+/* ✅ Responsive tablette et mobile */
+@media (max-width: 900px) {
+  .editor-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
 @media (max-width: 600px) {
   .editor-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 12px;
   }
 
   .editor-card {
     width: 100%;
     height: auto;
-    min-height: 120px;
+    min-height: 110px;
   }
 
   .editor-card img {
     max-width: 80px;
+    max-height: 60px;
+  }
+
+  .editor-card span {
+    font-size: 0.8rem;
   }
 }
-
 
 /* === Curseur + input trafic mensuel === */
 .traffic-slider-container {
