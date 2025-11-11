@@ -409,17 +409,17 @@ select {
   display: block;
 }
 
-/* ✅ Texte bleu toujours aligné entre les cartes */
+/* ✅ Texte bleu aligné sans décaler les logos */
 .editor-card span {
   font-size: 0.85rem;
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
   text-align: center;
-  margin-top: auto; /* pousse le texte vers le bas */
-  min-height: 22px; /* assure une hauteur constante du bloc texte */
+  margin-top: 8px; /* espace fixe sous chaque logo */
+  height: 22px; /* hauteur constante pour alignement horizontal parfait */
   display: flex;
-  align-items: flex-end; /* aligne verticalement le texte à la même ligne */
+  align-items: center;
   justify-content: center;
 }
 
