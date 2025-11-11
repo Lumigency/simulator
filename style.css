@@ -368,21 +368,21 @@ select {
   margin: 25px auto;
 }
 
-/* ✅ Cartes plus compactes et visuellement équilibrées */
+/* ✅ Cartes parfaitement centrées et harmonieuses */
 .editor-card {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  width: 140px;         /* ↘️ taille réduite */
-  height: 120px;        /* ↘️ hauteur adaptée */
+  width: 150px;
+  height: 130px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 10px;
+  justify-content: center; /* ✅ centre verticalement le contenu */
+  align-items: center;     /* ✅ centre horizontalement */
+  padding: 10px;
   cursor: default;
 }
 
@@ -390,35 +390,32 @@ select {
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-/* ✅ Zone logo — centrage visuel parfait quelle que soit la taille du logo */
+
+/* ✅ Zone logo : occupe la hauteur totale disponible */
 .logo-wrapper {
-  height: 75px;
-  width: 100%;
+  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 6px;
-  padding: 5px 0; /* équilibre vertical pour les logos à marge interne */
-  box-sizing: border-box;
+  align-items: center;     
+  justify-content: center; 
+  width: 100%;
+  height: 100%;
 }
 
-/* ✅ Image — centrée visuellement, même si le logo a du vide blanc */
+/* ✅ Image : centrée et jamais déformée */
 .editor-card img {
-  max-height: 65px;      /* hauteur uniforme */
-  max-width: 100px;      /* largeur maîtrisée */
+  max-height: 70px;
+  max-width: 100px;
   object-fit: contain;
   display: block;
-  margin: 0 auto;
-  vertical-align: middle;
-  transform: translateY(2px); /* ajuste légèrement le centrage vertical */
 }
+
 /* ✅ Texte bleu aligné et compact */
 .editor-card span {
   font-size: 0.85rem;
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
-  margin-top: auto;
+  margin-top: 10px;
 }
 
 /* ✅ Responsive tablette et mobile */
@@ -426,6 +423,28 @@ select {
   .editor-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .editor-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .editor-card {
+    width: 100%;
+    height: auto;
+    min-height: 110px;
+  }
+
+  .editor-card img {
+    max-width: 80px;
+    max-height: 60px;
+  }
+
+  .editor-card span {
+    font-size: 0.8rem;
   }
 }
 
