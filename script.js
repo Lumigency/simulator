@@ -285,7 +285,7 @@ const EDITORS_AFFINITAIRE = {
 
   // 🏡 MAISON & DÉCORATION
   home: [
-    { name: "Maison Travaux", logo: "assets/maisontravaux-logo.png" },
+    { name: "Maison Travaux", logo: "assets/maisontavaux-logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
     { name: "Potoroze", logo: "assets/potoroze-logo.png" }
   ],
@@ -819,6 +819,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
