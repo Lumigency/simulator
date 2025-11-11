@@ -390,26 +390,28 @@ select {
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-
-/* ✅ Zone logo — centrage parfait quelle que soit la taille du logo */
+/* ✅ Zone logo — centrage visuel parfait quelle que soit la taille du logo */
 .logo-wrapper {
-  height: 70px; /* hauteur fixe uniforme */
-  display: flex;
-  align-items: center;  /* centre verticalement */
-  justify-content: center; /* centre horizontalement */
-  margin-bottom: 6px;
+  height: 75px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  padding: 5px 0; /* équilibre vertical pour les logos à marge interne */
+  box-sizing: border-box;
 }
 
-/* ✅ Image centrée à 100 % */
+/* ✅ Image — centrée visuellement, même si le logo a du vide blanc */
 .editor-card img {
-  max-height: 70px;
-  max-width: 110px;
+  max-height: 65px;      /* hauteur uniforme */
+  max-width: 100px;      /* largeur maîtrisée */
   object-fit: contain;
   display: block;
-  margin: 0 auto; /* centre horizontalement si besoin */
+  margin: 0 auto;
+  vertical-align: middle;
+  transform: translateY(2px); /* ajuste légèrement le centrage vertical */
 }
-
 /* ✅ Texte bleu aligné et compact */
 .editor-card span {
   font-size: 0.85rem;
