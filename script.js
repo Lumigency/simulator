@@ -821,19 +821,7 @@ function updateProgress(percent) {
   text.textContent = percent + '%';
 }
 
-// === Toast opt-in éditeurs ===
-const optinEditeurs = document.getElementById("optin-editeurs");
-const toast = document.getElementById("toast");
 
-if (optinEditeurs && toast) {
-  optinEditeurs.addEventListener("change", () => {
-    if (optinEditeurs.checked) {
-      toast.classList.add("show");
-    } else {
-      toast.classList.remove("show");
-    }
-  });
-}
 
 
 
