@@ -368,29 +368,31 @@ select {
   margin: 25px auto;
 }
 
+/* ✅ Carte éditeur */
 .editor-card {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 18px 14px;
   width: 170px;
-  height: 150px; /* un peu plus haut pour équilibrer */
+  height: 150px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* on aligne en haut */
-  align-items: center;
+  justify-content: center;  /* centre verticalement tout le contenu */
+  align-items: center;      /* centre horizontalement */
 }
 
-/* ✅ Image à hauteur fixe pour alignement parfait */
+/* ✅ Logo parfaitement centré et homogène */
 .editor-card img {
-  height: 55px;         /* fixe la hauteur pour tous les logos */
-  width: auto;
+  height: 55px;
+  width: 100%;
+  max-width: 90px;
   object-fit: contain;
-  margin-bottom: 10px;
   display: block;
+  margin: 0 auto 10px;  /* centre et ajoute espace dessous */
 }
 
 /* ✅ Texte aligné et uniforme */
@@ -399,9 +401,9 @@ select {
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
-  margin-top: auto;     /* pousse le texte vers le bas pour un alignement homogène */
 }
 
+/* ✅ Responsive */
 @media (max-width: 600px) {
   .editor-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -418,7 +420,6 @@ select {
     max-width: 80px;
   }
 }
-
 
 
 /* === Curseur + input trafic mensuel === */
