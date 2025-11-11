@@ -376,7 +376,7 @@ function afficherEditeurs(leviers, sectorKey) {
 
   // 🔹 Étape 3 — Fusionner : affinitaires en premier, puis compléter avec autres
   const shuffledOthers = autres.sort(() => 0.5 - Math.random());
-  suggestions = [...affinitaires, ...shuffledOthers].slice(0, 6); // max 6
+  suggestions = [...affinitaires, ...shuffledOthers].slice(0, 8); // max 8
 
   // 🔹 Étape 4 — Injecter dans le DOM
   suggestions.forEach(e => {
@@ -834,6 +834,7 @@ if (optinEditeurs && toast) {
     }
   });
 }
+
 
 
 
