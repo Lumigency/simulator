@@ -678,16 +678,6 @@ select {
   text-align: left;
 }
 
-.editor-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 25px;
-  max-width: 900px;
-  margin: 20px auto;
-}
-
 .editor-card {
   display: flex;
   flex-direction: column;
