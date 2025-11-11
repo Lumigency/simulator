@@ -368,12 +368,11 @@ select {
   margin: 25px auto;
 }
 
-/* ✅ Carte éditeur */
+/* ✅ Carte éditeur — hauteur uniforme & centrage parfait */
 .editor-card {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  padding: 18px 14px;
   width: 170px;
   height: 150px;
   text-align: center;
@@ -381,46 +380,35 @@ select {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* centre verticalement tout le contenu */
-  align-items: center;      /* centre horizontalement */
+  justify-content: space-between; /* espace image / texte */
+  align-items: center;
+  padding: 18px 14px 14px;
 }
 
-/* ✅ Logo parfaitement centré et homogène */
+/* ✅ Zone image fixe et centrée */
 .editor-card img {
   height: 55px;
-  width: 100%;
+  width: auto;
   max-width: 90px;
   object-fit: contain;
   display: block;
-  margin: 0 auto 10px;  /* centre et ajoute espace dessous */
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
-/* ✅ Texte aligné et uniforme */
+/* ✅ Texte bleu toujours à la même hauteur */
 .editor-card span {
   font-size: 0.9rem;
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
+  margin-top: 10px;
 }
 
 /* ✅ Responsive */
 @media (max-width: 600px) {
   .editor-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .editor-card {
-    width: 100%;
-    height: auto;
-    min-height: 120px;
-  }
-
-  .editor-card img {
-    max-width: 80px;
-  }
-}
-
+    grid-template-columns: repeat(2, 1fr)
 
 /* === Curseur + input trafic mensuel === */
 .traffic-slider-container {
