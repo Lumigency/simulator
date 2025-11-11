@@ -384,7 +384,6 @@ function afficherEditeurs(leviers, sectorKey) {
     card.className = "editor-card";
     card.innerHTML = `
       <img src="${e.logo}" alt="${e.name}">
-      <span>${e.levier.charAt(0).toUpperCase() + e.levier.slice(1)}</span>
     `;
     container.appendChild(card);
   });
@@ -820,6 +819,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
