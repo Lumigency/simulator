@@ -409,13 +409,18 @@ select {
   display: block;
 }
 
-/* ✅ Texte bleu aligné et compact */
+/* ✅ Texte bleu toujours aligné entre les cartes */
 .editor-card span {
   font-size: 0.85rem;
   font-weight: 600;
   color: #0000FF;
   line-height: 1.2;
-  margin-top: 10px;
+  text-align: center;
+  margin-top: auto; /* pousse le texte vers le bas */
+  min-height: 22px; /* assure une hauteur constante du bloc texte */
+  display: flex;
+  align-items: flex-end; /* aligne verticalement le texte à la même ligne */
+  justify-content: center;
 }
 
 /* ✅ Responsive tablette et mobile */
