@@ -391,21 +391,23 @@ select {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* ✅ Zone logo uniforme & parfaitement centrée */
+/* ✅ Zone logo — centrage parfait quelle que soit la taille du logo */
 .logo-wrapper {
-  height: 70px;
+  height: 70px; /* hauteur fixe uniforme */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center;  /* centre verticalement */
+  justify-content: center; /* centre horizontalement */
   margin-bottom: 6px;
+  width: 100%;
 }
 
-/* ✅ Logos légèrement agrandis et centrés */
+/* ✅ Image centrée à 100 % */
 .editor-card img {
-  max-height: 70px;      /* ↗️ logo plus grand */
+  max-height: 70px;
   max-width: 110px;
   object-fit: contain;
   display: block;
+  margin: 0 auto; /* centre horizontalement si besoin */
 }
 
 /* ✅ Texte bleu aligné et compact */
