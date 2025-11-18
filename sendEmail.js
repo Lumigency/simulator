@@ -13,16 +13,18 @@ module.exports = async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS, // mot de passe d’application Gmail
-      },
+      host: "smtp-relay.gmail.com",
+      port: 587,
+      secure: false, // TLS auto
+      tls: {
+        rejectUnauthorized: false,
+      }
+      // ATTENTION : PAS D'AUTH → c'est ton SMTP relay qui authentifie par IP.
     });
 
     await transporter.sendMail({
-      from: `"Simulateur Lumigency" <${process.env.MAIL_USER}>`,
-      to: process.env.MAIL_TO || process.env.MAIL_USER,
+      from: `"Simulateur Lumigency" <tiphaine@lumigency.com>`,
+      to: "tiphaine@lumigency.com",
       subject: "🆕 Nouveau prospect – Simulateur Lumigency",
       html: `
         <h2>Nouvelle soumission du simulateur</h2>
