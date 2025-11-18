@@ -727,23 +727,22 @@ afficherEditeurs(levers, sectorKey);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-   // === Envoi email automatique vers ton API Vercel ===
+    // === Envoi email automatique vers API Vercel ===
 (async () => {
   try {
-
     const formPayload = {
-      // 🔵 Étape 1 — objectifs & maturité
-      objectif: objectifValue,
+      // Étape 1
+      objectif: form.elements["objectif"]?.value || "",
       hybrides: hybridChoice,
 
-      // 🔵 Étape 2 — caractéristiques business
+      // Étape 2
       sector: sectorKey,
       sectorLabel: SECTORS[sectorKey]?.label || "Autre",
       site: form.elements["site"]?.value || "",
       emailProspect: form.elements["email"]?.value || "",
       marge: form.elements["marge"]?.value || "",
 
-      // 🔵 Étape 3 — inputs du simulateur
+      // Étape 3
       trafficMensuel: trafficMonthly,
       budgetMensuel: budgetMonthly === Infinity ? "Illimité" : budgetMonthly,
       budgetAnnuel: budgetAnnual === Infinity ? "Illimité" : budgetAnnual,
@@ -752,7 +751,7 @@ afficherEditeurs(levers, sectorKey);
       cacClient: cacClient,
       leviersSelectionnes: levers,
 
-      // 🔵 Résultats de la simulation
+      // Résultats
       traficAnnuelAffilie: affiliatedTrafficYear,
       paniersAjuste: adjustedAov,
       cvrAjuste: adjustedCvr,
@@ -763,11 +762,9 @@ afficherEditeurs(levers, sectorKey);
       budgetConsomme: Math.round(budgetConsumed),
       roi: roi.toFixed(2),
 
-      // 🔵 Message synthèse
       messageMaturite: maturityMessage
     };
 
-    // ✨ CECI MANQUAIT = l’appel API pour envoyer l’email
     const response = await fetch("/api/sendEmail", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -777,7 +774,7 @@ afficherEditeurs(levers, sectorKey);
     if (response.ok) {
       console.log("📩 Email envoyé avec succès !");
     } else {
-      console.warn("⚠️ Erreur lors de l’envoi de l’email :", response.status);
+      console.warn("⚠️ Erreur envoi email :", response.status);
     }
 
   } catch (err) {
@@ -785,6 +782,7 @@ afficherEditeurs(levers, sectorKey);
   }
 })();
 
+ 
     // ✅ CTA dynamique selon l'objectif
 const objectif = form.elements["objectif"]?.value;
 const ctaWrapper = document.getElementById("cta-dynamic");
@@ -877,6 +875,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
