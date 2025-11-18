@@ -727,6 +727,64 @@ afficherEditeurs(levers, sectorKey);
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
+   // === Envoi email automatique vers ton API Vercel ===
+(async () => {
+  try {
+
+    const formPayload = {
+      // 🔵 Étape 1 — objectifs & maturité
+      objectif: objectifValue,
+      hybrides: hybridChoice,
+
+      // 🔵 Étape 2 — caractéristiques business
+      sector: sectorKey,
+      sectorLabel: SECTORS[sectorKey]?.label || "Autre",
+      site: form.elements["site"]?.value || "",
+      emailProspect: form.elements["email"]?.value || "",
+      marge: form.elements["marge"]?.value || "",
+
+      // 🔵 Étape 3 — inputs du simulateur
+      trafficMensuel: trafficMonthly,
+      budgetMensuel: budgetMonthly === Infinity ? "Illimité" : budgetMonthly,
+      budgetAnnuel: budgetAnnual === Infinity ? "Illimité" : budgetAnnual,
+      aovSaisi: aovUser,
+      cvrSaisi: cvrUserInput,
+      cacClient: cacClient,
+      leviersSelectionnes: levers,
+
+      // 🔵 Résultats de la simulation
+      traficAnnuelAffilie: affiliatedTrafficYear,
+      paniersAjuste: adjustedAov,
+      cvrAjuste: adjustedCvr,
+      commandesPotentielles: Math.round(potentialOrders),
+      commandesFinales: Math.round(finalOrders),
+      chiffreAffaires: Math.round(revenue),
+      cacProjete: Math.round(cacProjected),
+      budgetConsomme: Math.round(budgetConsumed),
+      roi: roi.toFixed(2),
+
+      // 🔵 Message synthèse
+      messageMaturite: maturityMessage
+    };
+
+    // ✨ CECI MANQUAIT = l’appel API pour envoyer l’email
+    const response = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formPayload),
+    });
+
+    if (response.ok) {
+      console.log("📩 Email envoyé avec succès !");
+    } else {
+      console.warn("⚠️ Erreur lors de l’envoi de l’email :", response.status);
+    }
+
+  } catch (err) {
+    console.error("❌ Erreur API Email :", err);
+  }
+})();
+
     // ✅ CTA dynamique selon l'objectif
 const objectif = form.elements["objectif"]?.value;
 const ctaWrapper = document.getElementById("cta-dynamic");
@@ -819,6 +877,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
