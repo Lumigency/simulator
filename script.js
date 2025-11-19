@@ -726,10 +726,32 @@ afficherEditeurs(levers, sectorKey);
 
     console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
     window.scrollTo({ top: 0, behavior: "smooth" });
-
+    
     // === Envoi email automatique vers API Vercel ===
+// ======================================
+// 📌 Capture des éditeurs réellement affichés (max 8)
+// ======================================
+const editeursAffiches = (function() {
+  let liste = [];
+
+  // 1️⃣ Affinitaires du secteur
+  const affi = EDITORS_AFFINITAIRE[sectorKey] || EDITORS_AFFINITAIRE.other;
+  affi.forEach(e => liste.push(e.name));
+
+  // 2️⃣ Éditeurs selon les leviers cochés
+  levers.forEach(l => {
+    if (EDITORS[l]) {
+      EDITORS[l].forEach(e => liste.push(e.name));
+    }
+  });
+
+  // 3️⃣ On renvoie EXACTEMENT ceux affichés (max 8)
+  return liste.slice(0, 8);
+})();
+
 (async () => {
   try {
+
     const formPayload = {
       // Étape 1
       objectif: form.elements["objectif"]?.value || "",
@@ -741,6 +763,9 @@ afficherEditeurs(levers, sectorKey);
       site: form.elements["site"]?.value || "",
       emailProspect: form.elements["email"]?.value || "",
       marge: form.elements["marge"]?.value || "",
+
+      // 🔥 AJOUT IMPORTANT
+      editeursAffiches: editeursAffiches,
 
       // Étape 3
       trafficMensuel: trafficMonthly,
@@ -765,6 +790,7 @@ afficherEditeurs(levers, sectorKey);
       messageMaturite: maturityMessage
     };
 
+    // === Envoi vers sendEmail ===
     const response = await fetch("/api/sendEmail", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -875,6 +901,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
