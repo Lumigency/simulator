@@ -674,20 +674,30 @@ select {
   align-items: center;
   margin-top: 20px;
 }
-
 .step-actions .cta,
 .step-actions .cta-secondary {
   width: auto;
 }
+
+/* Layout principal split : desktop / mobile */
+.split-layout {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
 @media (max-width: 1024px) {
   .split-layout {
     flex-direction: column;
   }
 
-  .left-column, .right-column {
+  .left-column,
+  .right-column {
     width: 100%;
     padding: 40px 30px;
   }
+}
+
 
   .signature {
     position: static;
