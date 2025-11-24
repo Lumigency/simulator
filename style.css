@@ -660,12 +660,12 @@ select {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ccc;
-  transition: background 0.3s ease;
+  background-color: #ccc;
+  transition: background-color 0.3s ease;
 }
 
 .step-pill.active {
-  background: #0000FF;
+  background-color: #0000FF;
 }
 
 .step-actions {
