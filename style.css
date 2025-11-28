@@ -130,7 +130,7 @@ body {
 /* Cards — largeur premium fixe */
 .simu-cards-row .result-card,
 .simu-cards-row .repartition-card {
-  width: 200px;      /* Taille équilibrée */
+  width: 250px;      /* Taille équilibrée */
   flex-shrink: 0;    /* 🔥 Empêche l’écrasement */
 }
 
@@ -175,7 +175,7 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.5;
 }
 
@@ -197,7 +197,7 @@ body {
 
 .repartition-card h3 {
   color: #0000FF;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 15px;
 }
