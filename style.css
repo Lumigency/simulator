@@ -166,44 +166,61 @@ body {
   margin-bottom: 18px;
 }
 
-/* ===== CARD 2 ===== */
-
+/* CARD 2 blanche */
 .repartition-card {
   background: #ffffff;
-  border-radius: 22px;
-  padding: 30px 25px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border: 1px solid #EDE1D8;
+  border-radius: 18px;
+  padding: 22px;
+  width: 300px;
   text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 .repartition-card h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.chart-wrapper {
-  width: 240px;
-  height: 240px;
-  margin: 0 auto 25px;
-}
-
-#chart-levers {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.repartition-card h4 {
+  color: #0000FF;
   font-size: 18px;
-  margin-bottom: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  margin-bottom: 18px;
 }
 
-.editors-icons span {
-  font-size: 22px;
-  margin: 4px;
-  color: #4a3f75; /* adapte si tu veux une autre couleur */
+/* Donut statique (il s’affiche TOUT LE TEMPS) */
+.fake-donut {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  background: conic-gradient(
+      #849BFF 0deg 120deg,
+      #F88989 120deg 210deg,
+      #0000FF 210deg 300deg,
+      #EDE1D8 300deg 360deg
+  );
+  position: relative;
 }
+
+.fake-donut::after {
+  content: "";
+  position: absolute;
+  inset: 28px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+/* Sous-titre */
+.simu-card-subtitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Icônes 👤 */
+.simu-card-icons span {
+  font-size: 20px;
+  margin: 0 2px;
+}
+
 
 /* Mini card "Analyse rapide" */
 .mini-insight {
