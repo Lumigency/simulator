@@ -2105,4 +2105,98 @@ select {
     padding: 13px 28px;
     font-size: 0.95rem;
   }
+  /* Container des 3 cards */
+.results-cards-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  margin: 50px auto;
+  flex-wrap: wrap;
+}
+
+/* Cards générales */
+.result-card {
+  width: 300px;
+  background: white;
+  border-radius: 22px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Gradient cards comme ton visuel */
+.gradient {
+  background: linear-gradient(180deg, #F88989, #849BFF);
+  color: white;
+}
+
+/* Titres */
+.result-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Liste KPI / Insights */
+.kpi-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.kpi-list li {
+  margin-bottom: 18px;
+}
+
+/* Répartition card */
+.repartition-card {
+  background: #ffffff;
+}
+
+.chart-placeholder {
+  width: 100%;
+  height: 200px;
+  border-radius: 100%;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 25px;
+  color: #666;
+}
+
+.editors-icons span {
+  font-size: 20px;
+  margin: 2px;
+}
+
+/* Mini card "Analyse rapide" */
+.mini-insight {
+  background: #ffffff;
+  color: #222;
+  border-radius: 14px;
+  padding: 12px 15px;
+  margin-top: 20px;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.mini-insight strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .results-cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 }
