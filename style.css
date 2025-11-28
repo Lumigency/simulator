@@ -118,117 +118,6 @@ body {
   color: #0000FF;
 }
 
-/* ===============================
-   🌟 LAYOUT PREMIUM 3 CARDS
-=============================== */
-.simu-cards-row {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 28px;
-  margin: 40px auto;
-  width: 100%;
-  max-width: 1040px;
-  position: relative;
-}
-
-/* STYLE GÉNÉRIQUE CARDS */
-.simu-card {
-  width: 280px;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 22px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-  border: 1px solid #EDE1D8;
-  font-family: 'Poppins', sans-serif;
-  transition: all .35s ease;
-}
-
-/* Titre */
-.simu-card h3 {
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 18px;
-  color: #0000FF;
-}
-
-/* Card du milieu en mode “mise en avant” */
-.simu-card.highlight {
-  transform: translateY(-18px);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.12);
-  z-index: 3;
-}
-
-/* Card droite — dépasse légèrement */
-.simu-card-3 {
-  transform: translateY(10px);
-}
-
-/* -------- Donut -------- */
-.fake-donut {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  margin: 0 auto 14px;
-  background: conic-gradient(
-      #849BFF 0deg 120deg,
-      #F88989 120deg 210deg,
-      #0000FF 210deg 300deg,
-      #EDE1D8 300deg 360deg
-  );
-  position: relative;
-}
-
-.fake-donut::after {
-  content: "";
-  position: absolute;
-  inset: 26px;
-  background: #ffffff;
-  border-radius: 50%;
-}
-
-/* Texte & icônes */
-.simu-card-subtitle {
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.simu-card-icons span {
-  font-size: 20px;
-  margin: 1px;
-}
-
-/* Numéros KPI */
-.simu-card-number {
-  font-size: 30px;
-  font-weight: 700;
-  color: #0000FF;
-  margin-bottom: 10px;
-}
-
-.simu-card-desc {
-  font-size: 14px;
-  color: #555;
-}
-
-/* MOBILE */
-@media (max-width: 900px) {
-  .simu-cards-row {
-    flex-direction: column;
-    gap: 22px;
-  }
-  .simu-card,
-  .simu-card.highlight,
-  .simu-card-3 {
-    transform: none !important;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-  }
-}
 
 /* === Signature Lumigency === */
 .signature {
@@ -2216,4 +2105,98 @@ select {
     padding: 13px 28px;
     font-size: 0.95rem;
   }
+  /* Container des 3 cards */
+.results-cards-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  margin: 50px auto;
+  flex-wrap: wrap;
+}
+
+/* Cards générales */
+.result-card {
+  width: 300px;
+  background: white;
+  border-radius: 22px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Gradient cards comme ton visuel */
+.gradient {
+  background: linear-gradient(180deg, #F88989, #849BFF);
+  color: white;
+}
+
+/* Titres */
+.result-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Liste KPI / Insights */
+.kpi-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.kpi-list li {
+  margin-bottom: 18px;
+}
+
+/* Répartition card */
+.repartition-card {
+  background: #ffffff;
+}
+
+.chart-placeholder {
+  width: 100%;
+  height: 200px;
+  border-radius: 100%;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 25px;
+  color: #666;
+}
+
+.editors-icons span {
+  font-size: 20px;
+  margin: 2px;
+}
+
+/* Mini card "Analyse rapide" */
+.mini-insight {
+  background: #ffffff;
+  color: #222;
+  border-radius: 14px;
+  padding: 12px 15px;
+  margin-top: 20px;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.mini-insight strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .results-cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 }
