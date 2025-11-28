@@ -271,7 +271,7 @@ body {
 
 /* === Bloc "Le saviez-vous ?" === */
 .insight-card {
-  background: #ffffff; /* ✅ fond blanc */
+  background: #eefeff; /* ✅ fond blanc */
   color: #1a1a1a;
   border-radius: 14px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
