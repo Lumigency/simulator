@@ -100,23 +100,6 @@ body {
   }
 }
 
-/* === Bloc "Le saviez-vous ?" === */
-.insight-card {
-  background: #ffffff; /* ✅ fond blanc */
-  color: #1a1a1a;
-  border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-  padding: 18px 22px;
-  text-align: left;
-  margin-top: 10px;
-  width: 100%;
-  max-width: 320px;
-  font-size: 0.9rem;
-}
-
-.insight-card strong {
-  color: #0000FF;
-}
 
 /* Conteneur des 3 cards */
 .simu-cards-row {
@@ -284,6 +267,24 @@ body {
     width: 100%;
     max-width: 350px;
   }
+}
+
+/* === Bloc "Le saviez-vous ?" === */
+.insight-card {
+  background: #ffffff; /* ✅ fond blanc */
+  color: #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  padding: 18px 22px;
+  text-align: left;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 320px;
+  font-size: 0.9rem;
+}
+
+.insight-card strong {
+  color: #0000FF;
 }
 
 /* === Signature Lumigency === */
