@@ -130,13 +130,13 @@ body {
 /* Cards — largeur premium fixe */
 .simu-cards-row .result-card,
 .simu-cards-row .repartition-card {
-  width: 300px;      /* Taille équilibrée */
+  width: 200px;      /* Taille équilibrée */
   flex-shrink: 0;    /* 🔥 Empêche l’écrasement */
 }
 
 /* CARD 2 (Hero) — plus grande & premium */
 .simu-cards-row .repartition-card {
-  width: 330px;               /* légèrement plus large */
+  width: 200px;               /* légèrement plus large */
   transform: translateY(-10px);
   box-shadow: 0 16px 32px rgba(0,0,0,0.15);
   border-radius: 26px;
