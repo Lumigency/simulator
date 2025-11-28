@@ -119,7 +119,7 @@ body {
 }
 
   /* Container des 3 cards */
-.results-cards-container {
+.simu-cards-row {
   display: flex;
   gap: 30px;
   justify-content: center;
@@ -129,7 +129,7 @@ body {
 }
 
 /* Cards générales */
-.result-card {
+.simu-cards-row {
   width: 300px;
   background: white;
   border-radius: 22px;
@@ -146,7 +146,7 @@ body {
 }
 
 /* Titres */
-.result-card h3 {
+.simu-cards-row h3 {
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 22px;
