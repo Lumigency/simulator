@@ -166,26 +166,43 @@ body {
   margin-bottom: 18px;
 }
 
-/* Répartition card */
+/* ===== CARD 2 ===== */
+
 .repartition-card {
   background: #ffffff;
+  border-radius: 22px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  text-align: center;
 }
 
-.chart-placeholder {
-  width: 100%;
-  height: 200px;
-  border-radius: 100%;
-  border: 2px dashed #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.repartition-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.chart-wrapper {
+  width: 240px;
+  height: 240px;
   margin: 0 auto 25px;
-  color: #666;
+}
+
+#chart-levers {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.repartition-card h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .editors-icons span {
-  font-size: 20px;
-  margin: 2px;
+  font-size: 22px;
+  margin: 4px;
+  color: #4a3f75; /* adapte si tu veux une autre couleur */
 }
 
 /* Mini card "Analyse rapide" */
