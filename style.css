@@ -118,26 +118,29 @@ body {
   color: #0000FF;
 }
 
-/* Conteneur */
+/* Conteneur des 3 cards */
 .simu-cards-row {
   display: flex;
   justify-content: center;
-  gap: 22px;
-  margin-top: 40px;
+  gap: 40px;
+  margin: 40px 0;
+  flex-wrap: nowrap; /* 🔥 Empêche le wrap = reste sur une seule ligne */
 }
 
-/* Cards compactes */
-.simu-cards-row .result-card {
-  width: 260px; /* 🔥 plus petit mais super UX */
+/* Cards — largeur premium fixe */
+.simu-cards-row .result-card,
+.simu-cards-row .repartition-card {
+  width: 300px;      /* Taille équilibrée */
+  flex-shrink: 0;    /* 🔥 Empêche l’écrasement */
 }
 
-/* Card du milieu = Hero */
-.simu-cards-row .result-card:nth-child(2) {
-  width: 290px;         /* légèrement plus grande */
+/* CARD 2 (Hero) — plus grande & premium */
+.simu-cards-row .repartition-card {
+  width: 330px;               /* légèrement plus large */
   transform: translateY(-10px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15); /* effet premium */
-  z-index: 2;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.15);
   border-radius: 26px;
+  z-index: 2;
 }
 
 /* ==========================================
