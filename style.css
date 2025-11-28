@@ -118,14 +118,26 @@ body {
   color: #0000FF;
 }
 
-  /* Container des 3 cards */
-.results-cards-container {
+/* Conteneur */
+.simu-cards-row {
   display: flex;
-  gap: 30px;
   justify-content: center;
-  align-items: stretch;
-  margin: 50px auto;
-  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 40px;
+}
+
+/* Cards compactes */
+.simu-cards-row .result-card {
+  width: 260px; /* 🔥 plus petit mais super UX */
+}
+
+/* Card du milieu = Hero */
+.simu-cards-row .result-card:nth-child(2) {
+  width: 290px;         /* légèrement plus grande */
+  transform: translateY(-10px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15); /* effet premium */
+  z-index: 2;
+  border-radius: 26px;
 }
 
 /* ==========================================
