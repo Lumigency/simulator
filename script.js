@@ -273,7 +273,6 @@ const EDITORS_AFFINITAIRE = {
     { name: "Konbini", logo: "assets/konbini-logo.png" },
     { name: "Ouest France", logo: "assets/ouestfrance-logo.png" },
     { name: "Geo", logo: "assets/geo-logo.png" },
-    { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" }
   ],
 
   // 💻 HIGH-TECH & ÉLECTROMÉNAGER
@@ -901,6 +900,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
