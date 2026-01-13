@@ -265,7 +265,6 @@ const EDITORS_AFFINITAIRE = {
   { name: "Grazia", logo: "assets/grazia-logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
     { name: "Stylight", logo: "assets/sytlight-logo.png" },
-    { name: "Unidays", logo: "assets/unidays-logo.png" }
   ],
 
   // 🎭 PRODUITS CULTURELS & LOISIRS
@@ -299,7 +298,6 @@ const EDITORS_AFFINITAIRE = {
   // 🏋️ SPORT
   sports: [
     { name: "Top Santé", logo: "assets/topsante-logo.jpg" },
-    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" }
   ],
 
   // ✈️ VOYAGE & TOURISME
@@ -324,14 +322,12 @@ const EDITORS_AFFINITAIRE = {
 
   // 🧸 JEUX & JOUETS
   games: [
-    { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" },
     { name: "Konbini", logo: "assets/konbini-logo.png" }
   ],
 
   // 🌿 MAISON & JARDIN
   garden: [
     { name: "Maison Travaux", logo: "assets/maisontravaux-logo.png" },
-    { name: "Potoroze", logo: "assets/potoroze-logo.png" }
   ],
 
   // 📱 TÉLÉCOM
@@ -343,9 +339,7 @@ const EDITORS_AFFINITAIRE = {
   // 🌀 AUTRE (fallback)
   other: [
     { name: "Konbini", logo: "assets/konbini-logo.png" },
-    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" },
-    { name: "Geo", logo: "assets/geo-logo.png" }
-  ]
+  ],
 };
 
 // ----------------- AFFICHAGE ÉDITEURS (priorité affinitaires + limite à 6) -----------------
@@ -900,6 +894,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
