@@ -221,10 +221,15 @@ const EDITORS = {
   ],
   css: [
     { name: "Redbrain", logo: "assets/redbrain-logo.png" },
+    { name: "Delupe", logo: "assets/delupe-logo.png" },
+    { name: "Shopforward", logo: "assets/shopforward-logos.png" },
     { name: "Velkashopping", logo: "assets/logo-velkashopping.jpg" }
   ],
   comparateurs: [
-    { name: "Idealo", logo: "assets/logo-idealo.png" }
+    { name: "Idealo", logo: "assets/logo-idealo.png" },
+    { name: "Kelkoo", logo: "assets/kelkoo-logo.png" },
+    { name: "Le parisien", logo: "assets/leparisien-logo.png" }
+    
   ],
   retargeting: [
     { name: "Criteo", logo: "assets/logo-criteo.jpg" },
@@ -232,21 +237,28 @@ const EDITORS = {
   ],
   display: [
     { name: "Sirdata", logo: "assets/logo-sirdata.png" },
+    { name: "Digidip", logo: "assets/logo-digidip.png" },
     { name: "Skimlinks", logo: "assets/logo-skimlinks.png" }
   ],
   content: [
     { name: "Reworld Media", logo: "assets/logo-reworld-media.png" },
+     { name: "Ouest France", logo: "assets/ouest-france-logo.png" },
+     { name: "Keleops", logo: "assets/keleops-logo.png" },
     { name: "DCE", logo: "assets/digital_content_expert_logo.jpg" }
   ],
   emailing: [
-    { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" }
+    { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" },
+      { name: "Power-space", logo: "assets/power-space-logo.png" },
+      { name: "Welcoming", logo: "assets/welcoming_logos.png" }
   ],
   sea: [
     { name: "JVWEB", logo: "assets/logo-jvweb.png" },
+    { name: "Google", logo: "assets/logo-google.png" },
     { name: "Ad's up", logo: "assets/adsup.png" }
   ],
   retention: [
-    { name: "Beyable", logo: "assets/logo-beyable.png" }
+    { name: "Beyable", logo: "assets/logo-beyable.png" },
+     { name: "Sale-cycle", logo: "assets/sale-cycle-logo.png" }
   ]
 };
 
@@ -264,27 +276,32 @@ const EDITORS_AFFINITAIRE = {
   beauty: [
   { name: "Grazia", logo: "assets/grazia-logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
-    { name: "Stylight", logo: "assets/sytlight-logo.png" },
+     { name: "Beauté-test", logo: "assets/beauté-test-logo.png" },
+    { name: "Stylight", logo: "assets/sytlight-logo.png" }
   ],
 
   // 🎭 PRODUITS CULTURELS & LOISIRS
   culture: [
     { name: "Konbini", logo: "assets/konbini-logo.png" },
-    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" },
-    { name: "Geo", logo: "assets/geo-logo.png" },
+    { name: "Ouest France", logo: "assets/ouest-france-logo.png" },
+    { name: "Topito", logo: "assets/topito-logo.png" },
+    { name: "Geo", logo: "assets/geo-logo.png" }
   ],
 
   // 💻 HIGH-TECH & ÉLECTROMÉNAGER
   electronics: [
     { name: "Les Numériques", logo: "assets/lesnumeriques-logo.png" },
     { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" },
+    { name: "01.net", logo: "assets//01net.logo.png" },
     { name: "FrAndroid", logo: "assets/frandroid-logo.png" }
   ],
 
   // 🏡 MAISON & DÉCORATION
   home: [
     { name: "Maison Travaux", logo: "assets/maisontavaux-logo.png" },
-    { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
+    { name: "Modesettravaux", logo: "assets/modesettravaux-logo.png" },
+    { name: "Maison Travaux", logo: "assets/maisontavaux-logo.png" },
+    { name: "Listy", logo: "assets/listy-logo_0.png" },
     { name: "Potoroze", logo: "assets/potoroze-logo.png" }
   ],
 
@@ -298,13 +315,15 @@ const EDITORS_AFFINITAIRE = {
   // 🏋️ SPORT
   sports: [
     { name: "Top Santé", logo: "assets/topsante-logo.jpg" },
+    { name: "Daily-sport", logo: "assets/daily-sport-fr-logo.jpeg" },
+    { name: "Sportfr", logo: "assets/sportfr-logo.png" }
   ],
 
   // ✈️ VOYAGE & TOURISME
   travel: [
     { name: "Lonely Planet", logo: "assets/lonelyplanet-logo.png" },
     { name: "Geo", logo: "assets/geo-logo.png" },
-    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" }
+    { name: "Globe-trotting", logo: "assets/globe-trotting_logos.png" }
   ],
 
   // 💎 LUXE & BIJOUX
@@ -317,28 +336,35 @@ const EDITORS_AFFINITAIRE = {
   // 🚗 PIÈCES AUTOMOBILES
   auto: [
     { name: "Auto Moto", logo: "assets/automoto-logo.png" },
-    { name: "Ouest France", logo: "assets/ouestfrance-logo.png" }
+    { name: "Leblog-auto", logo: "assets/leblog-auto-logo.png" },
+    { name: "Actu-automobile", logo: "assets/actu-automobile-logo.png" }
   ],
 
   // 🧸 JEUX & JOUETS
   games: [
-    { name: "Konbini", logo: "assets/konbini-logo.png" }
+    { name: "Konbini", logo: "assets/konbini-logo.png" },
+     { name: "Listy", logo: "assets/listy-logo_0.png" }
   ],
 
   // 🌿 MAISON & JARDIN
   garden: [
     { name: "Maison Travaux", logo: "assets/maisontravaux-logo.png" },
+    { name: "Monjardin-ma-maison", logo: "assets/monjardin-ma-maison-logo.png" },
+    { name: "Modesettravaux", logo: "assets/modesettravaux-logo.png" }
   ],
 
   // 📱 TÉLÉCOM
   telecom: [
     { name: "Les Numériques", logo: "assets/lesnumeriques-logo.png" },
+    { name: "Presse-citron", logo: "assets/presse-citron-logo.jpeg" },
+    { name: "Clubic", logo: "assets/logo-clubic.jpeg" },
     { name: "FrAndroid", logo: "assets/frandroid-logo.png" }
   ],
 
   // 🌀 AUTRE (fallback)
   other: [
     { name: "Konbini", logo: "assets/konbini-logo.png" },
+     { name: "Taboola", logo: "assets/taboola-logo.png" }
   ],
 };
 
@@ -894,6 +920,7 @@ function updateProgress(percent) {
   bar.style.width = percent + '%';
   text.textContent = percent + '%';
 }
+
 
 
 
