@@ -1,373 +1,441 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lumigency — Simulateur Affiliation</title>
+:root{
+  --blue-strong:#0000FF;
+  --blue-soft:#849BFF;
+  --pink:#F88989;
+  --beige:#F7F5F3;
+  --text:#222;
+  --card:#fff;
+  --shadow: 0 8px 24px rgba(0,0,0,.10);
+  --radius: 18px;
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:var(--beige);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-  <link rel="stylesheet" href="./style.css" />
-</head>
+.split-layout{
+  display:flex;
+  align-items:stretch;
+  min-height:100vh;
+}
 
-<body>
-  <div class="app">
-    <header class="topbar">
-      <div class="brand">
-        <img class="brand-logo" src="./assets/logo_lumigency_wip.svg" alt="Lumigency" />
-        <div class="brand-text">
-          <div class="brand-title">Simulateur Affiliation</div>
-          <div class="brand-subtitle">3 étapes • estimation instantanée • recommandations</div>
-        </div>
-      </div>
+/* ===== LEFT ===== */
+.left-column{
+  width:35%;
+  min-width:320px;
+  padding:56px 44px 90px;
+  color:#fff;
+  background: linear-gradient(90deg, #2020ff, #809fff);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:18px;
+}
 
-      <a class="close-btn" href="https://www.lumigency.com/strategie-consulting-affiliation" aria-label="Fermer le simulateur">✕</a>
-    </header>
+.brand-logo{max-width:160px;height:auto}
 
-    <main class="shell split-layout" id="layout">
-      <!-- LEFT -->
-      <section class="left-panel">
-        <div class="hero">
-          <div class="hero-badge">Outil premium</div>
-          <h1 class="hero-title">Projetez le potentiel de votre programme d’affiliation</h1>
-          <p class="hero-desc">
-            En quelques questions, obtenez une estimation (CA, commandes, CAC, ROI) et une lecture claire de votre mix de leviers.
-          </p>
+.left-column h1{
+  margin:0;
+  font-size:1.7rem;
+  line-height:1.25;
+}
+.left-column .muted{
+  font-weight:500;
+  opacity:.9;
+  font-size:.95rem;
+}
 
-          <div class="hero-cards" aria-hidden="true">
-            <div class="mini-card">
-              <div class="mini-ico"><img src="./assets/rocket_3d.svg" alt="" /></div>
-              <div>
-                <div class="mini-title">Projection</div>
-                <div class="mini-text">CA, commandes, budget</div>
-              </div>
-            </div>
+/* benefits */
+.benefits-list{
+  margin:10px 0 0;
+  padding:0;
+  list-style:none;
+  width:100%;
+  max-width:520px;
+  text-align:left;
+}
+.benefits-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin:10px 0;
+  color:#f7f7f7;
+  line-height:1.4;
+  font-size:.95rem;
+}
+.check{font-weight:800}
 
-            <div class="mini-card">
-              <div class="mini-ico"><img src="./assets/target_3d.svg" alt="" /></div>
-              <div>
-                <div class="mini-title">Mix leviers</div>
-                <div class="mini-text">Répartition estimée</div>
-              </div>
-            </div>
+/* info card */
+.insight-card{
+  margin-top:14px;
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  color:#1a1a1a;
+  border-radius:14px;
+  padding:18px 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  text-align:left;
+  line-height:1.55;
+  font-size:.95rem;
+}
+.insight-card strong{color:var(--blue-strong)}
 
-            <div class="mini-card">
-              <div class="mini-ico"><img src="./assets/thunder_3d.svg" alt="" /></div>
-              <div>
-                <div class="mini-title">Insights</div>
-                <div class="mini-text">Lecture rapide & action</div>
-              </div>
-            </div>
-          </div>
+.insight-personal-message{
+  width:100%;
+  max-width:420px;
+  background:#F5F4FF;
+  border-left:4px solid #6B64F3;
+  padding:14px 16px;
+  border-radius:10px;
+  opacity:0;
+  transform:translateY(6px);
+  transition:all .35s ease;
+  text-align:left;
+}
+.insight-personal-message.show{opacity:1;transform:translateY(0)}
+#insight-text{margin:0;color:#2b2b2b;font-size:15px;line-height:1.5}
 
-          <div class="didyouknow">
-            <div class="didyouknow-title">Le saviez-vous ?</div>
-            <div class="didyouknow-text">
-              L’affiliation ne se résume pas au cashback : un mix bien piloté combine contenu, intention (comparateurs/CSS),
-              relances (retargeting/email) et performance (SEA/PPC).
-            </div>
-          </div>
-        </div>
+.lumigency-signature{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  font-size:.82rem;
+  opacity:.95;
+}
 
-        <div class="progress">
-          <div class="progress-meta">
-            <span class="progress-label">Progression</span>
-            <span class="progress-value" id="progress-text">0%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress-bar"></div>
-          </div>
+/* ===== RIGHT ===== */
+.right-column{
+  width:65%;
+  padding:46px 50px;
+  background:#fff;
+}
 
-          <div class="stepper" role="list" aria-label="Étapes du simulateur">
-            <div class="step is-active" data-step="0" role="listitem">
-              <span class="step-dot"></span><span class="step-name">Contexte</span>
-            </div>
-            <div class="step" data-step="1" role="listitem">
-              <span class="step-dot"></span><span class="step-name">Données & leviers</span>
-            </div>
-            <div class="step" data-step="2" role="listitem">
-              <span class="step-dot"></span><span class="step-name">Finalisation</span>
-            </div>
-            <div class="step" data-step="3" role="listitem">
-              <span class="step-dot"></span><span class="step-name">Résultats</span>
-            </div>
-          </div>
-        </div>
-      </section>
+.intro h2{
+  margin:0 0 8px;
+  font-size:1.55rem;
+  color:var(--blue-strong);
+}
+.subtitle{
+  margin:0 0 22px;
+  color:#555;
+  line-height:1.5;
+}
 
-      <!-- RIGHT -->
-      <section class="right-panel" aria-label="Formulaire simulateur">
+/* progress */
+.progress-container{
+  width:100%;
+  height:12px;
+  background:#e6e9f5;
+  border-radius:999px;
+  overflow:hidden;
+  margin: 8px 0 26px;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg, #0732ef, var(--blue-soft));
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding-right:8px;
+  transition:width .6s ease;
+}
+.progress-text-inside{
+  font-size:.82rem;
+  font-weight:700;
+  color:#fff;
+  text-shadow:0 0 4px rgba(0,0,0,.25);
+}
 
-        <form id="simu-form" novalidate>
-          <!-- STEP 1 -->
-          <section class="form-step active" data-step="0" aria-labelledby="step1-title">
-            <div class="step-header">
-              <h2 id="step1-title">Contexte</h2>
-              <p>Quelques informations pour comprendre votre maturité et votre objectif.</p>
-            </div>
+/* form */
+form{
+  background:#fff;
+  padding:28px;
+  border-radius:14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+}
 
-            <div class="field">
-              <label>Objectif principal</label>
-              <div class="pill-grid" role="group" aria-label="Objectif">
-                <button type="button" class="pill" data-pill="objectif" data-value="lancer">Lancer</button>
-                <button type="button" class="pill" data-pill="objectif" data-value="optimiser">Optimiser</button>
-                <button type="button" class="pill" data-pill="objectif" data-value="diversifier">Diversifier</button>
-                <button type="button" class="pill" data-pill="objectif" data-value="scaler">Scaler</button>
-              </div>
-              <input type="hidden" id="objectif" name="objectif" required />
-            </div>
+.section-title{
+  margin:0 0 8px;
+  color:var(--blue-strong);
+  font-size:1.15rem;
+}
+.question-label{
+  display:block;
+  margin:16px 0 8px;
+  font-weight:600;
+  color:#000;
+}
 
-            <div class="grid-2">
-              <div class="field">
-                <label>Programme déjà en place ?</label>
-                <div class="pill-row" role="group" aria-label="Programme existant">
-                  <button type="button" class="pill" data-pill="programme" data-value="oui">Oui</button>
-                  <button type="button" class="pill" data-pill="programme" data-value="non">Non</button>
-                </div>
-                <input type="hidden" id="programme" name="programme" required />
-              </div>
+/* multi step */
+.form-step{display:none;opacity:0;transform:translateY(10px);transition:.35s}
+.form-step.active{display:block;opacity:1;transform:translateY(0)}
 
-              <div class="field">
-                <label>Zone géographique</label>
-                <select id="zone" name="zone" required>
-                  <option value="" disabled selected>Choisir…</option>
-                  <option value="fr">France</option>
-                  <option value="eu">Europe</option>
-                  <option value="intl">International</option>
-                </select>
-              </div>
-            </div>
+/* inputs */
+input:not([type="checkbox"]):not([type="radio"]),
+select{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:.95rem;
+  background:#fdfdfd;
+}
+input:focus,select:focus{
+  outline:none;
+  border-color:var(--blue-strong);
+  box-shadow:0 0 0 3px rgba(0,0,255,.10);
+}
 
-            <div class="grid-2">
-              <div class="field">
-                <label>Mode de gestion acquisition</label>
-                <select id="gestion" name="gestion" required>
-                  <option value="" disabled selected>Choisir…</option>
-                  <option value="interne">Interne</option>
-                  <option value="agence">Agence</option>
-                  <option value="mix">Mix</option>
-                </select>
-              </div>
+/* grid fields */
+.form-row{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:18px 28px;
+  margin-top:8px;
+}
+.form-row > div{display:flex;flex-direction:column}
 
-              <div class="field">
-                <label>Niveau de connaissance</label>
-                <select id="maturite" name="maturite" required>
-                  <option value="" disabled selected>Choisir…</option>
-                  <option value="decouverte">Je découvre</option>
-                  <option value="teste">J’ai déjà testé</option>
-                  <option value="structure">Programme structuré</option>
-                </select>
-              </div>
-            </div>
+/* slider */
+.traffic-slider-container{
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:space-between;
+}
+.slider-wrapper{flex:1;min-width:220px}
+.traffic-slider-container input[type="range"]{width:100%;accent-color:var(--blue-strong)}
+.slider-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:.78rem;
+  color:#666;
+  margin-top:6px;
+}
+.traffic-slider-container input[type="number"]{
+  width:140px;
+  text-align:right;
+  font-weight:600;
+  align-self:center;
+}
 
-            <div class="step-actions">
-              <button type="button" class="btn secondary" disabled>Retour</button>
-              <button type="button" class="btn primary" id="next-step-1" disabled>Continuer</button>
-            </div>
-          </section>
+/* checkbox groups */
+.single-checkbox,
+.checkbox-budget{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:.95rem;
+}
+.checkbox-group{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px 18px;
+  margin-top:10px;
+}
+.checkbox-group label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:500;
+  font-size:.92rem;
+  margin:0;
+}
 
-          <!-- STEP 2 -->
-          <section class="form-step" data-step="1" aria-labelledby="step2-title">
-            <div class="step-header">
-              <h2 id="step2-title">Données & leviers</h2>
-              <p>Renseignez vos métriques clés et sélectionnez les leviers à activer.</p>
-            </div>
+/* radios */
+.radio-group{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.radio-item{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight:500;
+}
 
-            <div class="grid-2">
-              <div class="field">
-                <label for="traffic">Trafic mensuel</label>
-                <div class="range-row">
-                  <input id="trafficRange" type="range" min="1000" max="1000000" step="1000" value="50000" />
-                  <input id="traffic" name="traffic" type="number" min="0" step="1000" value="50000" required />
-                </div>
-                <div class="hint">Astuce : on annualise le trafic pour simuler une montée en puissance.</div>
-              </div>
+/* hybrid alert */
+.alert-hybride{
+  display:none;
+  background:#fff4e5;
+  color:#663c00;
+  border:1px solid #ffcc80;
+  border-radius:10px;
+  padding:12px 14px;
+  margin-top:14px;
+  box-shadow:0 2px 8px rgba(255,165,0,.10);
+}
 
-              <div class="field">
-                <label for="aov">Panier moyen (€)</label>
-                <input id="aov" name="aov" type="number" min="0" step="1" placeholder="Ex : 65" required />
-              </div>
+/* buttons */
+.step-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:22px;
+}
 
-              <div class="field">
-                <label for="cvr">Taux de conversion (%)</label>
-                <input id="cvr" name="cvr" type="number" min="0" step="0.01" placeholder="Ex : 1.25" required />
-              </div>
+.btn-next, .btn-prev, .cta{
+  background:var(--blue-soft);
+  color:#111;
+  border:none;
+  font-weight:700;
+  font-size:.95rem;
+  padding:10px 22px;
+  border-radius:999px;
+  cursor:pointer;
+  box-shadow:0 3px 10px rgba(132,155,255,.35);
+  transition:.25s;
+}
+.btn-next:hover, .btn-prev:hover, .cta:hover{
+  background:var(--blue-strong);
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 14px rgba(0,0,255,.25);
+}
+.btn-next::after{content:"›";margin-left:8px}
+.btn-prev::before{content:"‹";margin-right:8px}
 
-              <div class="field">
-                <label for="cac">CAC client (€)</label>
-                <input id="cac" name="cac" type="number" min="0" step="1" placeholder="Ex : 35" required />
-              </div>
-            </div>
+/* ===== RESULTS ===== */
+.results-section{
+  background:#fff;
+  padding:36px;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,.06);
+  max-width:1000px;
+  margin:0 auto;
+}
 
-            <div class="grid-2">
-              <div class="field">
-                <label>Budget affiliation mensuel</label>
-                <div class="budget-box">
-                  <div class="pill-row">
-                    <button type="button" class="pill" data-pill="budgetMode" data-value="defini">Budget défini</button>
-                    <button type="button" class="pill" data-pill="budgetMode" data-value="illimite">Explorer le plein potentiel</button>
-                  </div>
-                  <input type="hidden" id="budgetMode" name="budgetMode" required />
+.kpi-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+  margin: 18px 0 24px;
+}
+.kpi-card{
+  background:#f5f7ff;
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  text-align:center;
+}
+.kpi-card strong{display:block;color:#333;font-size:.9rem;margin-bottom:6px}
+.kpi-card span{color:var(--blue-strong);font-weight:700;font-size:1.05rem}
 
-                  <div class="budget-gauge" id="budgetGauge" hidden>
-                    <div class="gauge-top">
-                      <span class="gauge-label">Montant mensuel</span>
-                      <span class="gauge-value" id="budgetValue">—</span>
-                    </div>
-                    <input id="budgetRange" type="range" min="500" max="20000" step="250" value="3000" />
-                    <input id="budget" name="budget" type="hidden" value="" />
-                    <div class="gauge-legend">
-                      <span>500€</span><span>20 000€</span>
-                    </div>
-                  </div>
+.chart-container{max-width:520px;margin:0 auto 18px}
+#chart-levers{max-width:320px;margin:0 auto;display:block}
 
-                  <div class="hint">Si vous n’avez pas de budget défini, on simule sans cap de budget.</div>
-                </div>
-              </div>
+.analysis-block{
+  font-size:.95rem;
+  background:#F0F4FF;
+  padding:18px;
+  border-radius:12px;
+  color:#222;
+  margin: 10px auto 18px;
+}
+.analysis-block h3{margin:0 0 10px;color:var(--blue-strong)}
+.analysis-block ul{margin:0;padding-left:18px}
 
-              <div class="field">
-                <label>Modèles hybrides</label>
-                <div class="pill-row" role="group" aria-label="Modèles hybrides">
-                  <button type="button" class="pill" data-pill="hybrides" data-value="oui">Ouvert</button>
-                  <button type="button" class="pill" data-pill="hybrides" data-value="non">Pas pour l’instant</button>
-                </div>
-                <input type="hidden" id="hybrides" name="hybrides" required />
-                <div class="alert" id="hybridAlert" hidden>
-                  Certains leviers performants demandent souvent de l’hybride. Si vous refusez l’hybridation tout en activant ces leviers, la projection sera pénalisée.
-                </div>
-              </div>
-            </div>
+/* editors */
+.editor-suggestions h3{
+  color:var(--blue-strong);
+  text-align:center;
+  margin:18px 0 12px;
+}
+.editor-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:16px;
+  justify-items:center;
+  max-width:880px;
+  margin:0 auto 10px;
+}
+.editor-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  width:150px;
+  height:120px;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+  transition:.2s;
+}
+.editor-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--blue-strong);
+  box-shadow:0 10px 20px rgba(0,0,255,.12);
+}
+.editor-card img{
+  max-width:80%;
+  max-height:55px;
+  object-fit:contain;
+}
 
-            <div class="field">
-              <label>Leviers à activer</label>
-              <div class="checks">
-                <label class="check"><input type="checkbox" name="lever" value="cashback"> Cashback</label>
-                <label class="check"><input type="checkbox" name="lever" value="bonsplans"> Bons plans</label>
-                <label class="check"><input type="checkbox" name="lever" value="css"> CSS</label>
-                <label class="check"><input type="checkbox" name="lever" value="comparateurs"> Comparateurs</label>
-                <label class="check"><input type="checkbox" name="lever" value="retargeting"> Retargeting</label>
-                <label class="check"><input type="checkbox" name="lever" value="display-networks"> Display networks</label>
-                <label class="check"><input type="checkbox" name="lever" value="content"> Content commerce</label>
-                <label class="check"><input type="checkbox" name="lever" value="emailing"> Emailing / newsletters</label>
-                <label class="check"><input type="checkbox" name="lever" value="ppc"> PPC / SEA</label>
-                <label class="check"><input type="checkbox" name="lever" value="influence"> Influence</label>
-                <label class="check"><input type="checkbox" name="lever" value="affinitaires"> Affinitaires</label>
-                <label class="check"><input type="checkbox" name="lever" value="retention"> Rétention onsite</label>
-              </div>
+/* CTA dynamic */
+.cta-dynamic{display:flex;justify-content:center;margin-top:18px}
+#cta-dynamic .cta-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--blue-soft);
+  color:#111;
+  font-weight:800;
+  font-size:1.02rem;
+  padding:14px 42px;
+  border-radius:999px;
+  text-decoration:none;
+  box-shadow:0 10px 24px rgba(132,155,255,.25);
+  transition:.25s;
+}
+#cta-dynamic .cta-button:hover{
+  background:var(--blue-strong);
+  color:#fff;
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(0,0,255,.18);
+}
 
-              <div class="inline-row">
-                <label class="check subtle">
-                  <input type="checkbox" id="selectAllLevers" /> Autoriser tous les leviers
-                </label>
-              </div>
-            </div>
+#restart-btn{
+  display:block;
+  margin:18px auto 0;
+  background:none;
+  border:none;
+  color:var(--blue-strong);
+  font-size:.95rem;
+  font-weight:600;
+  cursor:pointer;
+}
+#restart-btn:hover{text-decoration:underline}
 
-            <div class="step-actions">
-              <button type="button" class="btn secondary" id="prev-step-2">Retour</button>
-              <button type="button" class="btn primary" id="next-step-2" disabled>Continuer</button>
-            </div>
-          </section>
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px){
+  .split-layout{flex-direction:column}
+  .left-column, .right-column{width:100%;min-width:0}
+  .right-column{padding:28px 18px}
+  .left-column{padding:40px 22px 90px;background:linear-gradient(180deg,#2020ff,#809fff)}
+  .form-row{grid-template-columns:1fr}
+  .editor-grid{grid-template-columns:repeat(3,1fr)}
+}
 
-          <!-- STEP 3 -->
-          <section class="form-step" data-step="2" aria-labelledby="step3-title">
-            <div class="step-header">
-              <h2 id="step3-title">Finalisation</h2>
-              <p>Dernier écran : on vous envoie la simulation et on affiche vos résultats.</p>
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="sector">Secteur d’activité</label>
-                <select id="sector" name="sector" required>
-                  <option value="" disabled selected>Choisir…</option>
-                  <option value="fashion">Mode / accessoires</option>
-                  <option value="beauty">Beauté</option>
-                  <option value="home">Maison</option>
-                  <option value="travel">Voyage</option>
-                  <option value="services">Services</option>
-                  <option value="other">Autre</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="site">Site (optionnel)</label>
-                <input id="site" name="site" type="url" placeholder="https://votre-site.com" />
-              </div>
-
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="vous@entreprise.com" required />
-              </div>
-            </div>
-
-            <div class="step-actions">
-              <button type="button" class="btn secondary" id="prev-step-3">Retour</button>
-              <button type="submit" class="btn primary" id="submit-btn" disabled>Lancer ma simulation</button>
-            </div>
-          </section>
-        </form>
-
-        <!-- RESULTS -->
-        <section id="results" class="results hidden" aria-label="Résultats de la simulation">
-          <div class="results-header">
-            <div>
-              <h2>Résultats</h2>
-              <p class="muted">Voici votre projection, construite à partir de vos réponses.</p>
-            </div>
-            <button class="btn secondary small" id="restart-btn" type="button">Refaire une simulation</button>
-          </div>
-
-          <div class="kpi-grid">
-            <div class="kpi-card"><div class="kpi-label">CA estimé</div><div class="kpi-value" id="kpiRevenue">—</div></div>
-            <div class="kpi-card"><div class="kpi-label">Commandes</div><div class="kpi-value" id="kpiOrders">—</div></div>
-            <div class="kpi-card"><div class="kpi-label">Budget</div><div class="kpi-value" id="kpiBudget">—</div></div>
-            <div class="kpi-card"><div class="kpi-label">Panier ajusté</div><div class="kpi-value" id="kpiAov">—</div></div>
-            <div class="kpi-card"><div class="kpi-label">CAC projeté</div><div class="kpi-value" id="kpiCac">—</div></div>
-            <div class="kpi-card"><div class="kpi-label">ROI</div><div class="kpi-value" id="kpiRoi">—</div></div>
-          </div>
-
-          <div class="results-grid">
-            <div class="panel">
-              <div class="panel-title">Répartition des leviers</div>
-              <canvas id="leverChart" height="240"></canvas>
-              <div class="panel-note" id="mixNote">Mix projeté en fonction de vos réponses</div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-title">Analyse rapide</div>
-              <div class="insights" id="insights"></div>
-
-              <div class="cta-card">
-                <div>
-                  <div class="cta-title">Envie d’aller plus loin ?</div>
-                  <div class="cta-text">Un expert Lumigency analyse vos résultats et vous propose des pistes concrètes.</div>
-                </div>
-                <a class="btn primary" href="https://www.lumigency.com/strategie-consulting-affiliation" id="cta-audit">Obtenir un audit</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel editors">
-            <div class="panel-title">Éditeurs recommandés</div>
-            <div class="editor-grid" id="editorGrid"></div>
-          </div>
-
-          <div class="final-cta">
-            <div>
-              <div class="final-title">Bénéficier d’un échange stratégique avec Lumigency</div>
-              <div class="final-text">On vous aide à structurer votre programme et piloter un mix rentable.</div>
-            </div>
-            <a class="btn primary" href="https://www.lumigency.com/strategie-consulting-affiliation" id="cta-final">Prendre rendez-vous</a>
-          </div>
-        </section>
-
-      </section>
-    </main>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="./script.js"></script>
-</body>
-</html>
+@media (max-width: 600px){
+  form{padding:20px;box-shadow:none}
+  .editor-grid{grid-template-columns:repeat(2,1fr)}
+  .traffic-slider-container input[type="number"]{width:100%;text-align:left}
+}
