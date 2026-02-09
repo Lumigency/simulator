@@ -3,255 +3,280 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lumigency — Simulateur Affiliation</title>
+  <title>Simulateur Affiliation — Lumigency</title>
 
-  <!-- Police -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- ✅ Chemin RELATIF (GitHub Pages friendly) -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- CSS (RELATIF, sinon GitHub Pages te trolle) -->
+  <link rel="stylesheet" href="./style.css?v=1">
 
-  <!-- Chart.js (si tu l’utilises déjà) -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 
 <body>
-  <main class="split-layout">
-    <!-- ===================== LEFT COLUMN ===================== -->
-    <aside class="left-column">
-      <img class="brand-logo" src="LOGO2025.png" alt="Lumigency" />
+  <main class="simu-shell">
+    <!-- Top bar -->
+    <header class="topbar">
+      <a class="topbar-back" href="#" onclick="history.back(); return false;">← Retour</a>
 
-      <h1>Simulateur Affiliation<br><span class="muted">3 étapes • estimation instantanée • recommandations</span></h1>
-
-      <ul class="benefits-list">
-        <li><span class="check">✓</span><span>Projection CA / commandes / CAC / ROI</span></li>
-        <li><span class="check">✓</span><span>Lecture claire du mix de leviers</span></li>
-        <li><span class="check">✓</span><span>Recommandations éditeurs alignées secteur</span></li>
-      </ul>
-
-      <div class="insight-card">
-        <strong>Le saviez-vous ?</strong><br>
-        L’affiliation ne se résume pas au cashback : un mix bien piloté combine contenu, intention (comparateurs/CSS),
-        relances (retargeting/email) et paid (SEA/PPC).
+      <div class="topbar-brand">
+        <img class="topbar-logo" src="./LOGO2025.png" alt="Lumigency">
+        <span class="topbar-name">Lumigency ⚡</span>
       </div>
 
-      <!-- Message maturité (injecté par ton JS) -->
-      <div id="insight-message" class="insight-personal-message" style="display:none;">
-        <p id="insight-text"></p>
-      </div>
+      <button class="topbar-close" type="button" aria-label="Fermer" onclick="window.location.href='https://www.lumigency.com';">×</button>
+    </header>
 
-      <div class="lumigency-signature">
-        <strong>Lumigency</strong> — conseil & brokerage affiliation
-      </div>
-    </aside>
+    <div class="simu-grid split-layout">
+      <!-- Left -->
+      <aside class="left-panel left-column">
+        <div class="steps-mini">
+          <div class="step-dot active">
+            <span>1</span><small>Cadre d’analyse</small>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-dot">
+            <span>2</span><small>Hypothèses & leviers</small>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-dot">
+            <span>3</span><small>Projection</small>
+          </div>
+        </div>
 
-    <!-- ===================== RIGHT COLUMN (FORM) ===================== -->
-    <section class="right-column">
-      <header class="intro">
-        <h2>Projetez le potentiel de votre programme d’affiliation</h2>
+        <section class="left-card">
+          <h2>Ce que vous obtenez</h2>
+
+          <ul class="left-benefits">
+            <li>
+              <span class="ic">📈</span>
+              <div><strong>Projection</strong><br><span>CA, commandes, CAC, ROI</span></div>
+            </li>
+            <li>
+              <span class="ic">🧩</span>
+              <div><strong>Mix de leviers</strong><br><span>Répartition estimée</span></div>
+            </li>
+            <li>
+              <span class="ic">🤝</span>
+              <div><strong>Suggestions</strong><br><span>Éditeurs alignés secteur</span></div>
+            </li>
+          </ul>
+
+          <div class="left-quote insight-card">
+            <strong>Le saviez-vous ?</strong><br>
+            L’affiliation ne se résume pas au cashback : un mix bien piloté combine contenu,
+            intention (comparateurs/CSS), relances (retargeting/email) et SEA (PPC).
+          </div>
+
+          <div class="lumigency-signature">
+            <strong>Lumigency</strong> — conseil & brokerage affiliation
+          </div>
+        </section>
+      </aside>
+
+      <!-- Right -->
+      <section class="right-panel right-column">
+        <h1>Simulez votre potentiel en affiliation</h1>
         <p class="subtitle">
-          En quelques questions, obtenez une estimation (CA, commandes, CAC, ROI) et une lecture claire de votre mix de leviers.
+          Obtenez une projection fiable (CA, commandes, CAC, ROI) + une lecture claire de votre mix.
         </p>
-      </header>
 
-      <!-- Progress -->
-      <div class="progress-container" aria-label="Progression">
-        <div id="progress-bar" class="progress-bar">
-          <span id="progress-text" class="progress-text-inside">0%</span>
-        </div>
-      </div>
-
-      <!-- FORM -->
-      <form id="form-simu" novalidate>
-        <!-- ============ STEP 1 ============ -->
-        <div class="form-step active" data-step="1">
-          <h3 class="section-title">Contexte</h3>
-
-          <label class="question-label" for="objectif">Quel est votre objectif ?</label>
-          <select id="objectif" name="objectif" required>
-            <option value="">— Choisir —</option>
-            <option value="lancer">Lancer</option>
-            <option value="optimiser">Optimiser</option>
-            <option value="diversifier">Diversifier</option>
-            <option value="scaler">Scaler</option>
-          </select>
-
-          <label class="question-label">Autorisez-vous des modèles hybrides (CPC/CPM/fixe) ?</label>
-          <div class="radio-group">
-            <label class="radio-item">
-              <input type="radio" name="hybrides" value="oui" checked>
-              <span>Oui</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="hybrides" value="non">
-              <span>Non</span>
-            </label>
-          </div>
-
-          <div id="hybrid-alert" class="alert-hybride" role="alert"></div>
-
-          <div class="step-actions">
-            <button type="button" class="btn-next" id="next-step-1">Continuer</button>
+        <!-- Progress -->
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-bar" style="width:0%">
+            <span id="progress-text" class="progress-text-inside">0%</span>
           </div>
         </div>
 
-        <!-- ============ STEP 2 ============ -->
-        <div class="form-step" data-step="2">
-          <h3 class="section-title">Données & leviers</h3>
+        <!-- Hybrid warning -->
+        <div id="hybrid-alert" class="alert-hybride"></div>
 
-          <label class="question-label" for="sector">Secteur</label>
-          <select id="sector" name="sector">
-            <option value="other">Autre</option>
-            <option value="fashion">Mode & Beauté</option>
-            <option value="beauty">Beauté & Cosmétique</option>
-            <option value="electronics">High-tech & Électroménager</option>
-            <option value="home">Maison & Décoration</option>
-            <option value="food">Alimentaire & Drive</option>
-            <option value="sports">Sport & Loisirs</option>
-            <option value="travel">Voyage & Tourisme</option>
-            <option value="luxury">Luxe & Bijoux</option>
-            <option value="auto">Automobile</option>
-            <option value="culture">Produits culturels</option>
-          </select>
+        <!-- FORM -->
+        <form id="form-simu">
+          <!-- STEP 1 -->
+          <section class="form-step active" data-step="1">
+            <h2 class="section-title">Contexte</h2>
 
-          <div class="form-row">
-            <div>
-              <label class="question-label" for="site">URL du site</label>
-              <input id="site" name="site" type="url" placeholder="https://..." />
+            <label class="question-label" for="objectif">Quel est votre objectif ?</label>
+            <select name="objectif" id="objectif" required>
+              <option value="">— Choisir —</option>
+              <option value="lancer">Lancer un programme</option>
+              <option value="optimiser">Optimiser un programme existant</option>
+              <option value="diversifier">Tester de nouveaux leviers</option>
+              <option value="scaler">Scaler les ventes et le ROI</option>
+            </select>
+
+            <label class="question-label">Autorisez-vous des modèles hybrides (CPC/CPM/fixe) ?</label>
+            <div class="radio-group">
+              <label class="radio-item">
+                <input type="radio" name="hybrides" value="oui" checked>
+                <span>Oui</span>
+              </label>
+              <label class="radio-item">
+                <input type="radio" name="hybrides" value="non">
+                <span>Non</span>
+              </label>
             </div>
-            <div>
-              <label class="question-label" for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="vous@marque.com" />
+
+            <div class="step-actions">
+              <button class="btn-next" type="button" id="next-step-1">Continuer</button>
             </div>
-          </div>
+          </section>
 
-          <label class="question-label" for="marge">Marge (optionnel)</label>
-          <input id="marge" name="marge" type="text" placeholder="ex : 40%" />
+          <!-- STEP 2 -->
+          <section class="form-step" data-step="2">
+            <h2 class="section-title">Données & leviers</h2>
 
-          <label class="question-label">Leviers à activer</label>
+            <label class="question-label" for="sector">Votre secteur</label>
+            <select name="sector" id="sector">
+              <option value="other">Autre</option>
+              <option value="fashion">Mode & Beauté</option>
+              <option value="beauty">Beauté & Cosmétique</option>
+              <option value="electronics">High-tech & Électroménager</option>
+              <option value="home">Maison & Décoration</option>
+              <option value="food">Alimentaire & Drive</option>
+              <option value="sports">Sport & Loisirs</option>
+              <option value="travel">Voyage & Tourisme</option>
+              <option value="luxury">Luxe & Bijoux</option>
+              <option value="auto">Automobile</option>
+              <option value="culture">Produits culturels</option>
+            </select>
 
-          <div class="single-checkbox">
-            <input type="checkbox" id="allLevers">
-            <label for="allLevers">J’autorise tous les leviers</label>
-          </div>
+            <label class="question-label">Levi ers à activer</label>
+            <label class="single-checkbox">
+              <input type="checkbox" id="allLevers">
+              J’autorise tous les leviers
+            </label>
 
-          <div class="checkbox-group">
-            <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-            <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-            <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-            <label><input type="checkbox" name="levers" value="css"> CSS</label>
-            <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-            <label><input type="checkbox" name="levers" value="display-networks"> Display networks</label>
-            <label><input type="checkbox" name="levers" value="retention"> Retention</label>
-            <label><input type="checkbox" name="levers" value="content"> Content</label>
-            <label><input type="checkbox" name="levers" value="emailing"> Emailing</label>
-            <label><input type="checkbox" name="levers" value="ppc"> SEA / PPC</label>
-            <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-            <label><input type="checkbox" name="levers" value="influence"> Influence</label>
-          </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+              <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+              <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+              <label><input type="checkbox" name="levers" value="css"> CSS</label>
+              <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+              <label><input type="checkbox" name="levers" value="display-networks"> Display networks</label>
+              <label><input type="checkbox" name="levers" value="emailing"> Emailing / newsletters</label>
+              <label><input type="checkbox" name="levers" value="content"> Content / éditorial</label>
+              <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+              <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+              <label><input type="checkbox" name="levers" value="ppc"> SEA (PPC)</label>
+              <label><input type="checkbox" name="levers" value="retention"> Retention</label>
+            </div>
 
-          <div class="step-actions">
-            <button type="button" class="btn-prev" id="prev-step-2">Retour</button>
-            <button type="button" class="btn-next" id="next-step-2">Continuer</button>
-          </div>
-        </div>
+            <div class="step-actions">
+              <button class="btn-prev" type="button" id="prev-step-2">Retour</button>
+              <button class="btn-next" type="button" id="next-step-2">Continuer</button>
+            </div>
+          </section>
 
-        <!-- ============ STEP 3 ============ -->
-        <div class="form-step" data-step="3">
-          <h3 class="section-title">Finalisation</h3>
+          <!-- STEP 3 -->
+          <section class="form-step" data-step="3">
+            <h2 class="section-title">Finalisation</h2>
 
-          <label class="question-label">Trafic mensuel (visites)</label>
-          <div class="traffic-slider-container">
-            <div class="slider-wrapper">
-              <input id="trafficRange" type="range" min="0" max="1000000" step="1000" value="50000">
-              <div class="slider-labels">
-                <span>0</span><span>250k</span><span>500k</span><span>1M</span>
+            <label class="question-label">Trafic mensuel (visites)</label>
+            <div class="traffic-slider-container">
+              <div class="slider-wrapper">
+                <input type="range" id="trafficRange" min="0" max="1000000" step="1000" value="50000">
+                <div class="slider-labels">
+                  <span>0</span><span>250k</span><span>500k</span><span>1M</span>
+                </div>
+              </div>
+              <input type="number" id="trafficInput" name="traffic" min="0" max="1000000" value="50000">
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label class="question-label" for="budget">Budget mensuel (€)</label>
+                <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
+                <label class="checkbox-budget">
+                  <input type="checkbox" id="unlimited-budget">
+                  Je n’ai pas de budget
+                </label>
+              </div>
+
+              <div>
+                <label class="question-label" for="cac">CAC actuel (€)</label>
+                <input type="number" name="cac" id="cac" placeholder="Ex : 12">
+              </div>
+
+              <div>
+                <label class="question-label" for="aov">Panier moyen (€)</label>
+                <input type="number" name="aov" id="aov" placeholder="Ex : 80">
+              </div>
+
+              <div>
+                <label class="question-label" for="cvr">Taux de conversion (%)</label>
+                <input type="number" name="cvr" id="cvr" step="0.1" placeholder="Ex : 1.8">
               </div>
             </div>
-            <input id="trafficInput" name="traffic" type="number" min="0" max="1000000" step="1000" value="50000">
-          </div>
 
-          <div class="form-row">
-            <div>
-              <label class="question-label" for="budget">Budget mensuel (optionnel)</label>
-              <input id="budget" name="budget" type="number" min="0" step="50" placeholder="ex : 3000">
-              <div class="checkbox-budget">
-                <input type="checkbox" id="unlimited-budget">
-                <label for="unlimited-budget">Je n’ai pas de budget</label>
+            <label class="question-label" for="site">URL du site (optionnel)</label>
+            <input type="url" name="site" id="site" placeholder="https://…">
+
+            <label class="question-label" for="email">Email (pour recevoir le récap)</label>
+            <input type="email" name="email" id="email" placeholder="name@company.com" required>
+
+            <div class="step-actions">
+              <button class="btn-prev" type="button" id="prev-step-3">Retour</button>
+              <button class="cta" type="submit">Obtenir ma projection</button>
+            </div>
+          </section>
+        </form>
+
+        <!-- Results -->
+        <section id="results" class="results-section" style="display:none;">
+          <h2>Résultats</h2>
+          <p class="subtitle">Projection estimative — année 1 (montée en puissance incluse)</p>
+
+          <div class="kpi-grid simu-cards-row">
+            <div class="result-card gradient">
+              <h3>Projection</h3>
+              <ul class="kpi-list">
+                <li><strong>CA :</strong> <span id="kpi-revenue">—</span></li>
+                <li><strong>Commandes :</strong> <span id="kpi-orders">—</span></li>
+                <li><strong>Budget :</strong> <span id="kpi-budget">—</span></li>
+              </ul>
+            </div>
+
+            <div class="repartition-card">
+              <h3>Mix leviers</h3>
+              <canvas id="chart-levers" width="300" height="300"></canvas>
+              <div class="mini-insight">
+                <strong>KPIs</strong>
+                CAC projeté : <span id="kpi-cac">—</span><br>
+                ROI : <span id="kpi-roi">—</span><br>
+                Panier : <span id="kpi-aov">—</span>
               </div>
             </div>
 
-            <div>
-              <label class="question-label" for="aov">Panier moyen (AOV)</label>
-              <input id="aov" name="aov" type="number" min="0" step="1" placeholder="ex : 80">
-            </div>
-
-            <div>
-              <label class="question-label" for="cvr">Taux de conversion (%)</label>
-              <input id="cvr" name="cvr" type="number" min="0" step="0.1" placeholder="ex : 1.6">
-            </div>
-
-            <div>
-              <label class="question-label" for="cac">CAC (optionnel)</label>
-              <input id="cac" name="cac" type="number" min="0" step="1" placeholder="ex : 12">
+            <div class="result-card gradient">
+              <h3>Lecture rapide</h3>
+              <div id="insights" class="analysis-block" style="background:transparent; box-shadow:none; padding:0;"></div>
             </div>
           </div>
 
-          <div class="step-actions">
-            <button type="button" class="btn-prev" id="prev-step-3">Retour</button>
-            <button type="submit" class="cta">Lancer la simulation</button>
+          <div id="insight-message" class="insight-personal-message" style="display:none;">
+            <p id="insight-text"></p>
           </div>
-        </div>
-      </form>
-    </section>
 
-    <!-- ===================== RESULTS ===================== -->
-    <section id="results" class="right-column" style="display:none;">
-      <div class="results-section">
-        <h2>Résultats</h2>
-        <p class="subtitle">Projection année 1 (montée en puissance) selon les informations saisies.</p>
-
-        <div class="kpi-grid">
-          <div class="kpi-card"><strong>Chiffre d’affaires</strong><span id="kpi-revenue">—</span></div>
-          <div class="kpi-card"><strong>Commandes</strong><span id="kpi-orders">—</span></div>
-          <div class="kpi-card"><strong>Budget</strong><span id="kpi-budget">—</span></div>
-          <div class="kpi-card"><strong>AOV ajusté</strong><span id="kpi-aov">—</span></div>
-          <div class="kpi-card"><strong>CAC projeté</strong><span id="kpi-cac">—</span></div>
-          <div class="kpi-card"><strong>ROI</strong><span id="kpi-roi">—</span></div>
-        </div>
-
-        <div class="chart-container">
-          <canvas id="chart-levers" width="320" height="320"></canvas>
-        </div>
-
-        <div id="insights" class="analysis-block"></div>
-
-        <div class="editor-suggestions">
-          <h3>Éditeurs suggérés</h3>
+          <h3 class="section-title">Éditeurs recommandés</h3>
           <div class="editor-grid"></div>
-        </div>
 
-        <div class="editor-optin">
-          <label>
-            <input type="checkbox" id="optin-editors" checked>
-            Oui, je souhaite recevoir les recommandations par email.
-          </label>
-          <div id="toast"></div>
-        </div>
-
-        <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
-          <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Prendre rendez-vous</a>
-        </div>
-
-        <button id="restart-btn" type="button">↩ Refaire une simulation</button>
-      </div>
-    </section>
+          <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
+            <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
+            <button id="restart-btn" type="button">Refaire une simulation</button>
+          </div>
+        </section>
+      </section>
+    </div>
   </main>
 
-  <!-- JS (chemin RELATIF) -->
-  <script src="script.js"></script>
+  <!-- JS -->
+  <script src="./script.js?v=1" defer></script>
 </body>
 </html>
