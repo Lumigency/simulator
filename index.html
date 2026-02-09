@@ -173,92 +173,111 @@
           
 
 
-           <!-- STEP 2 -->
-          <section class="form-step" data-step="2">
-            <h2 class="section-title">Finalisation</h2>
+          <!-- STEP 2 -->
+<section class="form-step" data-step="2">
+  <h2 class="section-title">Données & leviers</h2>
 
-            <label class="question-label">Trafic mensuel (visites)</label>
-            <div class="traffic-slider-container">
-              <div class="slider-wrapper">
-                <input type="range" id="trafficRange" min="0" max="1000000" step="1000" value="50000">
-                <div class="slider-labels">
-                  <span>0</span><span>250k</span><span>500k</span><span>1M</span>
-                </div>
-              </div>
-              <input type="number" id="trafficInput" name="traffic" min="0" max="1000000" value="50000">
-            </div>
+  <!-- Trafic -->
+  <label class="question-label" for="trafficRange">Trafic mensuel (visites)</label>
+  <div class="traffic-slider-container">
+    <div class="slider-wrapper">
+      <input
+        type="range"
+        id="trafficRange"
+        name="trafficRange"
+        min="0"
+        max="1000000"
+        step="1000"
+        value="50000"
+      >
+      <div class="slider-labels">
+        <span>0</span><span>250k</span><span>500k</span><span>1M</span>
+      </div>
+    </div>
 
-            <div class="form-row">
-              <div>
-                <label class="question-label" for="budget">Budget mensuel (€)</label>
-                <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
-                <label class="checkbox-budget">
-                  <input type="checkbox" id="unlimited-budget">
-                  Je n’ai pas de budget
-                </label>
-              </div>
+    <input
+      type="number"
+      id="trafficInput"
+      name="traffic"
+      min="0"
+      max="1000000"
+      value="50000"
+    >
+  </div>
 
-              <div>
-                <label class="question-label" for="cac">CAC actuel (€)</label>
-                <input type="number" name="cac" id="cac" placeholder="Ex : 12">
-              </div>
+  <!-- Secteur -->
+  <label class="question-label" for="sector">Votre secteur</label>
+  <select name="sector" id="sector">
+    <option value="" selected disabled>— Choisir —</option>
+    <option value="other">Autre</option>
+    <option value="fashion">Mode & Beauté</option>
+    <option value="beauty">Beauté & Cosmétique</option>
+    <option value="electronics">High-tech & Électroménager</option>
+    <option value="home">Maison & Décoration</option>
+    <option value="food">Alimentaire & Drive</option>
+    <option value="sports">Sport & Loisirs</option>
+    <option value="travel">Voyage & Tourisme</option>
+    <option value="luxury">Luxe & Bijoux</option>
+    <option value="auto">Automobile</option>
+    <option value="culture">Produits culturels</option>
+  </select>
 
-              <div>
-                <label class="question-label" for="aov">Panier moyen (€)</label>
-                <input type="number" name="aov" id="aov" placeholder="Ex : 80">
-              </div>
+  <!-- KPIs -->
+  <div class="form-row">
+    <div class="form-col">
+      <label class="question-label" for="budget">Budget mensuel (€)</label>
+      <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
 
-              <div>
-          <section class="form-step" data-step="2">
-            <h2 class="section-title">Données & leviers</h2>
+      <label class="checkbox-budget">
+        <input type="checkbox" id="unlimited-budget" name="unlimited_budget">
+        Je n’ai pas de budget
+      </label>
+    </div>
 
-            <label class="question-label" for="sector">Votre secteur</label>
-            <select name="sector" id="sector">
-              <option value="other">Autre</option>
-              <option value="fashion">Mode & Beauté</option>
-              <option value="beauty">Beauté & Cosmétique</option>
-              <option value="electronics">High-tech & Électroménager</option>
-              <option value="home">Maison & Décoration</option>
-              <option value="food">Alimentaire & Drive</option>
-              <option value="sports">Sport & Loisirs</option>
-              <option value="travel">Voyage & Tourisme</option>
-              <option value="luxury">Luxe & Bijoux</option>
-              <option value="auto">Automobile</option>
-              <option value="culture">Produits culturels</option>
-            </select>
+    <div class="form-col">
+      <label class="question-label" for="cac">CAC actuel (€)</label>
+      <input type="number" name="cac" id="cac" placeholder="Ex : 12">
+    </div>
 
-            <label class="question-label">Levi ers à activer</label>
-            <label class="single-checkbox">
-              <input type="checkbox" id="allLevers">
-              J’autorise tous les leviers
-            </label>
+    <div class="form-col">
+      <label class="question-label" for="aov">Panier moyen (€)</label>
+      <input type="number" name="aov" id="aov" placeholder="Ex : 80">
+    </div>
 
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-              <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-              <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-              <label><input type="checkbox" name="levers" value="css"> CSS</label>
-              <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-              <label><input type="checkbox" name="levers" value="display-networks"> Display networks</label>
-              <label><input type="checkbox" name="levers" value="emailing"> Emailing / newsletters</label>
-              <label><input type="checkbox" name="levers" value="content"> Content / éditorial</label>
-              <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-              <label><input type="checkbox" name="levers" value="influence"> Influence</label>
-              <label><input type="checkbox" name="levers" value="ppc"> SEA (PPC)</label>
-              <label><input type="checkbox" name="levers" value="retention"> Retention</label>
-            </div>
+    <div class="form-col">
+      <label class="question-label" for="cvr">Taux de conversion (%)</label>
+      <input type="number" name="cvr" id="cvr" step="0.1" placeholder="Ex : 1.8">
+    </div>
+  </div>
 
+  <!-- Leviers -->
+  <label class="question-label">Leviers à activer</label>
+  <label class="single-checkbox">
+    <input type="checkbox" id="allLevers" name="allLevers">
+    J’autorise tous les leviers
+  </label>
 
-                <label class="question-label" for="cvr">Taux de conversion (%)</label>
-                <input type="number" name="cvr" id="cvr" step="0.1" placeholder="Ex : 1.8">
-              </div>
-            </div>
-            
-          <div class="step-actions">
-              <button class="btn-prev" type="button" id="prev-step-2">Retour</button>
-              <button class="btn-next" type="button" id="next-step-2">Continuer</button>
-            </div>
-          </section>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+    <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+    <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+    <label><input type="checkbox" name="levers" value="css"> CSS</label>
+    <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+    <label><input type="checkbox" name="levers" value="display-networks"> Display networks</label>
+    <label><input type="checkbox" name="levers" value="emailing"> Emailing / newsletters</label>
+    <label><input type="checkbox" name="levers" value="content"> Content / éditorial</label>
+    <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+    <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+    <label><input type="checkbox" name="levers" value="ppc"> SEA (PPC)</label>
+    <label><input type="checkbox" name="levers" value="retention"> Retention</label>
+  </div>
+
+  <!-- Actions -->
+  <div class="step-actions">
+    <button class="btn-prev" type="button" id="prev-step-2">Retour</button>
+    <button class="btn-next" type="button" id="next-step-2">Continuer</button>
+  </div>
+</section>
            
             <!-- STEP 3 -->
              <section class="form-step active" data-step="3">
