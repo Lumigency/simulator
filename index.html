@@ -172,7 +172,44 @@
           </section>
           
 
-          <!-- STEP 2 -->
+         
+
+           <!-- STEP 2 -->
+          <section class="form-step" data-step="3">
+            <h2 class="section-title">Finalisation</h2>
+
+            <label class="question-label">Trafic mensuel (visites)</label>
+            <div class="traffic-slider-container">
+              <div class="slider-wrapper">
+                <input type="range" id="trafficRange" min="0" max="1000000" step="1000" value="50000">
+                <div class="slider-labels">
+                  <span>0</span><span>250k</span><span>500k</span><span>1M</span>
+                </div>
+              </div>
+              <input type="number" id="trafficInput" name="traffic" min="0" max="1000000" value="50000">
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label class="question-label" for="budget">Budget mensuel (€)</label>
+                <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
+                <label class="checkbox-budget">
+                  <input type="checkbox" id="unlimited-budget">
+                  Je n’ai pas de budget
+                </label>
+              </div>
+
+              <div>
+                <label class="question-label" for="cac">CAC actuel (€)</label>
+                <input type="number" name="cac" id="cac" placeholder="Ex : 12">
+              </div>
+
+              <div>
+                <label class="question-label" for="aov">Panier moyen (€)</label>
+                <input type="number" name="aov" id="aov" placeholder="Ex : 80">
+              </div>
+
+              <div>
           <section class="form-step" data-step="2">
             <h2 class="section-title">Données & leviers</h2>
 
@@ -218,47 +255,13 @@
             </div>
           </section>
 
-          <!-- STEP 3 -->
-          <section class="form-step" data-step="3">
-            <h2 class="section-title">Finalisation</h2>
-
-            <label class="question-label">Trafic mensuel (visites)</label>
-            <div class="traffic-slider-container">
-              <div class="slider-wrapper">
-                <input type="range" id="trafficRange" min="0" max="1000000" step="1000" value="50000">
-                <div class="slider-labels">
-                  <span>0</span><span>250k</span><span>500k</span><span>1M</span>
-                </div>
-              </div>
-              <input type="number" id="trafficInput" name="traffic" min="0" max="1000000" value="50000">
-            </div>
-
-            <div class="form-row">
-              <div>
-                <label class="question-label" for="budget">Budget mensuel (€)</label>
-                <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
-                <label class="checkbox-budget">
-                  <input type="checkbox" id="unlimited-budget">
-                  Je n’ai pas de budget
-                </label>
-              </div>
-
-              <div>
-                <label class="question-label" for="cac">CAC actuel (€)</label>
-                <input type="number" name="cac" id="cac" placeholder="Ex : 12">
-              </div>
-
-              <div>
-                <label class="question-label" for="aov">Panier moyen (€)</label>
-                <input type="number" name="aov" id="aov" placeholder="Ex : 80">
-              </div>
-
-              <div>
                 <label class="question-label" for="cvr">Taux de conversion (%)</label>
                 <input type="number" name="cvr" id="cvr" step="0.1" placeholder="Ex : 1.8">
               </div>
             </div>
 
+             <!-- STEP 3 -->
+            
             <label class="question-label" for="site">URL du site (optionnel)</label>
             <input type="url" name="site" id="site" placeholder="https://…">
 
