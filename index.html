@@ -1,486 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulateur Affiliation by Lumigency</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lumigency — Simulateur Affiliation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
-  <div class="split-layout">
-    <div class="left-column">
-      <img src="https://simulator-lac.vercel.app/LOGO2025.png" alt="Logo Lumigency">
-   <h1>🤝Simulez votre potentiel en affiliation</h1>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-logo" src="./assets/logo_lumigency_wip.svg" alt="Lumigency" />
+        <div class="brand-text">
+          <div class="brand-title">Simulateur Affiliation</div>
+          <div class="brand-subtitle">3 étapes • estimation instantanée • recommandations</div>
+        </div>
+      </div>
 
-<div class="progress-container">
-  <div class="progress-bar" id="progress-bar">
-    <span class="progress-text-inside" id="progress-text">9%</span>
-  </div>
-</div>
+      <a class="close-btn" href="https://www.lumigency.com/strategie-consulting-affiliation" aria-label="Fermer le simulateur">✕</a>
+    </header>
 
-<ul class="benefits-list">
-  <li>✔ Estimez vos ventes potentielles.</li>
-  <li>✔ Calculez votre chiffre d’affaires prévisionnel.</li>
-  <li>✔ Explorez le potentiel de nouveaux leviers.</li>
-  <li>✔ Découvrez de nouveaux éditeurs.</li>
-</ul>
+    <main class="shell split-layout" id="layout">
+      <!-- LEFT -->
+      <section class="left-panel">
+        <div class="hero">
+          <div class="hero-badge">Outil premium</div>
+          <h1 class="hero-title">Projetez le potentiel de votre programme d’affiliation</h1>
+          <p class="hero-desc">
+            En quelques questions, obtenez une estimation (CA, commandes, CAC, ROI) et une lecture claire de votre mix de leviers.
+          </p>
 
-         <div class="insight-card">
-  <p>💡 <strong>Le saviez-vous ?</strong></p>
-  <p>
-    L’affiliation, c’est l’art du partenariat en ligne un levier qui peut
-    générer jusqu’à <strong>30 % de vos revenus digitaux</strong>.
-  </p>
-  <p>
-</div>
-      
-<!-- ⭐️ WRAPPER DES 3 CARDS  -->
-<div class="simu-cards-row">
+          <div class="hero-cards" aria-hidden="true">
+            <div class="mini-card">
+              <div class="mini-ico"><img src="./assets/rocket_3d.svg" alt="" /></div>
+              <div>
+                <div class="mini-title">Projection</div>
+                <div class="mini-text">CA, commandes, budget</div>
+              </div>
+            </div>
 
-  <!-- CARD 2 — Donut + nouveaux éditeurs -->
-  <div class="result-card repartition-card">
-    <h3>Répartition des leviers</h3>
-    <div class="fake-donut"></div>
-    <p class="simu-card-subtitle">Nouveaux éditeurs</p>
+            <div class="mini-card">
+              <div class="mini-ico"><img src="./assets/target_3d.svg" alt="" /></div>
+              <div>
+                <div class="mini-title">Mix leviers</div>
+                <div class="mini-text">Répartition estimée</div>
+              </div>
+            </div>
 
-    <div class="simu-card-icons">
-        <span>👤</span>
-        <span>👤</span>
-        <span>👤</span>
-        <span>👤</span>
-        <span>👤</span>
-    </div>
-  </div>
+            <div class="mini-card">
+              <div class="mini-ico"><img src="./assets/thunder_3d.svg" alt="" /></div>
+              <div>
+                <div class="mini-title">Insights</div>
+                <div class="mini-text">Lecture rapide & action</div>
+              </div>
+            </div>
+          </div>
 
-  <!-- CARD 3 — Insights -->
-  <div class="result-card gradient">
-    <h3>Insights</h3>
-    <ul class="kpi-list">
-      <li>📈 <strong>ROI estimé</strong><br>× 9,94</li>
-      <li>🎯 <strong>CAC estimé</strong><br>10%</li>
-    </ul>
-
-    <div class="mini-insight">
-      <strong>🪴 Analyse Rapide</strong>
-      <p>Votre panier moyen est légèrement au dessus du marché.</p>
-    </div>
-  </div>
-
-</div> <!-- ⭐️ fermeture de .simu-cards-row -->
-
-      <p class="lumigency-signature">
-  ⚡ Généré par <strong>Lumigency</strong> — agence indépendante affiliation & marketing à la performance.
-</p>
-
-    </div> <!-- ✅ fermeture de .left-column -->
-    
-    <div class="right-column">
-      
-    <h2 class="subtitle">
-  ⚙️ Renseignez vos données clés et obtenez une projection fiable de <mark>votre potentiel en affiliation</mark>.
-</h2>
-      <form id="form-simu">
-        
-        <!-- Barre de progression -->
-<div class="progress-bar">
-  <div class="progress" id="progress" style="width:33%;"></div>
-</div>
-
-        <!-- 🔹 ÉTAPE 1 : Contexte -->
-        <div class="form-step active" id="step-1">
-    <h3 class="section-title">🧭 Démarrons</h3>
-
-<!-- Programme existant -->
-<label class="question-label">📈 Avez-vous déjà un programme d’affiliation en place ?</label>
-<div class="pill-group">
-  <input type="radio" id="programme-non" name="programme" value="non" checked>
-  <label for="programme-non">Non</label>
-
-  <input type="radio" id="programme-oui" name="programme" value="oui">
-  <label for="programme-oui">Oui</label>
-</div>
-
-<!-- Objectif principal -->
-<label>🧭 Votre objectif principal avec l’affiliation</label>
-<select name="objectif" required>
-  <option value="">-- Sélectionnez --</option>
-  <option value="lancer">Lancer un programme performant</option>
-  <option value="optimiser">Optimiser un programme existant</option>
-  <option value="diversifier">Tester de nouveaux leviers</option>
-  <option value="scaler">Scaler les ventes et le ROI</option>
-</select>
-
-       <!-- 🌍 Vos ventes se font principalement sur... -->
-<label class="question-label">🌍 Vos ventes se font principalement sur...</label>
-<div class="pill-group">
-  <input type="radio" id="marche-france" name="marche" value="france" checked>
-  <label for="marche-france">France uniquement</label>
-
-  <input type="radio" id="marche-europe" name="marche" value="europe">
-  <label for="marche-europe">Europe</label>
-
-  <input type="radio" id="marche-international" name="marche" value="international">
-  <label for="marche-international">International</label>
-</div>
-
-<!-- ⚙️ Exemple pour la gestion des campagnes -->
-<label class="question-label">⚙️ Comment gérez-vous aujourd’hui vos campagnes d’acquisition ?</label>
-<div class="pill-group">
-  <input type="radio" id="orga-interne" name="organisation" value="interne">
-  <label for="orga-interne">En interne</label>
-
-  <input type="radio" id="orga-agence" name="organisation" value="agence">
-  <label for="orga-agence">Avec une agence</label>
-
-  <input type="radio" id="orga-mixte" name="organisation" value="mixte">
-  <label for="orga-mixte">Un mix des deux</label>
-</div>
-
-  <!-- connaissance -->
-  <label class="question-label">💡 Votre niveau de connaissance du levier affiliation</label>
-<div class="pill-group">
-  <input type="radio" id="maturite-debutant" name="maturite" value="debutant">
-  <label for="maturite-debutant">Je découvre</label>
-
-  <input type="radio" id="maturite-intermediaire" name="maturite" value="intermediaire">
-  <label for="maturite-intermediaire">J’ai déjà testé</label>
-
-  <input type="radio" id="maturite-avance" name="maturite" value="avance">
-  <label for="maturite-avance">Programme structuré</label>
-</div>
-<div style="margin: 1.5rem 0;"></div>
-
-<!-- ✅ Navigation étape 1 -->
-<div class="step-actions single">
-  <button type="button" class="btn-next" id="next-step-1">Suivant</button>
-</div>
-</div>
-
-        <!-- 🔹 ÉTAPE 2 : Données de simulation -->
-        <div class="form-step" id="step-2">
-<!-- Trafic -->
-<label>👥 Votre trafic mensuel actuel</label>
-<div class="traffic-slider-container">
-  <div class="slider-wrapper">
-    <input 
-      type="range" 
-      id="trafficRange" 
-      min="0" 
-      max="1000000" 
-      step="1000" 
-      value="50000" 
-      oninput="document.getElementById('trafficInput').value=this.value">
-   <div class="slider-labels">
-  <span>0</span>
-  <span>200k</span>
-  <span>400k</span>
-  <span>600k</span>
-  <span>800k</span>
-  <span>1M</span>
-</div>
-  </div>
-  <input type="number" id="trafficInput" name="traffic" value="50000">
-</div>
-
-       <div class="form-row">
-  <div>
-    <label>🛒 Panier moyen actuel (€)</label>
-    <input type="number" name="aov" required>
-  </div>
-
-  <div>
-    <label>📊 Taux de conversion actuel (%)</label>
-    <input type="number" step="0.1" name="cvr" required>
-  </div>
-
-  <div>
-    <label>🎯 Coût d’acquisition envisagé (€)</label>
-    <input type="number" name="cac" required>
-  </div>
-
-  <div>
-    <label>💰 Budget affiliation mensuel (€)</label>
-    <input type="number" name="budget" id="budget">
-    <div class="checkbox-budget">
-      <input type="checkbox" id="noBudget">
-      <label for="noBudget">Je n’ai pas de budget défini (explorer le plein potentiel)</label>
-    </div>
-  </div>
-  </div> <!-- ✅ fermeture du .form-row -->
-
-        <!-- Leviers -->
-        <label>📌 Leviers que vous souhaitez autoriser</label>
-        
-  <label class="single-checkbox">
-    <input type="checkbox" id="allLevers">
-    J’autorise tous les leviers
-  </label>
-        
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
-          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
-          <label><input type="checkbox" name="levers" value="css"> CSS</label>
-          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
-           <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
-          <label><input type="checkbox" name="levers" value="display-networks"> Display Networks</label>
-          <label><input type="checkbox" name="levers" value="content"> Content commerce</label>
-          <label><input type="checkbox" name="levers" value="emailing"> Emailing / NL</label>
-          <label><input type="checkbox" name="levers" value="ppc"> PPC / SEA</label>
-          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
-          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
-            <label><input type="checkbox" name="levers" value="retention"> Rétention on-site</label>
+          <div class="didyouknow">
+            <div class="didyouknow-title">Le saviez-vous ?</div>
+            <div class="didyouknow-text">
+              L’affiliation ne se résume pas au cashback : un mix bien piloté combine contenu, intention (comparateurs/CSS),
+              relances (retargeting/email) et performance (SEA/PPC).
+            </div>
+          </div>
         </div>
 
-      <!-- Modèles hybrides -->
-<label class="question-label">⚡ Êtes-vous ouverts aux modèles hybrides (fixes, CPC, CPM...)?</label>
-<div class="pill-group">
-  <input type="radio" id="hybrides-oui" name="hybrides" value="oui">
-  <label for="hybrides-oui">Oui</label>
+        <div class="progress">
+          <div class="progress-meta">
+            <span class="progress-label">Progression</span>
+            <span class="progress-value" id="progress-text">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
 
-  <input type="radio" id="hybrides-non" name="hybrides" value="non">
-  <label for="hybrides-non">Non</label>
-</div>
+          <div class="stepper" role="list" aria-label="Étapes du simulateur">
+            <div class="step is-active" data-step="0" role="listitem">
+              <span class="step-dot"></span><span class="step-name">Contexte</span>
+            </div>
+            <div class="step" data-step="1" role="listitem">
+              <span class="step-dot"></span><span class="step-name">Données & leviers</span>
+            </div>
+            <div class="step" data-step="2" role="listitem">
+              <span class="step-dot"></span><span class="step-name">Finalisation</span>
+            </div>
+            <div class="step" data-step="3" role="listitem">
+              <span class="step-dot"></span><span class="step-name">Résultats</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div id="hybrid-alert" class="alert-hybride" style="display:none;"></div>
-  <div style="margin: 1.5rem 0;"></div>
-<!-- ✅ Navigation étape 2 -->
-<div class="step-actions">
-  <button type="button" class="btn-prev" id="prev-step-2">Précédent</button>
-  <button type="button" class="btn-next" id="next-step-2">Suivant</button>
-</div>
-</div>
+      <!-- RIGHT -->
+      <section class="right-panel" aria-label="Formulaire simulateur">
 
-<!-- 🔹 ÉTAPE 3 : Données prospects -->
+        <form id="simu-form" novalidate>
+          <!-- STEP 1 -->
+          <section class="form-step active" data-step="0" aria-labelledby="step1-title">
+            <div class="step-header">
+              <h2 id="step1-title">Contexte</h2>
+              <p>Quelques informations pour comprendre votre maturité et votre objectif.</p>
+            </div>
 
-          <div class="form-step" id="step-3">
+            <div class="field">
+              <label>Objectif principal</label>
+              <div class="pill-grid" role="group" aria-label="Objectif">
+                <button type="button" class="pill" data-pill="objectif" data-value="lancer">Lancer</button>
+                <button type="button" class="pill" data-pill="objectif" data-value="optimiser">Optimiser</button>
+                <button type="button" class="pill" data-pill="objectif" data-value="diversifier">Diversifier</button>
+                <button type="button" class="pill" data-pill="objectif" data-value="scaler">Scaler</button>
+              </div>
+              <input type="hidden" id="objectif" name="objectif" required />
+            </div>
 
-      <label>🏷️ Votre secteur d’activité</label>
-<select name="sector" required>
-  <option value="">-- Sélectionnez --</option>
-  <option value="fashion">Mode</option>
-  <option value="beauty">Beauté, Santé & Hygiène</option>
-  <option value="culture">Produits culturels & Loisirs</option>
-  <option value="electronics">High-tech & Électroménager</option>
-  <option value="home">Maison & Décoration</option>
-  <option value="food">Alimentation & Drive</option>
-  <option value="sports">Sport</option>
-  <option value="travel">Voyage & Tourisme</option>
-  <option value="luxury">Luxe & Bijoux</option>
-  <option value="auto">Pièces automobiles</option>
-  <option value="games">Jeux & Jouets</option>
-  <option value="garden">Maison & Jardin</option>
-  <option value="telecom">Télécom</option>
-  <option value="other">Autre</option>
-</select>
-            
-        <!-- Website -->
-        <label for="website">🌐 Indiquez votre site internet</label>
-        <input type="url" id="website" name="website" placeholder="https://votre-site.com">
+            <div class="grid-2">
+              <div class="field">
+                <label>Programme déjà en place ?</label>
+                <div class="pill-row" role="group" aria-label="Programme existant">
+                  <button type="button" class="pill" data-pill="programme" data-value="oui">Oui</button>
+                  <button type="button" class="pill" data-pill="programme" data-value="non">Non</button>
+                </div>
+                <input type="hidden" id="programme" name="programme" required />
+              </div>
 
-        <!-- Email -->
-        <label>📧 Votre email (obligatoire)</label>
-        <input type="email" name="email" required>
+              <div class="field">
+                <label>Zone géographique</label>
+                <select id="zone" name="zone" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option value="fr">France</option>
+                  <option value="eu">Europe</option>
+                  <option value="intl">International</option>
+                </select>
+              </div>
+            </div>
 
+            <div class="grid-2">
+              <div class="field">
+                <label>Mode de gestion acquisition</label>
+                <select id="gestion" name="gestion" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option value="interne">Interne</option>
+                  <option value="agence">Agence</option>
+                  <option value="mix">Mix</option>
+                </select>
+              </div>
 
-      <!-- CTA principal + CTA secondaire -->
-<button type="submit" class="cta">🔥 Lancer ma simulation</button>
-<a href="https://www.lumigency.com/consultation-gratuite" class="cta-secondary">💬 Discuter avec un expert Lumigency</a>
+              <div class="field">
+                <label>Niveau de connaissance</label>
+                <select id="maturite" name="maturite" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option value="decouverte">Je découvre</option>
+                  <option value="teste">J’ai déjà testé</option>
+                  <option value="structure">Programme structuré</option>
+                </select>
+              </div>
+            </div>
 
-<div style="margin: 1.5rem 0;"></div>
+            <div class="step-actions">
+              <button type="button" class="btn secondary" disabled>Retour</button>
+              <button type="button" class="btn primary" id="next-step-1" disabled>Continuer</button>
+            </div>
+          </section>
 
-<!-- ✅ Navigation étape 3 -->
-<div class="step-actions">
-  <button type="button" class="btn-prev" id="prev-step-3">Précédent</button>
-</div>
-</div>
+          <!-- STEP 2 -->
+          <section class="form-step" data-step="1" aria-labelledby="step2-title">
+            <div class="step-header">
+              <h2 id="step2-title">Données & leviers</h2>
+              <p>Renseignez vos métriques clés et sélectionnez les leviers à activer.</p>
+            </div>
 
-</form>
-</div> <!-- fin de right-column -->
+            <div class="grid-2">
+              <div class="field">
+                <label for="traffic">Trafic mensuel</label>
+                <div class="range-row">
+                  <input id="trafficRange" type="range" min="1000" max="1000000" step="1000" value="50000" />
+                  <input id="traffic" name="traffic" type="number" min="0" step="1000" value="50000" required />
+                </div>
+                <div class="hint">Astuce : on annualise le trafic pour simuler une montée en puissance.</div>
+              </div>
 
-<!-- ✅ Résultats désormais inclus dans split-layout -->
-<section id="results" class="results-section" style="display: none;">
-  <h2>🎯 Vos résultats de simulation personnalisée</h2>
-  <p class="subtitle">Cette simulation combine vos données, notre expertise et les insights issus de nos benchmarks marché pour estimer vos performances potentielles sur 12 mois d’activité en affiliation.</p>
+              <div class="field">
+                <label for="aov">Panier moyen (€)</label>
+                <input id="aov" name="aov" type="number" min="0" step="1" placeholder="Ex : 65" required />
+              </div>
 
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <strong>💸 Chiffre d'affaires estimé</strong>
-      <span id="kpi-revenue">45 000 €</span>
-    </div>
-    <div class="kpi-card">
-      <strong>📦 Commandes générées</strong>
-      <span id="kpi-orders">670</span>
-    </div>
-    <div class="kpi-card">
-      <strong>💼 Budget estimé</strong>
-      <span id="kpi-budget">12 000 €</span>
-    </div>
-    <div class="kpi-card">
-      <strong>🛍️ Panier moyen simulé</strong>
-      <span id="kpi-aov">67 €</span>
-    </div>
-    <div class="kpi-card">
-      <strong>🎯 CAC projeté</strong>
-      <span id="kpi-cac">18 €</span>
-    </div>
-    <div class="kpi-card">
-      <strong>📈 ROI potentiel</strong>
-      <span id="kpi-roi">3.75x</span>
-    </div>
-    
-</div> <!-- ✅ fermeture manquante de kpi-grid -->
-  <div class="chart-container">
-    <h3>Répartition des leviers estimés</h3>
-    <canvas id="chart-levers"></canvas>
+              <div class="field">
+                <label for="cvr">Taux de conversion (%)</label>
+                <input id="cvr" name="cvr" type="number" min="0" step="0.01" placeholder="Ex : 1.25" required />
+              </div>
+
+              <div class="field">
+                <label for="cac">CAC client (€)</label>
+                <input id="cac" name="cac" type="number" min="0" step="1" placeholder="Ex : 35" required />
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label>Budget affiliation mensuel</label>
+                <div class="budget-box">
+                  <div class="pill-row">
+                    <button type="button" class="pill" data-pill="budgetMode" data-value="defini">Budget défini</button>
+                    <button type="button" class="pill" data-pill="budgetMode" data-value="illimite">Explorer le plein potentiel</button>
+                  </div>
+                  <input type="hidden" id="budgetMode" name="budgetMode" required />
+
+                  <div class="budget-gauge" id="budgetGauge" hidden>
+                    <div class="gauge-top">
+                      <span class="gauge-label">Montant mensuel</span>
+                      <span class="gauge-value" id="budgetValue">—</span>
+                    </div>
+                    <input id="budgetRange" type="range" min="500" max="20000" step="250" value="3000" />
+                    <input id="budget" name="budget" type="hidden" value="" />
+                    <div class="gauge-legend">
+                      <span>500€</span><span>20 000€</span>
+                    </div>
+                  </div>
+
+                  <div class="hint">Si vous n’avez pas de budget défini, on simule sans cap de budget.</div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Modèles hybrides</label>
+                <div class="pill-row" role="group" aria-label="Modèles hybrides">
+                  <button type="button" class="pill" data-pill="hybrides" data-value="oui">Ouvert</button>
+                  <button type="button" class="pill" data-pill="hybrides" data-value="non">Pas pour l’instant</button>
+                </div>
+                <input type="hidden" id="hybrides" name="hybrides" required />
+                <div class="alert" id="hybridAlert" hidden>
+                  Certains leviers performants demandent souvent de l’hybride. Si vous refusez l’hybridation tout en activant ces leviers, la projection sera pénalisée.
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Leviers à activer</label>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="lever" value="cashback"> Cashback</label>
+                <label class="check"><input type="checkbox" name="lever" value="bonsplans"> Bons plans</label>
+                <label class="check"><input type="checkbox" name="lever" value="css"> CSS</label>
+                <label class="check"><input type="checkbox" name="lever" value="comparateurs"> Comparateurs</label>
+                <label class="check"><input type="checkbox" name="lever" value="retargeting"> Retargeting</label>
+                <label class="check"><input type="checkbox" name="lever" value="display-networks"> Display networks</label>
+                <label class="check"><input type="checkbox" name="lever" value="content"> Content commerce</label>
+                <label class="check"><input type="checkbox" name="lever" value="emailing"> Emailing / newsletters</label>
+                <label class="check"><input type="checkbox" name="lever" value="ppc"> PPC / SEA</label>
+                <label class="check"><input type="checkbox" name="lever" value="influence"> Influence</label>
+                <label class="check"><input type="checkbox" name="lever" value="affinitaires"> Affinitaires</label>
+                <label class="check"><input type="checkbox" name="lever" value="retention"> Rétention onsite</label>
+              </div>
+
+              <div class="inline-row">
+                <label class="check subtle">
+                  <input type="checkbox" id="selectAllLevers" /> Autoriser tous les leviers
+                </label>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn secondary" id="prev-step-2">Retour</button>
+              <button type="button" class="btn primary" id="next-step-2" disabled>Continuer</button>
+            </div>
+          </section>
+
+          <!-- STEP 3 -->
+          <section class="form-step" data-step="2" aria-labelledby="step3-title">
+            <div class="step-header">
+              <h2 id="step3-title">Finalisation</h2>
+              <p>Dernier écran : on vous envoie la simulation et on affiche vos résultats.</p>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="sector">Secteur d’activité</label>
+                <select id="sector" name="sector" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option value="fashion">Mode / accessoires</option>
+                  <option value="beauty">Beauté</option>
+                  <option value="home">Maison</option>
+                  <option value="travel">Voyage</option>
+                  <option value="services">Services</option>
+                  <option value="other">Autre</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="site">Site (optionnel)</label>
+                <input id="site" name="site" type="url" placeholder="https://votre-site.com" />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="vous@entreprise.com" required />
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn secondary" id="prev-step-3">Retour</button>
+              <button type="submit" class="btn primary" id="submit-btn" disabled>Lancer ma simulation</button>
+            </div>
+          </section>
+        </form>
+
+        <!-- RESULTS -->
+        <section id="results" class="results hidden" aria-label="Résultats de la simulation">
+          <div class="results-header">
+            <div>
+              <h2>Résultats</h2>
+              <p class="muted">Voici votre projection, construite à partir de vos réponses.</p>
+            </div>
+            <button class="btn secondary small" id="restart-btn" type="button">Refaire une simulation</button>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">CA estimé</div><div class="kpi-value" id="kpiRevenue">—</div></div>
+            <div class="kpi-card"><div class="kpi-label">Commandes</div><div class="kpi-value" id="kpiOrders">—</div></div>
+            <div class="kpi-card"><div class="kpi-label">Budget</div><div class="kpi-value" id="kpiBudget">—</div></div>
+            <div class="kpi-card"><div class="kpi-label">Panier ajusté</div><div class="kpi-value" id="kpiAov">—</div></div>
+            <div class="kpi-card"><div class="kpi-label">CAC projeté</div><div class="kpi-value" id="kpiCac">—</div></div>
+            <div class="kpi-card"><div class="kpi-label">ROI</div><div class="kpi-value" id="kpiRoi">—</div></div>
+          </div>
+
+          <div class="results-grid">
+            <div class="panel">
+              <div class="panel-title">Répartition des leviers</div>
+              <canvas id="leverChart" height="240"></canvas>
+              <div class="panel-note" id="mixNote">Mix projeté en fonction de vos réponses</div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-title">Analyse rapide</div>
+              <div class="insights" id="insights"></div>
+
+              <div class="cta-card">
+                <div>
+                  <div class="cta-title">Envie d’aller plus loin ?</div>
+                  <div class="cta-text">Un expert Lumigency analyse vos résultats et vous propose des pistes concrètes.</div>
+                </div>
+                <a class="btn primary" href="https://www.lumigency.com/strategie-consulting-affiliation" id="cta-audit">Obtenir un audit</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel editors">
+            <div class="panel-title">Éditeurs recommandés</div>
+            <div class="editor-grid" id="editorGrid"></div>
+          </div>
+
+          <div class="final-cta">
+            <div>
+              <div class="final-title">Bénéficier d’un échange stratégique avec Lumigency</div>
+              <div class="final-text">On vous aide à structurer votre programme et piloter un mix rentable.</div>
+            </div>
+            <a class="btn primary" href="https://www.lumigency.com/strategie-consulting-affiliation" id="cta-final">Prendre rendez-vous</a>
+          </div>
+        </section>
+
+      </section>
+    </main>
   </div>
 
-      <!-- ✅ Message personnalisé -->
-<div id="insight-message" class="insight-personal-message" style="display:none;">
-    <p id="insight-text"></p>
-</div>
-
-  <div id="insights" class="analysis-block">
-    <h3>📊 Quelques informations marchés</h3>
-    <ul>
-      <li>Votre panier moyen estimé (67 €) est supérieur à la moyenne du secteur.</li>
-      <li>Taux de conversion simulé : 1.55% (montée en puissance sur l'année 1).</li>
-      <li>Note : votre budget annuel saisi (12 000 €) peut limiter le volume de ventes affiché.</li>
-    </ul>
-  </div>
-
-  <!-- 🚀 Bloc éditeurs suggestions directes -->
-<div id="editor-suggestions" class="analysis-block">
-  <h3>📰 Suggestions d’éditeurs pour votre programme</h3>
-  <p>Voici quelques éditeurs stratégiques que nous pourrions activer dans votre programme :</p>
-
- <!-- Les cartes éditeurs seront injectées ici -->
-<div class="editor-grid"></div>
-
-<!-- ✅ CTA dynamique selon l’objectif -->
-<div id="cta-dynamic" class="cta-dynamic" style="display:none; margin-top:30px;">
-  <a id="cta-button" href="#" class="cta-button" target="_blank"></a>
-</div>
-
-<!-- Bouton Refaire -->
-<button id="restart-btn" type="button">↩️ Refaire une simulation</button>
-
-</div> <!-- fin du bloc éditeurs -->
-  
-</section> <!-- ✅ fin du bloc résultats -->
-
-</div> <!-- ✅ fin de split-layout -->
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Script simulateur -->
-<script src="script.js"></script>
-
-<!-- Témoignages utilisateurs -->
-<section class="testimonials-section">
-  <h2>🗣 Ce que disent nos utilisateurs</h2>
-  <div class="slider-container">
-    <div class="testimonials-slider" id="slider">
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Un simulateur bluffant</strong>
-        <p>J’ai obtenu mes résultats en quelques secondes. Simple et très intuitif !</p>
-        <span>Camille R., il y a 3 heures</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Un vrai gain de temps</strong>
-        <p>Enfin un outil clair, rapide et orienté résultats. Je recommande.</p>
-        <span>Antoine L., il y a 6 heures</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Très professionnel</strong>
-        <p>J’ai pu visualiser mon potentiel en affiliation en moins de deux minutes !</p>
-        <span>Sarah D., il y a 1 jour</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Inspirant</strong>
-        <p>Une belle approche data et visuelle. On comprend tout de suite où aller.</p>
-        <span>Julien M., il y a 2 jours</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Ultra pertinent</strong>
-        <p>Enfin un outil qui parle performance sans bullshit. Bravo Lumigency !</p>
-        <span>Mathilde P., il y a 3 jours</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Interface canon</strong>
-        <p>Design pro, clair, et résultats cohérents avec nos projections internes.</p>
-        <span>Pauline G., il y a 5 jours</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <strong>Excellent support</strong>
-        <p>L’équipe Lumigency est réactive et super pédago. On recommande !</p>
-        <span>Olivier T., il y a 1 semaine</span>
-      </div>
-
-      <div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>Simple et efficace</strong>
-  <p>Je ne pensais pas qu’un simulateur pouvait être aussi clair. Résultats précis et sans jargon.</p>
-  <span>David M., il y a 9 jours</span>
-</div>
-
-<div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>Outil indispensable</strong>
-  <p>En tant que responsable acquisition, c’est devenu ma première étape avant tout lancement de campagne.</p>
-  <span>Claire G., il y a 1 semaine</span>
-</div>
-
-<div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>Vision stratégique</strong>
-  <p>Ce simulateur m’a aidé à comprendre où concentrer mes investissements en affiliation. Bravo à l’équipe !</p>
-  <span>Thomas L., il y a 2 semaines</span>
-</div>
-
-<div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>Résultats ultra concrets</strong>
-  <p>On repart avec un plan clair et des leviers pertinents à activer. C’est du concret, pas du blabla.</p>
-  <span>Élodie S., il y a 2 semaines</span>
-</div>
-
-<div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>Une vraie révélation</strong>
-  <p>Je pensais connaître mon potentiel digital… mais ce simulateur m’a ouvert les yeux sur le levier affiliation.</p>
-  <span>Marc D., il y a 3 semaines</span>
-</div>
-
-<div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>UX parfaite</strong>
-  <p>Tout est fluide, lisible, intuitif. On sent la patte d’une agence experte en conversion.</p>
-  <span>Anna F., il y a 3 semaines</span>
-</div>
-
-<div class="review">
-  <div class="stars">★★★★★</div>
-  <strong>Un vrai benchmark marché</strong>
-  <p>Les données sont cohérentes et reflètent la réalité du secteur. Un must-have pour tout marketer.</p>
-  <span>Nicolas B., il y a 1 mois</span>
-</div>
-      
-    </div>
-  </div>
-</section>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
