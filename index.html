@@ -93,8 +93,6 @@
           </div>
         </div>
 
-        <!-- Hybrid warning -->
-        <div id="hybrid-alert" class="alert-hybride"></div>
 
         <!-- FORM -->
         <form id="form-simu">
@@ -102,7 +100,25 @@
           <section class="form-step active" data-step="1">
             <h2 class="section-title">Contexte</h2>
 
-            <label class="question-label" for="objectif">Quel est votre objectif ?</label>
+          <div class="aff-field">
+    <p class="aff-label">Avez-vous déjà un programme d'affiliation&nbsp;?</p>
+
+      <div class="aff-options">
+    <button type="button" class="aff-pill">
+      Oui, on possède un programme structuré
+    </button>
+  
+    <button type="button" class="aff-pill">
+      Non, mais j’ai déjà testé
+    </button>
+
+      <button type="button" class="aff-pill">
+      Non, je découvre totalement
+      </button>
+    </div>
+    </div>
+
+            <label class="question-label" for="objectif">Quel est votre objectif principal ?</label>
             <select name="objectif" id="objectif" required>
               <option value="">— Choisir —</option>
               <option value="lancer">Lancer un programme</option>
@@ -111,22 +127,33 @@
               <option value="scaler">Scaler les ventes et le ROI</option>
             </select>
 
-            <label class="question-label">Autorisez-vous des modèles hybrides (CPC/CPM/fixe) ?</label>
-            <div class="radio-group">
-              <label class="radio-item">
-                <input type="radio" name="hybrides" value="oui" checked>
-                <span>Oui</span>
-              </label>
-              <label class="radio-item">
-                <input type="radio" name="hybrides" value="non">
-                <span>Non</span>
-              </label>
-            </div>
+            <div class="aff-field">
+  <p class="aff-label">Vos ventes se font principalement…</p>
 
+  <div class="aff-options">
+    <button type="button" class="aff-pill">En France</button>
+    <button type="button" class="aff-pill">En Europe</button>
+    <button type="button" class="aff-pill">À l’international</button>
+  </div>
+</div>
+
+<div class="aff-field">
+  <p class="aff-label">Comment gérez-vous aujourd’hui vos campagnes d’acquisition&nbsp;?</p>
+
+  <div class="aff-options">
+    <button type="button" class="aff-pill">Avec nos équipes internes</button>
+    <button type="button" class="aff-pill">On travaille avec une agence</button>
+    <button type="button" class="aff-pill">Un mix des deux</button>
+  </div>
+</div>
+
+
+           
             <div class="step-actions">
               <button class="btn-next" type="button" id="next-step-1">Continuer</button>
             </div>
           </section>
+          
 
           <!-- STEP 2 -->
           <section class="form-step" data-step="2">
