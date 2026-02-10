@@ -292,54 +292,56 @@
               <button class="btn-prev" type="button" id="prev-step-3">Retour</button>
               <button class="cta" type="submit">Obtenir ma projection</button>
             </div>
+
           </section>
-        </form>
+          </form>
+      </section> <!-- ✅ ferme .right-panel.right-column -->
 
-        <!-- Results -->
-        <section id="results" class="results-section">
-          <h2>Résultats</h2>
-          <p class="subtitle">Projection estimative — année 1 (montée en puissance incluse)</p>
+      <!-- ✅ Results (EN DEHORS de .right-column) -->
+      <section id="results" class="results-section">
+        <h2>Résultats</h2>
+        <p class="subtitle">Projection estimative — année 1 (montée en puissance incluse)</p>
 
-          <div class="kpi-grid simu-cards-row">
-            <div class="result-card gradient">
-              <h3>Projection</h3>
-              <ul class="kpi-list">
-                <li><strong>CA :</strong> <span id="kpi-revenue">—</span></li>
-                <li><strong>Commandes :</strong> <span id="kpi-orders">—</span></li>
-                <li><strong>Budget :</strong> <span id="kpi-budget">—</span></li>
-              </ul>
-            </div>
+        <div class="kpi-grid simu-cards-row">
+          <div class="result-card gradient">
+            <h3>Projection</h3>
+            <ul class="kpi-list">
+              <li><strong>CA :</strong> <span id="kpi-revenue">—</span></li>
+              <li><strong>Commandes :</strong> <span id="kpi-orders">—</span></li>
+              <li><strong>Budget :</strong> <span id="kpi-budget">—</span></li>
+            </ul>
+          </div>
 
-            <div class="repartition-card">
-              <h3>Mix leviers</h3>
-              <canvas id="chart-levers" width="300" height="300"></canvas>
-              <div class="mini-insight">
-                <strong>KPIs</strong>
-                CAC projeté : <span id="kpi-cac">—</span><br>
-                ROI : <span id="kpi-roi">—</span><br>
-                Panier : <span id="kpi-aov">—</span>
-              </div>
-            </div>
-
-            <div class="result-card gradient">
-              <h3>Lecture rapide</h3>
-              <div id="insights" class="analysis-block" style="background:transparent; box-shadow:none; padding:0;"></div>
+          <div class="repartition-card">
+            <h3>Mix leviers</h3>
+            <canvas id="chart-levers" width="300" height="300"></canvas>
+            <div class="mini-insight">
+              <strong>KPIs</strong>
+              CAC projeté : <span id="kpi-cac">—</span><br>
+              ROI : <span id="kpi-roi">—</span><br>
+              Panier : <span id="kpi-aov">—</span>
             </div>
           </div>
 
-          <div id="insight-message" class="insight-personal-message" style="display:none;">
-            <p id="insight-text"></p>
+          <div class="result-card gradient">
+            <h3>Lecture rapide</h3>
+            <div id="insights" class="analysis-block" style="background:transparent; box-shadow:none; padding:0;"></div>
           </div>
+        </div>
 
-          <h3 class="section-title">Éditeurs recommandés</h3>
-          <div class="editor-grid"></div>
+        <div id="insight-message" class="insight-personal-message" style="display:none;">
+          <p id="insight-text"></p>
+        </div>
 
-          <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
-            <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
-            <button id="restart-btn" type="button">Refaire une simulation</button>
-          </div>
-        </section>
-    </div>
+        <h3 class="section-title">Éditeurs recommandés</h3>
+        <div class="editor-grid"></div>
+
+        <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
+          <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
+          <button id="restart-btn" type="button">Refaire une simulation</button>
+        </div>
+       </section> <!-- ✅ fin #results -->
+    </div> <!-- ✅ fin .simu-grid.split-layout -->
   </main>
 
   <!-- JS -->
