@@ -297,52 +297,153 @@
           </form>
       </section> <!-- ✅ ferme .right-panel.right-column -->
 
-      <!-- ✅ Results (EN DEHORS de .right-column) -->
-      <section id="results" class="results-section">
-        <h2>Résultats</h2>
-        <p class="subtitle">Projection estimative — année 1 (montée en puissance incluse)</p>
+        <!-- Resultats -->
 
-        <div class="kpi-grid simu-cards-row">
-          <div class="result-card gradient">
-            <h3>Projection</h3>
-            <ul class="kpi-list">
-              <li><strong>CA :</strong> <span id="kpi-revenue">—</span></li>
-              <li><strong>Commandes :</strong> <span id="kpi-orders">—</span></li>
-              <li><strong>Budget :</strong> <span id="kpi-budget">—</span></li>
-            </ul>
-          </div>
+  <title>Résultats — Simulateur Lumigency</title>
 
-          <div class="repartition-card">
-            <h3>Mix leviers</h3>
-            <canvas id="chart-levers" width="300" height="300"></canvas>
-            <div class="mini-insight">
-              <strong>KPIs</strong>
-              CAC projeté : <span id="kpi-cac">—</span><br>
-              ROI : <span id="kpi-roi">—</span><br>
-              Panier : <span id="kpi-aov">—</span>
-            </div>
-          </div>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-          <div class="result-card gradient">
-            <h3>Lecture rapide</h3>
-            <div id="insights" class="analysis-block" style="background:transparent; box-shadow:none; padding:0;"></div>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <button class="btn-back">← Retour</button>
+  <strong>Lumigency</strong>
+</header>
+
+<main class="split-layout show-results">
+
+  <!-- RESULTS -->
+  <section class="results-section">
+
+    <!-- HERO -->
+    <div class="results-hero">
+      <span class="badge">✨ Simulation terminée avec succès</span>
+      <h2>Vos résultats de simulation personnalisée</h2>
+      <p>
+        Cette simulation combine vos données, notre expertise métier et des benchmarks marché
+        afin d’estimer vos performances potentielles sur 12 mois.
+      </p>
+    </div>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-tiles kpi-5">
+      <div class="kpi-tile">
+        <span class="kpi-label">💶 CA estimé</span>
+        <strong class="kpi-value">46,3 M€</strong>
+        <span class="kpi-sub">Année 1</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-label">📈 ROI</span>
+        <strong class="kpi-value">19,01x</strong>
+        <span class="kpi-sub">Global</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-label">🧾 Commandes</span>
+        <strong class="kpi-value">88 546</strong>
+        <span class="kpi-sub">Estimées</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-label">💰 Budget</span>
+        <strong class="kpi-value">2,32 M€</strong>
+        <span class="kpi-sub">Affiliation</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-label">🎯 CAC</span>
+        <strong class="kpi-value">26,24 €</strong>
+        <span class="kpi-sub">Projeté</span>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="results-grid">
+
+      <!-- LEFT -->
+      <div class="results-left">
+
+        <!-- LEVERS -->
+        <div class="results-card soft">
+          <h3>Répartition des leviers par volume de ventes estimés</h3>
+
+          <div class="lever-list">
+            <div>Cashback <progress value="15" max="100"></progress><span>15%</span></div>
+            <div>Bons plans <progress value="14" max="100"></progress><span>14%</span></div>
+            <div>Comparateurs <progress value="12" max="100"></progress><span>12%</span></div>
+            <div>Guides & contenus <progress value="11" max="100"></progress><span>11%</span></div>
+            <div>Influence <progress value="10" max="100"></progress><span>10%</span></div>
+            <div>Emailing <progress value="9" max="100"></progress><span>9%</span></div>
+            <div>Retargeting <progress value="7" max="100"></progress><span>7%</span></div>
+            <div>Affinitaires <progress value="4" max="100"></progress><span>4%</span></div>
           </div>
         </div>
 
-        <div id="insight-message" class="insight-personal-message" style="display:none;">
-          <p id="insight-text"></p>
+        <!-- EDITORS -->
+        <div class="results-card editors-wrap">
+          <h3>Éditeurs recommandés</h3>
+          <div class="editor-grid">
+            <div class="editor-card">Reeplay</div>
+            <div class="editor-card">AWS</div>
+            <div class="editor-card">Intel</div>
+            <div class="editor-card">Microsoft</div>
+            <div class="editor-card">NVIDIA</div>
+            <div class="editor-card">Twilio</div>
+            <div class="editor-card">Dropbox</div>
+            <div class="editor-card">Stripe</div>
+          </div>
         </div>
 
-        <h3 class="section-title">Éditeurs recommandés</h3>
-        <div class="editor-grid"></div>
-
-        <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
-          <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
-          <button id="restart-btn" type="button">Refaire une simulation</button>
+        <!-- CTA -->
+        <div class="results-footer">
+          <p>
+            Prêt à concrétiser votre potentiel ? Un expert Lumigency peut analyser vos résultats
+            et vous proposer des pistes concrètes.
+          </p>
+          <div class="cta-actions">
+            <a href="#" class="cta-button">Bénéficier d’un échange stratégique</a>
+            <button class="btn-secondary">Refaire une simulation</button>
+          </div>
         </div>
-       </section> <!-- ✅ fin #results -->
-    </div> <!-- ✅ fin .simu-grid.split-layout -->
-  </main>
+
+      </div>
+
+      <!-- RIGHT -->
+      <aside class="results-right">
+
+        <div class="results-card soft">
+          <h3>Insight clé</h3>
+          <p>
+            Votre allocation budgétaire favorise les leviers à forte contribution incrémentale.
+            En optimisant les contenus et l’influence, vous pouvez accélérer la croissance
+            sans dégrader le CAC.
+          </p>
+        </div>
+
+        <div class="results-card">
+          <h3>Analyse rapide</h3>
+          <ul>
+            <li>Mix de leviers équilibré</li>
+            <li>ROI largement supérieur aux standards marché</li>
+            <li>Potentiel d’optimisation créative et data</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
+
 
   <!-- JS -->
   <script src="./script.js?v=1" defer></script>
