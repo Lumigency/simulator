@@ -8,7 +8,7 @@
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS (RELATIF, sinon GitHub Pages te trolle) -->
   <link rel="stylesheet" href="./style.css?v=1">
@@ -29,12 +29,13 @@
         <span class="topbar-name">Lumigency ⚡</span>
       </div>
 
-      <button class="topbar-close" type="button" aria-label="Fermer" onclick="window.location.href='https://www.lumigency.com';">×</button>
+      <button class="topbar-close" type="button" aria-label="Fermer" onclick="window.location.href='https://www.lumigency.com';">
+        <img src="/assets/icon-close.png" alt="Fermer">
+      </button>
     </header>
 
-    <div class="simu-grid split-layout">
-      <!-- Left -->
-      <aside class="left-panel left-column">
+    <section class="simu-head">
+      <div class="simu-head-grid">
         <div class="steps-mini">
           <div class="step-dot active">
             <span>1</span><small>Cadre d’analyse</small>
@@ -48,22 +49,43 @@
             <span>3</span><small>Projection</small>
           </div>
         </div>
+        <div class="simu-head-copy">
+          <h1>Simulez votre potentiel en affiliation</h1>
+          <p class="subtitle">
+            Obtenez une projection fiable (CA, commandes, CAC, ROI) + une lecture claire de votre mix.
+          </p>
+        </div>
+      </div>
+    </section>
 
+    <div class="simu-grid split-layout">
+      <!-- Left -->
+      <aside class="left-panel left-column">
         <section class="left-card">
-          <h2>Ce que vous obtenez</h2>
-
           <ul class="left-benefits">
             <li>
-              <span class="ic">📈</span>
-              <div><strong>Projection</strong><br><span>CA, commandes, CAC, ROI</span></div>
+              <span class="ic">
+                <img src="/assets/svg/LeftSidebarStep1.svg" alt="Estimez vos ventes potentielles">
+              </span>
+              <div>Estimez vos ventes potentielles</div>
             </li>
             <li>
-              <span class="ic">🧩</span>
-              <div><strong>Mix de leviers</strong><br><span>Répartition estimée</span></div>
+              <span class="ic">
+                <img src="/assets/svg/LeftSidebarStep2.svg" alt="Calculez votre chiffre d'affaires prévisionnel">
+              </span>
+              <div>Calculez votre chiffre d'affaires prévisionnel</div>
             </li>
             <li>
-              <span class="ic">🤝</span>
-              <div><strong>Suggestions</strong><br><span>Éditeurs alignés secteur</span></div>
+              <span class="ic">
+                <img src="/assets/svg/LeftSidebarStep3.svg" alt="Explorez le potentiel de nouveaux leviers">
+              </span>
+              <div>Explorez le potentiel de nouveaux leviers</div>
+            </li>
+            <li>
+              <span class="ic">
+                <img src="/assets/svg/LeftSidebarStep4.svg" alt="Découvrez des éditeurs stratégiques">
+              </span>
+              <div>Découvrez des éditeurs stratégiques</div>
             </li>
           </ul>
 
@@ -81,44 +103,38 @@
 
       <!-- Right -->
       <section class="right-panel right-column">
-        <h1>Simulez votre potentiel en affiliation</h1>
-        <p class="subtitle">
-          Obtenez une projection fiable (CA, commandes, CAC, ROI) + une lecture claire de votre mix.
-        </p>
-
         <!-- Progress -->
-        <div class="progress-container">
+        <!-- <div class="progress-container">
           <div id="progress-bar" class="progress-bar" style="width:0%">
             <span id="progress-text" class="progress-text-inside">0%</span>
           </div>
-        </div>
+        </div> -->
 
 
         <!-- FORM -->
         <form id="form-simu">
           <!-- STEP 1 -->
           <section class="form-step active" data-step="1">
-            <h2 class="section-title">Contexte</h2>
-
           <div class="aff-field">
     <p class="aff-label">Avez-vous déjà un programme d'affiliation&nbsp;?</p>
 
       <div class="aff-options">
-    <button type="button" class="aff-pill">
+    <button type="button" class="btn-outline">
       Oui, on possède un programme structuré
     </button>
   
-    <button type="button" class="aff-pill">
+    <button type="button" class="btn-outline">
       Non, mais j’ai déjà testé
     </button>
 
-      <button type="button" class="aff-pill">
+      <button type="button" class="btn-outline">
       Non, je découvre totalement
       </button>
     </div>
     </div>
 
-       <label class="question-label" for="objectif">Quel est votre objectif principal ?</label>
+    <div class="aff-field">
+       <label class="aff-label" for="objectif">Quel est votre objectif principal ?</label>
       <select name="objectif" id="objectif" required>
       <option value="">— Choisir —</option>
       <option value="lancer">Lancer un programme</option>
@@ -126,20 +142,20 @@
       <option value="diversifier">Tester de nouveaux leviers</option>
       <option value="scaler">Scaler les ventes et le ROI</option>
       </select>
-
+    </div>
             
   <div class="aff-field">
   <p class="aff-label">Vos ventes se font principalement…</p>
 
   <div class="aff-options" role="radiogroup" aria-label="Zone de vente">
     <input class="aff-radio" type="radio" name="sales_area" id="sales_fr" value="france">
-    <label class="aff-pill" for="sales_fr">En France</label>
+    <label class="btn-outline aff-pill" for="sales_fr">En France</label>
 
     <input class="aff-radio" type="radio" name="sales_area" id="sales_eu" value="europe">
-    <label class="aff-pill" for="sales_eu">En Europe</label>
+    <label class="btn-outline aff-pill" for="sales_eu">En Europe</label>
 
     <input class="aff-radio" type="radio" name="sales_area" id="sales_int" value="international">
-    <label class="aff-pill" for="sales_int">À l’international</label>
+    <label class="btn-outline aff-pill" for="sales_int">À l’international</label>
     </div>
     </div>
 
@@ -149,17 +165,17 @@
 
   <div class="aff-options" role="radiogroup" aria-label="Gestion des campagnes d'acquisition">
     <input type="radio" name="acquisition_management" id="acq_internal" class="aff-radio" checked>
-    <label for="acq_internal" class="aff-pill">
+    <label for="acq_internal" class="btn-outline aff-pill">
       Avec nos équipes internes
     </label>
 
     <input type="radio" name="acquisition_management" id="acq_agency" class="aff-radio">
-    <label for="acq_agency" class="aff-pill">
+    <label for="acq_agency" class="btn-outline aff-pill">
       On travaille avec une agence
     </label>
 
     <input type="radio" name="acquisition_management" id="acq_mix" class="aff-radio">
-    <label for="acq_mix" class="aff-pill">
+    <label for="acq_mix" class="btn-outline aff-pill">
       Un mix des deux
     </label>
   </div>
@@ -167,7 +183,7 @@
 
     
             <div class="step-actions">
-              <button class="btn-next" type="button" id="next-step-1">Continuer</button>
+              <button class="btn-primary btn-next" type="button" id="next-step-1">Continuer</button>
             </div>
           </section>
           

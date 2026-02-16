@@ -1,7 +1,8 @@
-.simu-shell { min-height: 100vh; background: #f5f7ff; }
+.simu-shell { min-height: 100vh; background: linear-gradient(135deg, #F5F5F7 0%, #FAFAFA 50%, rgba(237, 225, 216, 0.2) 100%);
+}
 
 .simu-grid {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 22px;
   display: grid;
@@ -10,12 +11,25 @@
   align-items: start;
 }
 
+.simu-head {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 59px 22px 0;
+}
+
+.simu-head-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 18px;
+}
+
 .left-panel {
-  background: linear-gradient(160deg, #f6f7ff 0%, #ffffff 55%, #f7fbff 100%);
+  background: white;
   border: 1px solid var(--border);
   border-radius: 22px;
-  padding: 18px;
+  padding: 32px;
   box-shadow: var(--shadow);
+  height: 100%;
 }
 
 .steps-mini { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -37,29 +51,30 @@
 .step-line { height: 2px; flex: 1; background: rgba(0, 0, 0, 0.06); border-radius: 99px; }
 
 .left-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
+  background: white;
 }
 .left-card h2 { margin: 0 0 14px; font-size: 14px; color: #1b1b1b; }
 .left-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
 .left-benefits li {
   display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  background: linear-gradient(180deg, #fff, #fbfcff);
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  color: var(--textSecondary);
 }
 .left-benefits .ic {
-  width: 32px;
-  height: 32px;
-  border-radius: 12px;
   display: grid;
   place-items: center;
-  background: rgba(0, 0, 255, 0.06);
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.left-benefits .ic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .left-benefits strong { font-size: 12px; }
 .left-benefits span { font-size: 12px; color: var(--muted); }
@@ -84,12 +99,19 @@
 }
 
 .right-panel {
-  background: rgba(255, 255, 255, 0.75);
+  background: white;
   border: 1px solid var(--border);
   border-radius: 22px;
-  padding: 22px;
+  padding: 40px;
   box-shadow: var(--shadow);
+  height: 100%;
 }
 
-h1 { margin: 0 0 6px; font-size: 24px; }
-.subtitle { margin: 0 0 18px; color: var(--muted); font-size: 13px; }
+h1 { 
+  margin: 0 0 12px;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.64px;
+  line-height: 38px; 
+}
+.subtitle { margin: 0 0 18px; color: var(--textTertiary); font-size: 16px; line-height: 29px; }

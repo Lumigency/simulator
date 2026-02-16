@@ -1,10 +1,12 @@
 :root {
-  --blue: #0000ff;
+  --blue: #0A0AFF;
   --blueSoft: #849bff;
   --pink: #f88989;
   --beige: #ede1d8;
   --bg: #f7f5f3;
-  --text: #111;
+  --text: #0A0A0A;
+  --textSecondary: #2A2A2C;
+  --textTertiary: #3A3A3C;
   --muted: #667085;
   --card: #fff;
   --border: rgba(0, 0, 0, 0.08);

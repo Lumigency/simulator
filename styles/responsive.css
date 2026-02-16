@@ -1,4 +1,5 @@
 @media (max-width: 980px) {
+  .simu-head-grid { grid-template-columns: 1fr; }
   .simu-grid { grid-template-columns: 1fr; }
   .editor-grid { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; }

@@ -1,14 +1,58 @@
 form {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  background: white;
 }
 
 .section-title { margin: 0 0 12px; font-size: 16px; color: #1a1a1a; }
 .question-label { display: block; margin-top: 14px; margin-bottom: 8px; font-weight: 600; font-size: 13px; }
 
+.aff-label {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.5px;
+  color: var(--textTertiary);
+}
+.aff-options { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.aff-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aff-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.aff-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  background: #fff;
+  border-color: #d1d1d6;
+  line-height: 1.2;
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+button.aff-pill {
+  appearance: none;
+}
+
+.aff-pill:hover {
+  border-color: rgba(0, 0, 255, 0.4);
+}
+
+.aff-radio:focus-visible + .aff-pill {
+  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.12);
+}
+
+.aff-radio:checked + .aff-pill {
+  border-color: var(--blue);
+  background: rgba(0, 0, 255, 0.06);
+  color: var(--blue);
+}
 select,
 input:not([type="checkbox"]):not([type="radio"]) {
   width: 100%;
@@ -66,5 +110,5 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   margin-top: 8px;
 }
 
-.form-step { display: none; opacity: 0; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease; }
-.form-step.active { display: block; opacity: 1; transform: translateY(0); }
+.form-step { display: none; opacity: 0; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease; flex-direction: column; gap: 24.5px; }
+.form-step.active { display: block; opacity: 1; transform: translateY(0); display: flex;  }
