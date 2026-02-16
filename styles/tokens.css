@@ -1,0 +1,12 @@
+:root {
+  --blue: #0000ff;
+  --blueSoft: #849bff;
+  --pink: #f88989;
+  --beige: #ede1d8;
+  --bg: #f7f5f3;
+  --text: #111;
+  --muted: #667085;
+  --card: #fff;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}

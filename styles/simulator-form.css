@@ -1,0 +1,70 @@
+form {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.section-title { margin: 0 0 12px; font-size: 16px; color: #1a1a1a; }
+.question-label { display: block; margin-top: 14px; margin-bottom: 8px; font-weight: 600; font-size: 13px; }
+
+select,
+input:not([type="checkbox"]):not([type="radio"]) {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+}
+select:focus,
+input:focus { border-color: rgba(0, 0, 255, 0.35); box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.08); }
+
+.radio-group { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.radio-item { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: #222; }
+.radio-item input { margin: 0; }
+
+.single-checkbox,
+.checkbox-budget {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: #222;
+}
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 18px;
+  margin-top: 10px;
+}
+.checkbox-group label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff, #fbfcff);
+  font-size: 13px;
+}
+.checkbox-group input { margin: 0; }
+
+.traffic-slider-container { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.slider-wrapper { flex: 1; min-width: 220px; }
+.slider-labels { display: flex; justify-content: space-between; font-size: 11px; color: #7a7a7a; margin-top: 6px; }
+input[type="range"] { width: 100%; accent-color: var(--blue); }
+#trafficInput { width: 140px; text-align: right; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.form-step { display: none; opacity: 0; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+.form-step.active { display: block; opacity: 1; transform: translateY(0); }
