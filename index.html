@@ -89,14 +89,23 @@
             </li>
           </ul>
 
-          <div class="left-quote insight-card">
-            <strong>Le saviez-vous ?</strong><br>
-            L’affiliation ne se résume pas au cashback : un mix bien piloté combine contenu,
-            intention (comparateurs/CSS), relances (retargeting/email) et SEA (PPC).
+          <div class="left-quote">
+            <p class="left-quote-title"><img src="/assets/svg/icon-bd.svg" alt="quote">Ce que disent nos clients</p>
+            <div class="insight-card">
+              <img src="/assets/svg/five-stars.svg" alt="5 stars">
+              <p class="left-quote-text">J'ai obtenu mes résultats en quelques secondes. Simple et très intuitif !</p>
+              <div class="left-quote-author">
+                <img src="/assets/svg/icon-gl.svg" alt="avatar">
+                <div class="left-quote-author-details">
+                  <p class="left-quote-author-name-name">Grégory L.</p>
+                  <p class="left-quote-author-role">E-commerce</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="lumigency-signature">
-            <strong>Lumigency</strong> — conseil & brokerage affiliation
+            <strong>+ 1000 entreprises</strong> comme la vôtre nous font confiance
           </div>
         </section>
       </aside>
@@ -134,14 +143,32 @@
     </div>
 
     <div class="aff-field">
-       <label class="aff-label" for="objectif">Quel est votre objectif principal ?</label>
-      <select name="objectif" id="objectif" required>
-      <option value="">— Choisir —</option>
-      <option value="lancer">Lancer un programme</option>
-      <option value="optimiser">Optimiser un programme existant</option>
-      <option value="diversifier">Tester de nouveaux leviers</option>
-      <option value="scaler">Scaler les ventes et le ROI</option>
-      </select>
+      <p class="aff-label">Quel est votre objectif principal ?</p>
+      <div class="objective-grid" id="objectif-group" role="radiogroup" aria-label="Objectif principal">
+        <input class="objective-radio" type="radio" name="objectif" id="objectif_lancer" value="lancer" required>
+        <label class="objective-card" for="objectif_lancer">
+          <img class="objective-icon" src="/assets/L-rocket.png" alt="">
+          <span class="objective-title">Lancer un programme performant</span>
+        </label>
+
+        <input class="objective-radio" type="radio" name="objectif" id="objectif_optimiser" value="optimiser">
+        <label class="objective-card" for="objectif_optimiser">
+          <img class="objective-icon" src="/assets/L-stick.png" alt="">
+          <span class="objective-title">Optimiser un programme existant</span>
+        </label>
+
+        <input class="objective-radio" type="radio" name="objectif" id="objectif_diversifier" value="diversifier">
+        <label class="objective-card" for="objectif_diversifier">
+          <img class="objective-icon" src="/assets/L-target.png" alt="">
+          <span class="objective-title">Tester de nouveaux leviers</span>
+        </label>
+
+        <input class="objective-radio" type="radio" name="objectif" id="objectif_scaler" value="scaler">
+        <label class="objective-card" for="objectif_scaler">
+          <img class="objective-icon" src="/assets/L-lightning.png" alt="">
+          <span class="objective-title">Scaler les ventes et le ROI</span>
+        </label>
+      </div>
     </div>
             
   <div class="aff-field">

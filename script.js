@@ -469,10 +469,11 @@ updateProgress(0);
 
   // Navigation entre les étapes
 document.getElementById('next-step-1')?.addEventListener('click', () => {
-  const objectif = document.querySelector('[name="objectif"]');
-  if (!objectif.value) {
-    objectif.classList.add('is-invalid');
-    setTimeout(() => objectif.classList.remove('is-invalid'), 1200);
+  const objectifGroup = document.getElementById('objectif-group');
+  const objectifValue = form.elements["objectif"]?.value;
+  if (!objectifValue) {
+    objectifGroup?.classList.add('is-invalid');
+    setTimeout(() => objectifGroup?.classList.remove('is-invalid'), 1200);
     return;
   }
   currentStep = 1;

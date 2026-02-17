@@ -1,7 +1,12 @@
 @media (max-width: 980px) {
   .simu-head-grid { grid-template-columns: 1fr; }
   .simu-grid { grid-template-columns: 1fr; }
+  .objective-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .editor-grid { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; }
   #trafficInput { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .objective-grid { grid-template-columns: 1fr; }
 }

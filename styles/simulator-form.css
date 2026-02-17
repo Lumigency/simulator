@@ -16,7 +16,7 @@ form {
 .aff-field {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .aff-radio {
@@ -52,6 +52,64 @@ button.aff-pill {
   border-color: var(--blue);
   background: rgba(0, 0, 255, 0.06);
   color: var(--blue);
+}
+
+.objective-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.objective-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.objective-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 220px;
+  padding: 24px 12px;
+  border: 1px solid #d1d1d6;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.objective-card:hover {
+  border-color: rgba(0, 0, 255, 0.35);
+}
+
+.objective-icon {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+
+.objective-title {
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 400;
+  text-align: center;
+  color: var(--textTertiary);
+}
+
+.objective-radio:focus-visible + .objective-card {
+  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.12);
+}
+
+.objective-radio:checked + .objective-card {
+  border-color: var(--blue);
+  background: rgba(0, 0, 255, 0.04);
+}
+
+.objective-grid.is-invalid .objective-card {
+  border-color: #f88989;
 }
 select,
 input:not([type="checkbox"]):not([type="radio"]) {
