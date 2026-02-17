@@ -5,6 +5,8 @@ console.log("✅ script.js chargé");
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
 let currentStep = 0;
+// TEMP CSS work: start on Step 2 directly
+currentStep = 1;
 
 // ✅ message de maturité personnalisé
 let maturityMessage = "";
@@ -547,6 +549,205 @@ if (trafficRange && trafficInput) {
 
   // initialisation
   trafficInput.value = parseInt(trafficRange.value, 10);
+}
+
+// === STEP 2 V2: Traffic pills + budget slider + leviers dropdown ===
+const trafficBandRadios = form.querySelectorAll('input[name="traffic_band"]');
+if (trafficBandRadios.length && trafficInput && trafficRange) {
+  trafficBandRadios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (!radio.checked) return;
+      const mappedTraffic = Number(radio.dataset.traffic || 0);
+      trafficInput.value = mappedTraffic;
+      trafficRange.value = mappedTraffic;
+    });
+  });
+
+  const checkedBand = form.querySelector('input[name="traffic_band"]:checked');
+  if (checkedBand) {
+    const mappedTraffic = Number(checkedBand.dataset.traffic || 0);
+    trafficInput.value = mappedTraffic;
+    trafficRange.value = mappedTraffic;
+  }
+}
+
+const budgetRangeV2 = document.getElementById("budgetRangeV2");
+const budgetValueDisplay = document.getElementById("budgetValueDisplay");
+if (budgetRangeV2 && budgetInput) {
+  const fmtBudget = (value) => {
+    if (value >= 1000000) return "1M €";
+    if (value >= 1000) return `${Math.round(value / 1000)}k €`;
+    return `${value} €`;
+  };
+
+  const syncBudget = () => {
+    const val = Number(budgetRangeV2.value || 0);
+    budgetInput.value = val;
+    if (budgetValueDisplay) budgetValueDisplay.textContent = fmtBudget(val);
+  };
+
+  budgetRangeV2.addEventListener("input", syncBudget);
+  syncBudget();
+}
+
+const leverSelectTrigger = document.getElementById("leverSelectTrigger");
+const leverSelectMenu = document.getElementById("leverSelectMenu");
+if (leverSelectTrigger && leverSelectMenu) {
+  const leverInputs = leverSelectMenu.querySelectorAll('input[name="levers"]');
+
+  const refreshLeverLabel = () => {
+    const selected = Array.from(leverInputs).filter((input) => input.checked).length;
+    leverSelectTrigger.textContent = selected
+      ? `${selected} levier${selected > 1 ? "s" : ""} sélectionné${selected > 1 ? "s" : ""}`
+      : "Sélectionnez un ou plusieurs leviers";
+  };
+
+  leverSelectTrigger.addEventListener("click", () => {
+    leverSelectMenu.hidden = !leverSelectMenu.hidden;
+  });
+
+  leverInputs.forEach((input) => {
+    input.addEventListener("change", refreshLeverLabel);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (leverSelectMenu.hidden) return;
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!leverSelectMenu.contains(target) && !leverSelectTrigger.contains(target)) {
+      leverSelectMenu.hidden = true;
+    }
+  });
+
+  refreshLeverLabel();
+}
+
+// Old Step 2 V2 KPI inputs logic kept for reference:
+// const aovInputV2 = document.getElementById("aovInputV2");
+// const cvrInputV2 = document.getElementById("cvrInputV2");
+// const cacInputV2 = document.getElementById("cacInputV2");
+// ...
+
+// === STEP 2 V2: Editable KPI values + draggable CVR gauge ===
+const aovValueDisplay = document.getElementById("aovValueDisplay");
+const cvrValueDisplay = document.getElementById("cvrValueDisplay");
+const cacValueDisplay = document.getElementById("cacValueDisplay");
+const hiddenAov = form.elements["aov"];
+const hiddenCvr = form.elements["cvr"];
+const hiddenCac = form.elements["cac"];
+
+const parseEditableNumber = (text) => {
+  const cleaned = String(text || "")
+    .replace(",", ".")
+    .replace(/[^\d.]/g, "");
+  const parsed = parseFloat(cleaned);
+  return Number.isFinite(parsed) ? Math.max(0, parsed) : 0;
+};
+
+const bindEditableCurrency = (editableEl, hiddenField) => {
+  if (!editableEl || !hiddenField) return;
+
+  const syncFromEditable = () => {
+    const value = parseEditableNumber(editableEl.textContent);
+    hiddenField.value = String(value);
+    return value;
+  };
+
+  const formatEditable = () => {
+    const value = syncFromEditable();
+    editableEl.textContent = value.toFixed(2);
+  };
+
+  editableEl.addEventListener("input", () => {
+    syncFromEditable();
+  });
+
+  editableEl.addEventListener("blur", formatEditable);
+  editableEl.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      editableEl.blur();
+    }
+  });
+
+  formatEditable();
+};
+
+bindEditableCurrency(aovValueDisplay, hiddenAov);
+bindEditableCurrency(cacValueDisplay, hiddenCac);
+
+const cvrGauge = document.getElementById("cvrGauge");
+const cvrGaugePath = document.getElementById("cvrGaugeProgress");
+const cvrGaugeDot = document.getElementById("cvrGaugeDot");
+
+if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
+  const min = Number(cvrGauge.dataset.min || 0);
+  const max = Number(cvrGauge.dataset.max || 20);
+  const pathLength = cvrGaugePath.getTotalLength();
+  cvrGaugePath.style.strokeDasharray = `${pathLength} ${pathLength}`;
+
+  const setCvr = (rawValue) => {
+    const value = Math.max(min, Math.min(max, Number(rawValue) || 0));
+    hiddenCvr.value = String(value);
+    cvrValueDisplay.textContent = `${Number(value.toFixed(1))}%`;
+
+    const ratio = (value - min) / (max - min || 1);
+    cvrGaugePath.style.strokeDashoffset = String(pathLength * (1 - ratio));
+
+    const point = cvrGaugePath.getPointAtLength(pathLength * ratio);
+    cvrGaugeDot.style.left = `${point.x}px`;
+    cvrGaugeDot.style.top = `${point.y}px`;
+  };
+
+  const pointerToValue = (event) => {
+    const svg = cvrGauge.querySelector(".step2-gauge-svg");
+    if (!svg) return min;
+
+    const rect = svg.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    let bestLength = 0;
+    let bestDistance = Infinity;
+    const steps = 140;
+    for (let i = 0; i <= steps; i += 1) {
+      const len = (pathLength * i) / steps;
+      const pt = cvrGaugePath.getPointAtLength(len);
+      const d = (pt.x - x) ** 2 + (pt.y - y) ** 2;
+      if (d < bestDistance) {
+        bestDistance = d;
+        bestLength = len;
+      }
+    }
+
+    const ratio = bestLength / pathLength;
+    return min + ratio * (max - min);
+  };
+
+  let dragging = false;
+
+  const onPointerMove = (event) => {
+    if (!dragging) return;
+    setCvr(pointerToValue(event));
+  };
+
+  const onPointerUp = () => {
+    dragging = false;
+    window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("pointerup", onPointerUp);
+  };
+
+  const startDragging = (event) => {
+    dragging = true;
+    setCvr(pointerToValue(event));
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+  };
+
+  cvrGauge.addEventListener("pointerdown", startDragging);
+  cvrGaugeDot.addEventListener("pointerdown", startDragging);
+
+  setCvr(hiddenCvr.value || 1);
 }
 
   // Vérifie à chaque changement de levier ou de choix "hybride"

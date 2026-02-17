@@ -213,11 +213,11 @@
           
 
 
-          <!-- STEP 2 -->
+<!-- STEP 2 -->
 <section class="form-step" data-step="2">
+  <!--
+  Old Step 2 kept for reference:
   <h2 class="section-title">Données & leviers</h2>
-
-  <!-- Trafic -->
   <label class="question-label" for="trafficRange">Trafic mensuel (visites)</label>
   <div class="traffic-slider-container">
     <div class="slider-wrapper">
@@ -234,7 +234,6 @@
         <span>0</span><span>250k</span><span>500k</span><span>1M</span>
       </div>
     </div>
-
     <input
       type="number"
       id="trafficInput"
@@ -244,8 +243,6 @@
       value="50000"
     >
   </div>
-
-  <!-- Secteur -->
   <label class="question-label" for="sector">Votre secteur</label>
   <select name="sector" id="sector">
     <option value="" selected disabled>— Choisir —</option>
@@ -261,42 +258,33 @@
     <option value="auto">Automobile</option>
     <option value="culture">Produits culturels</option>
   </select>
-
-  <!-- KPIs -->
   <div class="form-row">
     <div class="form-col">
       <label class="question-label" for="budget">Budget mensuel (€)</label>
       <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
-
       <label class="checkbox-budget">
         <input type="checkbox" id="unlimited-budget" name="unlimited_budget">
         Je n’ai pas de budget
       </label>
     </div>
-
     <div class="form-col">
       <label class="question-label" for="cac">CAC actuel (€)</label>
       <input type="number" name="cac" id="cac" placeholder="Ex : 12">
     </div>
-
     <div class="form-col">
       <label class="question-label" for="aov">Panier moyen (€)</label>
       <input type="number" name="aov" id="aov" placeholder="Ex : 80">
     </div>
-
     <div class="form-col">
       <label class="question-label" for="cvr">Taux de conversion (%)</label>
       <input type="number" name="cvr" id="cvr" step="0.1" placeholder="Ex : 1.8">
     </div>
   </div>
-
-  <!-- Leviers -->
   <label class="question-label">Leviers à activer</label>
   <label class="single-checkbox">
     <input type="checkbox" id="allLevers" name="allLevers">
     J’autorise tous les leviers
   </label>
-
   <div class="checkbox-group">
     <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
     <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
@@ -311,11 +299,109 @@
     <label><input type="checkbox" name="levers" value="ppc"> SEA (PPC)</label>
     <label><input type="checkbox" name="levers" value="retention"> Retention</label>
   </div>
-
-  <!-- Actions -->
   <div class="step-actions">
     <button class="btn-prev" type="button" id="prev-step-2">Retour</button>
     <button class="btn-next" type="button" id="next-step-2">Continuer</button>
+  </div>
+  -->
+
+  <div class="step2-v2">
+    <div class="aff-field">
+      <p class="aff-label">Quel est votre trafic mensuel actuel ?</p>
+      <div class="traffic-pill-group" role="radiogroup" aria-label="Trafic mensuel">
+        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_1" data-traffic="180000">
+        <label class="btn-outline traffic-pill" for="traffic_band_1">Moins de 200k</label>
+
+        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_2" data-traffic="300000" checked>
+        <label class="btn-outline traffic-pill" for="traffic_band_2">Entre 200k et 400k</label>
+
+        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_3" data-traffic="500000">
+        <label class="btn-outline traffic-pill" for="traffic_band_3">Entre 400k et 600k</label>
+
+        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_4" data-traffic="700000">
+        <label class="btn-outline traffic-pill" for="traffic_band_4">Entre 600k et 800k</label>
+
+        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_5" data-traffic="900000">
+        <label class="btn-outline traffic-pill" for="traffic_band_5">Plus de 800k</label>
+      </div>
+    </div>
+
+    <div class="step2-kpis">
+      <div class="step2-kpi">
+        <p class="step2-kpi-value"><span id="aovValueDisplay" class="step2-kpi-editable" contenteditable="true" spellcheck="false">0.00</span>€</p>
+        <!-- <input type="number" id="aovInputV2" class="step2-kpi-input" min="0" step="1" value="0" aria-label="Panier moyen en euros"> -->
+        <p class="step2-kpi-label">Votre panier moyen</p>
+      </div>
+      <div class="step2-kpi center">
+        <div class="step2-gauge" id="cvrGauge" data-min="0" data-max="20">
+          <svg class="step2-gauge-svg" viewBox="0 0 160 160" aria-hidden="true">
+            <path class="step2-gauge-track" d="M 30 130 A 60 60 0 1 1 130 130" />
+            <path class="step2-gauge-progress" id="cvrGaugeProgress" d="M 30 130 A 60 60 0 1 1 130 130" />
+          </svg>
+          <button type="button" class="step2-gauge-dot" id="cvrGaugeDot" aria-label="Ajuster le taux de conversion"></button>
+          <input type="hidden" id="cvrInputV2" value="1">
+          <div class="step2-gauge-content">
+            <p class="step2-gauge-value" id="cvrValueDisplay">1%</p>
+            <p class="step2-gauge-label">Très bon</p>
+          </div>
+        </div>
+        <!-- <input type="number" id="cvrInputV2" class="step2-kpi-input" min="0" max="20" step="0.1" value="1" aria-label="Taux de conversion en pourcentage"> -->
+        <p class="step2-kpi-label">Votre taux de conversion</p>
+      </div>
+      <div class="step2-kpi">
+        <p class="step2-kpi-value"><span id="cacValueDisplay" class="step2-kpi-editable" contenteditable="true" spellcheck="false">0.00</span>€</p>
+        <!-- <input type="number" id="cacInputV2" class="step2-kpi-input" min="0" step="1" value="0" aria-label="Coût d’acquisition en euros"> -->
+        <p class="step2-kpi-label">Votre coût d’acquisition envisagé</p>
+      </div>
+    </div>
+
+    <div class="aff-field">
+      <p class="aff-label">Avez-vous un budget d’affiliation prédéfini ?</p>
+      <div class="budget-scale">
+        <span>0 €</span>
+        <input type="range" id="budgetRangeV2" min="0" max="1000000" step="10000" value="650000">
+        <span>1 M €</span>
+      </div>
+      <p class="budget-value" id="budgetValueDisplay">650k €</p>
+    </div>
+
+    <div class="aff-field">
+      <p class="aff-label">Quels sont les leviers que vous souhaitez autoriser ?</p>
+      <div class="lever-select">
+        <button type="button" id="leverSelectTrigger" class="lever-select-trigger">
+          Sélectionnez un ou plusieurs leviers
+        </button>
+        <div id="leverSelectMenu" class="lever-select-menu" hidden>
+          <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
+          <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
+          <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
+          <label><input type="checkbox" name="levers" value="css"> CSS</label>
+          <label><input type="checkbox" name="levers" value="retargeting"> Retargeting</label>
+          <label><input type="checkbox" name="levers" value="display-networks"> Display networks</label>
+          <label><input type="checkbox" name="levers" value="emailing"> Emailing / newsletters</label>
+          <label><input type="checkbox" name="levers" value="content"> Content / éditorial</label>
+          <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
+          <label><input type="checkbox" name="levers" value="influence"> Influence</label>
+          <label><input type="checkbox" name="levers" value="ppc"> SEA (PPC)</label>
+          <label><input type="checkbox" name="levers" value="retention"> Retention</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legacy fields kept for JS simulation compatibility -->
+    <input type="hidden" id="trafficInput" name="traffic" value="300000">
+    <input type="hidden" id="trafficRange" name="trafficRange" value="300000">
+    <input type="hidden" id="sector" name="sector" value="other">
+    <input type="hidden" id="budget" name="budget" value="650000">
+    <input type="hidden" id="cac" name="cac" value="0">
+    <input type="hidden" id="aov" name="aov" value="0">
+    <input type="hidden" id="cvr" name="cvr" value="1">
+
+    <!-- Actions -->
+    <div class="step-actions">
+      <button class="btn-prev" type="button" id="prev-step-2">Retour</button>
+      <button class="btn-next" type="button" id="next-step-2">Continuer</button>
+    </div>
   </div>
 </section>
            

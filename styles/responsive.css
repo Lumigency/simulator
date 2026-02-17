@@ -3,6 +3,15 @@
   .steps-mini { grid-template-columns: 72px 1fr 72px 1fr 72px; }
   .simu-grid { grid-template-columns: 1fr; }
   .objective-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step2-kpis { grid-template-columns: 1fr; }
+  .step2-kpi:not(:first-child) { border-left: none; border-top: 1px solid #ececf1; }
+  .step2-kpi { min-height: 160px; padding-top: 20px; }
+  .step2-kpi-value { font-size: 42px; }
+  .step2-gauge-value { font-size: 48px; }
+  .step2-gauge-label { font-size: 20px; }
+  .budget-scale span { font-size: 24px; }
+  .budget-value { font-size: 38px; }
+  .lever-select-menu { grid-template-columns: 1fr; }
   .editor-grid { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; }
   #trafficInput { width: 100%; }
@@ -10,4 +19,6 @@
 
 @media (max-width: 640px) {
   .objective-grid { grid-template-columns: 1fr; }
+  .traffic-pill-group { gap: 8px; }
+  .traffic-pill { width: 100%; justify-content: flex-start; }
 }

@@ -185,5 +185,245 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   margin-top: 8px;
 }
 
+/* STEP 2 V2 */
+.step2-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.traffic-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.traffic-pill-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.traffic-pill {
+  min-height: 44px;
+}
+
+.traffic-pill-radio:checked + .traffic-pill {
+  border-color: transparent;
+  background-color: var(--simu-hover-solid);
+  background-image: var(--simu-hover-gradient);
+  color: var(--blue);
+}
+
+.step2-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.step2-kpi {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.step2-kpi:not(:first-child) {
+  border-left: 1px solid #EFEFF2;
+}
+
+.step2-kpi-value {
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--text);
+  margin-top: auto;
+}
+
+.step2-kpi-editable {
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+  border-radius: 8px;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+}
+
+.step2-kpi-editable:focus {
+  outline: none;
+  border-color: rgba(10, 10, 255, 0.35);
+  box-shadow: 0 0 0 4px rgba(10, 10, 255, 0.08);
+  background: #fff;
+}
+
+.step2-kpi-label {
+  max-width: 260px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 22.5px;
+  color: var(--textTertiary);
+  margin-top: auto;
+}
+
+/* Old Step 2 input style kept for reference
+.step2-kpi-input {
+  width: 160px;
+  max-width: 100%;
+  text-align: center;
+  border: 1px solid #d1d1d6;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--textSecondary);
+  background: white;
+}
+*/
+
+.step2-gauge {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.step2-gauge-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.step2-gauge-track {
+  fill: none;
+  stroke: #dde0e8;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.step2-gauge-progress {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.12s linear;
+}
+
+.step2-gauge-dot {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 5px solid var(--blue);
+  background: white;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  padding: 0;
+}
+
+.step2-gauge-dot:active {
+  cursor: grabbing;
+}
+
+.step2-gauge-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.step2-gauge-value {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+  color: #0a0a0a;
+}
+
+.step2-gauge-label {
+  color: var(--blue);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.budget-scale {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.budget-scale span {
+  color: #8f92a8;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #9696AC;
+}
+
+#budgetRangeV2 {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  accent-color: var(--blue);
+}
+
+.budget-value {
+  margin-top: 4px;
+  text-align: right;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.lever-select {
+  position: relative;
+}
+
+.lever-select-trigger {
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid #d1d1d6;
+  border-radius: 16px;
+  background: white;
+  color: #6f7282;
+  text-align: left;
+  padding: 0 18px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.lever-select-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  border: 1px solid #d1d1d6;
+  border-radius: 16px;
+  background: white;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.lever-select-menu label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--textSecondary);
+}
+
 .form-step { display: none; opacity: 0; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease; flex-direction: column; gap: 24.5px; }
 .form-step.active { display: block; opacity: 1; transform: translateY(0); display: flex;  }
