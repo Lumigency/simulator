@@ -11,4 +11,10 @@
   --card: #fff;
   --border: rgba(0, 0, 0, 0.08);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --simu-hover-solid: #f1f2ff;
+  --simu-hover-gradient: linear-gradient(
+    193.71deg,
+    rgba(10, 10, 255, 0.1) -220.05%,
+    rgba(237, 225, 216, 0.3) 71.56%
+  );
 }

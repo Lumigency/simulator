@@ -127,18 +127,15 @@
           <div class="aff-field">
     <p class="aff-label">Avez-vous déjà un programme d'affiliation&nbsp;?</p>
 
-      <div class="aff-options">
-    <button type="button" class="btn-outline">
-      Oui, on possède un programme structuré
-    </button>
-  
-    <button type="button" class="btn-outline">
-      Non, mais j’ai déjà testé
-    </button>
+      <div class="aff-options" role="radiogroup" aria-label="Maturité programme d'affiliation">
+        <input class="aff-radio" type="radio" name="affiliate_program_status" id="prog_structured" value="structured">
+        <label class="btn-outline aff-pill" for="prog_structured">Oui, on possède un programme structuré</label>
 
-      <button type="button" class="btn-outline">
-      Non, je découvre totalement
-      </button>
+        <input class="aff-radio" type="radio" name="affiliate_program_status" id="prog_tested" value="tested">
+        <label class="btn-outline aff-pill" for="prog_tested">Non, mais j’ai déjà testé</label>
+
+        <input class="aff-radio" type="radio" name="affiliate_program_status" id="prog_discovery" value="discovery">
+        <label class="btn-outline aff-pill" for="prog_discovery">Non, je découvre totalement</label>
     </div>
     </div>
 

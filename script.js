@@ -4,7 +4,6 @@ console.log("✅ script.js chargé");
 
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
-const progress = document.querySelector('#progress');
 let currentStep = 0;
 
 // ✅ message de maturité personnalisé
@@ -12,12 +11,7 @@ let maturityMessage = "";
 
 function showStep(index) {
   steps.forEach((step, i) => step.classList.toggle('active', i === index));
-
-
-   // ✅ Met automatiquement à jour le pourcentage
-  let percent = Math.round((index / (steps.length - 1)) * 100);
-  if (index === steps.length - 1) percent = 85; // limite à 85% avant soumission
-  updateProgress(percent);
+  updateProgress(index);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -464,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialisation
 showStep(currentStep);
-// ✅ Forcer la barre à 0 % au tout démarrage
+// ✅ Forcer l'étape visuelle à 1 au tout démarrage
 updateProgress(0);
 
   // Navigation entre les étapes
@@ -564,7 +558,7 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
-      updateProgress(100); // ✅ passe à 100% quand on lance la simulation
+      updateProgress(2); // ✅ reste sur l'étape 3 pendant l'affichage des résultats
 
     // --- Read inputs safely ---
     const trafficMonthly = numberOf(form.elements["traffic"]?.value);
@@ -901,25 +895,21 @@ if (restartBtn) {
     currentStep = 0;
     showStep(currentStep);
 
-    // 🔁 Réinitialise la barre de progression
-    const progressBar = document.getElementById("progress-bar");
-    const progressText = document.getElementById("progress-text");
-    if (progressBar && progressText) {
-      progressBar.style.width = "0%";
-      progressText.textContent = "0%";
-    }
-
     // Retourne en haut de page
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
-function updateProgress(percent) {
-  const bar = document.getElementById('progress-bar');
-  const text = document.getElementById('progress-text');
-  
-  bar.style.width = percent + '%';
-  text.textContent = percent + '%';
+function updateProgress(stepIndex) {
+  const stepDots = document.querySelectorAll(".steps-mini .step-dot");
+  if (!stepDots.length) return;
+
+  const maxIndex = Math.max(0, stepDots.length - 1);
+  const safeIndex = Math.max(0, Math.min(maxIndex, Number(stepIndex) || 0));
+
+  stepDots.forEach((dot, index) => {
+    dot.classList.toggle("active", index <= safeIndex);
+  });
 }
 
 

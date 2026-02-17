@@ -11,7 +11,7 @@ form {
   line-height: 22.5px;
   color: var(--textTertiary);
 }
-.aff-options { display: flex; gap: 12px; flex-wrap: wrap; }
+.aff-options { display: flex; gap: 10px; flex-wrap: wrap; }
 
 .aff-field {
   display: flex;
@@ -29,10 +29,12 @@ form {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
+  min-height: 44px;
+  padding: 13px 20px;
+  border-radius: 12px;
   background: #fff;
   border-color: #d1d1d6;
-  line-height: 1.2;
+  line-height: 22.5px;
   transition: border-color .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease;
 }
 
@@ -40,19 +42,17 @@ button.aff-pill {
   appearance: none;
 }
 
-.aff-pill:hover {
-  border-color: rgba(0, 0, 255, 0.4);
-}
-
 .aff-radio:focus-visible + .aff-pill {
   box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.12);
 }
 
 .aff-radio:checked + .aff-pill {
-  border-color: var(--blue);
-  background: rgba(0, 0, 255, 0.06);
+  border-color: transparent;
+  background-color: var(--simu-hover-solid);
+  background-image: var(--simu-hover-gradient);
   color: var(--blue);
 }
+
 
 .objective-grid {
   display: grid;
@@ -81,10 +81,6 @@ button.aff-pill {
   transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 
-.objective-card:hover {
-  border-color: rgba(0, 0, 255, 0.35);
-}
-
 .objective-icon {
   width: 88px;
   height: 88px;
@@ -104,12 +100,33 @@ button.aff-pill {
 }
 
 .objective-radio:checked + .objective-card {
-  border-color: var(--blue);
-  background: rgba(0, 0, 255, 0.04);
+  border-color: transparent;
+  background-color: var(--simu-hover-solid);
+  background-image: var(--simu-hover-gradient);
+}
+
+.objective-radio:checked + .objective-card .objective-title {
+  color: var(--blue);
 }
 
 .objective-grid.is-invalid .objective-card {
   border-color: #f88989;
+}
+
+#form-simu :is(.btn-outline, .aff-pill, .objective-card, .btn-prev, .cta):hover {
+  background-color: var(--simu-hover-solid);
+  background-image: var(--simu-hover-gradient);
+  border-color: transparent;
+  color: var(--blue);
+}
+
+#form-simu :is(.btn-prev, .cta):hover {
+  color: var(--text);
+  transform: none;
+}
+
+#form-simu .objective-card:hover .objective-title {
+  color: var(--blue);
 }
 select,
 input:not([type="checkbox"]):not([type="radio"]) {
