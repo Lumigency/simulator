@@ -1,5 +1,6 @@
 @media (max-width: 980px) {
   .simu-head-grid { grid-template-columns: 1fr; }
+  .steps-mini { grid-template-columns: 72px 1fr 72px 1fr 72px; }
   .simu-grid { grid-template-columns: 1fr; }
   .objective-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .editor-grid { grid-template-columns: repeat(2, 1fr); }
