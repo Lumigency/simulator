@@ -5,8 +5,8 @@ console.log("✅ script.js chargé");
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
 let currentStep = 0;
-// TEMP CSS work: start on Step 2 directly
-currentStep = 1;
+// TEMP CSS work: start on Step 3 directly
+currentStep = 2;
 
 // ✅ message de maturité personnalisé
 let maturityMessage = "";
@@ -14,13 +14,28 @@ let maturityMessage = "";
 function showStep(index) {
   steps.forEach((step, i) => step.classList.toggle('active', i === index));
   updateProgress(index);
+  syncLeftAsideForStep(index);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function syncLeftAsideForStep(stepIndex) {
+  const defaultAside = document.getElementById("leftAsideDefault");
+  const step2Aside = document.getElementById("leftAsideStep2");
+  const step3Aside = document.getElementById("leftAsideStep3");
+  if (!defaultAside || !step2Aside || !step3Aside) return;
+  const safeStep = Number(stepIndex) || 0;
+  const isStep2 = safeStep === 1;
+  const isStep3 = safeStep === 2;
+  defaultAside.hidden = isStep2 || isStep3;
+  step2Aside.hidden = !isStep2;
+  step3Aside.hidden = !isStep3;
 }
 
 // ----------------- HELPERS -----------------
 function numberOf(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
 function fmtCurrency(n){ return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); }
 function fmtNumber(n){ return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(Math.round(n)); }
+function clamp(value, min, max){ return Math.min(max, Math.max(min, value)); }
 function normalize(map){
   const vals = Object.values(map);
   const s = vals.reduce((a,b)=>a+b,0) || 1;
@@ -460,8 +475,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialisation
 showStep(currentStep);
-// ✅ Forcer l'étape visuelle à 1 au tout démarrage
-updateProgress(0);
+// ✅ Forcer l'étape visuelle à 3 au tout démarrage
+updateProgress(2);
 
   // Navigation entre les étapes
 document.getElementById('next-step-1')?.addEventListener('click', () => {
@@ -501,8 +516,98 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
       if (unlimitedCheckbox.checked) {
         budgetInput.value = "";
       }
+      updateStep2AsidePreview();
     });
   }
+
+  const asideStep2RoiValue = document.getElementById("asideStep2RoiValue");
+  const asideStep2CacValue = document.getElementById("asideStep2CacValue");
+  const asideStep2CacNote = document.getElementById("asideStep2CacNote");
+  const asideStep2RoiBar = document.getElementById("asideStep2RoiBar");
+  const asideStep2CacBar = document.getElementById("asideStep2CacBar");
+  const asideStep2Point1 = document.getElementById("asideStep2Point1");
+  const asideStep2Point2 = document.getElementById("asideStep2Point2");
+  const asideStep2Point3 = document.getElementById("asideStep2Point3");
+
+  const updateStep2AsidePreview = () => {
+    if (!asideStep2RoiValue || !asideStep2CacValue || !asideStep2CacNote || !asideStep2RoiBar || !asideStep2CacBar) return;
+
+    const trafficMonthly = numberOf(form.elements["traffic"]?.value);
+    const aovUser = numberOf(form.elements["aov"]?.value);
+    const cvrUserInput = numberOf(form.elements["cvr"]?.value) / 100;
+    const cacClient = numberOf(form.elements["cac"]?.value);
+    const budgetMonthly = numberOf(form.elements["budget"]?.value);
+    const budgetAnnual = budgetMonthly > 0 ? budgetMonthly * 12 : 0;
+    const sectorKey = form.elements["sector"]?.value || "other";
+    const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map((input) => input.value);
+    const sector = SECTORS[sectorKey] || SECTORS.other;
+
+    const computeScenarioRoi = ({ baseAov, baseCvr, cac }) => {
+      const yearlyTraffic = annualAffiliatedTraffic(trafficMonthly);
+      const potentialOrders = yearlyTraffic * baseCvr;
+      const maxOrdersByBudget = (budgetAnnual > 0 && cac > 0) ? (budgetAnnual / cac) : potentialOrders;
+      const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
+      const revenue = finalOrders * baseAov;
+      const theoreticalCost = finalOrders * cac;
+      const consumedBudget = budgetAnnual > 0 ? Math.min(budgetAnnual, theoreticalCost) : theoreticalCost;
+      return consumedBudget > 0 ? revenue / consumedBudget : 0;
+    };
+
+    let adjustedAov = adjustAOV(aovUser > 0 ? aovUser : sector.aov, levers);
+    let adjustedCvr = adjustCVR(cvrUserInput > 0 ? cvrUserInput : sector.cvr, levers);
+    const hybridChoice = form.querySelector('input[name="hybrides"]:checked')?.value || "non";
+    const hybridLevers = ["affinitaires", "influence", "emailing", "content", "ppc"];
+    if (hybridChoice === "non" && levers.some((lever) => hybridLevers.includes(lever))) {
+      adjustedAov *= 0.9;
+      adjustedCvr *= 0.7;
+    }
+
+    const projectedUserCac = projectedCAC(sectorKey, levers, cacClient || 0);
+    const referenceCac = projectedCAC(sectorKey, [], 0);
+
+    const roiCurrent = computeScenarioRoi({
+      baseAov: adjustedAov,
+      baseCvr: adjustedCvr,
+      cac: projectedUserCac
+    });
+
+    const roiReference = computeScenarioRoi({
+      baseAov: sector.aov,
+      baseCvr: sector.cvr,
+      cac: referenceCac
+    });
+
+    const roiDelta = roiCurrent - roiReference;
+    const comparedCac = cacClient > 0 ? cacClient : projectedUserCac;
+    const cacDeltaPct = referenceCac > 0 ? ((referenceCac - comparedCac) / referenceCac) * 100 : 0;
+
+    asideStep2RoiValue.textContent = `${roiDelta >= 0 ? "+" : ""}${roiDelta.toFixed(2)}`;
+    asideStep2CacValue.textContent = `${Math.abs(Math.round(cacDeltaPct))}%`;
+    asideStep2CacNote.textContent = cacDeltaPct >= 0
+      ? "En dessous de la moyenne secteur"
+      : "Au-dessus de la moyenne secteur";
+
+    const roiBarWidth = clamp((roiDelta + 5) / 10, 0, 1) * 100;
+    const cacBarWidth = clamp(Math.abs(cacDeltaPct) / 35, 0, 1) * 100;
+    asideStep2RoiBar.style.width = `${Math.max(6, roiBarWidth)}%`;
+    asideStep2CacBar.style.width = `${Math.max(6, cacBarWidth)}%`;
+
+    if (asideStep2Point1) {
+      asideStep2Point1.textContent = roiDelta >= 0
+        ? "Potentiel de croissance intéressant en affiliation"
+        : "Le potentiel peut progresser avec un mix mieux priorisé";
+    }
+    if (asideStep2Point2) {
+      asideStep2Point2.textContent = cacDeltaPct >= 0
+        ? "Mix optimisé par rapport au budget disponible"
+        : "Le CAC peut être réduit en rééquilibrant les leviers";
+    }
+    if (asideStep2Point3) {
+      asideStep2Point3.textContent = levers.length >= 3
+        ? "Vos partenaires potentiels sont disponibles et qualifiés"
+        : "Ajoutez des leviers pour élargir vos opportunités partenaires";
+    }
+  };
 
   // ✅ Gestion de la case "J’autorise tous les leviers"
   const allLeversCheckbox = document.getElementById("allLevers");
@@ -513,6 +618,7 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
       leverCheckboxes.forEach(cb => {
         cb.checked = allLeversCheckbox.checked;
       });
+      updateStep2AsidePreview();
     });
 
     leverCheckboxes.forEach(cb => {
@@ -520,6 +626,7 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
         if (!cb.checked) {
           allLeversCheckbox.checked = false;
         }
+        updateStep2AsidePreview();
       });
     });
   }
@@ -536,6 +643,7 @@ if (trafficRange && trafficInput) {
   trafficRange.addEventListener("input", (e) => {
     const val = parseInt(e.target.value, 10) || 0;
     trafficInput.value = val;
+    updateStep2AsidePreview();
   });
 
   // quand on tape manuellement → met à jour le curseur
@@ -545,10 +653,12 @@ if (trafficRange && trafficInput) {
     if (val < 0) val = 0;
     if (val > 1000000) val = 1000000;
     trafficRange.value = val;
+    updateStep2AsidePreview();
   });
 
   // initialisation
   trafficInput.value = parseInt(trafficRange.value, 10);
+  updateStep2AsidePreview();
 }
 
 // === STEP 2 V2: Traffic pills + budget slider + leviers dropdown ===
@@ -560,6 +670,7 @@ if (trafficBandRadios.length && trafficInput && trafficRange) {
       const mappedTraffic = Number(radio.dataset.traffic || 0);
       trafficInput.value = mappedTraffic;
       trafficRange.value = mappedTraffic;
+      updateStep2AsidePreview();
     });
   });
 
@@ -568,6 +679,7 @@ if (trafficBandRadios.length && trafficInput && trafficRange) {
     const mappedTraffic = Number(checkedBand.dataset.traffic || 0);
     trafficInput.value = mappedTraffic;
     trafficRange.value = mappedTraffic;
+    updateStep2AsidePreview();
   }
 }
 
@@ -584,6 +696,7 @@ if (budgetRangeV2 && budgetInput) {
     const val = Number(budgetRangeV2.value || 0);
     budgetInput.value = val;
     if (budgetValueDisplay) budgetValueDisplay.textContent = fmtBudget(val);
+    updateStep2AsidePreview();
   };
 
   budgetRangeV2.addEventListener("input", syncBudget);
@@ -592,22 +705,111 @@ if (budgetRangeV2 && budgetInput) {
 
 const leverSelectTrigger = document.getElementById("leverSelectTrigger");
 const leverSelectMenu = document.getElementById("leverSelectMenu");
-if (leverSelectTrigger && leverSelectMenu) {
+const leverSelectValue = document.getElementById("leverSelectValue");
+if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
   const leverInputs = leverSelectMenu.querySelectorAll('input[name="levers"]');
+  const leverPlaceholder = leverSelectValue.dataset.placeholder || "Sélectionnez un ou plusieurs leviers";
+
+  // Old label renderer kept for reference:
+  // const refreshLeverLabel = () => {
+  //   const selected = Array.from(leverInputs).filter((input) => input.checked).length;
+  //   leverSelectTrigger.textContent = selected
+  //     ? `${selected} levier${selected > 1 ? "s" : ""} sélectionné${selected > 1 ? "s" : ""}`
+  //     : "Sélectionnez un ou plusieurs leviers";
+  // };
+
+  // Old tags renderer kept for reference:
+  // const refreshLeverTags = () => {
+  //   const selectedInputs = Array.from(leverInputs).filter((input) => input.checked);
+  //   leverSelectValue.innerHTML = "";
+  //   if (!selectedInputs.length) {
+  //     leverSelectValue.classList.add("is-placeholder");
+  //     leverSelectValue.textContent = leverPlaceholder;
+  //     return;
+  //   }
+  //   leverSelectValue.classList.remove("is-placeholder");
+  //   selectedInputs.forEach((input) => {
+  //     const tag = document.createElement("span");
+  //     tag.className = "lever-tag";
+  //     tag.dataset.value = input.value;
+  //     const remove = document.createElement("span");
+  //     remove.className = "lever-tag-remove";
+  //     remove.textContent = "×";
+  //     const labelText = document.createElement("span");
+  //     labelText.textContent = input.parentElement?.textContent?.trim() || input.value;
+  //     tag.appendChild(remove);
+  //     tag.appendChild(labelText);
+  //     leverSelectValue.appendChild(tag);
+  //   });
+  // };
 
   const refreshLeverLabel = () => {
-    const selected = Array.from(leverInputs).filter((input) => input.checked).length;
-    leverSelectTrigger.textContent = selected
-      ? `${selected} levier${selected > 1 ? "s" : ""} sélectionné${selected > 1 ? "s" : ""}`
-      : "Sélectionnez un ou plusieurs leviers";
+    const selectedInputs = Array.from(leverInputs).filter((input) => input.checked);
+
+    // Old neutral-placeholder behavior kept for reference:
+    // leverSelectValue.classList.add("is-placeholder");
+    // leverSelectValue.textContent = leverPlaceholder;
+
+    leverSelectValue.innerHTML = "";
+
+    if (!selectedInputs.length) {
+      leverSelectValue.classList.add("is-placeholder");
+      leverSelectValue.textContent = leverPlaceholder;
+      return;
+    }
+
+    leverSelectValue.classList.remove("is-placeholder");
+
+    selectedInputs.forEach((input) => {
+      const tag = document.createElement("span");
+      tag.className = "lever-tag";
+      tag.dataset.value = input.value;
+
+      const remove = document.createElement("span");
+      remove.className = "lever-tag-remove";
+      remove.textContent = "×";
+
+      const labelText = document.createElement("span");
+      labelText.textContent = input.parentElement?.textContent?.trim() || input.value;
+
+      tag.appendChild(remove);
+      tag.appendChild(labelText);
+      leverSelectValue.appendChild(tag);
+    });
   };
 
   leverSelectTrigger.addEventListener("click", () => {
     leverSelectMenu.hidden = !leverSelectMenu.hidden;
+    leverSelectTrigger.classList.toggle("is-open", !leverSelectMenu.hidden);
   });
 
   leverInputs.forEach((input) => {
-    input.addEventListener("change", refreshLeverLabel);
+    input.addEventListener("change", () => {
+      refreshLeverLabel();
+      updateStep2AsidePreview();
+    });
+  });
+
+  leverSelectValue.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const remove = target.closest(".lever-tag-remove");
+    if (!remove) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const tag = remove.closest(".lever-tag");
+    const value = tag?.getAttribute("data-value");
+    if (!value) return;
+
+    const input = leverSelectMenu.querySelector(`input[name="levers"][value="${value}"]`);
+    if (input instanceof HTMLInputElement) {
+      input.checked = false;
+      refreshLeverLabel();
+      checkHybridWarning();
+      updateStep2AsidePreview();
+    }
   });
 
   document.addEventListener("click", (event) => {
@@ -616,11 +818,68 @@ if (leverSelectTrigger && leverSelectMenu) {
     if (!(target instanceof Node)) return;
     if (!leverSelectMenu.contains(target) && !leverSelectTrigger.contains(target)) {
       leverSelectMenu.hidden = true;
+      leverSelectTrigger.classList.remove("is-open");
     }
   });
 
   refreshLeverLabel();
+  updateStep2AsidePreview();
 }
+
+// === STEP 3 V2: sector dropdown + submit enable state ===
+const sectorSelectTrigger = document.getElementById("sectorSelectTrigger");
+const sectorSelectMenu = document.getElementById("sectorSelectMenu");
+const sectorSelectValue = document.getElementById("sectorSelectValue");
+const hiddenSector = form.elements["sector"];
+const step3Submit = document.getElementById("step3Submit");
+const fullNameInput = document.getElementById("fullName");
+const emailInput = document.getElementById("email");
+
+const refreshStep3SubmitState = () => {
+  if (!step3Submit || !fullNameInput || !emailInput) return;
+  const ready = Boolean(
+    String(fullNameInput.value || "").trim() &&
+    emailInput.checkValidity() &&
+    String(hiddenSector?.value || "").trim()
+  );
+  step3Submit.disabled = !ready;
+  step3Submit.classList.toggle("is-ready", ready);
+};
+
+if (sectorSelectTrigger && sectorSelectMenu && sectorSelectValue && hiddenSector) {
+  const sectorItems = sectorSelectMenu.querySelectorAll("button[data-value]");
+
+  sectorSelectTrigger.addEventListener("click", () => {
+    sectorSelectMenu.hidden = !sectorSelectMenu.hidden;
+    sectorSelectTrigger.classList.toggle("is-open", !sectorSelectMenu.hidden);
+  });
+
+  sectorItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const value = item.getAttribute("data-value") || "";
+      hiddenSector.value = value;
+      sectorSelectValue.textContent = item.textContent || "Sélectionnez votre secteur d’activité";
+      sectorSelectMenu.hidden = true;
+      sectorSelectTrigger.classList.remove("is-open");
+      refreshStep3SubmitState();
+      updateStep2AsidePreview();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (sectorSelectMenu.hidden) return;
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!sectorSelectMenu.contains(target) && !sectorSelectTrigger.contains(target)) {
+      sectorSelectMenu.hidden = true;
+      sectorSelectTrigger.classList.remove("is-open");
+    }
+  });
+}
+
+fullNameInput?.addEventListener("input", refreshStep3SubmitState);
+emailInput?.addEventListener("input", refreshStep3SubmitState);
+refreshStep3SubmitState();
 
 // Old Step 2 V2 KPI inputs logic kept for reference:
 // const aovInputV2 = document.getElementById("aovInputV2");
@@ -675,6 +934,10 @@ const bindEditableCurrency = (editableEl, hiddenField) => {
 
 bindEditableCurrency(aovValueDisplay, hiddenAov);
 bindEditableCurrency(cacValueDisplay, hiddenCac);
+aovValueDisplay?.addEventListener("input", updateStep2AsidePreview);
+aovValueDisplay?.addEventListener("blur", updateStep2AsidePreview);
+cacValueDisplay?.addEventListener("input", updateStep2AsidePreview);
+cacValueDisplay?.addEventListener("blur", updateStep2AsidePreview);
 
 const cvrGauge = document.getElementById("cvrGauge");
 const cvrGaugePath = document.getElementById("cvrGaugeProgress");
@@ -683,20 +946,46 @@ const cvrGaugeDot = document.getElementById("cvrGaugeDot");
 if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   const min = Number(cvrGauge.dataset.min || 0);
   const max = Number(cvrGauge.dataset.max || 20);
+  const visualLowStart = 0.12;
+  const lowValueThreshold = 4;
+  const lowThresholdRatio = clamp((lowValueThreshold - min) / (max - min || 1), 0, 1);
   const pathLength = cvrGaugePath.getTotalLength();
   cvrGaugePath.style.strokeDasharray = `${pathLength} ${pathLength}`;
+
+  const toVisualRatio = (value) => {
+    const normalized = clamp((value - min) / (max - min || 1), 0, 1);
+    if (normalized <= lowThresholdRatio && lowThresholdRatio > visualLowStart) {
+      const t = normalized / lowThresholdRatio;
+      return visualLowStart + t * (lowThresholdRatio - visualLowStart);
+    }
+    return normalized;
+  };
+
+  const fromVisualRatio = (ratio) => {
+    const safeRatio = clamp(ratio, 0, 1);
+    let normalized = safeRatio;
+
+    if (safeRatio <= visualLowStart) normalized = 0;
+    else if (safeRatio <= lowThresholdRatio && lowThresholdRatio > visualLowStart) {
+      const t = (safeRatio - visualLowStart) / (lowThresholdRatio - visualLowStart);
+      normalized = t * lowThresholdRatio;
+    }
+
+    return min + normalized * (max - min);
+  };
 
   const setCvr = (rawValue) => {
     const value = Math.max(min, Math.min(max, Number(rawValue) || 0));
     hiddenCvr.value = String(value);
     cvrValueDisplay.textContent = `${Number(value.toFixed(1))}%`;
 
-    const ratio = (value - min) / (max - min || 1);
-    cvrGaugePath.style.strokeDashoffset = String(pathLength * (1 - ratio));
+    const visualRatio = toVisualRatio(value);
+    cvrGaugePath.style.strokeDashoffset = String(pathLength * (1 - visualRatio));
 
-    const point = cvrGaugePath.getPointAtLength(pathLength * ratio);
+    const point = cvrGaugePath.getPointAtLength(pathLength * visualRatio);
     cvrGaugeDot.style.left = `${point.x}px`;
     cvrGaugeDot.style.top = `${point.y}px`;
+    updateStep2AsidePreview();
   };
 
   const pointerToValue = (event) => {
@@ -720,8 +1009,8 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
       }
     }
 
-    const ratio = bestLength / pathLength;
-    return min + ratio * (max - min);
+    const visualRatio = bestLength / pathLength;
+    return fromVisualRatio(visualRatio);
   };
 
   let dragging = false;
@@ -738,6 +1027,7 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   };
 
   const startDragging = (event) => {
+    event.preventDefault();
     dragging = true;
     setCvr(pointerToValue(event));
     window.addEventListener("pointermove", onPointerMove);
@@ -752,8 +1042,13 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
 
   // Vérifie à chaque changement de levier ou de choix "hybride"
 form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el => {
-  el.addEventListener("change", checkHybridWarning);
+  el.addEventListener("change", () => {
+    checkHybridWarning();
+    updateStep2AsidePreview();
+  });
 });
+
+  updateStep2AsidePreview();
 
 // ✅ Début du submit handler (tout le calcul DOIT être dedans)
   form.addEventListener("submit", (ev) => {

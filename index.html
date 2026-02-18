@@ -8,7 +8,7 @@
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
   <!-- CSS (RELATIF, sinon GitHub Pages te trolle) -->
   <link rel="stylesheet" href="./style.css?v=1">
@@ -61,7 +61,7 @@
     <div class="simu-grid split-layout">
       <!-- Left -->
       <aside class="left-panel left-column">
-        <section class="left-card">
+        <section class="left-card" id="leftAsideDefault">
           <ul class="left-benefits">
             <li>
               <span class="ic">
@@ -107,6 +107,114 @@
           <div class="lumigency-signature">
             <strong>+ 1000 entreprises</strong> comme la vôtre nous font confiance
           </div>
+        </section>
+
+        <section class="left-card left-step2-analysis" id="leftAsideStep2" hidden>
+          <div class="left-step2-head">
+            <img class="left-step2-head-icon" src="/assets/svg/picto-star.svg" alt="">
+            <div>
+              <p class="left-step2-title">Analyse rapide</p>
+              <p class="left-step2-subtitle">Votre potentiel d'affiliation</p>
+            </div>
+          </div>
+
+          <article class="left-step2-metric">
+            <div class="left-step2-metric-row">
+              <p class="left-step2-metric-label">ROI estimé</p>
+              <p class="left-step2-metric-value" id="asideStep2RoiValue">+0.00</p>
+            </div>
+            <p class="left-step2-metric-note">Bel écart par rapport à votre secteur</p>
+            <div class="left-step2-meter" aria-hidden="true">
+              <span id="asideStep2RoiBar"></span>
+            </div>
+          </article>
+
+          <article class="left-step2-metric">
+            <div class="left-step2-metric-row">
+              <p class="left-step2-metric-label">CAC maîtrisé</p>
+              <p class="left-step2-metric-value" id="asideStep2CacValue">0%</p>
+            </div>
+            <p class="left-step2-metric-note" id="asideStep2CacNote">Aligné avec la moyenne secteur</p>
+            <div class="left-step2-meter" aria-hidden="true">
+              <span id="asideStep2CacBar"></span>
+            </div>
+          </article>
+
+          <div class="left-step2-points">
+            <p class="left-step2-points-title">
+              <img class="left-step2-points-icon" src="/assets/svg/icon-bulb.svg" alt="">
+              <span>Points clés identifiés</span>
+            </p>
+            <ul>
+              <li id="asideStep2Point1">Potentiel de croissance intéressant en affiliation</li>
+              <li id="asideStep2Point2">Mix optimisé par rapport au budget disponible</li>
+              <li id="asideStep2Point3">Vos partenaires potentiels sont disponibles et qualifiés</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="left-card left-step3-aside" id="leftAsideStep3" hidden>
+          <div class="left-step3-fact">
+            <p class="left-step3-fact-title">
+              <img src="/assets/svg/icon-bulb.svg" alt="">
+              <span>Le saviez-vous ?</span>
+            </p>
+            <p class="left-step3-fact-copy">
+              Une amélioration de <strong>+0,5 %</strong> du taux de conversion peut générer jusqu'à <strong>+20 %</strong> de revenus à trafic constant.
+            </p>
+          </div>
+
+          <div class="left-step3-editors">
+            <p class="left-step3-editors-title">
+              <span class="left-step3-editors-icon">
+                <img src="/assets/svg/icon-check-hand.svg" alt="">
+              </span>
+              <span>Qui sont nos éditeurs ?</span>
+            </p>
+
+            <article class="left-step3-editor-card">
+              <div class="left-step3-editor-brand">
+                <img src="/assets/icon-shopify.png" alt="Shopify">
+              </div>
+              <div class="left-step3-editor-copy">
+                <p class="left-step3-editor-name">Shopify</p>
+                <a href="https://www.shopify.com" target="_blank" rel="noopener">www.shopify.com</a>
+              </div>
+              <a class="left-step3-editor-link" href="https://www.shopify.com" target="_blank" rel="noopener" aria-label="Ouvrir Shopify">
+                <img src="/assets/svg/icon-link.svg" alt="">
+              </a>
+            </article>
+
+            <article class="left-step3-editor-card">
+              <div class="left-step3-editor-brand">
+                <img src="/assets/icon-atlassian.png" alt="Atlassian">
+              </div>
+              <div class="left-step3-editor-copy">
+                <p class="left-step3-editor-name">Atlassian</p>
+                <a href="https://www.atlassian.com" target="_blank" rel="noopener">www.atlassian.com</a>
+              </div>
+              <a class="left-step3-editor-link" href="https://www.atlassian.com" target="_blank" rel="noopener" aria-label="Ouvrir Atlassian">
+                <img src="/assets/svg/icon-link.svg" alt="">
+              </a>
+            </article>
+
+            <article class="left-step3-editor-card">
+              <div class="left-step3-editor-brand">
+                <img src="/assets/icon-aws.png" alt="AWS">
+              </div>
+              <div class="left-step3-editor-copy">
+                <p class="left-step3-editor-name">AWS</p>
+                <a href="https://www.aws.amazon.com" target="_blank" rel="noopener">www.aws.amazon.com</a>
+              </div>
+              <a class="left-step3-editor-link" href="https://www.aws.amazon.com" target="_blank" rel="noopener" aria-label="Ouvrir AWS">
+                <img src="/assets/svg/icon-link.svg" alt="">
+              </a>
+            </article>
+          </div>
+
+          <p class="left-step3-note">
+            <strong>💡 Bon à savoir :</strong> Les éditeurs présentés sont des exemples. Votre sélection finale sera adaptée à votre secteur et vos objectifs.
+          </p>
         </section>
       </aside>
 
@@ -365,13 +473,17 @@
       <p class="budget-value" id="budgetValueDisplay">650k €</p>
     </div>
 
-    <div class="aff-field">
-      <p class="aff-label">Quels sont les leviers que vous souhaitez autoriser ?</p>
-      <div class="lever-select">
-        <button type="button" id="leverSelectTrigger" class="lever-select-trigger">
-          Sélectionnez un ou plusieurs leviers
-        </button>
-        <div id="leverSelectMenu" class="lever-select-menu" hidden>
+      <div class="aff-field">
+        <p class="aff-label">Quels sont les leviers que vous souhaitez autoriser ?</p>
+        <div class="lever-select">
+          <button type="button" id="leverSelectTrigger" class="lever-select-trigger">
+            <span class="lever-select-leading" aria-hidden="true">&#9678;</span>
+            <span id="leverSelectValue" class="lever-select-value" data-placeholder="Sélectionnez un ou plusieurs leviers">
+              Sélectionnez un ou plusieurs leviers
+            </span>
+            <span class="lever-select-chevron" aria-hidden="true">&#8964;</span>
+          </button>
+          <div id="leverSelectMenu" class="lever-select-menu" hidden>
           <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
           <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
           <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
@@ -391,7 +503,7 @@
     <!-- Legacy fields kept for JS simulation compatibility -->
     <input type="hidden" id="trafficInput" name="traffic" value="300000">
     <input type="hidden" id="trafficRange" name="trafficRange" value="300000">
-    <input type="hidden" id="sector" name="sector" value="other">
+    <input type="hidden" id="sector" name="sector" value="">
     <input type="hidden" id="budget" name="budget" value="650000">
     <input type="hidden" id="cac" name="cac" value="0">
     <input type="hidden" id="aov" name="aov" value="0">
@@ -399,25 +511,77 @@
 
     <!-- Actions -->
     <div class="step-actions">
-      <button class="btn-prev" type="button" id="prev-step-2">Retour</button>
-      <button class="btn-next" type="button" id="next-step-2">Continuer</button>
+      <button class="btn-outline btn-prev" type="button" id="prev-step-2">Retour</button>
+      <button class="btn-primary btn-next" type="button" id="next-step-2">Continuer</button>
     </div>
   </div>
 </section>
            
             <!-- STEP 3 -->
             <section class="form-step" data-step="3">
-               
-            <label class="question-label" for="site">URL du site (optionnel)</label>
-            <input type="url" name="site" id="site" placeholder="https://…">
+              <!-- Old Step 3 kept for reference:
+              <label class="question-label" for="site">URL du site (optionnel)</label>
+              <input type="url" name="site" id="site" placeholder="https://…">
+              <label class="question-label" for="email">Email (pour recevoir le récap)</label>
+              <input type="email" name="email" id="email" placeholder="name@company.com" required>
+              <div class="step-actions">
+                <button class="btn-prev" type="button" id="prev-step-3">Retour</button>
+                <button class="cta" type="submit">Obtenir ma projection</button>
+              </div>
+              -->
 
-            <label class="question-label" for="email">Email (pour recevoir le récap)</label>
-            <input type="email" name="email" id="email" placeholder="name@company.com" required>
+              <div class="step3-v2">
+                <div class="aff-field">
+                  <label class="step3-label" for="fullName">Nom et prénom</label>
+                  <input class="step3-input" type="text" name="full_name" id="fullName" placeholder="Indiquez votre nom et prénom" required>
+                </div>
 
-            <div class="step-actions">
-              <button class="btn-prev" type="button" id="prev-step-3">Retour</button>
-              <button class="cta" type="submit">Obtenir ma projection</button>
-            </div>
+                <div class="aff-field">
+                  <label class="step3-label" for="email">Quel est votre adresse e-mail professionnelle ?</label>
+                  <input class="step3-input" type="email" name="email" id="email" placeholder="Indiquez votre adresse e-mail professionnelle" required>
+                </div>
+
+                <div class="step3-note step3-note-warning">
+                  <span class="step3-note-icon" aria-hidden="true">⚠️</span>
+                  <p>Vos données restent confidentielles et pourront être utilisées pour vous adresser des communications professionnelles en lien avec votre simulation.</p>
+                </div>
+
+                <div class="aff-field">
+                  <p class="step3-label">Quel est votre secteur d’activité ?</p>
+                  <div class="sector-select">
+                    <button type="button" id="sectorSelectTrigger" class="sector-select-trigger">
+                      <span class="sector-select-leading" aria-hidden="true">&#9678;</span>
+                      <span id="sectorSelectValue" class="sector-select-value">Sélectionnez votre secteur d’activité</span>
+                      <span class="sector-select-chevron" aria-hidden="true">&#8964;</span>
+                    </button>
+                    <div id="sectorSelectMenu" class="sector-select-menu" hidden>
+                      <button type="button" data-value="fashion">Mode & Beauté</button>
+                      <button type="button" data-value="beauty">Beauté & Cosmétique</button>
+                      <button type="button" data-value="electronics">High-tech & Électroménager</button>
+                      <button type="button" data-value="home">Maison & Décoration</button>
+                      <button type="button" data-value="food">Alimentaire & Drive</button>
+                      <button type="button" data-value="sports">Sport & Loisirs</button>
+                      <button type="button" data-value="travel">Voyage & Tourisme</button>
+                      <button type="button" data-value="luxury">Luxe & Bijoux</button>
+                      <button type="button" data-value="auto">Automobile</button>
+                      <button type="button" data-value="culture">Produits culturels</button>
+                      <button type="button" data-value="other">Autre</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="step3-note step3-note-info">
+                  <span class="step3-note-icon" aria-hidden="true">🎯</span>
+                  <p>Votre secteur d’activité nous permet d’interpréter vos données selon les références et benchmarks de votre marché.</p>
+                </div>
+
+                <input type="hidden" name="site" id="site" value="">
+
+                <div class="step-actions step3-actions">
+                  <button class="btn-outline btn-prev" type="button" id="prev-step-3">Retour</button>
+                  <button class="btn-primary step3-submit" type="submit" id="step3Submit" disabled>Découvrir mes résultats✨</button>
+                </div>
+              </div>
 
           </section>
           </form>
