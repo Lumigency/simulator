@@ -5,9 +5,6 @@ console.log("✅ script.js chargé");
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
 let currentStep = 0;
-// TEMP CSS work: start on Step 3 directly
-currentStep = 2;
-const FORCE_STEP4_PREVIEW = true;
 
 // ✅ message de maturité personnalisé
 let maturityMessage = "";
@@ -247,8 +244,8 @@ const EDITORS = {
     { name: "Criteo", logo: "assets/logo-criteo.jpg" },
     { name: "Uzerly", logo: "assets/logo-uzerly.jpeg" }
   ],
-  display: [
-    { name: "Sirdata", logo: "assets/logo-sirdata.png" },
+  "display-networks": [
+    { name: "Sirdata", logo: "assets/sirdata-logo.png" },
     { name: "Digidip", logo: "assets/logo-digidip.png" },
     { name: "Skimlinks", logo: "assets/logo-skimlinks.png" }
   ],
@@ -263,7 +260,7 @@ const EDITORS = {
       { name: "Power-space", logo: "assets/power-space-logo.png" },
       { name: "Welcoming", logo: "assets/welcoming_logos.png" }
   ],
-  sea: [
+  ppc: [
     { name: "JVWEB", logo: "assets/logo-jvweb.png" },
     { name: "Google", logo: "assets/logo-google.png" },
     { name: "Ad's up", logo: "assets/adsup.png" }
@@ -320,7 +317,7 @@ const EDITORS_AFFINITAIRE = {
   // 🥗 ALIMENTATION & DRIVE
   food: [
     { name: "Marmiton", logo: "assets/marmiton-logo.png" },
-    { name: "Cuisine Actuelle", logo: "assets/cuisineactuelle-logo.png" },
+    { name: "Cuisine Actuelle", logo: "assets/cuisineactuelle.logo.png" },
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" }
   ],
 
@@ -342,7 +339,7 @@ const EDITORS_AFFINITAIRE = {
   luxury: [
     { name: "Marie Claire", logo: "assets/marie-claire-logo.png" },
     { name: "Grazia", logo: "assets/grazia-logo.png" },
-    { name: "Stylight", logo: "assets/stylight-logo.png" }
+    { name: "Stylight", logo: "assets/sytlight-logo.png" }
   ],
 
   // 🚗 PIÈCES AUTOMOBILES
@@ -360,7 +357,7 @@ const EDITORS_AFFINITAIRE = {
 
   // 🌿 MAISON & JARDIN
   garden: [
-    { name: "Maison Travaux", logo: "assets/maisontravaux-logo.png" },
+    { name: "Maison Travaux", logo: "assets/maisontavaux-logo.png" },
     { name: "Monjardin-ma-maison", logo: "assets/monjardin-ma-maison-logo.png" },
     { name: "Modesettravaux", logo: "assets/modesettravaux-logo.png" }
   ],
@@ -380,7 +377,83 @@ const EDITORS_AFFINITAIRE = {
   ],
 };
 
-// ----------------- AFFICHAGE ÉDITEURS (priorité affinitaires + limite à 6) -----------------
+const DEFAULT_STEP3_ASIDE_EDITORS = [
+  { name: "Google", logo: "assets/logo-google.png", url: "https://www.google.com" },
+  { name: "iGraal", logo: "assets/logo-igraal-png.png", url: "https://www.igraal.com" },
+  { name: "Ouest France", logo: "assets/ouest-france-logo.png", url: "https://www.ouest-france.fr" }
+];
+
+const STEP3_EDITOR_URLS = {
+  "google": "https://www.google.com",
+  "igraal": "https://www.igraal.com",
+  "ouest france": "https://www.ouest-france.fr"
+};
+
+function formatEditorHost(url) {
+  if (!url) return "";
+  try {
+    return `www.${new URL(url).hostname.replace(/^www\./, "")}`;
+  } catch {
+    return "";
+  }
+}
+
+function renderStep3AsideEditors(sectorKey) {
+  const cards = Array.from(document.querySelectorAll(".left-step3-editor-card"));
+  if (!cards.length) return;
+
+  const normalizedSectorKey = String(sectorKey || "").trim();
+  const sectorEditors = normalizedSectorKey
+    ? (EDITORS_AFFINITAIRE[normalizedSectorKey] || EDITORS_AFFINITAIRE.other || [])
+    : DEFAULT_STEP3_ASIDE_EDITORS;
+
+  const editors = sectorEditors.slice(0, cards.length);
+  while (editors.length < cards.length) {
+    editors.push(DEFAULT_STEP3_ASIDE_EDITORS[editors.length % DEFAULT_STEP3_ASIDE_EDITORS.length]);
+  }
+
+  cards.forEach((card, index) => {
+    const editor = editors[index];
+    if (!editor) return;
+
+    const logo = card.querySelector(".left-step3-editor-brand img");
+    const name = card.querySelector(".left-step3-editor-name");
+    const website = card.querySelector(".left-step3-editor-copy a");
+    const link = card.querySelector(".left-step3-editor-link");
+
+    if (logo) {
+      logo.src = editor.logo;
+      logo.alt = editor.name;
+    }
+    if (name) name.textContent = editor.name;
+
+    const editorUrl = editor.url || STEP3_EDITOR_URLS[String(editor.name || "").trim().toLowerCase()] || "";
+    if (website) {
+      if (editorUrl) {
+        website.href = editorUrl;
+        website.textContent = formatEditorHost(editorUrl);
+        website.style.display = "";
+      } else {
+        website.removeAttribute("href");
+        website.textContent = "";
+        website.style.display = "none";
+      }
+    }
+    if (link) {
+      if (editorUrl) {
+        link.href = editorUrl;
+        link.setAttribute("aria-label", `Ouvrir ${editor.name}`);
+        link.style.display = "";
+      } else {
+        link.removeAttribute("href");
+        link.removeAttribute("aria-label");
+        link.style.display = "none";
+      }
+    }
+  });
+}
+
+// ----------------- AFFICHAGE ÉDITEURS (priorité affinitaires + limite à 8) -----------------
 function afficherEditeurs(leviers, sectorKey) {
   const container = document.querySelector(".editor-grid");
   if (!container) return;
@@ -489,14 +562,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialisation
 showStep(currentStep);
-// ✅ Forcer l'étape visuelle à 3 au tout démarrage
-updateProgress(2);
-
-if (FORCE_STEP4_PREVIEW) {
-  setResultsMode(true);
-} else {
-  setResultsMode(false);
-}
+updateProgress(currentStep);
+setResultsMode(false);
 
   // Navigation entre les étapes
 document.getElementById('next-step-1')?.addEventListener('click', () => {
@@ -542,7 +609,6 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
 
   const asideStep2RoiValue = document.getElementById("asideStep2RoiValue");
   const asideStep2CacValue = document.getElementById("asideStep2CacValue");
-  const asideStep2CacNote = document.getElementById("asideStep2CacNote");
   const asideStep2RoiBar = document.getElementById("asideStep2RoiBar");
   const asideStep2CacBar = document.getElementById("asideStep2CacBar");
   const asideStep2Point1 = document.getElementById("asideStep2Point1");
@@ -550,77 +616,36 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
   const asideStep2Point3 = document.getElementById("asideStep2Point3");
 
   const updateStep2AsidePreview = () => {
-    if (!asideStep2RoiValue || !asideStep2CacValue || !asideStep2CacNote || !asideStep2RoiBar || !asideStep2CacBar) return;
+    if (!asideStep2RoiValue || !asideStep2CacValue || !asideStep2RoiBar || !asideStep2CacBar) return;
 
     const trafficMonthly = numberOf(form.elements["traffic"]?.value);
     const aovUser = numberOf(form.elements["aov"]?.value);
-    const cvrUserInput = numberOf(form.elements["cvr"]?.value) / 100;
-    const cacClient = numberOf(form.elements["cac"]?.value);
+    const cvrRate = numberOf(form.elements["cvr"]?.value) / 100;
     const budgetMonthly = numberOf(form.elements["budget"]?.value);
-    const budgetAnnual = budgetMonthly > 0 ? budgetMonthly * 12 : 0;
-    const sectorKey = form.elements["sector"]?.value || "other";
     const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map((input) => input.value);
-    const sector = SECTORS[sectorKey] || SECTORS.other;
+    const estimatedRevenue = trafficMonthly * cvrRate * aovUser;
+    const roi = (budgetMonthly > 0) ? (estimatedRevenue / budgetMonthly) : 0;
+    const cacPercent = (budgetMonthly > 0 && estimatedRevenue > 0)
+      ? ((budgetMonthly / estimatedRevenue) * 100)
+      : 0;
 
-    const computeScenarioRoi = ({ baseAov, baseCvr, cac }) => {
-      const yearlyTraffic = annualAffiliatedTraffic(trafficMonthly);
-      const potentialOrders = yearlyTraffic * baseCvr;
-      const maxOrdersByBudget = (budgetAnnual > 0 && cac > 0) ? (budgetAnnual / cac) : potentialOrders;
-      const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
-      const revenue = finalOrders * baseAov;
-      const theoreticalCost = finalOrders * cac;
-      const consumedBudget = budgetAnnual > 0 ? Math.min(budgetAnnual, theoreticalCost) : theoreticalCost;
-      return consumedBudget > 0 ? revenue / consumedBudget : 0;
-    };
+    asideStep2RoiValue.textContent = `${roi.toFixed(2)}x`;
+    asideStep2CacValue.textContent = `${cacPercent.toFixed(1)}%`;
 
-    let adjustedAov = adjustAOV(aovUser > 0 ? aovUser : sector.aov, levers);
-    let adjustedCvr = adjustCVR(cvrUserInput > 0 ? cvrUserInput : sector.cvr, levers);
-    const hybridChoice = form.querySelector('input[name="hybrides"]:checked')?.value || "non";
-    const hybridLevers = ["affinitaires", "influence", "emailing", "content", "ppc"];
-    if (hybridChoice === "non" && levers.some((lever) => hybridLevers.includes(lever))) {
-      adjustedAov *= 0.9;
-      adjustedCvr *= 0.7;
-    }
-
-    const projectedUserCac = projectedCAC(sectorKey, levers, cacClient || 0);
-    const referenceCac = projectedCAC(sectorKey, [], 0);
-
-    const roiCurrent = computeScenarioRoi({
-      baseAov: adjustedAov,
-      baseCvr: adjustedCvr,
-      cac: projectedUserCac
-    });
-
-    const roiReference = computeScenarioRoi({
-      baseAov: sector.aov,
-      baseCvr: sector.cvr,
-      cac: referenceCac
-    });
-
-    const roiDelta = roiCurrent - roiReference;
-    const comparedCac = cacClient > 0 ? cacClient : projectedUserCac;
-    const cacDeltaPct = referenceCac > 0 ? ((referenceCac - comparedCac) / referenceCac) * 100 : 0;
-
-    asideStep2RoiValue.textContent = `${roiDelta >= 0 ? "+" : ""}${roiDelta.toFixed(2)}`;
-    asideStep2CacValue.textContent = `${Math.abs(Math.round(cacDeltaPct))}%`;
-    asideStep2CacNote.textContent = cacDeltaPct >= 0
-      ? "En dessous de la moyenne secteur"
-      : "Au-dessus de la moyenne secteur";
-
-    const roiBarWidth = clamp((roiDelta + 5) / 10, 0, 1) * 100;
-    const cacBarWidth = clamp(Math.abs(cacDeltaPct) / 35, 0, 1) * 100;
+    const roiBarWidth = clamp(roi / 6, 0, 1) * 100;
+    const cacBarWidth = clamp(cacPercent / 40, 0, 1) * 100;
     asideStep2RoiBar.style.width = `${Math.max(6, roiBarWidth)}%`;
     asideStep2CacBar.style.width = `${Math.max(6, cacBarWidth)}%`;
 
     if (asideStep2Point1) {
-      asideStep2Point1.textContent = roiDelta >= 0
-        ? "Potentiel de croissance intéressant en affiliation"
-        : "Le potentiel peut progresser avec un mix mieux priorisé";
+      asideStep2Point1.textContent = roi >= 1
+        ? "Le revenu projeté couvre votre budget affiliation"
+        : "Le revenu projeté reste inférieur au budget engagé";
     }
     if (asideStep2Point2) {
-      asideStep2Point2.textContent = cacDeltaPct >= 0
-        ? "Mix optimisé par rapport au budget disponible"
-        : "Le CAC peut être réduit en rééquilibrant les leviers";
+      asideStep2Point2.textContent = cacPercent > 0 && cacPercent <= 20
+        ? "CAC projeté dans une zone maîtrisée"
+        : "Le CAC projeté peut être optimisé en ajustant le mix";
     }
     if (asideStep2Point3) {
       asideStep2Point3.textContent = levers.length >= 3
@@ -859,6 +884,7 @@ if (sectorSelectTrigger && sectorSelectMenu && sectorSelectValue && hiddenSector
       sectorSelectValue.textContent = item.textContent || "Sélectionnez votre secteur d’activité";
       sectorSelectMenu.hidden = true;
       sectorSelectTrigger.classList.remove("is-open");
+      renderStep3AsideEditors(value);
       refreshStep3SubmitState();
       updateStep2AsidePreview();
     });
@@ -874,6 +900,8 @@ if (sectorSelectTrigger && sectorSelectMenu && sectorSelectValue && hiddenSector
     }
   });
 }
+
+renderStep3AsideEditors(hiddenSector?.value || "");
 
 fullNameInput?.addEventListener("input", refreshStep3SubmitState);
 emailInput?.addEventListener("input", refreshStep3SubmitState);
@@ -1416,6 +1444,7 @@ if (restartBtn) {
     // 🔁 Réinitialise le formulaire et la progression
     const form = document.getElementById("form-simu");
     if (form) form.reset();
+    renderStep3AsideEditors("");
 
     // 🔁 Revient à la toute première étape
     currentStep = 0;
