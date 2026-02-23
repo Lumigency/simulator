@@ -7,6 +7,7 @@ const steps = document.querySelectorAll('.form-step');
 let currentStep = 0;
 // TEMP CSS work: start on Step 3 directly
 currentStep = 2;
+const FORCE_STEP4_PREVIEW = true;
 
 // ✅ message de maturité personnalisé
 let maturityMessage = "";
@@ -478,6 +479,15 @@ showStep(currentStep);
 // ✅ Forcer l'étape visuelle à 3 au tout démarrage
 updateProgress(2);
 
+if (FORCE_STEP4_PREVIEW) {
+  const results = document.getElementById("results");
+  const formContainer = document.querySelector(".right-column");
+  const splitLayout = document.querySelector(".split-layout");
+  if (formContainer) formContainer.style.display = "none";
+  if (results) results.style.display = "block";
+  if (splitLayout) splitLayout.classList.add("show-results");
+}
+
   // Navigation entre les étapes
 document.getElementById('next-step-1')?.addEventListener('click', () => {
   const objectifGroup = document.getElementById('objectif-group');
@@ -631,76 +641,49 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
     });
   }
   
- // === Synchronisation curseur <-> champ numérique ===
-const trafficRange = document.getElementById('trafficRange');
-const trafficInput = document.getElementById('trafficInput');
+ // === STEP 2 V2: Traffic slider + budget bands + leviers dropdown ===
+const trafficRange = document.getElementById("trafficRange");
+const trafficInput = document.getElementById("trafficInput");
+const trafficRangeV2 = document.getElementById("trafficRangeV2");
+const trafficValueDisplay = document.getElementById("trafficValueDisplay");
 
-if (trafficRange && trafficInput) {
-  // formatteur FR (espaces entre les milliers)
-  const format = (n) => new Intl.NumberFormat("fr-FR").format(n);
+if (trafficRange && trafficInput && trafficRangeV2) {
+  const fmtTraffic = (value) => new Intl.NumberFormat("fr-FR").format(value);
 
-  // quand on bouge le curseur → met à jour la case
-  trafficRange.addEventListener("input", (e) => {
-    const val = parseInt(e.target.value, 10) || 0;
+  const syncTraffic = () => {
+    let val = Number(trafficRangeV2.value || 0);
+    if (!Number.isFinite(val)) val = 0;
+    val = Math.min(1000000, Math.max(0, val));
     trafficInput.value = val;
-    updateStep2AsidePreview();
-  });
-
-  // quand on tape manuellement → met à jour le curseur
-  trafficInput.addEventListener("input", (e) => {
-    let val = parseInt(e.target.value, 10);
-    if (isNaN(val)) val = 0;
-    if (val < 0) val = 0;
-    if (val > 1000000) val = 1000000;
     trafficRange.value = val;
+    if (trafficValueDisplay) trafficValueDisplay.textContent = fmtTraffic(val);
     updateStep2AsidePreview();
-  });
+  };
 
-  // initialisation
-  trafficInput.value = parseInt(trafficRange.value, 10);
-  updateStep2AsidePreview();
+  trafficRangeV2.addEventListener("input", syncTraffic);
+  syncTraffic();
 }
 
-// === STEP 2 V2: Traffic pills + budget slider + leviers dropdown ===
-const trafficBandRadios = form.querySelectorAll('input[name="traffic_band"]');
-if (trafficBandRadios.length && trafficInput && trafficRange) {
-  trafficBandRadios.forEach((radio) => {
+const budgetBandRadios = form.querySelectorAll('input[name="budget_band"]');
+if (budgetBandRadios.length && budgetInput) {
+  const syncBudgetFromBand = (radio) => {
+    let mappedBudget = Number(radio.dataset.budget || 0);
+    if (!Number.isFinite(mappedBudget)) mappedBudget = 0;
+    budgetInput.value = mappedBudget;
+    updateStep2AsidePreview();
+  };
+
+  budgetBandRadios.forEach((radio) => {
     radio.addEventListener("change", () => {
       if (!radio.checked) return;
-      const mappedTraffic = Number(radio.dataset.traffic || 0);
-      trafficInput.value = mappedTraffic;
-      trafficRange.value = mappedTraffic;
-      updateStep2AsidePreview();
+      syncBudgetFromBand(radio);
     });
   });
 
-  const checkedBand = form.querySelector('input[name="traffic_band"]:checked');
-  if (checkedBand) {
-    const mappedTraffic = Number(checkedBand.dataset.traffic || 0);
-    trafficInput.value = mappedTraffic;
-    trafficRange.value = mappedTraffic;
-    updateStep2AsidePreview();
+  const checkedBudgetBand = form.querySelector('input[name="budget_band"]:checked');
+  if (checkedBudgetBand) {
+    syncBudgetFromBand(checkedBudgetBand);
   }
-}
-
-const budgetRangeV2 = document.getElementById("budgetRangeV2");
-const budgetValueDisplay = document.getElementById("budgetValueDisplay");
-if (budgetRangeV2 && budgetInput) {
-  const fmtBudget = (value) => {
-    if (value >= 1000000) return "1M €";
-    if (value >= 1000) return `${Math.round(value / 1000)}k €`;
-    return `${value} €`;
-  };
-
-  const syncBudget = () => {
-    const val = Number(budgetRangeV2.value || 0);
-    budgetInput.value = val;
-    if (budgetValueDisplay) budgetValueDisplay.textContent = fmtBudget(val);
-    updateStep2AsidePreview();
-  };
-
-  budgetRangeV2.addEventListener("input", syncBudget);
-  syncBudget();
 }
 
 const leverSelectTrigger = document.getElementById("leverSelectTrigger");
@@ -767,7 +750,12 @@ if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
 
       const remove = document.createElement("span");
       remove.className = "lever-tag-remove";
-      remove.textContent = "×";
+      const removeIcon = document.createElement("img");
+      removeIcon.className = "lever-tag-remove-icon";
+      removeIcon.src = "assets/svg/icon-x-circle.svg";
+      removeIcon.alt = "";
+      remove.setAttribute("aria-label", "Retirer ce levier");
+      remove.appendChild(removeIcon);
 
       const labelText = document.createElement("span");
       labelText.textContent = input.parentElement?.textContent?.trim() || input.value;
@@ -895,10 +883,15 @@ const hiddenAov = form.elements["aov"];
 const hiddenCvr = form.elements["cvr"];
 const hiddenCac = form.elements["cac"];
 
+const sanitizeEditableNumericText = (text) => {
+  const base = String(text || "").replace(",", ".").replace(/[^\d.]/g, "");
+  const firstDotIndex = base.indexOf(".");
+  if (firstDotIndex === -1) return base;
+  return `${base.slice(0, firstDotIndex + 1)}${base.slice(firstDotIndex + 1).replace(/\./g, "")}`;
+};
+
 const parseEditableNumber = (text) => {
-  const cleaned = String(text || "")
-    .replace(",", ".")
-    .replace(/[^\d.]/g, "");
+  const cleaned = sanitizeEditableNumericText(text);
   const parsed = parseFloat(cleaned);
   return Number.isFinite(parsed) ? Math.max(0, parsed) : 0;
 };
@@ -917,8 +910,33 @@ const bindEditableCurrency = (editableEl, hiddenField) => {
     editableEl.textContent = value.toFixed(2);
   };
 
+  editableEl.addEventListener("beforeinput", (event) => {
+    if (event.inputType !== "insertText") return;
+    const insertedText = String(event.data || "");
+    if (!/^[\d.,]+$/.test(insertedText)) event.preventDefault();
+  });
+
   editableEl.addEventListener("input", () => {
+    const sanitizedText = sanitizeEditableNumericText(editableEl.textContent);
+    if (String(editableEl.textContent || "") !== sanitizedText) {
+      editableEl.textContent = sanitizedText;
+    }
     syncFromEditable();
+  });
+
+  editableEl.addEventListener("paste", (event) => {
+    event.preventDefault();
+    const pastedText = event.clipboardData?.getData("text") || "";
+    const sanitizedText = sanitizeEditableNumericText(pastedText);
+    const inserted = document.execCommand && document.execCommand("insertText", false, sanitizedText);
+    if (!inserted) {
+      editableEl.textContent = sanitizeEditableNumericText(editableEl.textContent + sanitizedText);
+    }
+    syncFromEditable();
+  });
+
+  editableEl.addEventListener("drop", (event) => {
+    event.preventDefault();
   });
 
   editableEl.addEventListener("blur", formatEditable);
@@ -1135,9 +1153,18 @@ const elBudget = document.getElementById("kpi-budget");
 const elAov = document.getElementById("kpi-aov");
 const elCac = document.getElementById("kpi-cac");
 const elRoi = document.getElementById("kpi-roi");
-const insightsBox = document.getElementById("insights");
+const insightKeyBox = document.getElementById("kpi-insight-key");
+const quickAnalysisList = document.getElementById("quickAnalysisList");
+const leverSplitBars = document.getElementById("leverSplitBars");
+const nextStepBtn = document.getElementById("nextStepBtn");
 
-    if (elRevenue) elRevenue.textContent = fmtCurrency(revenue);
+    const fmtCompactCurrency = (value) => {
+      if (!Number.isFinite(value)) return "—";
+      if (Math.abs(value) >= 1000000) return `${(value / 1000000).toFixed(1).replace(".", ",")} M€`;
+      return fmtCurrency(value);
+    };
+	
+    if (elRevenue) elRevenue.textContent = fmtCompactCurrency(revenue);
     if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
     if (elBudget) elBudget.textContent = (budgetAnnual === Infinity) ? "Illimité" : fmtCurrency(budgetAnnual);
     if (elAov) elAov.textContent = fmtCurrency(adjustedAov);
@@ -1154,12 +1181,53 @@ const insightsBox = document.getElementById("insights");
     analysis.push(`Taux de conversion simulé : ${(adjustedCvr * 100).toFixed(2)}% (montée en puissance sur l'année 1).`);
     if (budgetAnnual !== Infinity) analysis.push(`Note : votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) peut limiter le volume de ventes affiché.`);
 
-    if (insightsBox) insightsBox.innerHTML = `<h3>Analyse rapide</h3><ul>${analysis.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+    if (quickAnalysisList) {
+      quickAnalysisList.innerHTML = analysis
+        .slice(0, 3)
+        .map((text) => `<li>${text}</li>`)
+        .join("");
+    }
+
+    const leverLabels = {
+      cashback: "Cashback",
+      bonsplans: "Bons plans",
+      comparateurs: "Comparateurs",
+      css: "CSS",
+      retargeting: "Retargeting",
+      "display-networks": "Display networks",
+      emailing: "Emailing / NL",
+      content: "Content commerce",
+      affinitaires: "Affinitaires",
+      influence: "Influence",
+      ppc: "SEA (PPC)",
+      retention: "Retention"
+    };
+
+    const { labels, data } = chartDataFor(sectorKey, levers);
+    const splitData = labels
+      .map((label, index) => ({
+        label: leverLabels[label] || label.replace(/-/g, " "),
+        pct: Math.max(1, Math.round((data[index] || 0) * 100))
+      }))
+      .sort((a, b) => b.pct - a.pct);
+
+    if (leverSplitBars) {
+      leverSplitBars.innerHTML = splitData
+        .map(
+          (item) => `
+            <div class="lever-split-row">
+              <p class="lever-split-label">${item.label}</p>
+              <p class="lever-split-pct">${item.pct}%</p>
+              <div class="lever-split-track"><span class="lever-split-fill" style="width:${item.pct}%;"></span></div>
+            </div>
+          `
+        )
+        .join("");
+    }
 
     // --- Chart (doughnut) : build from sector PDV filtered by levers ---
     const canvas = document.getElementById("chart-levers");
     if (canvas && window.Chart) {
-      const { labels, data } = chartDataFor(sectorKey, levers);
       // convert data to percentages for display plugin
       const dataPct = data.map(v => +(v*100).toFixed(2));
 
@@ -1219,16 +1287,14 @@ if (objectifValue === "scaler") {
     maturityMessage = "🚀 Vous entrez en phase d’accélération. Capitaliser sur ce qui fonctionne déjà tout en apportant plus de granularité dans vos partenariats sera clé pour scaler efficacement.";
 }
 
-// ✅ Affichage dans l’UI + animation
-const insightText = document.getElementById("insight-text");
-const insightMessage = document.getElementById("insight-message");
-
-if (insightMessage && insightText && maturityMessage) {
-    insightText.textContent = maturityMessage;
-    insightMessage.style.display = "block";
-    
-    // animation douce
-    setTimeout(() => insightMessage.classList.add("show"), 20);
+const summaryInsight = String(maturityMessage || "").replace(/^[^A-Za-zÀ-ÿ0-9]+/u, "").trim();
+if (insightKeyBox) {
+  if (summaryInsight) {
+    const firstSentence = summaryInsight.split(".").map((part) => part.trim()).filter(Boolean)[0];
+    insightKeyBox.textContent = firstSentence ? `${firstSentence}.` : summaryInsight;
+  } else {
+    insightKeyBox.textContent = analysis[0] || "Insight indisponible (en dur)";
+  }
 }
 
     // --- Editors suggestions ---
@@ -1348,6 +1414,7 @@ if (ctaWrapper && ctaBtn) {
   ctaBtn.textContent = ctaText;
   ctaBtn.href = ctaLink;
   ctaWrapper.style.display = "block";
+  if (nextStepBtn) nextStepBtn.href = ctaLink;
 }
   });
 });
@@ -1404,7 +1471,10 @@ function updateProgress(stepIndex) {
   const safeIndex = Math.max(0, Math.min(maxIndex, Number(stepIndex) || 0));
 
   stepDots.forEach((dot, index) => {
-    dot.classList.toggle("active", index <= safeIndex);
+    const isReached = index <= safeIndex;
+    const isCompleted = index < safeIndex;
+    dot.classList.toggle("active", isReached);
+    dot.classList.toggle("completed", isCompleted);
   });
 }
 

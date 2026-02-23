@@ -54,9 +54,11 @@
 */
 
 .steps-mini {
+  --step-dot-size: 32px;
+  --step-line-thickness: 2px;
   display: grid;
   grid-template-columns: 78px 1fr 78px 1fr 78px;
-  column-gap: 10px;
+  column-gap: 0;
   align-items: start;
   width: 100%;
 }
@@ -70,9 +72,10 @@
 }
 
 .step-dot span {
-  width: 32px;
-  height: 32px;
+  width: var(--step-dot-size);
+  height: var(--step-dot-size);
   border-radius: 999px;
+  position: relative;
   display: grid;
   place-items: center;
   border: 1px solid #9696AC;
@@ -103,11 +106,26 @@
   font-weight: 600;
 }
 
+.step-dot.completed span {
+  color: transparent;
+}
+
+.step-dot.completed span::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: center / contain no-repeat url("/assets/svg/icon-check-white.svg");
+}
+
 .step-line {
-  height: 1px;
+  height: var(--step-line-thickness);
   min-width: 0;
-  margin-top: 24px;
-  background: #bfc2d6;
+  margin-top: calc((var(--step-dot-size) - var(--step-line-thickness)) / 2);
+  margin-left: -18px;
+  margin-right: -18px;
+  background: var(--blue);
+  border-radius: 999px;
 }
 
 .left-card {
@@ -121,6 +139,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-bottom: 10px;
 }
 .left-step2-head-icon {
   width: 56px;
@@ -129,23 +148,25 @@
   flex: 0 0 56px;
   object-fit: contain;
 }
-.left-step2-title {
-  font-size: 24px;
-  line-height: 1.2;
-  font-weight: 700;
+.left-aside-title {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 900;
+  letter-spacing: -0.44px;
   color: var(--text);
 }
 .left-step2-subtitle {
   margin-top: 4px;
   font-size: 14px;
-  line-height: 1.4;
-  color: var(--muted);
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #6B6B7D;
 }
 .left-step2-metric {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(10, 10, 255, 0.06) 0%, rgba(10, 10, 255, 0.02) 100%);
 }
 .left-step2-metric-row {
   display: flex;
@@ -154,21 +175,32 @@
   gap: 10px;
 }
 .left-step2-metric-label {
-  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
   font-weight: 500;
+  letter-spacing: -0.15px;
+  line-height: 20px;
   color: var(--textSecondary);
 }
+.left-step2-metric-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
 .left-step2-metric-value {
-  font-size: 36px;
-  line-height: 1;
-  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 900;
   letter-spacing: -0.02em;
   color: var(--text);
 }
 .left-step2-metric-note {
   margin-top: 10px;
   font-size: 13px;
-  color: var(--muted);
+  color: #6B6B7D;
 }
 .left-step2-meter {
   margin-top: 10px;
@@ -187,15 +219,13 @@
   transition: width 0.25s ease;
 }
 .left-step2-points {
-  margin-top: 8px;
-  border-top: 1px solid var(--border);
-  padding-top: 14px;
+  margin-top: 34px;
 }
 .left-step2-points-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text);
 }
@@ -206,14 +236,14 @@
 }
 .left-step2-points ul {
   list-style: none;
-  margin-top: 10px;
+  margin-top: 13px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 .left-step2-points li {
   position: relative;
   padding-left: 26px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.4;
   color: var(--textSecondary);
 }
@@ -239,11 +269,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 900;
-  letter-spacing: -0.44px;
-  color: var(--text);
 }
 .left-step3-fact-title img {
   width: 20px;

@@ -9,40 +9,71 @@
   .step2-kpi-value { font-size: 42px; }
   .step2-gauge-value { font-size: 48px; }
   .step2-gauge-label { font-size: 20px; }
-  .budget-scale span { font-size: 24px; }
-  .budget-value { font-size: 38px; }
+  .traffic-scale span { font-size: 24px; }
+  .traffic-value { font-size: 38px; }
   .lever-select-menu { grid-template-columns: 1fr; }
   .step3-input { min-height: 56px; font-size: 24px; }
   .step3-label { font-size: 15px; }
   .step3-note { min-height: auto; padding: 12px 14px; align-items: flex-start; }
   .step3-note p { font-size: 13px; }
-  .sector-select-trigger { min-height: 56px; border-radius: 14px; padding: 0 14px; }
+  .sector-select-trigger,
+  .lever-select-trigger { min-height: 56px; border-radius: 14px; padding: 0 14px; }
   .sector-select-value { font-size: 14px; }
   .sector-select-menu { grid-template-columns: 1fr; }
   .step3-submit { min-height: 54px; border-radius: 14px; font-size: 15px; }
   .editor-grid { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; }
   #trafficInput { width: 100%; }
-  .left-step2-title { font-size: 22px; }
+  .left-aside-title { font-size: 22px; }
   .left-step2-metric-value { font-size: 32px; }
-  .left-step3-fact-title { font-size: 22px; }
   .left-step3-fact-copy { font-size: 18px; }
   .left-step3-editors-title { font-size: 20px; }
   .left-step3-editor-name { font-size: 22px; }
   .left-step3-editor-copy a { font-size: 17px; }
+  .conf-hero h2 { font-size: 34px; }
+  .conf-grid { grid-template-columns: 1fr; }
+  .conf-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .conf-kpi-card { min-height: 128px; }
+  .conf-kpi-grid .conf-kpi-card { grid-column: auto; grid-row: auto; }
+  .conf-kpi-insight { min-height: 128px; }
+  .conf-kpi-insight .conf-kpi-label { font-size: 20px; }
+  .conf-kpi-insight-text { font-size: 14px; }
+  .conf-kpi-value { font-size: 30px; }
+  .conf-next-btn { font-size: 16px; }
+  .conf-next-btn span { font-size: 18px; }
+  .editor-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (max-width: 640px) {
   .objective-grid { grid-template-columns: 1fr; }
-  .traffic-pill-group { gap: 8px; }
-  .traffic-pill { width: 100%; justify-content: flex-start; }
+  .budget-pill-group { gap: 8px; }
+  .budget-pill { width: 100%; justify-content: flex-start; }
   .step3-actions { flex-direction: column; align-items: stretch; }
   .left-step2-metric-value { font-size: 28px; }
   .left-step3-aside { padding: 16px; gap: 20px; }
-  .left-step3-fact-title { font-size: 20px; }
+  .left-aside-title { font-size: 20px; }
   .left-step3-fact-copy { font-size: 17px; }
   .left-step3-editor-card { grid-template-columns: 64px 1fr auto; padding: 12px; }
   .left-step3-editor-brand { width: 64px; height: 64px; border-radius: 14px; }
   .left-step3-editor-name { font-size: 20px; }
   .left-step3-editor-copy a { font-size: 16px; }
+  .conf-hero { padding: 20px 16px; }
+  .conf-hero h2 { font-size: 30px; }
+  .conf-hero p { font-size: 14px; }
+  .conf-kpi-grid { grid-template-columns: 1fr; }
+  .conf-kpi-card { min-height: 104px; }
+  .conf-kpi-grid .conf-kpi-card { grid-column: auto; grid-row: auto; }
+  .conf-kpi-insight .conf-kpi-label { font-size: 18px; }
+  .conf-kpi-insight-text { font-size: 13px; }
+  .conf-kpi-value { font-size: 28px; }
+  .lever-split-label,
+  .lever-split-pct { font-size: 13px; }
+  .conf-analysis-list li { font-size: 13px; }
+  .conf-next p { font-size: 13px; }
+  .conf-next-btn { font-size: 15px; min-height: 44px; }
+  .conf-next-btn span { font-size: 16px; }
+  .editor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #cta-dynamic { flex-direction: column; align-items: stretch; }
+  #cta-dynamic .cta-button,
+  #restart-btn { width: 100%; }
 }

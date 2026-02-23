@@ -113,14 +113,17 @@
           <div class="left-step2-head">
             <img class="left-step2-head-icon" src="/assets/svg/picto-star.svg" alt="">
             <div>
-              <p class="left-step2-title">Analyse rapide</p>
+              <p class="left-aside-title">Analyse rapide</p>
               <p class="left-step2-subtitle">Votre potentiel d'affiliation</p>
             </div>
           </div>
 
           <article class="left-step2-metric">
             <div class="left-step2-metric-row">
-              <p class="left-step2-metric-label">ROI estimé</p>
+              <p class="left-step2-metric-label">
+                <img class="left-step2-metric-icon" src="/assets/svg/icon-arrow-up.svg" alt="">
+                <span>ROI estimé</span>
+              </p>
               <p class="left-step2-metric-value" id="asideStep2RoiValue">+0.00</p>
             </div>
             <p class="left-step2-metric-note">Bel écart par rapport à votre secteur</p>
@@ -131,7 +134,10 @@
 
           <article class="left-step2-metric">
             <div class="left-step2-metric-row">
-              <p class="left-step2-metric-label">CAC maîtrisé</p>
+              <p class="left-step2-metric-label">
+                <img class="left-step2-metric-icon" src="/assets/svg/icon-3-concentrics-circles-blue.svg" alt="">
+                <span>CAC maîtrisé</span>
+              </p>
               <p class="left-step2-metric-value" id="asideStep2CacValue">0%</p>
             </div>
             <p class="left-step2-metric-note" id="asideStep2CacNote">Aligné avec la moyenne secteur</p>
@@ -155,7 +161,7 @@
 
         <section class="left-card left-step3-aside" id="leftAsideStep3" hidden>
           <div class="left-step3-fact">
-            <p class="left-step3-fact-title">
+            <p class="left-step3-fact-title left-aside-title">
               <img src="/assets/svg/icon-bulb.svg" alt="">
               <span>Le saviez-vous ?</span>
             </p>
@@ -416,27 +422,17 @@
   <div class="step2-v2">
     <div class="aff-field">
       <p class="aff-label">Quel est votre trafic mensuel actuel ?</p>
-      <div class="traffic-pill-group" role="radiogroup" aria-label="Trafic mensuel">
-        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_1" data-traffic="180000">
-        <label class="btn-outline traffic-pill" for="traffic_band_1">Moins de 200k</label>
-
-        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_2" data-traffic="300000" checked>
-        <label class="btn-outline traffic-pill" for="traffic_band_2">Entre 200k et 400k</label>
-
-        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_3" data-traffic="500000">
-        <label class="btn-outline traffic-pill" for="traffic_band_3">Entre 400k et 600k</label>
-
-        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_4" data-traffic="700000">
-        <label class="btn-outline traffic-pill" for="traffic_band_4">Entre 600k et 800k</label>
-
-        <input class="traffic-pill-radio" type="radio" name="traffic_band" id="traffic_band_5" data-traffic="900000">
-        <label class="btn-outline traffic-pill" for="traffic_band_5">Plus de 800k</label>
+      <div class="traffic-scale">
+        <span>0</span>
+        <input type="range" id="trafficRangeV2" min="0" max="1000000" step="1000" value="300000">
+        <span>1 M</span>
       </div>
+      <p class="traffic-value" id="trafficValueDisplay">300 000</p>
     </div>
 
     <div class="step2-kpis">
       <div class="step2-kpi">
-        <p class="step2-kpi-value"><span id="aovValueDisplay" class="step2-kpi-editable" contenteditable="true" spellcheck="false">0.00</span>€</p>
+        <p class="step2-kpi-value"><span id="aovValueDisplay" class="step2-kpi-editable" contenteditable="true" inputmode="decimal" spellcheck="false">0.00</span>€</p>
         <!-- <input type="number" id="aovInputV2" class="step2-kpi-input" min="0" step="1" value="0" aria-label="Panier moyen en euros"> -->
         <p class="step2-kpi-label">Votre panier moyen</p>
       </div>
@@ -457,7 +453,7 @@
         <p class="step2-kpi-label">Votre taux de conversion</p>
       </div>
       <div class="step2-kpi">
-        <p class="step2-kpi-value"><span id="cacValueDisplay" class="step2-kpi-editable" contenteditable="true" spellcheck="false">0.00</span>€</p>
+        <p class="step2-kpi-value"><span id="cacValueDisplay" class="step2-kpi-editable" contenteditable="true" inputmode="decimal" spellcheck="false">0.00</span>€</p>
         <!-- <input type="number" id="cacInputV2" class="step2-kpi-input" min="0" step="1" value="0" aria-label="Coût d’acquisition en euros"> -->
         <p class="step2-kpi-label">Votre coût d’acquisition envisagé</p>
       </div>
@@ -465,19 +461,28 @@
 
     <div class="aff-field">
       <p class="aff-label">Avez-vous un budget d’affiliation prédéfini ?</p>
-      <div class="budget-scale">
-        <span>0 €</span>
-        <input type="range" id="budgetRangeV2" min="0" max="1000000" step="10000" value="650000">
-        <span>1 M €</span>
+      <div class="budget-pill-group" role="radiogroup" aria-label="Budget mensuel d'affiliation">
+        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_1" data-budget="10000">
+        <label class="btn-outline budget-pill" for="budget_band_1">Moins de 20k €</label>
+
+        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_2" data-budget="35000" checked>
+        <label class="btn-outline budget-pill" for="budget_band_2">Entre 20k et 50k €</label>
+
+        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_3" data-budget="60000">
+        <label class="btn-outline budget-pill" for="budget_band_3">Entre 50k et 70k €</label>
+
+        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_4" data-budget="80000">
+        <label class="btn-outline budget-pill" for="budget_band_4">Plus de 70k €</label>
       </div>
-      <p class="budget-value" id="budgetValueDisplay">650k €</p>
     </div>
 
       <div class="aff-field">
         <p class="aff-label">Quels sont les leviers que vous souhaitez autoriser ?</p>
         <div class="lever-select">
           <button type="button" id="leverSelectTrigger" class="lever-select-trigger">
-            <span class="lever-select-leading" aria-hidden="true">&#9678;</span>
+            <span class="lever-select-leading" aria-hidden="true">
+              <img class="select-leading-icon" src="assets/svg/icon-3-concentric-circles.svg" alt="">
+            </span>
             <span id="leverSelectValue" class="lever-select-value" data-placeholder="Sélectionnez un ou plusieurs leviers">
               Sélectionnez un ou plusieurs leviers
             </span>
@@ -504,7 +509,7 @@
     <input type="hidden" id="trafficInput" name="traffic" value="300000">
     <input type="hidden" id="trafficRange" name="trafficRange" value="300000">
     <input type="hidden" id="sector" name="sector" value="">
-    <input type="hidden" id="budget" name="budget" value="650000">
+    <input type="hidden" id="budget" name="budget" value="35000">
     <input type="hidden" id="cac" name="cac" value="0">
     <input type="hidden" id="aov" name="aov" value="0">
     <input type="hidden" id="cvr" name="cvr" value="1">
@@ -550,7 +555,9 @@
                   <p class="step3-label">Quel est votre secteur d’activité ?</p>
                   <div class="sector-select">
                     <button type="button" id="sectorSelectTrigger" class="sector-select-trigger">
-                      <span class="sector-select-leading" aria-hidden="true">&#9678;</span>
+                      <span class="sector-select-leading" aria-hidden="true">
+                        <img class="select-leading-icon" src="assets/svg/icon-3-concentric-circles.svg" alt="">
+                      </span>
                       <span id="sectorSelectValue" class="sector-select-value">Sélectionnez votre secteur d’activité</span>
                       <span class="sector-select-chevron" aria-hidden="true">&#8964;</span>
                     </button>
@@ -589,46 +596,101 @@
 
       <!-- ✅ Results (EN DEHORS de .right-column) -->
       <section id="results" class="results-section">
-        <h2>Résultats</h2>
-        <p class="subtitle">Projection estimative — année 1 (montée en puissance incluse)</p>
+        <section class="conf-hero">
+          <p class="conf-badge">Simulation complétée avec succès</p>
+          <h2>Vos résultats de simulation personnalisée</h2>
+          <p>
+            Cette simulation combine vos données, notre expertise métier et des benchmarks marché
+            afin d'estimer vos performances potentielles sur <strong>12 mois d'activité en affiliation</strong>.
+          </p>
+          <small>Ces résultats sont des estimations et servent de base à la réflexion stratégique.</small>
+        </section>
 
-        <div class="kpi-grid simu-cards-row">
-          <div class="result-card gradient">
-            <h3>Projection</h3>
-            <ul class="kpi-list">
-              <li><strong>CA :</strong> <span id="kpi-revenue">—</span></li>
-              <li><strong>Commandes :</strong> <span id="kpi-orders">—</span></li>
-              <li><strong>Budget :</strong> <span id="kpi-budget">—</span></li>
-            </ul>
+        <div class="conf-grid">
+          <div class="conf-main">
+            <section class="conf-kpi-grid">
+              <article class="conf-kpi-card conf-kpi-revenue">
+                <p class="conf-kpi-label">Chiffre d'affaires estimé</p>
+                <p class="conf-kpi-value" id="kpi-revenue">—</p>
+                <p class="conf-kpi-note">Projection annuelle</p>
+              </article>
+
+              <article class="conf-kpi-card conf-kpi-roi">
+                <p class="conf-kpi-label">ROI potentiel</p>
+                <p class="conf-kpi-value" id="kpi-roi">—</p>
+                <p class="conf-kpi-note">Retour sur investissement</p>
+              </article>
+
+              <article class="conf-kpi-card conf-kpi-orders">
+                <p class="conf-kpi-label">Commandes générées</p>
+                <p class="conf-kpi-value" id="kpi-orders">—</p>
+                <p class="conf-kpi-note">Volume sur 12 mois</p>
+              </article>
+
+              <article class="conf-kpi-card conf-kpi-insight">
+                <p class="conf-kpi-label">Insight clé</p>
+                <p class="conf-kpi-insight-text" id="kpi-insight-key">—</p>
+              </article>
+
+              <article class="conf-kpi-card conf-kpi-small conf-kpi-aov">
+                <p class="conf-kpi-label">Panier moyen</p>
+                <p class="conf-kpi-value" id="kpi-aov">—</p>
+              </article>
+
+              <article class="conf-kpi-card conf-kpi-small conf-kpi-cac">
+                <p class="conf-kpi-label">CAC projeté</p>
+                <p class="conf-kpi-value" id="kpi-cac">—</p>
+              </article>
+
+              <article class="conf-kpi-card conf-kpi-small conf-kpi-budget">
+                <p class="conf-kpi-label">Budget affiliation</p>
+                <p class="conf-kpi-value" id="kpi-budget">—</p>
+              </article>
+            </section>
+
+            <section class="conf-card conf-levers">
+              <h3>Répartition des leviers par volume de ventes estimés</h3>
+              <p class="conf-kpi-label">Mix projetés en fonction de vos réponses</p>
+              <div id="leverSplitBars" class="lever-split-bars"></div>
+            </section>
+
+            <section class="conf-card conf-editors">
+              <h3>Éditeurs recommandés</h3>
+              <p class="conf-kpi-label">Partenaires stratégiques pour votre programme</p>
+              <div class="editor-grid"></div>
+            </section>
+
+            <section class="conf-card conf-final-cta">
+              <h3>Prêt à concrétiser votre potentiel ?</h3>
+              <p>
+                Un expert Lumigency ⚡ analysera vos résultats et vous proposera des pistes concrètes
+                pour développer ou optimiser votre stratégie d'affiliation.
+              </p>
+              <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
+                <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
+                <button id="restart-btn" type="button">Refaire une simulation</button>
+              </div>
+            </section>
           </div>
 
-          <div class="repartition-card">
-            <h3>Mix leviers</h3>
-            <canvas id="chart-levers" width="300" height="300"></canvas>
-            <div class="mini-insight">
-              <strong>KPIs</strong>
-              CAC projeté : <span id="kpi-cac">—</span><br>
-              ROI : <span id="kpi-roi">—</span><br>
-              Panier : <span id="kpi-aov">—</span>
-            </div>
-          </div>
+          <aside class="conf-side">
+            <section class="conf-card conf-analysis">
+              <h3>Analyse rapide</h3>
+              <ul id="quickAnalysisList" class="conf-analysis-list"></ul>
+            </section>
 
-          <div class="result-card gradient">
-            <h3>Lecture rapide</h3>
-            <div id="insights" class="analysis-block" style="background:transparent; box-shadow:none; padding:0;"></div>
-          </div>
-        </div>
-
-        <div id="insight-message" class="insight-personal-message" style="display:none;">
-          <p id="insight-text"></p>
-        </div>
-
-        <h3 class="section-title">Éditeurs recommandés</h3>
-        <div class="editor-grid"></div>
-
-        <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
-          <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
-          <button id="restart-btn" type="button">Refaire une simulation</button>
+            <section class="conf-card conf-next">
+              <h3>Prochaine étape</h3>
+              <p>
+                Un expert Lumigency peut analyser ces résultats avec vous et identifier les leviers
+                prioritaires pour votre programme.
+              </p>
+              <a id="nextStepBtn" class="conf-next-btn" href="https://www.lumigency.com/consultation-gratuite" target="_blank" rel="noopener">
+                Prendre rendez-vous
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </aside>
         </div>
        </section> <!-- ✅ fin #results -->
     </div> <!-- ✅ fin .simu-grid.split-layout -->

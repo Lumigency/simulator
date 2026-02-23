@@ -126,8 +126,28 @@ button.aff-pill {
 }
 
 #form-simu .btn-prev.btn-outline {
+  padding: 13px 20px;
+  border: 1px solid #9696AC;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.5px;
+  color: var(--text);
   box-shadow: none;
   background: #fff;
+}
+
+#form-simu .btn-prev.btn-outline:hover {
+  background: #fff;
+  background-image: none;
+  border-color: #9696AC;
+  color: var(--text);
+  transform: none;
+}
+
+#form-simu .btn-prev.btn-outline::before {
+  content: "←";
+  margin-right: 8px;
 }
 
 #form-simu .objective-card:hover .objective-title {
@@ -197,23 +217,23 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   gap: 28px;
 }
 
-.traffic-pill-group {
+.budget-pill-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.traffic-pill-radio {
+.budget-pill-radio {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-.traffic-pill {
+.budget-pill {
   min-height: 44px;
 }
 
-.traffic-pill-radio:checked + .traffic-pill {
+.budget-pill-radio:checked + .budget-pill {
   border-color: transparent;
   background-color: var(--simu-hover-solid);
   background-image: var(--simu-hover-gradient);
@@ -258,9 +278,6 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 
 .step2-kpi-editable:focus {
   outline: none;
-  border-color: rgba(10, 10, 255, 0.35);
-  box-shadow: 0 0 0 4px rgba(10, 10, 255, 0.08);
-  background: #fff;
 }
 
 .step2-kpi-label {
@@ -363,14 +380,14 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   font-size: 12px;
 }
 
-.budget-scale {
+.traffic-scale {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 16px;
 }
 
-.budget-scale span {
+.traffic-scale span {
   color: #8f92a8;
   font-size: 14px;
   line-height: 20px;
@@ -378,7 +395,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   color: #9696AC;
 }
 
-#budgetRangeV2 {
+#trafficRangeV2 {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -388,7 +405,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   accent-color: var(--blue);
 }
 
-.budget-value {
+.traffic-value {
   margin-top: 3px;
   text-align: right;
   font-size: 24px;
@@ -418,14 +435,12 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 
 .lever-select-trigger {
   width: 100%;
-  min-height: 78px;
+  min-height: 50px;
   border: 1px solid #d1d1d6;
-  border-radius: 16px;
+  border-radius: 12px;
   background: white;
-  color: #6f7282;
   text-align: left;
-  padding: 12px 16px;
-  font-size: 16px;
+  padding: 0 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -433,10 +448,19 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 }
 
 .lever-select-leading {
-  color: #c3c5d1;
-  font-size: 22px;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
+}
+
+.select-leading-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .lever-select-value {
@@ -472,11 +496,22 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: 999px;
-  border: 2px solid var(--blue);
-  font-size: 16px;
-  line-height: 1;
-  font-weight: 700;
+  cursor: pointer;
+}
+
+.lever-tag-remove-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.lever-tag span {
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 500;
+  color: var(--blue);
 }
 
 .lever-select-chevron {
@@ -544,7 +579,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 14px;
+  padding: 12px 16px;
 }
 
 .step3-note p {
@@ -579,17 +614,19 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   border-radius: 12px;
   background: white;
   text-align: left;
-  padding: 0 24px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   cursor: pointer;
 }
 
 .sector-select-leading {
-  color: #c3c5d1;
-  font-size: 24px;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 }
 
