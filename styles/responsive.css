@@ -39,6 +39,15 @@
   .conf-kpi-insight .conf-kpi-label { font-size: 20px; }
   .conf-kpi-insight-text { font-size: 14px; }
   .conf-kpi-value { font-size: 30px; }
+  .conf-kpi-small {
+    min-height: 120px;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .conf-kpi-small-icon {
+    width: 40px;
+    height: 40px;
+  }
   .conf-next-btn { font-size: 16px; }
   .conf-next-btn span { font-size: 18px; }
   .editor-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -63,6 +72,15 @@
   .conf-kpi-grid { grid-template-columns: 1fr; }
   .conf-kpi-card { min-height: 104px; }
   .conf-kpi-grid .conf-kpi-card { grid-column: auto; grid-row: auto; }
+  .conf-kpi-small {
+    min-height: 110px;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .conf-kpi-small-icon {
+    width: 36px;
+    height: 36px;
+  }
   .conf-kpi-insight .conf-kpi-label { font-size: 18px; }
   .conf-kpi-insight-text { font-size: 13px; }
   .conf-kpi-value { font-size: 28px; }

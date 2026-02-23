@@ -84,7 +84,7 @@
   font-weight: 900;
 }
 
-.conf-hero p {
+.conf-hero p:not(.conf-badge) {
   margin-top: 16px;
   max-width: 860px;
   font-size: 20px;
@@ -116,7 +116,7 @@
   margin-top: 32px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 16px;
+  gap: 32px;
   align-items: start;
 }
 
@@ -135,15 +135,19 @@
 
 .conf-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
 }
 
 .conf-kpi-card {
   --kpi-accent: #3040f3;
   --kpi-chip-bg: #eef0ff;
   --kpi-chip-icon: none;
-  --kpi-cloud: rgba(48, 64, 243, 0.1);
+  --kpi-sign: none;
+  --kpi-sign-size: 156px;
+  --kpi-sign-top: 16px;
+  --kpi-sign-right: 16px;
+  --kpi-sign-opacity: 0;
   position: relative;
   overflow: hidden;
   border-radius: 16px;
@@ -167,12 +171,13 @@
 .conf-kpi-card::after {
   content: "";
   position: absolute;
-  right: -24px;
-  top: -24px;
-  width: 120px;
-  height: 120px;
-  border-radius: 36px;
-  background: radial-gradient(circle at 35% 35%, var(--kpi-cloud) 0%, rgba(255, 255, 255, 0) 72%);
+  right: var(--kpi-sign-right);
+  top: var(--kpi-sign-top);
+  width: var(--kpi-sign-size);
+  height: var(--kpi-sign-size);
+  background: center / contain no-repeat var(--kpi-sign);
+  opacity: var(--kpi-sign-opacity);
+  pointer-events: none;
 }
 
 .conf-kpi-revenue {
@@ -180,7 +185,11 @@
   grid-row: 1;
   --kpi-accent: #2a33f0;
   --kpi-chip-icon: url("/assets/svg/icon-euro.svg");
-  --kpi-cloud: rgba(42, 51, 240, 0.15);
+  --kpi-sign: url("/assets/svg/sign-euro.svg");
+  --kpi-sign-size: 154px;
+  --kpi-sign-top: 14px;
+  --kpi-sign-right: 8px;
+  --kpi-sign-opacity: 1;
 }
 
 .conf-kpi-roi {
@@ -188,7 +197,11 @@
   grid-row: 1;
   --kpi-accent: #5a5df3;
   --kpi-chip-icon: url("/assets/svg/icon-roi.svg");
-  --kpi-cloud: rgba(90, 93, 243, 0.14);
+  --kpi-sign: url("/assets/svg/sign-arrow-up.svg");
+  --kpi-sign-size: 160px;
+  --kpi-sign-top: 10px;
+  --kpi-sign-right: 8px;
+  --kpi-sign-opacity: 1;
 }
 
 .conf-kpi-orders {
@@ -196,7 +209,11 @@
   grid-row: 1;
   --kpi-accent: #ff7c89;
   --kpi-chip-icon: url("/assets/svg/icon-commandes.svg");
-  --kpi-cloud: rgba(255, 124, 137, 0.16);
+  --kpi-sign: url("/assets/svg/sign-orders.svg");
+  --kpi-sign-size: 176px;
+  --kpi-sign-top: 6px;
+  --kpi-sign-right: 6px;
+  --kpi-sign-opacity: 1;
 }
 
 .conf-kpi-insight {
@@ -211,12 +228,14 @@
   --kpi-accent: #6f56f7;
   --kpi-chip-bg: #f1edff;
   --kpi-chip-icon: url("/assets/svg/picto-star.svg");
-  --kpi-cloud: rgba(111, 86, 247, 0.16);
 }
 
 .conf-kpi-small {
-  min-height: 104px;
-  padding: 20px;
+  min-height: 136px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .conf-kpi-aov {
@@ -224,7 +243,6 @@
   grid-row: 2;
   --kpi-accent: #7d6bf7;
   --kpi-chip-icon: url("/assets/svg/icon-cac.svg");
-  --kpi-cloud: rgba(125, 107, 247, 0.14);
 }
 
 .conf-kpi-cac {
@@ -232,7 +250,6 @@
   grid-row: 2;
   --kpi-accent: #9f7ff9;
   --kpi-chip-icon: url("/assets/svg/icon-cac.svg");
-  --kpi-cloud: rgba(159, 127, 249, 0.14);
 }
 
 .conf-kpi-budget {
@@ -240,20 +257,35 @@
   grid-row: 2;
   --kpi-accent: #5b66ff;
   --kpi-chip-icon: url("/assets/svg/icon-budget.svg");
-  --kpi-cloud: rgba(91, 102, 255, 0.14);
 }
 
 .conf-kpi-revenue::before,
 .conf-kpi-roi::before,
-.conf-kpi-orders::before,
-.conf-kpi-aov::before,
-.conf-kpi-cac::before,
-.conf-kpi-budget::before {
-  width: 44px;
-  height: 44px;
+.conf-kpi-orders::before {
+  width: 48px;
+  height: 48px;
   border: none;
   border-radius: 0;
   background: center / contain no-repeat var(--kpi-chip-icon);
+}
+
+.conf-kpi-small::before {
+  content: none;
+}
+
+.conf-kpi-small-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  background: center / contain no-repeat var(--kpi-chip-icon);
+}
+
+.conf-kpi-small-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .conf-kpi-label {
@@ -279,8 +311,16 @@
 }
 
 .conf-kpi-small .conf-kpi-value {
-  margin-top: 6px;
+  margin-top: 0;
   font-size: clamp(1.6rem, 1.95vw, 2.2rem);
+  line-height: 1.05;
+}
+
+.conf-kpi-small .conf-kpi-label {
+  margin-top: 0;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
 }
 
 #kpi-budget {
@@ -372,8 +412,9 @@
 }
 
 .conf-side {
-  display: grid;
-  gap: 14px;
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
 }
 
 .conf-analysis h3,
@@ -562,32 +603,40 @@
 #cta-dynamic .cta-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 12px;
   min-height: 46px;
-  border-radius: 12px;
-  padding: 0 20px;
-  background: #232cf0;
-  color: #fff;
+  padding: 12px 18px;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 600;
-  box-shadow: 0 8px 22px rgba(35, 44, 240, 0.28);
+  text-align: left;
 }
 
-#cta-dynamic .cta-button:hover {
-  background: #151de8;
+#cta-dynamic .cta-button .cta-button-icon {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 400;
 }
 
 #restart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 46px;
   border-radius: 12px;
   border: 1px solid #d5d7e0;
-  background: #fff;
+  background: transparent;
   color: #242741;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0 18px;
   cursor: pointer;
+}
+
+#restart-btn .restart-btn-icon {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 400;
 }
 
 .split-layout.show-results {
@@ -608,5 +657,9 @@
 }
 
 .split-layout.show-results .right-column {
+  display: none;
+}
+
+.simu-shell.results-mode .simu-head {
   display: none;
 }

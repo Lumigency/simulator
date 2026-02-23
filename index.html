@@ -627,24 +627,28 @@
                 <p class="conf-kpi-note">Volume sur 12 mois</p>
               </article>
 
-              <article class="conf-kpi-card conf-kpi-insight">
-                <p class="conf-kpi-label">Insight clé</p>
-                <p class="conf-kpi-insight-text" id="kpi-insight-key">—</p>
-              </article>
-
               <article class="conf-kpi-card conf-kpi-small conf-kpi-aov">
-                <p class="conf-kpi-label">Panier moyen</p>
-                <p class="conf-kpi-value" id="kpi-aov">—</p>
+                <span class="conf-kpi-small-icon" aria-hidden="true"></span>
+                <div class="conf-kpi-small-copy">
+                  <p class="conf-kpi-label">Panier moyen</p>
+                  <p class="conf-kpi-value" id="kpi-aov">—</p>
+                </div>
               </article>
 
               <article class="conf-kpi-card conf-kpi-small conf-kpi-cac">
-                <p class="conf-kpi-label">CAC projeté</p>
-                <p class="conf-kpi-value" id="kpi-cac">—</p>
+                <span class="conf-kpi-small-icon" aria-hidden="true"></span>
+                <div class="conf-kpi-small-copy">
+                  <p class="conf-kpi-label">CAC projeté</p>
+                  <p class="conf-kpi-value" id="kpi-cac">—</p>
+                </div>
               </article>
 
               <article class="conf-kpi-card conf-kpi-small conf-kpi-budget">
-                <p class="conf-kpi-label">Budget affiliation</p>
-                <p class="conf-kpi-value" id="kpi-budget">—</p>
+                <span class="conf-kpi-small-icon" aria-hidden="true"></span>
+                <div class="conf-kpi-small-copy">
+                  <p class="conf-kpi-label">Budget affiliation</p>
+                  <p class="conf-kpi-value" id="kpi-budget">—</p>
+                </div>
               </article>
             </section>
 
@@ -666,14 +670,24 @@
                 Un expert Lumigency ⚡ analysera vos résultats et vous proposera des pistes concrètes
                 pour développer ou optimiser votre stratégie d'affiliation.
               </p>
-              <div id="cta-dynamic" class="cta-dynamic" style="display:none;">
-                <a id="cta-button" class="cta-button" href="#" target="_blank" rel="noopener">Parler à un expert Lumigency</a>
-                <button id="restart-btn" type="button">Refaire une simulation</button>
+              <div id="cta-dynamic" class="cta-dynamic">
+                <a id="cta-button" class="cta-button btn-primary" href="https://www.lumigency.com/consultation-gratuite" target="_blank" rel="noopener">
+                  <span>Bénéficier d’un échange stratégique avec Lumigency</span>
+                  <span class="cta-button-icon" aria-hidden="true">→</span>
+                </a>
+                <button id="restart-btn" class="btn-outline" type="button">
+                  <span class="restart-btn-icon" aria-hidden="true">↻</span>
+                  <span>Refaire une simulation</span>
+                </button>
               </div>
             </section>
           </div>
 
           <aside class="conf-side">
+            <section class="conf-kpi-card conf-kpi-insight">
+              <p class="conf-kpi-label">Insight clé</p>
+              <p class="conf-kpi-insight-text" id="kpi-insight-key">—</p>
+            </section>
             <section class="conf-card conf-analysis">
               <h3>Analyse rapide</h3>
               <ul id="quickAnalysisList" class="conf-analysis-list"></ul>

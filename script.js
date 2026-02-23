@@ -474,18 +474,28 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const setResultsMode = (isResultsMode) => {
+    const isResults = Boolean(isResultsMode);
+    const results = document.getElementById("results");
+    const formContainer = document.querySelector(".right-column");
+    const splitLayout = document.querySelector(".split-layout");
+    const shell = document.querySelector(".simu-shell");
+
+    if (formContainer) formContainer.style.display = isResults ? "none" : "block";
+    if (results) results.style.display = isResults ? "block" : "none";
+    if (splitLayout) splitLayout.classList.toggle("show-results", isResults);
+    if (shell) shell.classList.toggle("results-mode", isResults);
+  };
+
 // Initialisation
 showStep(currentStep);
 // ✅ Forcer l'étape visuelle à 3 au tout démarrage
 updateProgress(2);
 
 if (FORCE_STEP4_PREVIEW) {
-  const results = document.getElementById("results");
-  const formContainer = document.querySelector(".right-column");
-  const splitLayout = document.querySelector(".split-layout");
-  if (formContainer) formContainer.style.display = "none";
-  if (results) results.style.display = "block";
-  if (splitLayout) splitLayout.classList.add("show-results");
+  setResultsMode(true);
+} else {
+  setResultsMode(false);
 }
 
   // Navigation entre les étapes
@@ -1133,18 +1143,7 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
     const roi = (budgetConsumed > 0) ? (revenue / budgetConsumed) : (budgetAnnual === Infinity ? (revenue / (finalOrders * cacClient || 1)) : 0);
 
    // --- Display results (safe DOM queries) ---
-const results = document.getElementById("results");
-const formContainer = document.querySelector(".right-column"); // container du formulaire
-
-// Cacher le formulaire
-if (formContainer) formContainer.style.display = "none";
-
-// Afficher les résultats
-if (results) results.style.display = "block";
-
-// ✅ Ajout UX : active la classe show-results pour la mise en page CSS
-const splitLayout = document.querySelector(".split-layout");
-if (splitLayout) splitLayout.classList.add("show-results");
+setResultsMode(true);
 
 // Récupération des éléments à mettre à jour
 const elRevenue = document.getElementById("kpi-revenue");
@@ -1385,37 +1384,11 @@ const editeursAffiches = (function() {
 })();
 
  
-    // ✅ CTA dynamique selon l'objectif
-const objectif = form.elements["objectif"]?.value;
-const ctaWrapper = document.getElementById("cta-dynamic");
+    // CTA fixe + synchro du lien latéral
 const ctaBtn = document.getElementById("cta-button");
-
-if (ctaWrapper && ctaBtn) {
-  let ctaText = "";
-  let ctaLink = "https://www.lumigency.com/consultation-gratuite";
-
-  switch (objectif) {
-    case "lancer":
-      ctaText = "🚀 Bénéficier d’une consultation gratuite de lancement";
-      break;
-    case "optimiser":
-      ctaText = "🧠 Obtenir un audit de votre stratégie d’affiliation";
-      break;
-    case "diversifier":
-      ctaText = "🤝 Échanger sur les bons leviers à activer pour votre marques";
-      break;
-    case "scaler":
-      ctaText = "📈 Planifier un call stratégique pour passer à l’échelle";
-      break;
-    default:
-      ctaText = "💬 Parler à un expert Lumigency";
-  }
-
-  ctaBtn.textContent = ctaText;
-  ctaBtn.href = ctaLink;
-  ctaWrapper.style.display = "block";
-  if (nextStepBtn) nextStepBtn.href = ctaLink;
-}
+const ctaLink = "https://www.lumigency.com/consultation-gratuite";
+if (ctaBtn) ctaBtn.href = ctaLink;
+if (nextStepBtn) nextStepBtn.href = ctaLink;
   });
 });
 
@@ -1438,17 +1411,7 @@ if (ctaWrapper && ctaBtn) {
 const restartBtn = document.getElementById("restart-btn");
 if (restartBtn) {
   restartBtn.addEventListener("click", () => {
-    // Cache la section résultats
-    const results = document.getElementById("results");
-    if (results) results.style.display = "none";
-
-    // Réaffiche le formulaire
-    const formContainer = document.querySelector(".right-column");
-    if (formContainer) formContainer.style.display = "block";
-
-    // Retire la classe show-results pour réinitialiser la mise en page
-    const splitLayout = document.querySelector(".split-layout");
-    if (splitLayout) splitLayout.classList.remove("show-results");
+    setResultsMode(false);
 
     // 🔁 Réinitialise le formulaire et la progression
     const form = document.getElementById("form-simu");
