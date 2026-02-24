@@ -4,7 +4,7 @@ console.log("✅ script.js chargé");
 
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
-let currentStep = 0;
+let currentStep = 1;
 
 // ✅ message de maturité personnalisé
 let maturityMessage = "";
@@ -547,6 +547,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // If Step 1 is skipped (debug/start on later step), ensure required objective is set.
+  const objectiveInputs = form.querySelectorAll('input[name="objectif"]');
+  if (!String(form.elements["objectif"]?.value || "").trim()) {
+    const defaultObjective = objectiveInputs[0];
+    if (defaultObjective instanceof HTMLInputElement) {
+      defaultObjective.checked = true;
+    }
+  }
+
   const setResultsMode = (isResultsMode) => {
     const isResults = Boolean(isResultsMode);
     const results = document.getElementById("results");
@@ -596,12 +605,36 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
   // Budget checkbox
   const unlimitedCheckbox = document.getElementById("unlimited-budget") || document.getElementById("noBudget");
   const budgetInput = form.elements["budget"];
+  const budgetExactInput = document.getElementById("budgetExactInput");
+
+  if (budgetExactInput && budgetInput) {
+    const exactBudget = numberOf(budgetExactInput.value);
+    budgetInput.value = exactBudget > 0 ? String(exactBudget) : "";
+  }
+
+  if (unlimitedCheckbox?.checked && budgetInput) {
+    budgetInput.value = "";
+    if (budgetExactInput) budgetExactInput.disabled = true;
+  }
+
+  if (budgetExactInput && budgetInput) {
+    budgetExactInput.addEventListener("input", () => {
+      if (unlimitedCheckbox?.checked) return;
+      const exactBudget = numberOf(budgetExactInput.value);
+      budgetInput.value = exactBudget > 0 ? String(exactBudget) : "";
+      updateStep2AsidePreview();
+    });
+  }
 
   if (unlimitedCheckbox && budgetInput) {
     unlimitedCheckbox.addEventListener("change", () => {
       budgetInput.disabled = unlimitedCheckbox.checked;
+      if (budgetExactInput) budgetExactInput.disabled = unlimitedCheckbox.checked;
       if (unlimitedCheckbox.checked) {
         budgetInput.value = "";
+      } else if (budgetExactInput) {
+        const exactBudget = numberOf(budgetExactInput.value);
+        budgetInput.value = exactBudget > 0 ? String(exactBudget) : "";
       }
       updateStep2AsidePreview();
     });
@@ -699,33 +732,12 @@ if (trafficRange && trafficInput && trafficRangeV2) {
   syncTraffic();
 }
 
-const budgetBandRadios = form.querySelectorAll('input[name="budget_band"]');
-if (budgetBandRadios.length && budgetInput) {
-  const syncBudgetFromBand = (radio) => {
-    let mappedBudget = Number(radio.dataset.budget || 0);
-    if (!Number.isFinite(mappedBudget)) mappedBudget = 0;
-    budgetInput.value = mappedBudget;
-    updateStep2AsidePreview();
-  };
-
-  budgetBandRadios.forEach((radio) => {
-    radio.addEventListener("change", () => {
-      if (!radio.checked) return;
-      syncBudgetFromBand(radio);
-    });
-  });
-
-  const checkedBudgetBand = form.querySelector('input[name="budget_band"]:checked');
-  if (checkedBudgetBand) {
-    syncBudgetFromBand(checkedBudgetBand);
-  }
-}
-
 const leverSelectTrigger = document.getElementById("leverSelectTrigger");
 const leverSelectMenu = document.getElementById("leverSelectMenu");
 const leverSelectValue = document.getElementById("leverSelectValue");
 if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
   const leverInputs = leverSelectMenu.querySelectorAll('input[name="levers"]');
+  const leverSelectAllBtn = document.getElementById("leverSelectAllBtn");
   const leverPlaceholder = leverSelectValue.dataset.placeholder || "Sélectionnez un ou plusieurs leviers";
 
   // Old label renderer kept for reference:
@@ -761,6 +773,14 @@ if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
   //   });
   // };
 
+  const refreshLeverAllButtonState = () => {
+    if (!leverSelectAllBtn) return;
+    const selectedCount = Array.from(leverInputs).filter((input) => input.checked).length;
+    const allSelected = leverInputs.length > 0 && selectedCount === leverInputs.length;
+    leverSelectAllBtn.textContent = allSelected ? "Retirer tous les leviers" : "Tous les leviers";
+    leverSelectAllBtn.classList.toggle("is-active", allSelected);
+  };
+
   const refreshLeverLabel = () => {
     const selectedInputs = Array.from(leverInputs).filter((input) => input.checked);
 
@@ -773,6 +793,7 @@ if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
     if (!selectedInputs.length) {
       leverSelectValue.classList.add("is-placeholder");
       leverSelectValue.textContent = leverPlaceholder;
+      refreshLeverAllButtonState();
       return;
     }
 
@@ -799,6 +820,7 @@ if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
       tag.appendChild(labelText);
       leverSelectValue.appendChild(tag);
     });
+    refreshLeverAllButtonState();
   };
 
   leverSelectTrigger.addEventListener("click", () => {
@@ -811,6 +833,18 @@ if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
       refreshLeverLabel();
       updateStep2AsidePreview();
     });
+  });
+
+  leverSelectAllBtn?.addEventListener("click", () => {
+    const shouldSelectAll = Array.from(leverInputs).some((input) => !input.checked);
+    leverInputs.forEach((input) => {
+      input.checked = shouldSelectAll;
+    });
+    refreshLeverLabel();
+    checkHybridWarning();
+    updateStep2AsidePreview();
+    leverSelectMenu.hidden = true;
+    leverSelectTrigger.classList.remove("is-open");
   });
 
   leverSelectValue.addEventListener("click", (event) => {
@@ -998,6 +1032,7 @@ cacValueDisplay?.addEventListener("blur", updateStep2AsidePreview);
 const cvrGauge = document.getElementById("cvrGauge");
 const cvrGaugePath = document.getElementById("cvrGaugeProgress");
 const cvrGaugeDot = document.getElementById("cvrGaugeDot");
+const cvrGaugeLabel = document.querySelector(".step2-gauge-label");
 
 if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   const min = Number(cvrGauge.dataset.min || 0);
@@ -1030,10 +1065,19 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
     return min + normalized * (max - min);
   };
 
+  const cvrLabelFor = (value) => {
+    if (value >= 4) return "Excellent";
+    if (value >= 3) return "Très bon";
+    if (value >= 2) return "Normal";
+    if (value < 1) return "Faible";
+    return "Faible";
+  };
+
   const setCvr = (rawValue) => {
     const value = Math.max(min, Math.min(max, Number(rawValue) || 0));
     hiddenCvr.value = String(value);
     cvrValueDisplay.textContent = `${Number(value.toFixed(1))}%`;
+    if (cvrGaugeLabel) cvrGaugeLabel.textContent = cvrLabelFor(value);
 
     const visualRatio = toVisualRatio(value);
     cvrGaugePath.style.strokeDashoffset = String(pathLength * (1 - visualRatio));
@@ -1418,6 +1462,25 @@ const ctaLink = "https://www.lumigency.com/consultation-gratuite";
 if (ctaBtn) ctaBtn.href = ctaLink;
 if (nextStepBtn) nextStepBtn.href = ctaLink;
   });
+
+  // === Bouton "Faire une nouvelle simulation" ===
+  const restartBtn = document.getElementById("restart-btn");
+  if (restartBtn) {
+    restartBtn.addEventListener("click", () => {
+      setResultsMode(false);
+
+      // 🔁 Réinitialise le formulaire et la progression
+      if (form) form.reset();
+      renderStep3AsideEditors("");
+
+      // 🔁 Revient à la toute première étape
+      currentStep = 0;
+      showStep(currentStep);
+
+      // Retourne en haut de page
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });
 
 // === Slider Témoignages ===
@@ -1434,26 +1497,6 @@ if (nextStepBtn) nextStepBtn.href = ctaLink;
   setInterval(slideTestimonials, 4000);
 })();
 
-
-// === Bouton "Faire une nouvelle simulation" ===
-const restartBtn = document.getElementById("restart-btn");
-if (restartBtn) {
-  restartBtn.addEventListener("click", () => {
-    setResultsMode(false);
-
-    // 🔁 Réinitialise le formulaire et la progression
-    const form = document.getElementById("form-simu");
-    if (form) form.reset();
-    renderStep3AsideEditors("");
-
-    // 🔁 Revient à la toute première étape
-    currentStep = 0;
-    showStep(currentStep);
-
-    // Retourne en haut de page
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
 
 function updateProgress(stepIndex) {
   const stepDots = document.querySelectorAll(".steps-mini .step-dot");

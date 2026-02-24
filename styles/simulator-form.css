@@ -240,6 +240,23 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   color: var(--blue);
 }
 
+.budget-exact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.budget-exact-row input {
+  flex: 1;
+}
+
+.budget-exact-suffix {
+  flex: 0 0 auto;
+  color: #6f7282;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
 .step2-kpis {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -418,21 +435,6 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   position: relative;
 }
 
-/* Old trigger style kept for reference:
-.lever-select-trigger {
-  width: 100%;
-  min-height: 56px;
-  border: 1px solid #d1d1d6;
-  border-radius: 16px;
-  background: white;
-  color: #6f7282;
-  text-align: left;
-  padding: 0 18px;
-  font-size: 16px;
-  cursor: pointer;
-}
-*/
-
 .lever-select-trigger {
   width: 100%;
   min-height: 50px;
@@ -440,7 +442,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   border-radius: 12px;
   background: white;
   text-align: left;
-  padding: 0 24px;
+  padding: 10px 24px 10px 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -541,6 +543,24 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 
 .lever-select-menu[hidden] {
   display: none !important;
+}
+
+.lever-select-menu-action {
+  grid-column: 1 / -1;
+  min-height: 36px;
+  border: 1px solid #d1d1d6;
+  border-radius: 10px;
+  background: #f7f8fb;
+  color: var(--blue);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lever-select-menu-action.is-active {
+  background: #eef3ff;
+  border-color: #9db5ff;
 }
 
 .lever-select-menu label {

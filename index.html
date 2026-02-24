@@ -113,7 +113,7 @@
           <div class="left-step2-head">
             <img class="left-step2-head-icon" src="/assets/svg/picto-star.svg" alt="">
             <div>
-              <p class="left-aside-title">Analyse rapide</p>
+              <p class="left-aside-title">Définition des indicateurs de performances</p>
               <p class="left-step2-subtitle">Votre potentiel d'affiliation</p>
             </div>
           </div>
@@ -122,36 +122,27 @@
             <div class="left-step2-metric-row">
               <p class="left-step2-metric-label">
                 <img class="left-step2-metric-icon" src="/assets/svg/icon-arrow-up.svg" alt="">
-                <span>ROI estimé</span>
+                <span>Panier moyen : Le panier moyen désigne le montant moyen dépensé par les clients.</span>
               </p>
-              <p class="left-step2-metric-value" id="asideStep2RoiValue">0.00x</p>
-            </div>
-            <p class="left-step2-metric-note">Basé sur vos données actuelles</p>
-            <div class="left-step2-meter" aria-hidden="true">
-              <span id="asideStep2RoiBar"></span>
             </div>
           </article>
 
           <article class="left-step2-metric">
             <div class="left-step2-metric-row">
               <p class="left-step2-metric-label">
-                <img class="left-step2-metric-icon" src="/assets/svg/icon-3-concentrics-circles-blue.svg" alt="">
-                <span>CAC maîtrisé</span>
+                <img class="left-step2-metric-icon" src="/assets/svg/icon-arrow-up.svg" alt="">
+                <span>CAC :  Le coût d'acquisition client correspond à votre coût pour acquérir un nouveau client potentiel</span>
               </p>
-              <p class="left-step2-metric-value" id="asideStep2CacValue">0%</p>
-            </div>
-            <div class="left-step2-meter" aria-hidden="true">
-              <span id="asideStep2CacBar"></span>
             </div>
           </article>
 
           <div class="left-step2-points">
             <p class="left-step2-points-title">
               <img class="left-step2-points-icon" src="/assets/svg/icon-bulb.svg" alt="">
-              <span>Points clés identifiés</span>
+              <span>Points à retenir</span>
             </p>
             <ul>
-              <li id="asideStep2Point1">Potentiel de croissance intéressant en affiliation</li>
+              <li id="asideStep2Point1">Le trafic mensuel a un impact sur vos projections</li>
               <li id="asideStep2Point2">Mix optimisé par rapport au budget disponible</li>
               <li id="asideStep2Point3">Vos partenaires potentiels sont disponibles et qualifiés</li>
             </ul>
@@ -459,20 +450,15 @@
     </div>
 
     <div class="aff-field">
-      <p class="aff-label">Avez-vous un budget d’affiliation prédéfini ?</p>
-      <div class="budget-pill-group" role="radiogroup" aria-label="Budget mensuel d'affiliation">
-        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_1" data-budget="10000">
-        <label class="btn-outline budget-pill" for="budget_band_1">Moins de 20k €</label>
-
-        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_2" data-budget="35000" checked>
-        <label class="btn-outline budget-pill" for="budget_band_2">Entre 20k et 50k €</label>
-
-        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_3" data-budget="60000">
-        <label class="btn-outline budget-pill" for="budget_band_3">Entre 50k et 70k €</label>
-
-        <input class="budget-pill-radio" type="radio" name="budget_band" id="budget_band_4" data-budget="80000">
-        <label class="btn-outline budget-pill" for="budget_band_4">Plus de 70k €</label>
+      <p class="aff-label">Quel est votre budget d'affiliation mensuel exact ?</p>
+      <div class="budget-exact-row">
+        <input type="number" id="budgetExactInput" min="0" step="1" placeholder="Ex : 35000" aria-label="Budget mensuel d'affiliation exact">
+        <span class="budget-exact-suffix">€ / mois</span>
       </div>
+      <label class="single-checkbox">
+        <input type="checkbox" id="noBudget" name="noBudget">
+        Je n'ai pas de budget prédéfini (explorer le plein potentiel)
+      </label>
     </div>
 
       <div class="aff-field">
@@ -488,6 +474,7 @@
             <span class="lever-select-chevron" aria-hidden="true">&#8964;</span>
           </button>
           <div id="leverSelectMenu" class="lever-select-menu" hidden>
+          <button type="button" id="leverSelectAllBtn" class="lever-select-menu-action">Tous les leviers</button>
           <label><input type="checkbox" name="levers" value="cashback"> Cashback</label>
           <label><input type="checkbox" name="levers" value="bonsplans"> Bons plans</label>
           <label><input type="checkbox" name="levers" value="comparateurs"> Comparateurs</label>
@@ -499,7 +486,7 @@
           <label><input type="checkbox" name="levers" value="affinitaires"> Affinitaires</label>
           <label><input type="checkbox" name="levers" value="influence"> Influence</label>
           <label><input type="checkbox" name="levers" value="ppc"> SEA (PPC)</label>
-          <label><input type="checkbox" name="levers" value="retention"> Retention</label>
+          <label><input type="checkbox" name="levers" value="retention"> Retention on site</label>
         </div>
       </div>
     </div>
@@ -508,7 +495,7 @@
     <input type="hidden" id="trafficInput" name="traffic" value="300000">
     <input type="hidden" id="trafficRange" name="trafficRange" value="300000">
     <input type="hidden" id="sector" name="sector" value="">
-    <input type="hidden" id="budget" name="budget" value="35000">
+    <input type="hidden" id="budget" name="budget" value="0">
     <input type="hidden" id="cac" name="cac" value="0">
     <input type="hidden" id="aov" name="aov" value="0">
     <input type="hidden" id="cvr" name="cvr" value="1">

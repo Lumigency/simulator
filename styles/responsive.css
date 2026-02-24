@@ -4,6 +4,7 @@
   .simu-grid { grid-template-columns: 1fr; }
   .objective-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .step2-kpis { grid-template-columns: 1fr; }
+  .budget-exact-row { flex-direction: column; align-items: stretch; }
   .step2-kpi:not(:first-child) { border-left: none; border-top: 1px solid #ececf1; }
   .step2-kpi { min-height: 160px; padding-top: 20px; }
   .step2-kpi-value { font-size: 42px; }
