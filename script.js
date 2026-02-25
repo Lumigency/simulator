@@ -4,7 +4,8 @@ console.log("✅ script.js chargé");
 
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
-let currentStep = 1;
+let currentStep = 0;
+const FORCE_STEP4_PREVIEW = false;
 
 // ✅ message de maturité personnalisé
 let maturityMessage = "";
@@ -572,7 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Initialisation
 showStep(currentStep);
 updateProgress(currentStep);
-setResultsMode(false);
+setResultsMode(FORCE_STEP4_PREVIEW);
 
   // Navigation entre les étapes
 document.getElementById('next-step-1')?.addEventListener('click', () => {
@@ -657,26 +658,31 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
     const budgetMonthly = numberOf(form.elements["budget"]?.value);
     const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map((input) => input.value);
     const estimatedRevenue = trafficMonthly * cvrRate * aovUser;
-    const roi = (budgetMonthly > 0) ? (estimatedRevenue / budgetMonthly) : 0;
-    const cacPercent = (budgetMonthly > 0 && estimatedRevenue > 0)
+    const hasBudget = budgetMonthly > 0;
+    const roi = hasBudget ? (estimatedRevenue / budgetMonthly) : null;
+    const cacPercent = (hasBudget && estimatedRevenue > 0)
       ? ((budgetMonthly / estimatedRevenue) * 100)
-      : 0;
+      : null;
 
-    asideStep2RoiValue.textContent = `${roi.toFixed(2)}x`;
-    asideStep2CacValue.textContent = `${cacPercent.toFixed(1)}%`;
+    asideStep2RoiValue.textContent = roi !== null ? `${roi.toFixed(2)}x` : "—";
+    asideStep2CacValue.textContent = cacPercent !== null ? `${cacPercent.toFixed(1)}%` : "—";
 
-    const roiBarWidth = clamp(roi / 6, 0, 1) * 100;
-    const cacBarWidth = clamp(cacPercent / 40, 0, 1) * 100;
+    const roiBarWidth = clamp((roi || 0) / 6, 0, 1) * 100;
+    const cacBarWidth = clamp((cacPercent || 0) / 40, 0, 1) * 100;
     asideStep2RoiBar.style.width = `${Math.max(6, roiBarWidth)}%`;
     asideStep2CacBar.style.width = `${Math.max(6, cacBarWidth)}%`;
 
     if (asideStep2Point1) {
-      asideStep2Point1.textContent = roi >= 1
+      asideStep2Point1.textContent = !hasBudget
+        ? "Renseignez un budget pour calculer un ROI exploitable"
+        : roi >= 1
         ? "Le revenu projeté couvre votre budget affiliation"
         : "Le revenu projeté reste inférieur au budget engagé";
     }
     if (asideStep2Point2) {
-      asideStep2Point2.textContent = cacPercent > 0 && cacPercent <= 20
+      asideStep2Point2.textContent = !hasBudget
+        ? "Le CAC (%) sera disponible dès qu'un budget est saisi"
+        : cacPercent > 0 && cacPercent <= 20
         ? "CAC projeté dans une zone maîtrisée"
         : "Le CAC projeté peut être optimisé en ajustant le mix";
     }
@@ -1211,8 +1217,11 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
     // computed budget consumed (prefer showing budgetAnnual or theoretical)
     const budgetConsumed = (budgetAnnual === Infinity) ? finalOrders * cacProjected : Math.min(budgetAnnual, finalOrders * cacProjected);
 
-    // ROI (revenue / budgetConsumed) guard
-    const roi = (budgetConsumed > 0) ? (revenue / budgetConsumed) : (budgetAnnual === Infinity ? (revenue / (finalOrders * cacClient || 1)) : 0);
+    // KPI business rules:
+    // ROI = Revenue / Budget ; CAC% = Budget / Revenue * 100
+    const budgetReference = Number.isFinite(budgetAnnual) && budgetAnnual > 0 ? budgetAnnual : 0;
+    const roi = budgetReference > 0 ? (revenue / budgetReference) : null;
+    const cacPercent = (budgetReference > 0 && revenue > 0) ? ((budgetReference / revenue) * 100) : null;
 
    // --- Display results (safe DOM queries) ---
 setResultsMode(true);
@@ -1239,8 +1248,8 @@ const nextStepBtn = document.getElementById("nextStepBtn");
     if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
     if (elBudget) elBudget.textContent = (budgetAnnual === Infinity) ? "Illimité" : fmtCurrency(budgetAnnual);
     if (elAov) elAov.textContent = fmtCurrency(adjustedAov);
-    if (elCac) elCac.textContent = fmtCurrency(cacProjected);
-    if (elRoi) elRoi.textContent = (roi > 0 ? roi.toFixed(2) + "x" : "—");
+    if (elCac) elCac.textContent = cacPercent !== null ? `${cacPercent.toFixed(1)}%` : "—";
+    if (elRoi) elRoi.textContent = roi !== null ? `${roi.toFixed(2)}x` : "—";
 
     // analysis: only AOV vs sector as requested + one-line CR mention + budget cap note
     const analysis = [];
@@ -1431,8 +1440,9 @@ const editeursAffiches = (function() {
       commandesFinales: Math.round(finalOrders),
       chiffreAffaires: Math.round(revenue),
       cacProjete: Math.round(cacProjected),
+      cacPourcent: cacPercent !== null ? Number(cacPercent.toFixed(2)) : null,
       budgetConsomme: Math.round(budgetConsumed),
-      roi: roi.toFixed(2),
+      roi: roi !== null ? roi.toFixed(2) : "N/A",
 
       messageMaturite: maturityMessage
     };
