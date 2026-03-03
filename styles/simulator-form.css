@@ -293,6 +293,11 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   border: 1px solid transparent;
 }
 
+.step2-kpi-editable.is-invalid {
+  border-color: #f28a8a;
+  box-shadow: 0 0 0 3px rgba(242, 138, 138, 0.18);
+}
+
 .step2-kpi-editable:focus {
   outline: none;
 }
@@ -367,6 +372,14 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   padding: 0;
 }
 
+.step2-gauge.is-invalid .step2-gauge-track {
+  stroke: #f1b9b9;
+}
+
+.step2-gauge.is-invalid .step2-gauge-dot {
+  border-color: #e05a5a;
+}
+
 .step2-gauge-dot:active {
   cursor: grabbing;
 }
@@ -422,6 +435,10 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   accent-color: var(--blue);
 }
 
+#trafficRangeV2.is-invalid {
+  accent-color: #e05a5a;
+}
+
 .traffic-value {
   margin-top: 3px;
   text-align: right;
@@ -447,6 +464,12 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.lever-select-trigger.is-invalid,
+#budgetExactInput.is-invalid {
+  border-color: #f28a8a;
+  box-shadow: 0 0 0 3px rgba(242, 138, 138, 0.18);
 }
 
 .lever-select-leading {

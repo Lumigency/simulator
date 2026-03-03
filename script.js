@@ -47,7 +47,7 @@ function normalize(map){
 // AOV (euros) et CVR (decimale). PDV = parts de voix estimées par levier (non-exhaustif)
 const SECTORS = {
   fashion: {
-    label: "Mode & Beauté", aov: 67, cvr: 0.0155,
+    label: "Mode & Chaussures", aov: 67, cvr: 0.0155,
     pdv: normalize({ cashback:0.23, bonsplans:0.18, retargeting:0.14, css:0.12, comparateurs:0.11, "display-networks":0.10, retention:0.06, content:0.04, emailing:0.02 })
   },
   beauty: {
@@ -589,6 +589,42 @@ document.getElementById('next-step-1')?.addEventListener('click', () => {
 });
 
 document.getElementById('next-step-2')?.addEventListener('click', () => {
+  const trafficRangeV2 = document.getElementById("trafficRangeV2");
+  const aovDisplay = document.getElementById("aovValueDisplay");
+  const cvrGaugeEl = document.getElementById("cvrGauge");
+  const cacDisplay = document.getElementById("cacValueDisplay");
+  const budgetExactEl = document.getElementById("budgetExactInput");
+  const leverTrigger = document.getElementById("leverSelectTrigger");
+
+  [trafficRangeV2, aovDisplay, cvrGaugeEl, cacDisplay, budgetExactEl, leverTrigger]
+    .forEach((el) => el?.classList.remove("is-invalid"));
+
+  const trafficMonthly = numberOf(form.elements["traffic"]?.value);
+  const aovUser = numberOf(form.elements["aov"]?.value);
+  const cvrUser = numberOf(form.elements["cvr"]?.value);
+  const cacUser = numberOf(form.elements["cac"]?.value);
+  const budgetMonthly = numberOf(form.elements["budget"]?.value);
+  const selectedLeversCount = form.querySelectorAll('input[name="levers"]:checked').length;
+
+  let firstInvalidEl = null;
+  const markInvalid = (el) => {
+    if (!el) return;
+    el.classList.add("is-invalid");
+    if (!firstInvalidEl) firstInvalidEl = el;
+  };
+
+  if (!(trafficMonthly > 0)) markInvalid(trafficRangeV2);
+  if (!(aovUser > 0)) markInvalid(aovDisplay);
+  if (!(cvrUser > 0)) markInvalid(cvrGaugeEl);
+  if (!(cacUser > 0)) markInvalid(cacDisplay);
+  if (!(budgetMonthly > 0)) markInvalid(budgetExactEl);
+  if (selectedLeversCount === 0) markInvalid(leverTrigger);
+
+  if (firstInvalidEl) {
+    if (typeof firstInvalidEl.focus === "function") firstInvalidEl.focus();
+    return;
+  }
+
   currentStep = 2;
   showStep(currentStep);
 });
@@ -603,8 +639,7 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
   showStep(currentStep);
 });
 
-  // Budget checkbox
-  const unlimitedCheckbox = document.getElementById("unlimited-budget") || document.getElementById("noBudget");
+  // Budget sync
   const budgetInput = form.elements["budget"];
   const budgetExactInput = document.getElementById("budgetExactInput");
 
@@ -613,30 +648,11 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
     budgetInput.value = exactBudget > 0 ? String(exactBudget) : "";
   }
 
-  if (unlimitedCheckbox?.checked && budgetInput) {
-    budgetInput.value = "";
-    if (budgetExactInput) budgetExactInput.disabled = true;
-  }
-
   if (budgetExactInput && budgetInput) {
     budgetExactInput.addEventListener("input", () => {
-      if (unlimitedCheckbox?.checked) return;
       const exactBudget = numberOf(budgetExactInput.value);
       budgetInput.value = exactBudget > 0 ? String(exactBudget) : "";
-      updateStep2AsidePreview();
-    });
-  }
-
-  if (unlimitedCheckbox && budgetInput) {
-    unlimitedCheckbox.addEventListener("change", () => {
-      budgetInput.disabled = unlimitedCheckbox.checked;
-      if (budgetExactInput) budgetExactInput.disabled = unlimitedCheckbox.checked;
-      if (unlimitedCheckbox.checked) {
-        budgetInput.value = "";
-      } else if (budgetExactInput) {
-        const exactBudget = numberOf(budgetExactInput.value);
-        budgetInput.value = exactBudget > 0 ? String(exactBudget) : "";
-      }
+      if (exactBudget > 0) budgetExactInput.classList.remove("is-invalid");
       updateStep2AsidePreview();
     });
   }
@@ -731,6 +747,7 @@ if (trafficRange && trafficInput && trafficRangeV2) {
     val = Math.min(1000000, Math.max(0, val));
     trafficInput.value = val;
     trafficRange.value = val;
+    if (val > 0) trafficRangeV2.classList.remove("is-invalid");
     if (trafficValueDisplay) trafficValueDisplay.textContent = fmtTraffic(val);
     updateStep2AsidePreview();
   };
@@ -804,6 +821,7 @@ if (leverSelectTrigger && leverSelectMenu && leverSelectValue) {
       return;
     }
 
+    leverSelectTrigger.classList.remove("is-invalid");
     leverSelectValue.classList.remove("is-placeholder");
 
     selectedInputs.forEach((input) => {
@@ -901,10 +919,12 @@ const emailInput = document.getElementById("email");
 
 const refreshStep3SubmitState = () => {
   if (!step3Submit || !fullNameInput || !emailInput) return;
+  const monthlyBudget = numberOf(form.elements["budget"]?.value);
   const ready = Boolean(
     String(fullNameInput.value || "").trim() &&
     emailInput.checkValidity() &&
-    String(hiddenSector?.value || "").trim()
+    String(hiddenSector?.value || "").trim() &&
+    monthlyBudget > 0
   );
   step3Submit.disabled = !ready;
   step3Submit.classList.toggle("is-ready", ready);
@@ -981,6 +1001,7 @@ const bindEditableCurrency = (editableEl, hiddenField) => {
   const syncFromEditable = () => {
     const value = parseEditableNumber(editableEl.textContent);
     hiddenField.value = String(value);
+    if (value > 0) editableEl.classList.remove("is-invalid");
     return value;
   };
 
@@ -1044,6 +1065,7 @@ const cvrGaugeLabel = document.querySelector(".step2-gauge-label");
 if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   const min = Number(cvrGauge.dataset.min || 0);
   const max = Number(cvrGauge.dataset.max || 20);
+  const cvrStep = 0.1;
   const visualLowStart = 0.12;
   const lowValueThreshold = 4;
   const lowThresholdRatio = clamp((lowValueThreshold - min) / (max - min || 1), 0, 1);
@@ -1081,8 +1103,11 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   };
 
   const setCvr = (rawValue) => {
-    const value = Math.max(min, Math.min(max, Number(rawValue) || 0));
+    const parsed = Number(rawValue) || 0;
+    const snapped = Math.round(parsed / cvrStep) * cvrStep;
+    const value = Math.max(min, Math.min(max, snapped));
     hiddenCvr.value = String(value);
+    if (value > 0) cvrGauge.classList.remove("is-invalid");
     cvrValueDisplay.textContent = `${Number(value.toFixed(1))}%`;
     if (cvrGaugeLabel) cvrGaugeLabel.textContent = cvrLabelFor(value);
 
@@ -1173,11 +1198,15 @@ form.querySelectorAll('input[name="levers"], input[name="hybrides"]').forEach(el
     // levers checked
     const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map(i => i.value);
 
-    // budget handling (defensive)
-    let budgetMonthly = 0;
-    if (unlimitedCheckbox && unlimitedCheckbox.checked) budgetMonthly = Infinity;
-    else budgetMonthly = numberOf(form.elements["budget"]?.value) || 0;
-    const budgetAnnual = (budgetMonthly === Infinity) ? Infinity : budgetMonthly * 12;
+    // budget handling (mandatory)
+    const budgetMonthly = numberOf(form.elements["budget"]?.value) || 0;
+    if (budgetMonthly <= 0) {
+      currentStep = 1;
+      showStep(currentStep);
+      if (budgetExactInput) budgetExactInput.focus();
+      return;
+    }
+    const budgetAnnual = budgetMonthly * 12;
 
     // --- Base values & adjustments ---
     const sector = SECTORS[sectorKey] || SECTORS.other;
@@ -1208,8 +1237,8 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
     // projected CAC (weighted by PDV / fallback to client cac)
     const cacProjected = projectedCAC(sectorKey, levers, cacClient || 0);
 
-    // cap by budget (if budget provided)
-    const maxOrdersByBudget = (budgetAnnual === Infinity || cacProjected === 0) ? potentialOrders : (budgetAnnual / cacProjected);
+    // cap by budget
+    const maxOrdersByBudget = cacProjected === 0 ? potentialOrders : (budgetAnnual / cacProjected);
     const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
 
     // revenue
@@ -1259,12 +1288,10 @@ const nextStepBtn = document.getElementById("nextStepBtn");
       else analysis.push(`Votre panier moyen estimé (${fmtCurrency(adjustedAov)}) est proche de la moyenne du secteur.`);
     }
     analysis.push(`Taux de conversion simulé : ${(adjustedCvr * 100).toFixed(2)}% (montée en puissance sur l'année 1).`);
-    if (budgetAnnual !== Infinity) {
-      if (budgetConsumed < budgetAnnual * 0.98) {
-        analysis.push(`Avec le trafic estimé, le budget consommé (${fmtCurrency(budgetConsumed)}) reste inférieur au budget saisi (${fmtCurrency(budgetAnnual)}).`);
-      } else {
-        analysis.push(`Votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) limite le volume de ventes affiché.`);
-      }
+    if (budgetConsumed < budgetAnnual * 0.98) {
+      analysis.push(`Avec le trafic estimé, le budget consommé (${fmtCurrency(budgetConsumed)}) reste inférieur au budget saisi (${fmtCurrency(budgetAnnual)}).`);
+    } else {
+      analysis.push(`Votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) limite le volume de ventes affiché.`);
     }
 
     if (quickAnalysisList) {
@@ -1353,12 +1380,9 @@ const nextStepBtn = document.getElementById("nextStepBtn");
 
  // ✅ Message personnalisé (objectif + budget)
 const objectifValue = form.elements["objectif"]?.value;
-const hasBudget = !(unlimitedCheckbox && unlimitedCheckbox.checked);
 
 if (objectifValue === "lancer") {
-    maturityMessage = hasBudget
-      ? "🌱 Vous êtes au début d’un beau programme. Avec un budget dédié, vous pouvez poser une base saine et attirer les bons partenaires dès le départ."
-      : "🌱 Vous souhaitez lancer un programme. Même sans budget défini, un démarrage progressif avec des partenaires sélectionnés peut vous permettre d’apprendre et d'avancer sereinement.";
+    maturityMessage = "🌱 Vous êtes au début d’un beau programme. Avec un budget dédié, vous pouvez poser une base saine et attirer les bons partenaires dès le départ.";
 }
 
 if (objectifValue === "optimiser") {
@@ -1431,8 +1455,8 @@ const editeursAffiches = (function() {
 
       // Étape 3
       trafficMensuel: trafficMonthly,
-      budgetMensuel: budgetMonthly === Infinity ? "Illimité" : budgetMonthly,
-      budgetAnnuel: budgetAnnual === Infinity ? "Illimité" : budgetAnnual,
+      budgetMensuel: budgetMonthly,
+      budgetAnnuel: budgetAnnual,
       aovSaisi: aovUser,
       cvrSaisi: cvrUserInput,
       cacClient: cacClient,

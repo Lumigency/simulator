@@ -184,6 +184,9 @@
   line-height: 20px;
   color: var(--textSecondary);
 }
+.left-step2-metric-term {
+  font-weight: 600;
+}
 .left-step2-metric-icon {
   width: 20px;
   height: 20px;

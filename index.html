@@ -122,7 +122,7 @@
             <div class="left-step2-metric-row">
               <p class="left-step2-metric-label">
                 <img class="left-step2-metric-icon" src="/assets/svg/icon-arrow-up.svg" alt="">
-                <span>Panier moyen : Le panier moyen désigne le montant moyen dépensé par les clients.</span>
+                <span><span class="left-step2-metric-term">Panier moyen</span> : Le panier moyen désigne le montant moyen dépensé par les clients.</span>
               </p>
             </div>
           </article>
@@ -131,7 +131,16 @@
             <div class="left-step2-metric-row">
               <p class="left-step2-metric-label">
                 <img class="left-step2-metric-icon" src="/assets/svg/icon-arrow-up.svg" alt="">
-                <span>CAC :  Le coût d'acquisition client correspond à votre coût pour acquérir un nouveau client potentiel</span>
+                <span><span class="left-step2-metric-term">Taux de conversion</span> : Le taux de conversion définit le pourcentage de visiteurs qui deviennent prospects ou clients.</span>
+              </p>
+            </div>
+          </article>
+
+          <article class="left-step2-metric">
+            <div class="left-step2-metric-row">
+              <p class="left-step2-metric-label">
+                <img class="left-step2-metric-icon" src="/assets/svg/icon-arrow-up.svg" alt="">
+                <span><span class="left-step2-metric-term">CAC</span> : Le coût d'acquisition client correspond à votre coût pour acquérir un nouveau client potentiel</span>
               </p>
             </div>
           </article>
@@ -366,10 +375,6 @@
     <div class="form-col">
       <label class="question-label" for="budget">Budget mensuel (€)</label>
       <input type="number" name="budget" id="budget" placeholder="Ex : 5000">
-      <label class="checkbox-budget">
-        <input type="checkbox" id="unlimited-budget" name="unlimited_budget">
-        Je n’ai pas de budget
-      </label>
     </div>
     <div class="form-col">
       <label class="question-label" for="cac">CAC actuel (€)</label>
@@ -452,13 +457,9 @@
     <div class="aff-field">
       <p class="aff-label">Quel est votre budget d'affiliation mensuel exact ?</p>
       <div class="budget-exact-row">
-        <input type="number" id="budgetExactInput" min="0" step="1" placeholder="Ex : 35000" aria-label="Budget mensuel d'affiliation exact">
+        <input type="number" id="budgetExactInput" min="1" step="1" placeholder="Ex : 35000" aria-label="Budget mensuel d'affiliation exact" required>
         <span class="budget-exact-suffix">€ / mois</span>
       </div>
-      <label class="single-checkbox">
-        <input type="checkbox" id="noBudget" name="noBudget">
-        Je n'ai pas de budget prédéfini (explorer le plein potentiel)
-      </label>
     </div>
 
       <div class="aff-field">
@@ -548,7 +549,7 @@
                       <span class="sector-select-chevron" aria-hidden="true">&#8964;</span>
                     </button>
                     <div id="sectorSelectMenu" class="sector-select-menu" hidden>
-                      <button type="button" data-value="fashion">Mode & Beauté</button>
+                      <button type="button" data-value="fashion">Mode & Chaussures</button>
                       <button type="button" data-value="beauty">Beauté & Cosmétique</button>
                       <button type="button" data-value="electronics">High-tech & Électroménager</button>
                       <button type="button" data-value="home">Maison & Décoration</button>
