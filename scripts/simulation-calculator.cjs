@@ -330,7 +330,8 @@ function computeSimulation(input) {
 
   const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
   const revenue = finalOrders * adjustedAov;
-  const budgetConsumed = finalOrders * cacProjected;
+  const budgetConsumed = budgetAnnual === Number.POSITIVE_INFINITY ? revenue : budgetAnnual;
+  const budgetDisplayed = budgetConsumed < 5000 ? 10000 : budgetConsumed;
   const roi = budgetConsumed > 0 ? revenue / budgetConsumed : null;
   const cacEuro = finalOrders > 0 ? budgetConsumed / finalOrders : null;
   const costRatioPct = revenue > 0 ? (budgetConsumed / revenue) * 100 : null;
@@ -349,6 +350,7 @@ function computeSimulation(input) {
     revenue,
     cacProjected,
     budgetConsumed,
+    budgetDisplayed,
     roi,
     cacEuro,
     costRatioPct

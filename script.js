@@ -302,7 +302,7 @@ const EDITORS_AFFINITAIRE = {
   electronics: [
     { name: "Les Numériques", logo: "assets/lesnumeriques-logo.png" },
     { name: "Journal du Geek", logo: "assets/journaldugeek-logo.png" },
-    { name: "01.net", logo: "assets//01net.logo.png" },
+    { name: "01.net", logo: "assets/01net.logo.png" },
     { name: "FrAndroid", logo: "assets/frandroid-logo.png" }
   ],
 
@@ -1237,18 +1237,14 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
     // projected CAC (weighted by PDV / fallback to client cac)
     const cacProjected = projectedCAC(sectorKey, levers, cacClient || 0);
 
-    // cap by budget
+    // cap orders by budget
     const maxOrdersByBudget = cacProjected === 0 ? potentialOrders : (budgetAnnual / cacProjected);
     const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
 
-    // revenue
     const revenue = finalOrders * adjustedAov;
+    const budgetConsumed = budgetAnnual;
+    const budgetDisplayed = budgetConsumed < 5000 ? 10000 : budgetConsumed;
 
-    // budget réellement consommé selon le volume de ventes effectivement généré
-    const budgetConsumed = finalOrders * cacProjected;
-
-    // KPI business rules:
-    // ROI = Revenue / Budget consommé ; CAC = Budget consommé / Commandes
     const roi = budgetConsumed > 0 ? (revenue / budgetConsumed) : null;
     const cacEuro = finalOrders > 0 ? (budgetConsumed / finalOrders) : null;
 
@@ -1275,7 +1271,7 @@ const nextStepBtn = document.getElementById("nextStepBtn");
 	
     if (elRevenue) elRevenue.textContent = fmtCompactCurrency(revenue);
     if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
-    if (elBudget) elBudget.textContent = fmtCompactCurrency(budgetConsumed);
+    if (elBudget) elBudget.textContent = fmtCompactCurrency(budgetDisplayed);
     if (elAov) elAov.textContent = fmtCurrency(adjustedAov);
     if (elCac) elCac.textContent = cacEuro !== null ? fmtCurrency(cacEuro) : "—";
     if (elRoi) elRoi.textContent = roi !== null ? `${roi.toFixed(2)}x` : "—";
@@ -1410,7 +1406,7 @@ if (insightKeyBox) {
     // --- Editors suggestions ---
 afficherEditeurs(levers, sectorKey);
 
-    console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual, "budgetConsomme:", budgetConsumed);
+    console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacClient:", cacClient, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual, "budgetConsomme:", budgetConsumed, "budgetAffiche:", budgetDisplayed);
     window.scrollTo({ top: 0, behavior: "smooth" });
     
     // === Envoi email automatique vers API Vercel ===
@@ -1472,6 +1468,7 @@ const editeursAffiches = (function() {
       cacProjete: Math.round(cacProjected),
       cacEstimeEuros: cacEuro !== null ? Number(cacEuro.toFixed(2)) : null,
       budgetConsomme: Math.round(budgetConsumed),
+      budgetAffiche: Math.round(budgetDisplayed),
       roi: roi !== null ? roi.toFixed(2) : "N/A",
 
       messageMaturite: maturityMessage
