@@ -233,7 +233,7 @@ const EDITORS = {
     { name: "Redbrain", logo: "assets/redbrain-logo.png" },
     { name: "Delupe", logo: "assets/delupe-logo.png" },
     { name: "Shopforward", logo: "assets/shopforward-logos.png" },
-    { name: "Velkashopping", logo: "assets/logo-velkashopping.jpg" }
+    { name: "Velkashopping", logo: "assets/logo-velkashopping.png" }
   ],
   comparateurs: [
     { name: "Idealo", logo: "assets/logo-idealo.png" },
@@ -242,8 +242,8 @@ const EDITORS = {
     
   ],
   retargeting: [
-    { name: "Criteo", logo: "assets/logo-criteo.jpg" },
-    { name: "Uzerly", logo: "assets/logo-uzerly.jpeg" }
+    { name: "Criteo", logo: "assets/logo-criteo.png" },
+    { name: "Uzerly", logo: "assets/logo-uzerly.png" }
   ],
   "display-networks": [
     { name: "Sirdata", logo: "assets/sirdata-logo.png" },
@@ -254,10 +254,10 @@ const EDITORS = {
     { name: "Reworld Media", logo: "assets/logo-reworld-media.png" },
      { name: "Ouest France", logo: "assets/ouest-france-logo.png" },
      { name: "Keleops", logo: "assets/keleops-logo.png" },
-    { name: "DCE", logo: "assets/digital_content_expert_logo.jpg" }
+    { name: "DCE", logo: "assets/digital_content_expert_logo.png" }
   ],
   emailing: [
-    { name: "Emailing Networks", logo: "assets/emailing-networks-logo.jpg" },
+    { name: "Emailing Networks", logo: "assets/emailing-networks-logo.png" },
       { name: "Power-space", logo: "assets/power-space-logo.png" },
       { name: "Welcoming", logo: "assets/welcoming_logos.png" }
   ],
@@ -324,8 +324,8 @@ const EDITORS_AFFINITAIRE = {
 
   // 🏋️ SPORT
   sports: [
-    { name: "Top Santé", logo: "assets/topsante-logo.jpg" },
-    { name: "Daily-sport", logo: "assets/daily-sport-fr-logo.jpeg" },
+    { name: "Top Santé", logo: "assets/topsante-logo.png" },
+    { name: "Daily-sport", logo: "assets/daily-sport-fr-logo.png" },
     { name: "Sportfr", logo: "assets/sportfr-logo.png" }
   ],
 
@@ -366,8 +366,8 @@ const EDITORS_AFFINITAIRE = {
   // 📱 TÉLÉCOM
   telecom: [
     { name: "Les Numériques", logo: "assets/lesnumeriques-logo.png" },
-    { name: "Presse-citron", logo: "assets/presse-citron-logo.jpeg" },
-    { name: "Clubic", logo: "assets/logo-clubic.jpeg" },
+    { name: "Presse-citron", logo: "assets/presse-citron-logo.png" },
+    { name: "Clubic", logo: "assets/logo-clubic.png" },
     { name: "FrAndroid", logo: "assets/frandroid-logo.png" }
   ],
 
@@ -657,18 +657,19 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
     const cvrRate = numberOf(form.elements["cvr"]?.value) / 100;
     const budgetMonthly = numberOf(form.elements["budget"]?.value);
     const levers = Array.from(form.querySelectorAll('input[name="levers"]:checked')).map((input) => input.value);
-    const estimatedRevenue = trafficMonthly * cvrRate * aovUser;
+    const estimatedOrders = trafficMonthly * cvrRate;
+    const estimatedRevenue = estimatedOrders * aovUser;
     const hasBudget = budgetMonthly > 0;
     const roi = hasBudget ? (estimatedRevenue / budgetMonthly) : null;
-    const cacPercent = (hasBudget && estimatedRevenue > 0)
-      ? ((budgetMonthly / estimatedRevenue) * 100)
+    const cacEuro = (hasBudget && estimatedOrders > 0)
+      ? (budgetMonthly / estimatedOrders)
       : null;
 
     asideStep2RoiValue.textContent = roi !== null ? `${roi.toFixed(2)}x` : "—";
-    asideStep2CacValue.textContent = cacPercent !== null ? `${cacPercent.toFixed(1)}%` : "—";
+    asideStep2CacValue.textContent = cacEuro !== null ? fmtCurrency(cacEuro) : "—";
 
     const roiBarWidth = clamp((roi || 0) / 6, 0, 1) * 100;
-    const cacBarWidth = clamp((cacPercent || 0) / 40, 0, 1) * 100;
+    const cacBarWidth = clamp((cacEuro || 0) / 40, 0, 1) * 100;
     asideStep2RoiBar.style.width = `${Math.max(6, roiBarWidth)}%`;
     asideStep2CacBar.style.width = `${Math.max(6, cacBarWidth)}%`;
 
@@ -681,8 +682,8 @@ document.getElementById('prev-step-3')?.addEventListener('click', () => {
     }
     if (asideStep2Point2) {
       asideStep2Point2.textContent = !hasBudget
-        ? "Le CAC (%) sera disponible dès qu'un budget est saisi"
-        : cacPercent > 0 && cacPercent <= 20
+        ? "Le CAC (€) sera disponible dès qu'un budget est saisi"
+        : cacEuro > 0 && cacEuro <= 20
         ? "CAC projeté dans une zone maîtrisée"
         : "Le CAC projeté peut être optimisé en ajustant le mix";
     }
@@ -1074,7 +1075,7 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   const cvrLabelFor = (value) => {
     if (value >= 4) return "Excellent";
     if (value >= 3) return "Très bon";
-    if (value >= 2) return "Normal";
+    if (value >= 1) return "Normal";
     if (value < 1) return "Faible";
     return "Faible";
   };
@@ -1214,14 +1215,13 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
     // revenue
     const revenue = finalOrders * adjustedAov;
 
-    // computed budget consumed (prefer showing budgetAnnual or theoretical)
-    const budgetConsumed = (budgetAnnual === Infinity) ? finalOrders * cacProjected : Math.min(budgetAnnual, finalOrders * cacProjected);
+    // budget réellement consommé selon le volume de ventes effectivement généré
+    const budgetConsumed = finalOrders * cacProjected;
 
     // KPI business rules:
-    // ROI = Revenue / Budget ; CAC% = Budget / Revenue * 100
-    const budgetReference = Number.isFinite(budgetAnnual) && budgetAnnual > 0 ? budgetAnnual : 0;
-    const roi = budgetReference > 0 ? (revenue / budgetReference) : null;
-    const cacPercent = (budgetReference > 0 && revenue > 0) ? ((budgetReference / revenue) * 100) : null;
+    // ROI = Revenue / Budget consommé ; CAC = Budget consommé / Commandes
+    const roi = budgetConsumed > 0 ? (revenue / budgetConsumed) : null;
+    const cacEuro = finalOrders > 0 ? (budgetConsumed / finalOrders) : null;
 
    // --- Display results (safe DOM queries) ---
 setResultsMode(true);
@@ -1246,9 +1246,9 @@ const nextStepBtn = document.getElementById("nextStepBtn");
 	
     if (elRevenue) elRevenue.textContent = fmtCompactCurrency(revenue);
     if (elOrders) elOrders.textContent = fmtNumber(finalOrders);
-    if (elBudget) elBudget.textContent = (budgetAnnual === Infinity) ? "Illimité" : fmtCurrency(budgetAnnual);
+    if (elBudget) elBudget.textContent = fmtCompactCurrency(budgetConsumed);
     if (elAov) elAov.textContent = fmtCurrency(adjustedAov);
-    if (elCac) elCac.textContent = cacPercent !== null ? `${cacPercent.toFixed(1)}%` : "—";
+    if (elCac) elCac.textContent = cacEuro !== null ? fmtCurrency(cacEuro) : "—";
     if (elRoi) elRoi.textContent = roi !== null ? `${roi.toFixed(2)}x` : "—";
 
     // analysis: only AOV vs sector as requested + one-line CR mention + budget cap note
@@ -1259,7 +1259,13 @@ const nextStepBtn = document.getElementById("nextStepBtn");
       else analysis.push(`Votre panier moyen estimé (${fmtCurrency(adjustedAov)}) est proche de la moyenne du secteur.`);
     }
     analysis.push(`Taux de conversion simulé : ${(adjustedCvr * 100).toFixed(2)}% (montée en puissance sur l'année 1).`);
-    if (budgetAnnual !== Infinity) analysis.push(`Note : votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) peut limiter le volume de ventes affiché.`);
+    if (budgetAnnual !== Infinity) {
+      if (budgetConsumed < budgetAnnual * 0.98) {
+        analysis.push(`Avec le trafic estimé, le budget consommé (${fmtCurrency(budgetConsumed)}) reste inférieur au budget saisi (${fmtCurrency(budgetAnnual)}).`);
+      } else {
+        analysis.push(`Votre budget annuel saisi (${fmtCurrency(budgetAnnual)}) limite le volume de ventes affiché.`);
+      }
+    }
 
     if (quickAnalysisList) {
       quickAnalysisList.innerHTML = analysis
@@ -1380,7 +1386,7 @@ if (insightKeyBox) {
     // --- Editors suggestions ---
 afficherEditeurs(levers, sectorKey);
 
-    console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual);
+    console.log("Simulation — trafic:", trafficMonthly, "orders:", finalOrders, "rev:", revenue, "cacProj:", cacProjected, "budgetAnnuel:", budgetAnnual, "budgetConsomme:", budgetConsumed);
     window.scrollTo({ top: 0, behavior: "smooth" });
     
     // === Envoi email automatique vers API Vercel ===
@@ -1440,7 +1446,7 @@ const editeursAffiches = (function() {
       commandesFinales: Math.round(finalOrders),
       chiffreAffaires: Math.round(revenue),
       cacProjete: Math.round(cacProjected),
-      cacPourcent: cacPercent !== null ? Number(cacPercent.toFixed(2)) : null,
+      cacEstimeEuros: cacEuro !== null ? Number(cacEuro.toFixed(2)) : null,
       budgetConsomme: Math.round(budgetConsumed),
       roi: roi !== null ? roi.toFixed(2) : "N/A",
 

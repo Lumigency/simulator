@@ -1,0 +1,375 @@
+[
+  {
+    "name": "Client test 1 - mode beaute - tous leviers",
+    "input": {
+      "trafficMonthly": 51000,
+      "budgetMonthly": 3000,
+      "aov": 80,
+      "cvrPercent": 1,
+      "cacClient": 10,
+      "sectorKey": "fashion",
+      "levers": [
+        "cashback",
+        "bonsplans",
+        "retargeting",
+        "css",
+        "comparateurs",
+        "display-networks",
+        "retention",
+        "content",
+        "emailing",
+        "ppc",
+        "affinitaires",
+        "influence"
+      ],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 172567,
+      "roi": 4.79,
+      "finalOrders": 2458,
+      "adjustedAov": 70,
+      "costRatioPct": 20.9,
+      "budgetConsumed": 36000
+    },
+    "tolerance": {
+      "revenue": 2500,
+      "roi": 0.1,
+      "finalOrders": 30,
+      "adjustedAov": 2,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 2 - maison deco - mix 4 leviers",
+    "input": {
+      "trafficMonthly": 410000,
+      "budgetMonthly": 5000,
+      "aov": 150,
+      "cvrPercent": 1.9,
+      "cacClient": 15,
+      "sectorKey": "home",
+      "levers": ["cashback", "comparateurs", "emailing", "affinitaires"],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 708710,
+      "roi": 11.8,
+      "finalOrders": 5370,
+      "adjustedAov": 132,
+      "costRatioPct": 8.5,
+      "budgetConsumed": 60000
+    },
+    "tolerance": {
+      "revenue": 2500,
+      "roi": 0.1,
+      "finalOrders": 30,
+      "adjustedAov": 2,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 3 - alimentaire drive - tous leviers",
+    "input": {
+      "trafficMonthly": 19000,
+      "budgetMonthly": 1500,
+      "aov": 50,
+      "cvrPercent": 0.8,
+      "cacClient": 5,
+      "sectorKey": "food",
+      "levers": [
+        "cashback",
+        "bonsplans",
+        "retargeting",
+        "css",
+        "comparateurs",
+        "display-networks",
+        "retention",
+        "content",
+        "emailing",
+        "ppc",
+        "affinitaires",
+        "influence"
+      ],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 25437,
+      "roi": 1.41,
+      "finalOrders": 580,
+      "adjustedAov": 44,
+      "costRatioPct": 70.8,
+      "budgetConsumed": 18000
+    },
+    "tolerance": {
+      "revenue": 1500,
+      "roi": 0.1,
+      "finalOrders": 20,
+      "adjustedAov": 2,
+      "costRatioPct": 2,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 4 - sport loisirs - cashback influence affinitaires",
+    "input": {
+      "trafficMonthly": 13000,
+      "budgetMonthly": 1000,
+      "aov": 20,
+      "cvrPercent": 1.5,
+      "cacClient": 5,
+      "sectorKey": "sports",
+      "levers": ["cashback", "influence", "affinitaires"],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 3613,
+      "roi": 0.3,
+      "finalOrders": 192,
+      "adjustedAov": 19,
+      "costRatioPct": 332,
+      "budgetConsumed": 12000
+    },
+    "tolerance": {
+      "revenue": 300,
+      "roi": 0.05,
+      "finalOrders": 10,
+      "adjustedAov": 1,
+      "costRatioPct": 10,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 5 - luxe bijoux - tous leviers",
+    "input": {
+      "trafficMonthly": 759000,
+      "budgetMonthly": 15000,
+      "aov": 90,
+      "cvrPercent": 0.4,
+      "cacClient": 12,
+      "sectorKey": "luxury",
+      "levers": [
+        "cashback",
+        "bonsplans",
+        "retargeting",
+        "css",
+        "comparateurs",
+        "display-networks",
+        "retention",
+        "content",
+        "emailing",
+        "ppc",
+        "affinitaires",
+        "influence"
+      ],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 1600000,
+      "roi": 8.97,
+      "finalOrders": 20433,
+      "adjustedAov": 79,
+      "costRatioPct": 11.2,
+      "budgetConsumed": 180000
+    },
+    "tolerance": {
+      "revenue": 10000,
+      "roi": 0.2,
+      "finalOrders": 100,
+      "adjustedAov": 2,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 6 - autre - comparateurs css content",
+    "input": {
+      "trafficMonthly": 65000,
+      "budgetMonthly": 8000,
+      "aov": 500,
+      "cvrPercent": 1.9,
+      "cacClient": 50,
+      "sectorKey": "other",
+      "levers": ["comparateurs", "css", "content"],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 350602,
+      "roi": 3.65,
+      "finalOrders": 795,
+      "adjustedAov": 441,
+      "costRatioPct": 27.4,
+      "budgetConsumed": 96000
+    },
+    "tolerance": {
+      "revenue": 2500,
+      "roi": 0.1,
+      "finalOrders": 20,
+      "adjustedAov": 2,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 7 - sport loisirs - tous leviers petit trafic",
+    "input": {
+      "trafficMonthly": 6000,
+      "budgetMonthly": 500,
+      "aov": 39,
+      "cvrPercent": 2.2,
+      "cacClient": 4,
+      "sectorKey": "sports",
+      "levers": [
+        "cashback",
+        "bonsplans",
+        "retargeting",
+        "css",
+        "comparateurs",
+        "display-networks",
+        "retention",
+        "content",
+        "emailing",
+        "ppc",
+        "affinitaires",
+        "influence"
+      ],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 6127,
+      "roi": 1.02,
+      "finalOrders": 179,
+      "adjustedAov": 34,
+      "costRatioPct": 97.9,
+      "budgetConsumed": 6000
+    },
+    "tolerance": {
+      "revenue": 400,
+      "roi": 0.05,
+      "finalOrders": 10,
+      "adjustedAov": 1,
+      "costRatioPct": 3,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 8 - high tech - comparateurs retargeting display sea",
+    "input": {
+      "trafficMonthly": 172000,
+      "budgetMonthly": 4500,
+      "aov": 78,
+      "cvrPercent": 3.3,
+      "cacClient": 7,
+      "sectorKey": "electronics",
+      "levers": ["comparateurs", "retargeting", "display-networks", "ppc"],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 247256,
+      "roi": 4.58,
+      "finalOrders": 4123,
+      "adjustedAov": 60,
+      "costRatioPct": 21.8,
+      "budgetConsumed": 54000
+    },
+    "tolerance": {
+      "revenue": 2500,
+      "roi": 0.1,
+      "finalOrders": 30,
+      "adjustedAov": 2,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 9 - voyage tourisme - tous leviers",
+    "input": {
+      "trafficMonthly": 235000,
+      "budgetMonthly": 2000,
+      "aov": 25,
+      "cvrPercent": 0.8,
+      "cacClient": 2,
+      "sectorKey": "travel",
+      "levers": [
+        "cashback",
+        "bonsplans",
+        "retargeting",
+        "css",
+        "comparateurs",
+        "display-networks",
+        "retention",
+        "content",
+        "emailing",
+        "ppc",
+        "affinitaires",
+        "influence"
+      ],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 98708,
+      "roi": 4.11,
+      "finalOrders": 4499,
+      "adjustedAov": 22,
+      "costRatioPct": 24.3,
+      "budgetConsumed": 24000
+    },
+    "tolerance": {
+      "revenue": 2500,
+      "roi": 0.1,
+      "finalOrders": 30,
+      "adjustedAov": 1,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  },
+  {
+    "name": "Client test 10 - automobile - mix 7 leviers",
+    "input": {
+      "trafficMonthly": 378000,
+      "budgetMonthly": 20000,
+      "aov": 250,
+      "cvrPercent": 0.8,
+      "cacClient": 35,
+      "sectorKey": "auto",
+      "levers": [
+        "comparateurs",
+        "retargeting",
+        "emailing",
+        "affinitaires",
+        "css",
+        "display-networks",
+        "content"
+      ],
+      "hybridChoice": "non",
+      "unlimitedBudget": false
+    },
+    "expected": {
+      "revenue": 871795,
+      "roi": 3.63,
+      "finalOrders": 3765,
+      "adjustedAov": 232,
+      "costRatioPct": 27.5,
+      "budgetConsumed": 240000
+    },
+    "tolerance": {
+      "revenue": 3000,
+      "roi": 0.1,
+      "finalOrders": 30,
+      "adjustedAov": 2,
+      "costRatioPct": 1,
+      "budgetConsumed": 10
+    }
+  }
+]
