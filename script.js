@@ -1061,6 +1061,7 @@ const cvrGauge = document.getElementById("cvrGauge");
 const cvrGaugePath = document.getElementById("cvrGaugeProgress");
 const cvrGaugeDot = document.getElementById("cvrGaugeDot");
 const cvrGaugeLabel = document.querySelector(".step2-gauge-label");
+let _setCvr = null;
 
 if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   const min = Number(cvrGauge.dataset.min || 0);
@@ -1119,6 +1120,7 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
     cvrGaugeDot.style.top = `${point.y}px`;
     updateStep2AsidePreview();
   };
+  _setCvr = setCvr;
 
   const pointerToValue = (event) => {
     const svg = cvrGauge.querySelector(".step2-gauge-svg");
@@ -1500,22 +1502,82 @@ if (ctaBtn) ctaBtn.href = ctaLink;
 if (nextStepBtn) nextStepBtn.href = ctaLink;
   });
 
+  const resetSimulation = () => {
+    setResultsMode(false);
+
+    if (form) form.reset();
+
+    if (trafficRangeV2) trafficRangeV2.value = 300000;
+    if (trafficInput) trafficInput.value = 300000;
+    if (trafficRange) trafficRange.value = 300000;
+    if (trafficValueDisplay) trafficValueDisplay.textContent = new Intl.NumberFormat("fr-FR").format(300000);
+
+    if (aovValueDisplay) { aovValueDisplay.textContent = "0.00"; }
+    if (hiddenAov) hiddenAov.value = "0";
+
+    if (cacValueDisplay) { cacValueDisplay.textContent = "0.00"; }
+    if (hiddenCac) hiddenCac.value = "0";
+
+    if (_setCvr) _setCvr(1);
+    else if (hiddenCvr) hiddenCvr.value = "1";
+
+    const budgetExact = document.getElementById("budgetExactInput");
+    if (budgetExact) budgetExact.value = "";
+    const budgetHidden = form.elements["budget"];
+    if (budgetHidden) budgetHidden.value = "0";
+
+    form.querySelectorAll('input[name="levers"]').forEach(cb => { cb.checked = false; });
+    if (leverSelectValue) {
+      leverSelectValue.innerHTML = "";
+      leverSelectValue.classList.add("is-placeholder");
+      leverSelectValue.textContent = leverSelectValue.dataset.placeholder || "Sélectionnez un ou plusieurs leviers";
+    }
+    const leverAllBtn = document.getElementById("leverSelectAllBtn");
+    if (leverAllBtn) {
+      leverAllBtn.textContent = "Tous les leviers";
+      leverAllBtn.classList.remove("is-active");
+    }
+
+    if (hiddenSector) hiddenSector.value = "";
+    if (sectorSelectValue) sectorSelectValue.textContent = "Sélectionnez votre secteur d'activité";
+    renderStep3AsideEditors("");
+
+    if (fullNameInput) fullNameInput.value = "";
+    if (emailInput) emailInput.value = "";
+    if (step3Submit) { step3Submit.disabled = true; step3Submit.classList.remove("is-ready"); }
+
+    form.querySelectorAll('input[name="objectif"]').forEach(r => { r.checked = false; });
+    form.querySelectorAll('input[name="affiliate_program_status"]').forEach(r => { r.checked = false; });
+    form.querySelectorAll('input[name="sales_area"]').forEach(r => { r.checked = false; });
+    form.querySelectorAll('input[name="acquisition_management"]').forEach(r => { r.checked = false; });
+
+    currentStep = 0;
+    showStep(currentStep);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   // === Bouton "Faire une nouvelle simulation" ===
   const restartBtn = document.getElementById("restart-btn");
-  if (restartBtn) {
-    restartBtn.addEventListener("click", () => {
-      setResultsMode(false);
+  if (restartBtn) restartBtn.addEventListener("click", resetSimulation);
 
-      // 🔁 Réinitialise le formulaire et la progression
-      if (form) form.reset();
-      renderStep3AsideEditors("");
-
-      // 🔁 Revient à la toute première étape
-      currentStep = 0;
-      showStep(currentStep);
-
-      // Retourne en haut de page
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  // === Bouton "Retour" topbar : navigation arrière entre étapes ===
+  const topbarBack = document.getElementById("topbar-back");
+  if (topbarBack) {
+    topbarBack.addEventListener("click", (e) => {
+      e.preventDefault();
+      const resultsEl = document.getElementById("results");
+      if (resultsEl && resultsEl.style.display !== "none") {
+        setResultsMode(false);
+        currentStep = 0;
+        showStep(currentStep);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (currentStep > 0) {
+        currentStep = currentStep - 1;
+        showStep(currentStep);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        history.back();
+      }
     });
   }
 });

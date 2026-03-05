@@ -594,7 +594,7 @@
 #cta-dynamic {
   margin-top: 18px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
@@ -629,7 +629,7 @@
   color: #242741;
   font-size: 15px;
   font-weight: 400;
-  padding: 0 18px;
+  padding: 12px 18px;
   cursor: pointer;
 }
 
