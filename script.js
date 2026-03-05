@@ -1245,7 +1245,7 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
 
     const revenue = finalOrders * adjustedAov;
     const budgetConsumed = budgetAnnual;
-    const budgetDisplayed = budgetConsumed < 5000 ? 10000 : budgetConsumed;
+    const budgetDisplayed = budgetConsumed < 12000 ? 12000 : budgetConsumed;
 
     const roi = budgetConsumed > 0 ? (revenue / budgetConsumed) : null;
     const cacEuro = finalOrders > 0 ? (budgetConsumed / finalOrders) : null;
