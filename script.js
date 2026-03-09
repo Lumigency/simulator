@@ -1147,10 +1147,14 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   };
 
   let dragging = false;
+  let currentCvrValue = 1;
 
   const onPointerMove = (event) => {
     if (!dragging) return;
-    setCvr(pointerToValue(event));
+    const target = pointerToValue(event);
+    // Lissage : le sélecteur suit avec retard pour faciliter le réglage fin (0.1 en 0.1)
+    currentCvrValue = currentCvrValue + (target - currentCvrValue) * 0.04;
+    setCvr(currentCvrValue);
   };
 
   const onPointerUp = () => {
@@ -1162,7 +1166,10 @@ if (cvrGauge && cvrGaugePath && cvrGaugeDot && hiddenCvr && cvrValueDisplay) {
   const startDragging = (event) => {
     event.preventDefault();
     dragging = true;
-    setCvr(pointerToValue(event));
+    currentCvrValue = numberOf(hiddenCvr.value) || 1;
+    const target = pointerToValue(event);
+    currentCvrValue = currentCvrValue + (target - currentCvrValue) * 0.04;
+    setCvr(currentCvrValue);
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
   };
