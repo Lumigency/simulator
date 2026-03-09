@@ -386,8 +386,7 @@ const DEFAULT_STEP3_ASIDE_EDITORS = [
 
 const STEP3_EDITOR_URLS = {
   "google": "https://www.google.com",
-  "igraal": "https://www.igraal.com",
-  "ouest france": "https://www.ouest-france.fr"
+  "igraal": "https://www.igraal.com"
 };
 
 function formatEditorHost(url) {
@@ -1239,13 +1238,13 @@ if (saidNoToHybrid && levers.some(l => hybridLevers.includes(l))) {
     // projected CAC (weighted by PDV / fallback to client cac)
     const cacProjected = projectedCAC(sectorKey, levers, cacClient || 0);
 
-    // cap orders by budget
+    // orders capped by the lesser of traffic potential or budget capacity
     const maxOrdersByBudget = cacProjected === 0 ? potentialOrders : (budgetAnnual / cacProjected);
     const finalOrders = Math.min(potentialOrders, maxOrdersByBudget);
 
     const revenue = finalOrders * adjustedAov;
-    const budgetConsumed = budgetAnnual;
-    const budgetDisplayed = budgetConsumed < 12000 ? 12000 : budgetConsumed;
+    const budgetConsumed = finalOrders * cacProjected; // actual budget consumed by orders
+    const budgetDisplayed = budgetAnnual < 12000 ? 12000 : budgetAnnual; // display entered budget
 
     const roi = budgetConsumed > 0 ? (revenue / budgetConsumed) : null;
     const cacEuro = finalOrders > 0 ? (budgetConsumed / finalOrders) : null;
