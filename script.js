@@ -1,10 +1,13 @@
 // ========== script.js — Simulateur Lumigency (version complète) ==========
 
+console.log("✅ script.js chargé");
+
 // === Gestion du formulaire multi-étapes ===
 const steps = document.querySelectorAll('.form-step');
 let currentStep = 0;
 const FORCE_STEP4_PREVIEW = false;
 
+// ✅ message de maturité personnalisé
 let maturityMessage = "";
 
 function showStep(index) {

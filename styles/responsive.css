@@ -1,4 +1,9 @@
 @media (max-width: 980px) {
+  #form-simu input:not([type="checkbox"]):not([type="radio"]),
+  #form-simu select,
+  #form-simu textarea {
+    font-size: 16px;
+  }
   .topbar {
     padding: 16px 20px;
     gap: 10px;
@@ -30,7 +35,7 @@
   .traffic-scale span { font-size: 24px; }
   .traffic-value { font-size: 38px; }
   .lever-select-menu { grid-template-columns: 1fr; }
-  .step3-input { min-height: 56px; font-size: 24px; }
+  .step3-input { min-height: 56px; font-size: 16px; }
   .step3-label { font-size: 15px; }
   .step3-note { min-height: auto; padding: 12px 14px; align-items: flex-start; }
   .step3-note p { font-size: 13px; }
