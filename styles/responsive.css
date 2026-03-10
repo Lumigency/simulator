@@ -76,6 +76,16 @@
 }
 
 @media (max-width: 640px) {
+  .topbar {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .topbar-back { padding: 10px 12px; font-size: 14px; }
+  .topbar-name { font-size: 16px; }
+  .simu-head { padding: 32px 16px 0; }
+  .simu-grid { padding: 16px; gap: 20px; }
+  .left-panel,
+  .right-panel { padding: 20px; }
   .objective-grid { grid-template-columns: 1fr; }
   .budget-pill-group { gap: 8px; }
   .budget-pill { width: 100%; justify-content: flex-start; }
@@ -84,7 +94,11 @@
   .left-step3-aside { padding: 16px; gap: 20px; }
   .left-aside-title { font-size: 20px; }
   .left-step3-fact-copy { font-size: 17px; }
-  .left-step3-editor-card { grid-template-columns: 64px 1fr auto; padding: 12px; }
+  .left-step3-editor-card {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    padding: 12px;
+  }
   .left-step3-editor-brand { width: 64px; height: 64px; border-radius: 14px; }
   .left-step3-editor-name { font-size: 20px; }
   .left-step3-editor-copy a { font-size: 16px; }

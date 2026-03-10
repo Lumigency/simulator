@@ -490,6 +490,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 
 .lever-select-value {
   flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -505,6 +506,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  max-width: 100%;
   min-height: 40px;
   border-radius: 12px;
   border: 1px solid #d1d1d6;
@@ -533,6 +535,8 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 }
 
 .lever-tag span {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: 15px;
   line-height: 22.5px;
   font-weight: 500;

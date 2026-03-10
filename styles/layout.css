@@ -342,6 +342,7 @@
 }
 .left-step3-editor-copy a {
   display: inline-block;
+  overflow-wrap: anywhere;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0;
