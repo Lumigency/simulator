@@ -4,6 +4,10 @@
   animation: conf-fade-in 420ms ease;
 }
 
+.results-section .conf-grid > * {
+  min-width: 0;
+}
+
 @keyframes conf-fade-in {
   from {
     opacity: 0;
@@ -309,6 +313,7 @@
   letter-spacing: -0.03em;
   font-weight: 800;
   color: #11142c;
+  overflow-wrap: anywhere;
 }
 
 .conf-kpi-small .conf-kpi-value {
@@ -345,6 +350,7 @@
   line-height: 1.65;
   font-weight: 500;
   color: #3f4561;
+  overflow-wrap: anywhere;
 }
 
 .conf-kpi-insight .conf-kpi-label {
@@ -446,6 +452,7 @@
   font-size: 14px;
   line-height: 1.5;
   color: #3f445f;
+  overflow-wrap: anywhere;
 }
 
 .conf-analysis-list li::before {
@@ -526,6 +533,8 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 700;
+  text-align: center;
+  white-space: normal;
 }
 
 .conf-next-btn span {
@@ -547,6 +556,7 @@
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.31px;
+  overflow-wrap: anywhere;
 }
 
 .conf-final-cta h3 {
@@ -597,14 +607,20 @@
 }
 
 #cta-dynamic .cta-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
   min-height: 46px;
   padding: 12px 18px;
   text-decoration: none;
   text-align: left;
+}
+
+#cta-dynamic .cta-button span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 #cta-dynamic .cta-button .cta-button-icon {
@@ -658,4 +674,8 @@
 
 .simu-shell.results-mode .simu-head {
   display: none;
+}
+
+.simu-shell.results-mode {
+  overflow-x: hidden;
 }
