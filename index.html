@@ -594,104 +594,101 @@
         </section>
 
         <div class="conf-grid">
-          <div class="conf-main">
-            <section class="conf-kpi-grid">
-              <article class="conf-kpi-card conf-kpi-revenue">
-                <p class="conf-kpi-label">Chiffre d'affaires estimé</p>
-                <p class="conf-kpi-value" id="kpi-revenue">—</p>
-                <p class="conf-kpi-note">Projection annuelle</p>
-              </article>
+          <section class="conf-kpi-grid conf-grid-kpis">
+            <article class="conf-kpi-card conf-kpi-revenue">
+              <p class="conf-kpi-label">Chiffre d’affaires estimé</p>
+              <p class="conf-kpi-value" id="kpi-revenue">—</p>
+              <p class="conf-kpi-note">Projection annuelle</p>
+            </article>
 
-              <article class="conf-kpi-card conf-kpi-roi">
-                <p class="conf-kpi-label">ROI potentiel</p>
-                <p class="conf-kpi-value" id="kpi-roi">—</p>
-                <p class="conf-kpi-note">Retour sur investissement</p>
-              </article>
+            <article class="conf-kpi-card conf-kpi-roi">
+              <p class="conf-kpi-label">ROI potentiel</p>
+              <p class="conf-kpi-value" id="kpi-roi">—</p>
+              <p class="conf-kpi-note">Retour sur investissement</p>
+            </article>
 
-              <article class="conf-kpi-card conf-kpi-orders">
-                <p class="conf-kpi-label">Commandes générées</p>
-                <p class="conf-kpi-value" id="kpi-orders">—</p>
-                <p class="conf-kpi-note">Volume sur 12 mois</p>
-              </article>
+            <article class="conf-kpi-card conf-kpi-orders">
+              <p class="conf-kpi-label">Commandes générées</p>
+              <p class="conf-kpi-value" id="kpi-orders">—</p>
+              <p class="conf-kpi-note">Volume sur 12 mois</p>
+            </article>
 
-              <article class="conf-kpi-card conf-kpi-small conf-kpi-aov">
-                <span class="conf-kpi-small-icon" aria-hidden="true"></span>
-                <div class="conf-kpi-small-copy">
-                  <p class="conf-kpi-label">Panier moyen</p>
-                  <p class="conf-kpi-value" id="kpi-aov">—</p>
-                </div>
-              </article>
-
-              <article class="conf-kpi-card conf-kpi-small conf-kpi-cac">
-                <span class="conf-kpi-small-icon" aria-hidden="true"></span>
-                <div class="conf-kpi-small-copy">
-                  <p class="conf-kpi-label">CAC estimé (€)</p>
-                  <p class="conf-kpi-value" id="kpi-cac">—</p>
-                </div>
-              </article>
-
-              <article class="conf-kpi-card conf-kpi-small conf-kpi-budget">
-                <span class="conf-kpi-small-icon" aria-hidden="true"></span>
-                <div class="conf-kpi-small-copy">
-                  <p class="conf-kpi-label">Budget affiliation estimé</p>
-                  <p class="conf-kpi-value" id="kpi-budget">—</p>
-                </div>
-              </article>
-            </section>
-
-            <section class="conf-card conf-levers">
-              <h3>Répartition des leviers par volume de ventes estimés</h3>
-              <p class="conf-kpi-label">Mix projetés en fonction de vos réponses</p>
-              <div id="leverSplitBars" class="lever-split-bars"></div>
-            </section>
-
-            <section class="conf-card conf-editors">
-              <h3>Éditeurs recommandés</h3>
-              <p class="conf-kpi-label">Partenaires stratégiques pour votre programme</p>
-              <div class="editor-grid"></div>
-            </section>
-
-            <section class="conf-card conf-final-cta">
-              <h3>Prêt à concrétiser votre potentiel ?</h3>
-              <p>
-                Un expert Lumigency ⚡ analysera vos résultats et vous proposera des pistes concrètes
-                pour développer ou optimiser votre stratégie d'affiliation.
-              </p>
-              <div id="cta-dynamic" class="cta-dynamic">
-                <a id="cta-button" class="cta-button btn-primary" href="https://www.lumigency.com/consultation-gratuite" target="_blank" rel="noopener">
-                  <span>Bénéficier d’un échange stratégique avec Lumigency</span>
-                  <span class="cta-button-icon" aria-hidden="true">→</span>
-                </a>
-                <button id="restart-btn" class="btn-outline" type="button">
-                  <span class="restart-btn-icon" aria-hidden="true">↻</span>
-                  <span>Refaire une simulation</span>
-                </button>
+            <article class="conf-kpi-card conf-kpi-small conf-kpi-aov">
+              <span class="conf-kpi-small-icon" aria-hidden="true"></span>
+              <div class="conf-kpi-small-copy">
+                <p class="conf-kpi-label">Panier moyen</p>
+                <p class="conf-kpi-value" id="kpi-aov">—</p>
               </div>
-            </section>
-          </div>
+            </article>
 
-          <aside class="conf-side">
-            <section class="conf-kpi-card conf-kpi-insight">
-              <p class="conf-kpi-label">Insight clé</p>
-              <p class="conf-kpi-insight-text" id="kpi-insight-key">—</p>
-            </section>
-            <section class="conf-card conf-analysis">
-              <h3>Analyse rapide</h3>
-              <ul id="quickAnalysisList" class="conf-analysis-list"></ul>
-            </section>
+            <article class="conf-kpi-card conf-kpi-small conf-kpi-cac">
+              <span class="conf-kpi-small-icon" aria-hidden="true"></span>
+              <div class="conf-kpi-small-copy">
+                <p class="conf-kpi-label">CAC estimé (€)</p>
+                <p class="conf-kpi-value" id="kpi-cac">—</p>
+              </div>
+            </article>
 
-            <section class="conf-card conf-next">
-              <h3>Prochaine étape</h3>
-              <p>
-                Un expert Lumigency peut analyser ces résultats avec vous et identifier les leviers
-                prioritaires pour votre programme.
-              </p>
-              <a id="nextStepBtn" class="conf-next-btn" href="https://www.lumigency.com/consultation-gratuite" target="_blank" rel="noopener">
-                Prendre rendez-vous
-                <span aria-hidden="true">→</span>
+            <article class="conf-kpi-card conf-kpi-small conf-kpi-budget">
+              <span class="conf-kpi-small-icon" aria-hidden="true"></span>
+              <div class="conf-kpi-small-copy">
+                <p class="conf-kpi-label">Budget affiliation estimé</p>
+                <p class="conf-kpi-value" id="kpi-budget">—</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="conf-kpi-card conf-kpi-insight conf-grid-insight">
+            <p class="conf-kpi-label">Insight clé</p>
+            <p class="conf-kpi-insight-text" id="kpi-insight-key">—</p>
+          </section>
+
+          <section class="conf-card conf-analysis conf-grid-analysis">
+            <h3>Analyse rapide</h3>
+            <ul id="quickAnalysisList" class="conf-analysis-list"></ul>
+          </section>
+
+          <section class="conf-card conf-levers conf-grid-levers">
+            <h3>Répartition des leviers par volume de ventes estimés</h3>
+            <p class="conf-kpi-label">Mix projetés en fonction de vos réponses</p>
+            <div id="leverSplitBars" class="lever-split-bars"></div>
+          </section>
+
+          <section class="conf-card conf-next conf-grid-next">
+            <h3>Prochaine étape</h3>
+            <p>
+              Un expert Lumigency peut analyser ces résultats avec vous et identifier les leviers
+              prioritaires pour votre programme.
+            </p>
+            <a id="nextStepBtn" class="conf-next-btn" href="https://www.lumigency.com/consultation-gratuite" target="_blank" rel="noopener">
+              Prendre rendez-vous
+              <span aria-hidden="true">→</span>
+            </a>
+          </section>
+
+          <section class="conf-card conf-editors conf-grid-editors">
+            <h3>Éditeurs recommandés</h3>
+            <p class="conf-kpi-label">Partenaires stratégiques pour votre programme</p>
+            <div class="editor-grid"></div>
+          </section>
+
+          <section class="conf-card conf-final-cta conf-grid-cta">
+            <h3>Prêt à concrétiser votre potentiel ?</h3>
+            <p>
+              Un expert Lumigency ⚡ analysera vos résultats et vous proposera des pistes concrètes
+              pour développer ou optimiser votre stratégie d’affiliation.
+            </p>
+            <div id="cta-dynamic" class="cta-dynamic">
+              <a id="cta-button" class="cta-button btn-primary" href="https://www.lumigency.com/consultation-gratuite" target="_blank" rel="noopener">
+                <span>Bénéficier d’un échange stratégique avec Lumigency</span>
+                <span class="cta-button-icon" aria-hidden="true">→</span>
               </a>
-            </section>
-          </aside>
+              <button id="restart-btn" class="btn-outline" type="button">
+                <span class="restart-btn-icon" aria-hidden="true">↻</span>
+                <span>Refaire une simulation</span>
+              </button>
+            </div>
+          </section>
         </div>
        </section> <!-- ✅ fin #results -->
     </div> <!-- ✅ fin .simu-grid.split-layout -->

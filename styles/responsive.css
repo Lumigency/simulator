@@ -32,7 +32,28 @@
   .left-step3-editor-name { font-size: 22px; }
   .left-step3-editor-copy a { font-size: 17px; }
   .conf-hero h2 { font-size: 34px; }
-  .conf-grid { grid-template-columns: 1fr; }
+  .conf-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Reset explicit desktop placement */
+  .conf-grid-kpis,
+  .conf-grid-insight,
+  .conf-grid-analysis,
+  .conf-grid-levers,
+  .conf-grid-next,
+  .conf-grid-editors,
+  .conf-grid-cta {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  /* Mobile order: KPIs → Insight → Analyse → Leviers → Prochaine étape → Éditeurs → CTA */
+  .conf-grid-kpis     { order: 1; }
+  .conf-grid-insight  { order: 2; }
+  .conf-grid-analysis { order: 3; }
+  .conf-grid-levers   { order: 4; }
+  .conf-grid-next     { order: 5; }
+  .conf-grid-editors  { order: 6; }
+  .conf-grid-cta      { order: 7; }
   .conf-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .conf-kpi-card { min-height: 128px; }
   .conf-kpi-grid .conf-kpi-card { grid-column: auto; grid-row: auto; }

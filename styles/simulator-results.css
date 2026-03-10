@@ -116,14 +116,18 @@
   margin-top: 32px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 32px;
+  gap: 16px 32px;
   align-items: start;
 }
 
-.conf-main {
-  display: grid;
-  gap: 16px;
-}
+/* Desktop: explicit column/row placement */
+.conf-grid-kpis    { grid-column: 1; grid-row: 1; }
+.conf-grid-insight { grid-column: 2; grid-row: 1; }
+.conf-grid-analysis{ grid-column: 2; grid-row: 2; }
+.conf-grid-levers  { grid-column: 1; grid-row: 2; }
+.conf-grid-next    { grid-column: 2; grid-row: 3; }
+.conf-grid-editors { grid-column: 1; grid-row: 3; }
+.conf-grid-cta     { grid-column: 1; grid-row: 4; }
 
 .conf-card {
   border-radius: 16px;
@@ -217,12 +221,9 @@
 }
 
 .conf-kpi-insight {
-  grid-column: 4;
-  grid-row: 1 / span 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 100%;
   background: linear-gradient(160deg, #f7f4ff 0%, #fbf5f9 100%);
   border-color: #efe5f5;
   --kpi-accent: #6f56f7;
@@ -411,11 +412,6 @@
   background: var(--split-color);
 }
 
-.conf-side {
-  display: flex;
-  gap: 32px;
-  flex-direction: column;
-}
 
 .conf-analysis h3,
 .conf-next h3 {
