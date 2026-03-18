@@ -36,6 +36,7 @@ module.exports = async (req, res) => {
           <div style="background:#f6f6f6; padding:12px; border-radius:6px;">
             <p><strong>Secteur :</strong> ${data.sectorLabel}</p>
             <p><strong>Site :</strong> ${data.site}</p>
+            <p><strong>Nom & Prénom :</strong> ${data.nomPrenom}</p>
             <p><strong>Email prospect :</strong> ${data.emailProspect}</p>
             <p><strong>Marge :</strong> ${data.marge}</p>
           </div>
