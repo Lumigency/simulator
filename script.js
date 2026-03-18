@@ -1452,6 +1452,7 @@ const editeursAffiches = (function() {
       sectorLabel: SECTORS[sectorKey]?.label || "Autre",
       site: form.elements["site"]?.value || "",
       emailProspect: form.elements["email"]?.value || "",
+	  nomPrenom: form.elements["fullName"]?.value || "",
       marge: form.elements["marge"]?.value || "",
 
       // 🔥 AJOUT IMPORTANT
