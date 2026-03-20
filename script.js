@@ -1504,7 +1504,7 @@ const editeursAffiches = (function() {
  
     // CTA fixe + synchro du lien latéral
 const ctaBtn = document.getElementById("cta-button");
-const ctaLink = "https://www.lumigency.com/consultation-gratuite";
+const ctaLink = "https://calendar.app.google/HmAsTcbTmsXArZ5v9";
 if (ctaBtn) ctaBtn.href = ctaLink;
 if (nextStepBtn) nextStepBtn.href = ctaLink;
   });
